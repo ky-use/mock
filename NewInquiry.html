@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="shift_jis">
+		<title>PayPay銀行　新規問い合わせ確認画面</title>
+		<meta name="description" content="顧客コンタクトボード">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+		<style>
+			.buttonContainer{
+                width: 30em;
+                max-width: 100%;
+                text-align: center;
+            }
+			.buttonBrue_small{
+                color: #3c90fff7;
+                border-color: #3c90fff7;
+                background: none;
+                border-radius: 5px;
+                border: 1px solid #3c90fff7;
+                font-weight: bold;
+                padding: 5px 10px;
+				cursor: pointer;
+            }
+			.buttonBrue_noborder{
+                color: #3c90fff7;
+                outline: none;
+                border: none;
+                background: none;
+                font-weight: bold;
+                padding: 10px 30px;
+                cursor: pointer;
+            }
+			.buttonGray_small{
+                color: #b7c4d5;
+                border-color: #b7c4d5;
+                background: none;
+                border-radius: 5px;
+                border: 1px solid #b7c4d5;
+                font-weight: bold;
+                padding: 5px 10px;
+            }
+		</style>
+	</head>
+	<body>
+		<div id="work">
+			<form id="testForm">
+
+				<template id="template">
+					<option class="inqTypeOption" value="">選択してください</option>
+				</template>
+
+				<b><p>お問い合わせ種別</p></b>
+				<p>
+					<select name="inqType" id="inqType" style="color: #3c90fff7; border: none;" required>
+						<option value="">選択してください</option>
+						<!--
+						<option value="ATMについて">ATMについて</option>
+						<option value="キャッシュカード・トークンについて">キャッシュカード・トークンについて</option>
+						<option value="ログインパスワード・暗証番号・不明・変更について">ログインパスワード・暗証番号・不明・変更について</option>
+						<option value="Visaデビットについて">Visaデビットについて</option>
+						<option value="ローン・住宅ローンについて">ローン・住宅ローンについて</option>
+						<option value="口座開設・口座利用開始について">口座開設・口座利用開始について</option>
+						<option value="FX・投信・外貨預金について">FX・投信・外貨預金について</option>
+						<option value="登録情報変更　住所変更等について">登録情報変更　住所変更等について</option>
+						<option value="明細・振込・振替等について">明細・振込・振替等について</option>
+						<option value="その他お問い合わせ">その他お問い合わせ</option>
+						-->
+					</select>
+				</p>
+
+				<b><p>問い合わせ詳細</p></b>
+				<p><textarea id="textarea" name="inqDeteil" rows="4" cols="40" placeholder="入力してください" required></textarea></p>
+				
+				<b style="color: #3c90fff7;">ファイルアップロード（任意）</b><br>
+				<input type="file" id="file" style="cursor:pointer;" onchange="$('#fileName').val($(this).val().replace(/^.*[\\\/]/, ''))" hidden>
+				<input type="text" id="fileName" name="attachment" value="" size="35" readonly onClick="$('#file').click();">
+
+				<!--<b><p>ファイルアップロード（任意）</p></b>
+				<input type="file" name="attachment" accept="image/jpeg, image/png"><br>-->
+				
+				<b><p>通知用メールアドレス<br>
+					<label><input type="radio" name="mailSelect" id="radio1" value="登録メールアドレス宛に送付" checked> 登録メールアドレス宛に送付</label><br>
+					<label><input type="radio" name="mailSelect" id="radio2" value="通知用メールアドレスを登録する"> 通知用メールアドレスを登録する</label><br>
+				</p></b>
+				<input type="email" id="mailaddress" class="inpBox" disabled></input>
+				
+				<b><p disabled>（確認用）</p></b>
+				<input type="email" id="confirmationMailaddress" class="inpBox" disabled></input>
+				
+				<b><p>ここで登録されるメールアドレスは顧客コンタクトボードの通知用にのみ使用されます。</p></b>
+				
+				<div class="buttonContainer">
+					<p><button type="button" id="nextButton" class="buttonGray_small" disabled>次へ</button></p>
+					<!--<button type="button" onclick="location.href='./Home.html'">戻る</button>-->
+				</div>
+			</form>
+		</div>
+		
+		<script>
+			// ラジオボタン
+			const radio1 = document.getElementById('radio1');
+			const radio2 = document.getElementById('radio2');
+			// 次へボタン
+			const button = document.getElementById('nextButton');
+			// 問い合わせ種別
+			const inqType = document.getElementById('inqType');
+			// 問い合わせ詳細
+			let textarea = document.getElementById('textarea');
+			// メールの入力欄
+			const mail = document.getElementById('mailaddress');
+			const conMail = document.getElementById('confirmationMailaddress');
+			// フォーム全体
+			const form = document.getElementById('testForm');
+			
+			// 選択肢データ
+			let optionData = [
+				'ATMについて',
+				'キャッシュカード・トークンについて',
+				'ログインパスワード・暗証番号・不明・変更について',
+				'Visaデビットについて',
+				'ローン・住宅ローンについて',
+				'口座開設・口座利用開始について',
+				'FX・投信・外貨預金について',
+				'登録情報変更　住所変更等について',
+				'明細・振込・振替等について',
+				'その他お問い合わせ'
+			];
+
+			// template要素を取得
+            var template = document.getElementById('template');
+            // データの数分繰り返し
+            for(var i =0; i < optionData.length; i++){
+                // template要素の内容を複製
+                var clone = template.content.cloneNode(true);
+                // 複製したtemplate要素にデータを挿入
+                clone.querySelector('.inqTypeOption').innerHTML = optionData[i];
+                clone.querySelector('.inqTypeOption').value = optionData[i];
+                // div#vcontainerの中に追加
+                document.getElementById('inqType').appendChild(clone);
+            }
+
+			/***
+			 メール入力欄活性
+			***/
+
+			// フォームの状態が変更されたとき
+			radio2.addEventListener('change', function() {
+				// プロパティの取得
+				mail.required;
+				conMail.required;
+				// 「通知用メールアドレスを登録する」がチェックされた場合
+				if (radio2.checked) {
+					// 必須に設定
+					mail.required = true;
+					conMail.required = true;
+					// 無効を解除
+					mail.disabled = false;
+					conMail.disabled = false;
+				}
+			})
+			//フォームの状態が変更されたとき
+			radio1.addEventListener('change', function() {
+				//「登録メールアドレス宛に送付」がチェックされた場合
+				if (radio1.checked) {
+					// 必須を解除
+					mail.required = false;
+					conMail.required = false;
+					// 無効に設定
+					mail.disabled = true;
+					conMail.disabled = true;
+					// 値を削除
+					mail.value = '';
+					conMail.value = '';
+				}
+			})
+
+			/***
+			 次へボタン活性
+			***/
+
+			// フォーム（テキストが変わった場合のinput、チェックボックスやラジオボタンに入力があった場合のchange）
+			form.addEventListener("input", update)
+			form.addEventListener("change", update)
+			
+			function update() {
+				// フォームの必須項目が入力されているか確認する
+				const isRequired = form.checkValidity()
+				// 必須項目が入力されているなら、ボタンの無効を解除
+				if (isRequired) {
+					// ボタンを活性
+					button.disabled = false;
+					button.classList.remove('buttonGray_small');
+					button.classList.add('buttonBrue_small');
+					/* 
+						条件：ラジオボタンTRUE かつ メール入力なしまたは、ラジオボタンFALSE かつ メール入力あり
+						※ただし、ラジオボタンの切り替えで値のを残さない場合は修正が必要（現状は残る）
+					*/
+					// メール新規登録の場合、入力チェック
+					if((radio2.checked && (mail.value=="" || conMail.value=="")) ||
+					(!radio2.checked && (mail.value!="" || conMail.value!=""))) {
+					//ボタンを非活性
+					button.disabled = true;
+					//button.style.cursor = "default";
+					button.classList.remove('buttonBrue_small');
+					button.classList.add('buttonGray_small');
+					return;
+					}
+					if(mail.value != conMail.value) {
+						//ボタンを非活性
+						button.disabled = true;
+						//button.style.cursor = "default";
+						button.classList.remove('buttonBrue_small');
+						button.classList.add('buttonGray_small');
+						return;
+					}
+					return;
+				} else{
+					// ボタンを非活性
+					button.disabled = true;
+					//button.style.cursor = "default";
+					button.classList.remove('buttonBrue_small');
+					button.classList.add('buttonGray_small');
+					return;
+				}
+
+			}
+
+			/***
+			 入力量に応じた入力領域拡張
+			***/
+
+			// textareaのデフォルトの要素の高さを取得
+			let clientHeight = textarea.clientHeight;
+			// textareaのinputイベント
+			textarea.addEventListener('input', ()=>{
+				// textareaの要素の高さを設定
+				textarea.style.height = clientHeight + 'px';
+				// textareaの入力内容の高さを取得
+				let scrollHeight = textarea.scrollHeight;                            
+				// textareaの高さに入力内容の高さを設定
+				textarea.style.height = scrollHeight + 'px';
+			});
+
+			/***
+			 確認画面
+			***/
+			
+			// バックスラッシュ
+			const regex = /\\/;
+
+			// 添付ファイル名を返却
+			function splitFileName1(filePass){
+				let array = filePass.split(regex);
+				return (array[array.length - 1]=='') ? 'ファイルなし' : array[array.length - 1];
+			}
+
+
+			// イベントを非同期で取得する
+			HTMLElement.prototype.observe = function (type) {
+				const getHandler = resolve => {
+					const result =  () => {
+						resolve();
+						this.removeEventListener(type, result);
+					};
+					return result;
+				};
+				return new Promise(resolve => this.addEventListener(type, getHandler(resolve)));
+			};
+
+			(async () => {
+				while (true) {
+					// ボタンクリックを待つ
+					await document.getElementById("nextButton").observe("click");
+					// ワークエリアを取得
+					const workArea = document.getElementById("work");
+					// ワークエリアをバックアップ
+					const backup = workArea.cloneNode(true);
+					// 添付ファイル名
+					let attachmentName = document.getElementsByName('attachment')[0].value;
+					// バックスラッシュ
+					const regex = /\\/;
+
+					// 添付ファイル名を返却
+					function splitFileName(fileName){
+						let array = attachmentName.split(regex);
+						return (array[array.length - 1]=='') ? 'ファイルなし' : array[array.length - 1];
+					}
+					// ラジオボタンの入力状況を返却
+					function radioChecked(radio){
+						return(radio ? 'checked' : 'disabled');
+					}
+
+					/*
+						pタグは折り返しをしない(CSSで)
+					*/
+					// ワークエリアを結果で書き換える(確認画面)
+					workArea.innerHTML = `
+						<b><p>お問い合わせ種別</p></b>
+						<p>${document.getElementById("inqType").value}</p>
+
+						<b><p>問い合わせ詳細</p></b>
+						<p>${document.getElementsByName("inqDeteil")[0].value}</p>
+
+						<b><p>ファイルアップロード</p></b>
+						<p>${splitFileName(attachmentName)}</p>
+
+						<b><p>通知用メールアドレス<br>
+							<input type="radio" name="mailSelect" value="登録メールアドレス宛に送付" ${radioChecked(radio1.checked)}> 登録メールアドレス宛に送付<br>
+							<input type="radio" name="mailSelect" value="通知用メールアドレスを登録する" ${radioChecked(radio2.checked)}> 通知用メールアドレスを登録する
+						</p></b>
+						<p>${document.getElementById("mailaddress").value}</p>
+
+						<b><p>（確認用）</p></b>
+						<p>${document.getElementById("confirmationMailaddress").value}</p>
+
+						<b><p>ここで登録されるメールアドレスは顧客コンタクトボードの通知用にのみ使用されます。</p></b>
+						<div class="buttonContainer">
+							<p><input id="nextCompletion" type="button" class="buttonBrue_small" onclick="location.href='./NewCompletion.html'" value="問い合わせを送る"></p>
+							<input id="back" type="button" class="buttonBrue_noborder" value="戻る">
+						</div>
+					`;
+
+					// 戻るボタンのクリックを待つ
+					await document.getElementById("back").observe("click");
+					// ワークエリアを戻す
+					document.body.replaceChild(backup, workArea);
+				}
+			})();
+		</script>
+	</body>
+</html>

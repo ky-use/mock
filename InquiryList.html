@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="shift_jis">
+		<title>PayPay銀行　お問い合わせ一覧画面</title>
+		<meta name="description" content="顧客コンタクトボード">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            #inqList{
+                display:inline;
+            }
+            #inqDetailsList{
+                display:none;
+            }
+            #inqDetails1{
+                display:none;
+            }
+            #inqDetails2{
+                display:none;
+            }
+            #content{
+                margin: 1.5em 1.5em;
+            }
+            .elementHidden{
+                display:none;
+            }
+
+            .overflow-wrap-normal {
+                overflow-wrap: normal;
+            }
+            .button {
+                /*枠線、外枠、クリック時の枠線を消去*/
+                padding: 1em 0 0;
+                border: none;
+                outline: none;
+                background: transparent;
+                font-weight: bold;
+                color: #3c90fff7;
+                font-size: 100%;
+            }
+            .equal_table{
+                table-layout: fixed;
+                width: 30em;
+                max-width: 100%;
+            }
+            .equal_table td{
+                word-wrap: break-word;
+            }
+            .buttonContainer{
+                width: 30em;
+                max-width: 100%;
+                text-align: center;
+            }
+            .buttonBrue{
+                color: #3c90fff7;
+                border-color: #3c90fff7;
+                background: none;
+                border-radius: 5px;
+                border: 1px solid #3c90fff7;
+                font-weight: bold;
+                padding: 10px 30px;
+                cursor: pointer;
+            }
+            .buttonBrue_small{
+                color: #3c90fff7;
+                border-color: #3c90fff7;
+                background: none;
+                border-radius: 5px;
+                border: 1px solid #3c90fff7;
+                font-weight: bold;
+                padding: 5px 10px;
+                cursor: pointer;
+            }
+            .buttonBrue_noborder{
+                color: #3c90fff7;
+                outline: none;
+                border: none;
+                background: none;
+                font-weight: bold;
+                padding: 10px 30px;
+                cursor: pointer;
+            }
+
+            
+        </style>
+	</head>
+	<body>
+        <div id="content">
+            <!-- お問い合わせ一覧 -->
+            <div id="inqList">
+                <p>お問い合わせ一覧</p>
+                <table class="equal_table">
+                    <tr align="left" >
+                        <th style="color: #004db1f7;">No. 20220602_1000</th>
+                    </tr>
+                    <tr>
+                        <td>問い合わせ種別：ATMについて</td>
+                    </tr>
+                    <tr>
+                        <td>ステータス：回答未確認</td>
+                    </tr>
+                    <tr align="right">
+                        <td><button type="button" id="Button1" class="buttonBrue_small" onclick="changeDisplayButton1()">表示</button></td>
+                    </tr>
+
+                    <tr align="left">
+                        <th style="color: #004db1f7;">No. 20220602_1001</th>
+                    </tr>
+                    <tr>
+                        <td>問い合わせ種別：キャッシュカード・トークンについて</td>
+                    </tr>
+                    <tr>
+                        <td>ステータス：PayPay銀行回答完了</td>
+                    </tr>
+                    <tr align="right">
+                        <td><button type="button" id="Button2" class="buttonBrue_small" onclick="changeDisplayButton2()">表示</button></td>
+                    </tr>
+                </table>
+                <div class="buttonContainer">
+                    <b><button type="button" onclick="location.href='./Home.html'" class="buttonBrue">コンタクトボード ホーム</button></b>
+                </div>
+            </div>
+            <!-- /お問い合わせ一覧 -->
+            
+            <!-- お問い合わせ詳細 -->
+            <div id="inqDetailsList">
+                <div id="inqDetails1">
+                    
+                    <b><p id='inq1' style='display:none; color: #004db1f7; font-size: 19px;'>No. 20220602_1000</p></b>
+                    <b><p id='inq2' style='display:none; color: #004db1f7; font-size: 19px;'>No. 20220602_1001</p></b>
+                    
+                    <template id="template">
+                        <tr align="left">
+                            <th >
+                                <!--ボタンでやらない場合　<b class="dateTime" style="cursor:pointer; color: #0000FF;"></b>-->
+                                <button class="detailButton button" type="button" value="false" onclick="dButton(this)">詳細</button>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="inqDetail"></p>
+                                <p class="fileDownloadText"></p>
+                                <p><a class="fileName" download></a></p>
+                            </td>
+                        </tr>
+                    </template>
+                    <!-- テンプレート出力 -->
+                    <div id="container">
+                    </div>
+                    <!-- /テンプレート出力 -->
+                    <div class="buttonContainer">
+                        <p><button type="button" onclick="location.href='./NewReply.html'" class="buttonBrue">返信する</button></p>
+                        <button type="button" onclick="changeDisplayBuckButton()" class="buttonBrue_noborder">戻る</button>
+                    </div>
+                </div>
+                <!-- /お問い合わせ詳細 -->
+            </div>
+        </div>
+
+        <script>
+            /***
+			 一覧と詳細画面の切り替え
+			***/
+            
+            // 表示ボタン
+            function changeDisplayButton1() {
+                // お問い合わせ一覧非表示
+                document.getElementById('inqList').style.display = 'none';
+                // お問い合わせ詳細の表示
+                document.getElementById('inqDetailsList').style.display = 'inline';
+                document.getElementById('inqDetails1').style.display = 'inline';
+                document.getElementById('inq1').style.display = 'inline';
+            };
+
+            function changeDisplayButton2() {
+                // お問い合わせ一覧非表示
+                document.getElementById('inqList').style.display = 'none';
+                // お問い合わせ詳細の表示
+                document.getElementById('inqDetailsList').style.display = 'inline';
+                document.getElementById('inqDetails1').style.display = 'inline';
+                document.getElementById('inq2').style.display = 'inline';
+            };
+
+            // 戻るボタン
+            function changeDisplayBuckButton() {
+                // お問い合わせ一覧表示
+                document.getElementById('inqList').style.display = 'inline';
+                // お問い合わせ詳細の非表示
+                document.getElementById('inqDetailsList').style.display = 'none';
+                document.getElementById('inqDetails1').style.display = 'none';
+                //document.getElementById('inqDetails2').style.display = 'none';
+                // タイトルの非表示
+                document.getElementById('inq1').style.display = 'none';
+                document.getElementById('inq2').style.display = 'none';
+
+                // 表示初期化
+                for(var i =0; i < arrayInqDetails.length; i++){
+                    let resetElement = document.getElementById('detail'+ i); 
+                    let resetButton = document.getElementById('detailButton'+ i); 
+                    // 詳細を部分表示
+                    resetElement.innerHTML = arrayInqDetails[i].inqDetail.substr(0, 20) + "...";
+                        // ファイルがある場合、固定文言とファイルリンクを非表示
+                        if(arrayInqDetails[i].fileDownloadText){
+                            document.getElementById('fdText'+i).style = 'display:none;';
+                            document.getElementById('fName'+i).style = 'display:none;';
+                        }
+                        resetButton.value = 'false';
+                }
+            };
+            
+            /***
+			 お問い合わせ詳細の出力処理
+			***/
+
+            /*
+              配列内：
+                dateTime:画面出力概要（日時）
+                inqDetail:お問い合わせ詳細
+                fileDownloadText:ファイル（コチラからダウンロード）を出力するか（T/F）
+                fileName:画面出力ファイル名
+                fileLink:ファイルのリンク表示用URL
+            */
+            // お問い合わせ詳細のデータ
+            let arrayInqDetails = [
+                {
+                    dateTime:'2022年06月02日　10：01',
+                    inqDetail:'問い合わせ詳細：スマホを機種変更したのですが、トークンアプリの引継ぎ？がよくわかりません。前のスマホはもっていません。スマホを機種変更したのですが、トークンアプリの引継ぎ？がよくわかりません。前のスマホはもっていません。スマホを機種変更したのですが、トークンアプリの引継ぎ？がよくわかりません。前のスマホはもっていません。',
+                    fileDownloadText:true,
+                    fileName:'aaaaaaaaaaaaaaaaaaa.txt'
+                },{
+                    dateTime:'2022年06月02日　10：02',
+                    inqDetail:'ご回答：カスタマーセンターの鈴木です。お問い合わせありがとうございます。スマートフォンを機種変更した場合、トークンアプリは引継ぎがされません。お手数おかけいたしますが、あらためてトークンアプリをダウンロードいただき、再登録をお願いいたします。',
+                    fileDownloadText:false,
+                    fileName:'bbbbbbbbbbbbbbb.txt'
+                },{
+                    dateTime:'2022年06月02日　10：03',
+                    inqDetail:'問い合わせ詳細：スマホを機種変更したのですが、トークンアプリの引継ぎ？がよくわかりません。前のスマホはもっていません。スマホを機種変更したのですが、トークンアプリの引継ぎ？がよくわかりません。前のスマホはもっていません。スマホを機種変更したのですが、トークンアプリの引継ぎ？がよくわかりません。前のスマホはもっていません。',
+                    fileDownloadText:true,
+                    fileName:'cccccccccc.txt'
+                },{
+                    dateTime:'2022年06月02日　10：04',
+                    inqDetail:'ご回答：カスタマーセンターの鈴木です。お問い合わせありがとうございます。スマートフォンを機種変更した場合、トークンアプリは引継ぎがされません。お手数おかけいたしますが、あらためてトークンアプリをダウンロードいただき、再登録をお願いいたします。',
+                    fileDownloadText:true,
+                    fileName:'ddddd.txt'
+                }
+            ];
+            // ファイルパス(サーバーを立てていないため、ダウンロードされずにファイルの中身がWeb上に表示される)
+            const fileLink = 'download/';
+            // 画面出力用テキスト
+            const fileDowText = 'ファイル（コチラからダウンロード）'; 
+            // template要素を取得
+            var template = document.getElementById('template');
+            // データの数分繰り返し
+            for(var i =0; i < arrayInqDetails.length; i++){
+                // template要素の内容を複製
+                var clone = template.content.cloneNode(true);
+                
+                // 複製したtemplate要素にデータを挿入
+                //clone.querySelector('.dateTime').textContent = arrayInqDetails[i].dateTime;
+                clone.querySelector('.detailButton').innerHTML = arrayInqDetails[i].dateTime;
+                clone.querySelector('.detailButton').Name = 'detail'+ i;
+                clone.querySelector('.detailButton').id = 'detailButton'+ i;
+                clone.querySelector('.detailButton').value = false;
+                clone.querySelector('.inqDetail').textContent = arrayInqDetails[i].inqDetail.substr(0, 18) + "...";
+                clone.querySelector('.inqDetail').id = 'detail'+ i;
+                // -----以降は画面表示しない設定で出力-------
+                clone.querySelector('.fileDownloadText').textContent = (arrayInqDetails[i].fileDownloadText) ? fileDowText : '';
+                clone.querySelector('.fileDownloadText').style = 'display:none;';
+                clone.querySelector('.fileDownloadText').id = 'fdText'+ i;
+                clone.querySelector('.fileName').textContent = arrayInqDetails[i].fileName;
+                clone.querySelector('.fileName').download = arrayInqDetails[i].fileName;
+                clone.querySelector('.fileName').href = fileLink + arrayInqDetails[i].fileName;
+                clone.querySelector('.fileName').style = 'display:none;';
+                clone.querySelector('.fileName').id = 'fName'+ i;
+                
+                // div#vcontainerの中に追加
+                document.getElementById('container').appendChild(clone);
+            }
+
+			/***
+			 要素の全表示・部分表示処理
+			***/
+
+            /*
+                引数：押下ボタン要素
+            */
+            function dButton(elem){
+                // ボタンの状態
+                // openState=全表示(true)/部分表示(false)の状態
+                let openState = elem.value;
+                // 押されたボタンNo
+                let num = elem.Name.substr(elem.Name.length-1, elem.Name.length);
+                // 詳細要素の取得
+                let element = document.getElementById(elem.Name);                
+                
+                // ボタンの状態で表示を切り替え(要素のvalueは文字列)
+                if(openState=='true'){
+                    // 詳細を部分表示
+                    element.innerHTML = arrayInqDetails[num].inqDetail.substr(0, 18) + "...";
+                    // ファイルがある場合、固定文言とファイルリンクを非表示
+                    if(arrayInqDetails[num].fileDownloadText){
+                        document.getElementById('fdText'+num).style = 'display:none;';
+                        document.getElementById('fName'+num).style = 'display:none;';
+                    }
+                    openState = 'false';
+
+                } else{
+                    // 詳細を全表示
+                    element.innerHTML = arrayInqDetails[num].inqDetail;
+                    // ファイルがある場合、固定文言とファイルリンクを表示
+                    if(arrayInqDetails[num].fileDownloadText){
+                        document.getElementById('fdText'+num).style = 'display:inline;';
+                        document.getElementById('fName'+num).style = 'display:inline;';
+                    }
+                    openState = 'true';
+
+                }
+                // ボタンの状態を設定
+                elem.value = openState;
+            }
+        </script>
+    </body>
+</html>

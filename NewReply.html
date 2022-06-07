@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="shift_jis">
+		<title>PayPay銀行　返信画面</title>
+		<meta name="description" content="顧客コンタクトボード">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+		<style>
+			#work{
+				margin: 1.5em 1.5em;
+			}
+			.buttonContainer{
+                width: 22em;/*他のページは30指定*/
+                max-width: 100%;
+                text-align: center;
+            }
+			
+			.buttonBrue_small{
+                color: #3c90fff7;
+                border-color: #3c90fff7;
+                background: none;
+                border-radius: 5px;
+                border: 1px solid #3c90fff7;
+                font-weight: bold;
+                padding: 5px 10px;
+				cursor: pointer;
+            }
+			.buttonGray_small{
+                color: #b7c4d5;
+                border-color: #b7c4d5;
+                background: none;
+                border-radius: 5px;
+                border: 1px solid #b7c4d5;
+                font-weight: bold;
+                padding: 5px 10px;
+            }
+			.buttonBrue_noborder{
+                color: #3c90fff7;
+                outline: none;
+                border: none;
+                background: none;
+                font-weight: bold;
+                padding: 10px 30px;
+                cursor: pointer;
+            }
+		</style>
+	</head>
+	<body>
+		<div id="work">
+			<form id="testForm">
+				<b><p>返信内容</p></b>
+				<textarea id="textarea" name="replyDeteil" rows="4" cols="40" placeholder="入力してください" required></textarea><br>
+				<b style="color: #3c90fff7;">ファイルアップロード（任意）</b><br>
+				<input type="file" id="file" style="cursor:pointer;" onchange="$('#fileName').val($(this).val().replace(/^.*[\\\/]/, ''))" hidden>
+				<input type="text" id="fileName" name="attachment" value="" size="35" readonly onClick="$('#file').click();">
+				<div class="buttonContainer">
+					<p><button type="button" id="nextButton" class="buttonGray_small" disabled>次へ</button></p>
+					<p><button type="button" class="buttonBrue_noborder" onclick="location.href='./InquiryList.html'">戻る</button></p>
+				</div>
+			</form>
+		</div>
+
+		<script>
+			// 次へボタン
+			const button = document.getElementById('nextButton');
+			// 問い合わせ詳細
+			let textarea = document.getElementById('textarea');
+			// フォーム全体
+			const form = document.getElementById('testForm');
+
+			/***
+			 次へボタン活性
+			***/
+
+			// フォーム（テキストが変わった場合のinput、チェックボックスやラジオボタンに入力があった場合のchange）
+			form.addEventListener("input", update)
+			form.addEventListener("change", update)
+			function update() {
+				// フォームの必須項目が入力されているか確認する
+				const isRequired = form.checkValidity()
+				// 必須項目が入力されているなら、ボタンの無効を解除
+				if (isRequired) {
+					// ボタンを活性
+					button.disabled = false;
+					button.classList.remove('buttonGray_small');
+					button.classList.add('buttonBrue_small');
+					/* 
+						条件：ラジオボタンTRUE かつ メール入力なしまたは、ラジオボタンFALSE かつ メール入力あり
+						※ただし、ラジオボタンの切り替えで値のを残さない場合は修正が必要（現状は残る）
+					*/
+					// メール新規登録の場合、入力チェック
+					if((radio2.checked && (mail.value=="" || conMail.value=="")) ||
+					(!radio2.checked && (mail.value!="" || conMail.value!=""))) {
+					//ボタンを非活性
+					button.disabled = true;
+					//button.style.cursor = "default";
+					button.classList.remove('buttonBrue_small');
+					button.classList.add('buttonGray_small');
+					return;
+					}
+					if(mail.value != conMail.value) {
+						//ボタンを非活性
+						button.disabled = true;
+						//button.style.cursor = "default";
+						button.classList.remove('buttonBrue_small');
+						button.classList.add('buttonGray_small');
+						return;
+					}
+					return;
+				} else{
+					// ボタンを非活性
+					button.disabled = true;
+					//button.style.cursor = "default";
+					button.classList.remove('buttonBrue_small');
+					button.classList.add('buttonGray_small');
+					return;
+				}
+
+			}
+
+			/***
+			 入力量に応じた入力領域拡張
+			***/
+
+			// textareaのデフォルトの要素の高さを取得
+			let clientHeight = textarea.clientHeight;
+			// textareaのinputイベント
+			textarea.addEventListener('input', ()=>{
+				// textareaの要素の高さを設定
+				textarea.style.height = clientHeight + 'px';
+				// textareaの入力内容の高さを取得
+				let scrollHeight = textarea.scrollHeight;                            
+				// textareaの高さに入力内容の高さを設定
+				textarea.style.height = scrollHeight + 'px';
+			});
+
+			/***
+			 確認画面
+			***/
+			
+			// イベントを非同期で取得する
+			HTMLElement.prototype.observe = function (type) {
+				const getHandler = resolve => {
+					const result =  () => {
+						resolve();
+						this.removeEventListener(type, result);
+					};
+					return result;
+				};
+				return new Promise(resolve => this.addEventListener(type, getHandler(resolve)));
+			};
+
+			(async () => {
+				while (true) {
+					// ボタンクリックを待つ
+					await document.getElementById("nextButton").observe("click");
+					// ワークエリアを取得
+					const workArea = document.getElementById("work");
+					// ワークエリアをバックアップ
+					const backup = workArea.cloneNode(true);
+					// 添付ファイル名
+					let attachmentName = document.getElementsByName('attachment')[0].value;
+					// バックスラッシュ
+					const regex = /\\/;
+							
+					// 添付ファイル名を返却
+					function splitFileName(fileName){
+						let array = attachmentName.split(regex);
+						return (array[array.length - 1]=='') ? 'ファイルなし' : array[array.length - 1];
+					}
+					// ラジオボタンの入力状況を返却
+					function radioChecked(radio){
+						return(radio ? 'checked' : 'disabled');
+					}
+
+					/*
+						pタグは折り返しをしない(CSSで)
+					*/
+					// ワークエリアを結果で書き換える(確認画面)
+					workArea.innerHTML = `
+						<b><p>返信内容</p></b>
+						<p>${document.getElementsByName("replyDeteil")[0].value}</p>
+						<b><p>ファイルアップロード</p></b>
+						<p>${splitFileName(attachmentName)}</p>
+						<div class="buttonContainer">
+							<input id="nextCompletion" type="button" class="buttonBrue_small" onclick="location.href='./NewCompletion.html'" value="返信を送る"><br>
+							<p><input id="back" type="button" class="buttonBrue_noborder" value="戻る"></p>
+						</div>
+					`;
+					// 戻るボタンのクリックを待つ
+					await document.getElementById("back").observe("click");
+					// ワークエリアを戻す
+					document.body.replaceChild(backup, workArea);
+				}
+			})();
+		</script>
+	</body>
+</html>
