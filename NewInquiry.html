@@ -349,7 +349,7 @@
 						var accToken = 'Bearer ' + connectData.access_token;
 
 						// 問い合わせ種別
-						const inqTypeValue = document.getElementById('inqType').value;
+						const inqTypeValue = document.getElementById('inqType');
 						// 問い合わせ詳細
 						const inqDeteilValue = document.getElementById('inqDeteil').value;
 						// メール
@@ -357,7 +357,7 @@
 						
 						var inputData = {};
 						inputData.AccountNumber = 'A0000001';
-						inputData.Classification = inqTypeValue;
+						inputData.Classification = inqTypeValue.value;
 						inputData.Inquiry = inqDeteilValue;
 						inputData.mail = mailValue;
 						//inputData.File = inputFile ;
