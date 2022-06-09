@@ -241,6 +241,10 @@
 			 確認画面
 			***/
 
+			let bkInqType;
+			let bkInqDeteil;
+			let bkMail;
+
 			// イベントを非同期で取得する
 			HTMLElement.prototype.observe = function (type) {
 				const getHandler = resolve => {
@@ -258,6 +262,11 @@
 					await document.getElementById("nextButton").observe("click");
 					// ワークエリアを取得
 					const workArea = document.getElementById("work");
+					// 入力内容の取得
+					bkInqType = document.getElementById("inqType").value;
+					bkInqDeteil = document.getElementById("inqDeteil").value;
+					bkMail = document.getElementById("mail").value;
+
 					// ワークエリアをバックアップ
 					const backup = workArea.cloneNode(true);
 					// 添付ファイル名
@@ -349,19 +358,18 @@
 						var accToken = 'Bearer ' + connectData.access_token;
 
 						// 問い合わせ種別
-						console.log(document.getElementById('inqType'));
 						console.log(document.getElementById('inqType').value);
-						const inqTypeValue = document.getElementById('inqType');
+						/*const inqTypeValue = document.getElementById('inqType');
 						// 問い合わせ詳細
 						const inqDeteilValue = document.getElementById('inqDeteil').value;
 						// メール
-						const mailValue = document.getElementById('mailaddress'.value);
+						const mailValue = document.getElementById('mailaddress'.value);*/
 						
 						var inputData = {};
 						inputData.AccountNumber = 'A0000001';
-						inputData.Classification = inqTypeValue.value;
-						inputData.Inquiry = inqDeteilValue;
-						inputData.mail = mailValue;
+						inputData.Classification = bkInqType;
+						inputData.Inquiry = bkInqDeteil;
+						inputData.mail = bkMail;
 						//inputData.File = inputFile ;
 						inputData.File = '' ;
 
