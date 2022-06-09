@@ -70,7 +70,7 @@
 				</p>
 
 				<b><p>問い合わせ詳細</p></b>
-				<p><textarea id="inqDeteil" name="inqDeteil" rows="4" cols="40" placeholder="入力してください" required></textarea></p>
+				<p><textarea id="inqDetail" name="inqDetail" rows="4" cols="40" placeholder="入力してください" required></textarea></p>
 				
 				<b style="color: #3c90fff7;">ファイルアップロード（任意）</b><br>
 				<input type="file" id="file" style="cursor:pointer;" hidden>
@@ -106,7 +106,7 @@
 			// 問い合わせ種別
 			const inqType = document.getElementById('inqType');
 			// 問い合わせ詳細
-			let inqDeteil = document.getElementById('inqDeteil');
+			let inqDetail = document.getElementById('inqDetail');
 			// メールの入力欄
 			const mail = document.getElementById('mailaddress');
 			const conMail = document.getElementById('confirmationMailaddress');
@@ -227,22 +227,22 @@
 			***/
 
 			// textareaのデフォルトの要素の高さを取得
-			let clientHeight = inqDeteil.clientHeight;
+			let clientHeight = inqDetail.clientHeight;
 			// textareaのinputイベント
-			inqDeteil.addEventListener('input', ()=>{
+			inqDetail.addEventListener('input', ()=>{
 				// textareaの要素の高さを設定
-				inqDeteil.style.height = clientHeight + 'px';
+				inqDetail.style.height = clientHeight + 'px';
 				// textareaの入力内容の高さを取得
-				let scrollHeight = inqDeteil.scrollHeight;                            
+				let scrollHeight = inqDetail.scrollHeight;                            
 				// textareaの高さに入力内容の高さを設定
-				inqDeteil.style.height = scrollHeight + 'px';
+				inqDetail.style.height = scrollHeight + 'px';
 			});
 			/***
 			 確認画面
 			***/
 
 			let bkInqType;
-			let bkInqDeteil;
+			let bkInqDetail;
 			let bkMail;
 
 			// イベントを非同期で取得する
@@ -265,10 +265,10 @@
 					
 					// 入力内容の取得(SF送信用)
 					bkInqType = document.getElementById("inqType").value;
-					bkInqDeteil = document.getElementById("inqDeteil").value;
+					bkInqDetail = document.getElementById("inqDetail").value;
 					bkMail = document.getElementById("mailaddress").value;
 					console.log(bkInqType);
-					console.log(bkInqDeteil);
+					console.log(bkInqDetail);
 					console.log(bkMail);
 
 					// ワークエリアをバックアップ
@@ -295,7 +295,7 @@
 						<p>${document.getElementById("inqType").value}</p>
 
 						<b><p>問い合わせ詳細</p></b>
-						<p>${document.getElementsByName("inqDeteil")[0].value}</p>
+						<p>${document.getElementsByName("inqDetail")[0].value}</p>
 
 						<b><p>ファイルアップロード</p></b>
 						<p>${splitFileName(attachmentName)}</p>
@@ -364,8 +364,8 @@
 						var inputData = {};
 						inputData.AccountNumber = 'A0000001';
 						inputData.Classification = bkInqType;
-						inputData.Inquiry = bkInqDeteil;
-						inputData.mail = bkMail;
+						inputData.InquiryDetail = bkInqDetail;
+						inputData.Mail = bkMail;
 						//inputData.File = inputFile ;
 						inputData.File = '' ;
 						console.log(inputData);
