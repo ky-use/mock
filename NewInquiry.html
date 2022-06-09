@@ -2,7 +2,7 @@
 <html lang="ja">
 	<head>
 		<meta charset="shift_jis">
-		<title>PayPay銀行　新規問い合わせ確認画面</title>
+		<title>PayPay銀行　新規問い合わせ画面</title>
 		<meta name="description" content="顧客コンタクトボード">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -369,7 +369,7 @@
 						$.ajax({
 							type: 'POST',
 							crossOrigin: true,
-							url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/PPB_Inquiry__c/',
+							url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/Mock_Case/',
 							cache :false,
 							headers: {"Authorization" : accToken, "Content-Type" : "application/json"},
 							dataType: 'json',
