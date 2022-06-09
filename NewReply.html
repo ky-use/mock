@@ -2,8 +2,8 @@
 <html lang="ja">
 	<head>
 		<meta charset="shift_jis">
-		<title>PayPay‹âs@•ÔM‰æ–Ê</title>
-		<meta name="description" content="ŒÚ‹qƒRƒ“ƒ^ƒNƒgƒ{[ƒh">
+		<title>PayPayéŠ€è¡Œã€€è¿”ä¿¡ç”»é¢</title>
+		<meta name="description" content="é¡§å®¢ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<style>
@@ -11,7 +11,7 @@
 				margin: 1.5em 1.5em;
 			}
 			.buttonContainer{
-                width: 22em;/*‘¼‚Ìƒy[ƒW‚Í30w’è*/
+                width: 22em;/*ä»–ã®ãƒšãƒ¼ã‚¸ã¯30æŒ‡å®š*/
                 max-width: 100%;
                 text-align: center;
             }
@@ -49,50 +49,50 @@
 	<body>
 		<div id="work">
 			<form id="testForm">
-				<b><p>•ÔM“à—e</p></b>
-				<textarea id="textarea" name="replyDeteil" rows="4" cols="40" placeholder="“ü—Í‚µ‚Ä‚­‚¾‚³‚¢" required></textarea><br>
-				<b style="color: #3c90fff7;">ƒtƒ@ƒCƒ‹ƒAƒbƒvƒ[ƒhi”CˆÓj</b><br>
+				<b><p>è¿”ä¿¡å†…å®¹</p></b>
+				<textarea id="textarea" name="replyDeteil" rows="4" cols="40" placeholder="å…¥åŠ›ã—ã¦ãã ã•ã„" required></textarea><br>
+				<b style="color: #3c90fff7;">ãƒ•ã‚¡ã‚¤ãƒ«ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ï¼ˆä»»æ„ï¼‰</b><br>
 				<input type="file" id="file" style="cursor:pointer;" onchange="$('#fileName').val($(this).val().replace(/^.*[\\\/]/, ''))" hidden>
 				<input type="text" id="fileName" name="attachment" value="" size="35" readonly onClick="$('#file').click();">
 				<div class="buttonContainer">
-					<p><button type="button" id="nextButton" class="buttonGray_small" disabled>Ÿ‚Ö</button></p>
-					<p><button type="button" class="buttonBrue_noborder" onclick="location.href='./InquiryList.html'">–ß‚é</button></p>
+					<p><button type="button" id="nextButton" class="buttonGray_small" disabled>æ¬¡ã¸</button></p>
+					<p><button type="button" class="buttonBrue_noborder" onclick="location.href='./InquiryList.html'">æˆ»ã‚‹</button></p>
 				</div>
 			</form>
 		</div>
 
 		<script>
-			// Ÿ‚Öƒ{ƒ^ƒ“
+			// æ¬¡ã¸ãƒœã‚¿ãƒ³
 			const button = document.getElementById('nextButton');
-			// –â‚¢‡‚í‚¹Ú×
+			// å•ã„åˆã‚ã›è©³ç´°
 			let textarea = document.getElementById('textarea');
-			// ƒtƒH[ƒ€‘S‘Ì
+			// ãƒ•ã‚©ãƒ¼ãƒ å…¨ä½“
 			const form = document.getElementById('testForm');
 
 			/***
-			 Ÿ‚Öƒ{ƒ^ƒ“Šˆ«
+			 æ¬¡ã¸ãƒœã‚¿ãƒ³æ´»æ€§
 			***/
 
-			// ƒtƒH[ƒ€iƒeƒLƒXƒg‚ª•Ï‚í‚Á‚½ê‡‚ÌinputAƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚âƒ‰ƒWƒIƒ{ƒ^ƒ“‚É“ü—Í‚ª‚ ‚Á‚½ê‡‚Ìchangej
+			// ãƒ•ã‚©ãƒ¼ãƒ ï¼ˆãƒ†ã‚­ã‚¹ãƒˆãŒå¤‰ã‚ã£ãŸå ´åˆã®inputã€ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹ã‚„ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³ã«å…¥åŠ›ãŒã‚ã£ãŸå ´åˆã®changeï¼‰
 			form.addEventListener("input", update)
 			form.addEventListener("change", update)
 			function update() {
-				// ƒtƒH[ƒ€‚Ì•K{€–Ú‚ª“ü—Í‚³‚ê‚Ä‚¢‚é‚©Šm”F‚·‚é
+				// ãƒ•ã‚©ãƒ¼ãƒ ã®å¿…é ˆé …ç›®ãŒå…¥åŠ›ã•ã‚Œã¦ã„ã‚‹ã‹ç¢ºèªã™ã‚‹
 				const isRequired = form.checkValidity()
-				// •K{€–Ú‚ª“ü—Í‚³‚ê‚Ä‚¢‚é‚È‚çAƒ{ƒ^ƒ“‚Ì–³Œø‚ğ‰ğœ
+				// å¿…é ˆé …ç›®ãŒå…¥åŠ›ã•ã‚Œã¦ã„ã‚‹ãªã‚‰ã€ãƒœã‚¿ãƒ³ã®ç„¡åŠ¹ã‚’è§£é™¤
 				if (isRequired) {
-					// ƒ{ƒ^ƒ“‚ğŠˆ«
+					// ãƒœã‚¿ãƒ³ã‚’æ´»æ€§
 					button.disabled = false;
 					button.classList.remove('buttonGray_small');
 					button.classList.add('buttonBrue_small');
 					/* 
-						ğŒFƒ‰ƒWƒIƒ{ƒ^ƒ“TRUE ‚©‚Â ƒ[ƒ‹“ü—Í‚È‚µ‚Ü‚½‚ÍAƒ‰ƒWƒIƒ{ƒ^ƒ“FALSE ‚©‚Â ƒ[ƒ‹“ü—Í‚ ‚è
-						¦‚½‚¾‚µAƒ‰ƒWƒIƒ{ƒ^ƒ“‚ÌØ‚è‘Ö‚¦‚Å’l‚Ì‚ğc‚³‚È‚¢ê‡‚ÍC³‚ª•K—viŒ»ó‚Íc‚éj
+						æ¡ä»¶ï¼šãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³TRUE ã‹ã¤ ãƒ¡ãƒ¼ãƒ«å…¥åŠ›ãªã—ã¾ãŸã¯ã€ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³FALSE ã‹ã¤ ãƒ¡ãƒ¼ãƒ«å…¥åŠ›ã‚ã‚Š
+						â€»ãŸã ã—ã€ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³ã®åˆ‡ã‚Šæ›¿ãˆã§å€¤ã®ã‚’æ®‹ã•ãªã„å ´åˆã¯ä¿®æ­£ãŒå¿…è¦ï¼ˆç¾çŠ¶ã¯æ®‹ã‚‹ï¼‰
 					*/
-					// ƒ[ƒ‹V‹K“o˜^‚Ìê‡A“ü—Íƒ`ƒFƒbƒN
+					// ãƒ¡ãƒ¼ãƒ«æ–°è¦ç™»éŒ²ã®å ´åˆã€å…¥åŠ›ãƒã‚§ãƒƒã‚¯
 					if((radio2.checked && (mail.value=="" || conMail.value=="")) ||
 					(!radio2.checked && (mail.value!="" || conMail.value!=""))) {
-					//ƒ{ƒ^ƒ“‚ğ”ñŠˆ«
+					//ãƒœã‚¿ãƒ³ã‚’éæ´»æ€§
 					button.disabled = true;
 					//button.style.cursor = "default";
 					button.classList.remove('buttonBrue_small');
@@ -100,7 +100,7 @@
 					return;
 					}
 					if(mail.value != conMail.value) {
-						//ƒ{ƒ^ƒ“‚ğ”ñŠˆ«
+						//ãƒœã‚¿ãƒ³ã‚’éæ´»æ€§
 						button.disabled = true;
 						//button.style.cursor = "default";
 						button.classList.remove('buttonBrue_small');
@@ -109,7 +109,7 @@
 					}
 					return;
 				} else{
-					// ƒ{ƒ^ƒ“‚ğ”ñŠˆ«
+					// ãƒœã‚¿ãƒ³ã‚’éæ´»æ€§
 					button.disabled = true;
 					//button.style.cursor = "default";
 					button.classList.remove('buttonBrue_small');
@@ -120,26 +120,26 @@
 			}
 
 			/***
-			 “ü—Í—Ê‚É‰‚¶‚½“ü—Í—ÌˆæŠg’£
+			 å…¥åŠ›é‡ã«å¿œã˜ãŸå…¥åŠ›é ˜åŸŸæ‹¡å¼µ
 			***/
 
-			// textarea‚ÌƒfƒtƒHƒ‹ƒg‚Ì—v‘f‚Ì‚‚³‚ğæ“¾
+			// textareaã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®è¦ç´ ã®é«˜ã•ã‚’å–å¾—
 			let clientHeight = textarea.clientHeight;
-			// textarea‚ÌinputƒCƒxƒ“ƒg
+			// textareaã®inputã‚¤ãƒ™ãƒ³ãƒˆ
 			textarea.addEventListener('input', ()=>{
-				// textarea‚Ì—v‘f‚Ì‚‚³‚ğİ’è
+				// textareaã®è¦ç´ ã®é«˜ã•ã‚’è¨­å®š
 				textarea.style.height = clientHeight + 'px';
-				// textarea‚Ì“ü—Í“à—e‚Ì‚‚³‚ğæ“¾
+				// textareaã®å…¥åŠ›å†…å®¹ã®é«˜ã•ã‚’å–å¾—
 				let scrollHeight = textarea.scrollHeight;                            
-				// textarea‚Ì‚‚³‚É“ü—Í“à—e‚Ì‚‚³‚ğİ’è
+				// textareaã®é«˜ã•ã«å…¥åŠ›å†…å®¹ã®é«˜ã•ã‚’è¨­å®š
 				textarea.style.height = scrollHeight + 'px';
 			});
 
 			/***
-			 Šm”F‰æ–Ê
+			 ç¢ºèªç”»é¢
 			***/
 			
-			// ƒCƒxƒ“ƒg‚ğ”ñ“¯Šú‚Åæ“¾‚·‚é
+			// ã‚¤ãƒ™ãƒ³ãƒˆã‚’éåŒæœŸã§å–å¾—ã™ã‚‹
 			HTMLElement.prototype.observe = function (type) {
 				const getHandler = resolve => {
 					const result =  () => {
@@ -153,44 +153,44 @@
 
 			(async () => {
 				while (true) {
-					// ƒ{ƒ^ƒ“ƒNƒŠƒbƒN‚ğ‘Ò‚Â
+					// ãƒœã‚¿ãƒ³ã‚¯ãƒªãƒƒã‚¯ã‚’å¾…ã¤
 					await document.getElementById("nextButton").observe("click");
-					// ƒ[ƒNƒGƒŠƒA‚ğæ“¾
+					// ãƒ¯ãƒ¼ã‚¯ã‚¨ãƒªã‚¢ã‚’å–å¾—
 					const workArea = document.getElementById("work");
-					// ƒ[ƒNƒGƒŠƒA‚ğƒoƒbƒNƒAƒbƒv
+					// ãƒ¯ãƒ¼ã‚¯ã‚¨ãƒªã‚¢ã‚’ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—
 					const backup = workArea.cloneNode(true);
-					// “Y•tƒtƒ@ƒCƒ‹–¼
+					// æ·»ä»˜ãƒ•ã‚¡ã‚¤ãƒ«å
 					let attachmentName = document.getElementsByName('attachment')[0].value;
-					// ƒoƒbƒNƒXƒ‰ƒbƒVƒ…
+					// ãƒãƒƒã‚¯ã‚¹ãƒ©ãƒƒã‚·ãƒ¥
 					const regex = /\\/;
 							
-					// “Y•tƒtƒ@ƒCƒ‹–¼‚ğ•Ô‹p
+					// æ·»ä»˜ãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¿”å´
 					function splitFileName(fileName){
 						let array = attachmentName.split(regex);
-						return (array[array.length - 1]=='') ? 'ƒtƒ@ƒCƒ‹‚È‚µ' : array[array.length - 1];
+						return (array[array.length - 1]=='') ? 'ãƒ•ã‚¡ã‚¤ãƒ«ãªã—' : array[array.length - 1];
 					}
-					// ƒ‰ƒWƒIƒ{ƒ^ƒ“‚Ì“ü—Íó‹µ‚ğ•Ô‹p
+					// ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³ã®å…¥åŠ›çŠ¶æ³ã‚’è¿”å´
 					function radioChecked(radio){
 						return(radio ? 'checked' : 'disabled');
 					}
 
 					/*
-						pƒ^ƒO‚ÍÜ‚è•Ô‚µ‚ğ‚µ‚È‚¢(CSS‚Å)
+						pã‚¿ã‚°ã¯æŠ˜ã‚Šè¿”ã—ã‚’ã—ãªã„(CSSã§)
 					*/
-					// ƒ[ƒNƒGƒŠƒA‚ğŒ‹‰Ê‚Å‘‚«Š·‚¦‚é(Šm”F‰æ–Ê)
+					// ãƒ¯ãƒ¼ã‚¯ã‚¨ãƒªã‚¢ã‚’çµæœã§æ›¸ãæ›ãˆã‚‹(ç¢ºèªç”»é¢)
 					workArea.innerHTML = `
-						<b><p>•ÔM“à—e</p></b>
+						<b><p>è¿”ä¿¡å†…å®¹</p></b>
 						<p>${document.getElementsByName("replyDeteil")[0].value}</p>
-						<b><p>ƒtƒ@ƒCƒ‹ƒAƒbƒvƒ[ƒh</p></b>
+						<b><p>ãƒ•ã‚¡ã‚¤ãƒ«ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰</p></b>
 						<p>${splitFileName(attachmentName)}</p>
 						<div class="buttonContainer">
-							<input id="nextCompletion" type="button" class="buttonBrue_small" onclick="location.href='./NewCompletion.html'" value="•ÔM‚ğ‘—‚é"><br>
-							<p><input id="back" type="button" class="buttonBrue_noborder" value="–ß‚é"></p>
+							<input id="nextCompletion" type="button" class="buttonBrue_small" onclick="location.href='./NewCompletion.html'" value="è¿”ä¿¡ã‚’é€ã‚‹"><br>
+							<p><input id="back" type="button" class="buttonBrue_noborder" value="æˆ»ã‚‹"></p>
 						</div>
 					`;
-					// –ß‚éƒ{ƒ^ƒ“‚ÌƒNƒŠƒbƒN‚ğ‘Ò‚Â
+					// æˆ»ã‚‹ãƒœã‚¿ãƒ³ã®ã‚¯ãƒªãƒƒã‚¯ã‚’å¾…ã¤
 					await document.getElementById("back").observe("click");
-					// ƒ[ƒNƒGƒŠƒA‚ğ–ß‚·
+					// ãƒ¯ãƒ¼ã‚¯ã‚¨ãƒªã‚¢ã‚’æˆ»ã™
 					document.body.replaceChild(backup, workArea);
 				}
 			})();

@@ -3,16 +3,41 @@
 	<head>
 		<meta charset="shift_jis">
 		<title>PayPay銀行　Welcome Page</title>
-		<meta name="description" content="顧客コンタクトボード">
+		<meta name="description" content="Welcome Page">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .centerBox{
+                text-align: center;
+                /*max-width: 300px;
+                margin: 0 auto;*/
+            }
+            .centerBox p{
+                display: inline-block;
+                text-align: left;
+            }
+            .buttonBrue_small{
+                color: #3c90fff7;
+                border-color: #3c90fff7;
+                background: none;
+                border-radius: 5px;
+                border: 1px solid #3c90fff7;
+                font-weight: bold;
+                padding: 5px 10px;
+				cursor: pointer;
+            }
+        </style>
 	</head>
 	<body>
-        <div>
-            <p>Welcome</p>
-            <p>~~~~~~~~~~~~~~</p>
-            <p>~~~~~~~~~~~~~~</p>
-            <p>~~~~~~~~~~~~~~</p>
-            <p><button type="button" onclick="location.href='./index.html'">コタンタクトボード ホーム</button></p>
+        <div class="centerBox">
+            <p class="txt">Welcome<br>
+                ~~~~~~~~~~~~~~<br>
+                ~~~~~~~~~~~~~~<br>
+                ~~~~~~~~~~~~~~<br>
+            </p>
         </div>
+        <div class="centerBox">
+            <p><button type="button" class="buttonBrue_small" onclick="location.href='./Home.html'">コンタクトボード ホーム</button></p>
+        </div>
+
     </body>
 </html>
