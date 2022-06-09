@@ -262,10 +262,14 @@
 					await document.getElementById("nextButton").observe("click");
 					// ワークエリアを取得
 					const workArea = document.getElementById("work");
-					// 入力内容の取得
+					
+					// 入力内容の取得(SF送信用)
 					bkInqType = document.getElementById("inqType").value;
 					bkInqDeteil = document.getElementById("inqDeteil").value;
 					bkMail = document.getElementById("mailaddress").value;
+					console.log(bkInqType);
+					console.log(bkInqDeteil);
+					console.log(bkMail);
 
 					// ワークエリアをバックアップ
 					const backup = workArea.cloneNode(true);
@@ -356,14 +360,6 @@
 						var reader = new FileReader();
 						// アクセストークン
 						var accToken = 'Bearer ' + connectData.access_token;
-
-						// 問い合わせ種別
-						//console.log(document.getElementById('inqType').value);
-						/*const inqTypeValue = document.getElementById('inqType');
-						// 問い合わせ詳細
-						const inqDeteilValue = document.getElementById('inqDeteil').value;
-						// メール
-						const mailValue = document.getElementById('mailaddress'.value);*/
 						
 						var inputData = {};
 						inputData.AccountNumber = 'A0000001';
