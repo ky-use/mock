@@ -387,7 +387,7 @@
 								if(res.length != 0){
 									console.log(res);
 									// コンタクトボードのIDを取得
-									var insId = res[0].id;
+									var insId = res;
 									//var insId = res[0].Id;
 
 									// formを取得しリセット
@@ -426,8 +426,8 @@
 
 													//お問い合せレコードとリンクさせるためのbodyを作成
 													var linkJson = {
-														"ContentDocumentId" : cdId,
-														"LinkedEntityId" : insId, //コンタクトボード明細のレコードID
+														"ContentDocumentId" : insId,
+														"LinkedEntityId" : cdId, //コンタクトボード明細のレコードID
 														"Visibility" : "AllUsers" //閲覧できる人の制限
 													};
 													console.log(cdId);
