@@ -54,18 +54,6 @@
 				<p>
 					<select name="inqType" id="inqType" style="color: #3c90fff7; border: none;" required>
 						<option value="">選択してください</option>
-						<!--
-						<option value="ATMについて">ATMについて</option>
-						<option value="キャッシュカード・トークンについて">キャッシュカード・トークンについて</option>
-						<option value="ログインパスワード・暗証番号・不明・変更について">ログインパスワード・暗証番号・不明・変更について</option>
-						<option value="Visaデビットについて">Visaデビットについて</option>
-						<option value="ローン・住宅ローンについて">ローン・住宅ローンについて</option>
-						<option value="口座開設・口座利用開始について">口座開設・口座利用開始について</option>
-						<option value="FX・投信・外貨預金について">FX・投信・外貨預金について</option>
-						<option value="登録情報変更　住所変更等について">登録情報変更　住所変更等について</option>
-						<option value="明細・振込・振替等について">明細・振込・振替等について</option>
-						<option value="その他お問い合わせ">その他お問い合わせ</option>
-						-->
 					</select>
 				</p>
 
@@ -75,9 +63,6 @@
 				<b style="color: #3c90fff7;">ファイルアップロード（任意）</b><br>
 				<input type="file" id="file" style="cursor:pointer;" hidden>
 				<input type="text" id="fileName" name="attachment" value="" size="35" readonly onClick="$('#file').click();">
-
-				<!--<b><p>ファイルアップロード（任意）</p></b>
-				<input type="file" name="attachment" accept="image/jpeg, image/png"><br>-->
 				
 				<b><p>通知用メールアドレス<br>
 					<label><input type="radio" name="mailSelect" id="radio1" value="登録メールアドレス宛に送付" checked> 登録メールアドレス宛に送付</label><br>
@@ -92,7 +77,6 @@
 				
 				<div class="buttonContainer">
 					<p><button type="button" id="nextButton" class="buttonGray_small" disabled>次へ</button></p>
-					<!--<button type="button" onclick="location.href='./index.html'">戻る</button>-->
 				</div>
 			</form>
 		</div>
@@ -135,13 +119,13 @@
                 // 複製したtemplate要素にデータを挿入
                 clone.querySelector('.inqTypeOption').innerHTML = optionData[i];
                 clone.querySelector('.inqTypeOption').value = optionData[i];
-                // div#vcontainerの中に追加
+                // div#containerの中に追加
                 document.getElementById('inqType').appendChild(clone);
             }
+			
 			/***
 			 メール入力欄活性
 			***/
-
 			// フォームの状態が変更されたとき
 			radio2.addEventListener('change', function() {
 				// プロパティの取得
@@ -172,10 +156,10 @@
 					conMail.value = '';
 				}
 			})
+
 			/***
 			 次へボタン活性
 			***/
-
 			// フォーム（テキストが変わった場合のinput、チェックボックスやラジオボタンに入力があった場合のchange）
 			form.addEventListener("input", update)
 			form.addEventListener("change", update)
@@ -222,10 +206,10 @@
 				}
 
 			}
+
 			/***
 			 入力量に応じた入力領域拡張
 			***/
-
 			// textareaのデフォルトの要素の高さを取得
 			let clientHeight = inqDetail.clientHeight;
 			// textareaのinputイベント
@@ -237,10 +221,10 @@
 				// textareaの高さに入力内容の高さを設定
 				inqDetail.style.height = scrollHeight + 'px';
 			});
+
 			/***
 			 確認画面
 			***/
-
 			let bkInqType;
 			let bkInqDetail;
 			let bkMail;
@@ -333,9 +317,9 @@
 				let onlyFileName = document.getElementById("file").value.replace(/^.*[\\\/]/, '');
 				// ファイル名をinputに差し込む
 				attText.value = onlyFileName;
+				
 				// ファイルオブジェクトを準備
 				var fileReader = new FileReader() ;
-
 				fileReader.onload = function () {
 					// ファイル内容を取得
 					var baseFile = this.result ;
@@ -343,12 +327,16 @@
 					// 先頭の余計な文字列を除いたBlobデータのみにする(Data-URL の宣言を削除(spFile[0] = 'data:*/*;base64,'))
 					inputFile = spFile[1];
 				}
-
+				// ファイルの1個目
 				var file = files.files[0] ;
 				fileName = file.name;
 				// 指定したBlob型かFIle型のファイルを読み込む(読み込むとresult属性にファイルのurlを格納(Data URI(Base64)))
 				fileReader.readAsDataURL( file ) ;
 			}
+
+			/***
+			 Salesforceへデータ登録処理
+			***/
 			function send() {
 				// アクセストークン取得（リフレッシュトークンフロー） Ajax
 				$.ajax({
@@ -363,15 +351,13 @@
 						var reader = new FileReader();
 						// アクセストークン
 						var accToken = 'Bearer ' + connectData.access_token;
-						
+						// 送信データ準備
 						var inputData = {};
 						inputData.AccountNumber = 'A0000001';
 						inputData.Classification = bkInqType;
 						inputData.InquiryDetail = bkInqDetail;
 						inputData.Mail = bkMail;
-						//inputData.File = inputFile ;
 						inputData.File = '' ;
-						console.log(inputData);
 						// Rest ApexへパラメータをJSON形式に変換
 						var data = JSON.stringify( inputData );
 						
@@ -385,16 +371,9 @@
 							data : data,
 							success : function (res) {
 								if(res.length != 0){
-									//console.log(res);
 									// コンタクトボードのIDを取得
 									var insId = res;
-									//var insId = res[0].Id;
 
-									// formを取得しリセット
-									//var formElement = document.getElementById('inquiryForm');
-									//formElement.reset();
-
-									//console.log(inputFile);
 									//Salesforceにアップロードするためのbodyを作成
 									var cvJson = {
 										"Title" : fileName,  //アップされるファイルのタイトル
@@ -412,7 +391,7 @@
 										success : function (contentversionres) {
 											var cvId = contentversionres.id;
 
-											//content versionに紐付いて作成されたcontent documentのIDを取得
+											// content versionに紐付いて作成されたcontent documentのIDを取得
 											var query = "SELECT+ContentDocumentId+FROM+ContentVersion+WHERE+Id+=+'" + cvId + "'"
 											$.ajax({
 												type: 'GET',
@@ -424,7 +403,7 @@
 													var cdRecords = DocumentIdRes["records"];
 													var cdId = cdRecords[0].ContentDocumentId;
 
-													//お問い合せレコードとリンクさせるためのbodyを作成
+													// コンタクトボード明細レコードとリンクさせるためのbodyを作成
 													var linkJson = {
 														"ContentDocumentId" : cdId,
 														"LinkedEntityId" : insId, //コンタクトボード明細のレコードID
@@ -432,9 +411,7 @@
 													};
 
 													console.log(cdId);
-
 													console.log(insId);
-													console.log(linkJson.LinkedEntityId);
 													
 													$.ajax({
 														type: 'POST',
@@ -446,6 +423,8 @@
 														data : JSON.stringify(linkJson),
 														success : function (contentdocumentRes) {
 															console.log('送信完了');
+															// 完了画面に遷移
+															window.location.href = './NewCompletion.html';
 														},
 														error : function (data, errorThrown,status) {
 															console.log(data);
