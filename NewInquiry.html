@@ -325,25 +325,28 @@
 			var files = document.getElementById( "file" ) ;
 			var inputFile;
 			var fileName;
-			// 内容を非同期で読み取る
+			// 非同期でFile オブジェクトの中身を読み込む
 			files.onchange = function () {
 				// ファイル名表示input取得
 				let attText = document.getElementById("fileName");
-
+				// ファイル名のみを取得(パスの削除)
 				let onlyFileName = document.getElementById("file").value.replace(/^.*[\\\/]/, '');
 				// ファイル名をinputに差し込む
 				attText.value = onlyFileName;
-
+				// ファイルオブジェクトを準備
 				var fileReader = new FileReader() ;
 
 				fileReader.onload = function () {
+					// ファイル内容を取得
 					var baseFile = this.result ;
 					var spFile = baseFile.split(',');
+					// 先頭の余計な文字列を除いたBlobデータのみにする(Data-URL の宣言を削除(spFile[0] = 'data:*/*;base64,'))
 					inputFile = spFile[1];
 				}
 
 				var file = files.files[0] ;
-					fileName = file.name;
+				fileName = file.name;
+				// 指定したBlob型かFIle型のファイルを読み込む(読み込むとresult属性にファイルのurlを格納(Data URI(Base64)))
 				fileReader.readAsDataURL( file ) ;
 			}
 			function send() {
@@ -382,7 +385,10 @@
 							data : data,
 							success : function (res) {
 								if(res.length != 0){
-									var insId = res[0].Id;
+									console.log(res);
+									// コンタクトボードのIDを取得
+									var insId = res;
+									//var insId = res[0].Id;
 
 									// formを取得しリセット
 									//var formElement = document.getElementById('inquiryForm');
