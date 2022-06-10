@@ -385,7 +385,7 @@
 							data : data,
 							success : function (res) {
 								if(res.length != 0){
-									console.log(res);
+									//console.log(res);
 									// コンタクトボードのIDを取得
 									var insId = res;
 									//var insId = res[0].Id;
@@ -426,12 +426,16 @@
 
 													//お問い合せレコードとリンクさせるためのbodyを作成
 													var linkJson = {
-														"ContentDocumentId" : insId,
-														"LinkedEntityId" : cdId, //コンタクトボード明細のレコードID
+														"ContentDocumentId" : cdId,
+														"LinkedEntityId" : insId, //コンタクトボード明細のレコードID
 														"Visibility" : "AllUsers" //閲覧できる人の制限
 													};
+
 													console.log(cdId);
+
 													console.log(insId);
+													console.log(linkJson.insId);
+													
 													$.ajax({
 														type: 'POST',
 														crossOrigin: true,
