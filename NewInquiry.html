@@ -122,7 +122,7 @@
                 // div#containerの中に追加
                 document.getElementById('inqType').appendChild(clone);
             }
-			
+
 			/***
 			 メール入力欄活性
 			***/
@@ -250,7 +250,8 @@
 					// 入力内容の取得(SF送信用)
 					bkInqType = document.getElementById("inqType").value;
 					bkInqDetail = document.getElementById("inqDetail").value;
-					bkMail = document.getElementById("mailaddress").value;
+					// 登録メールアドレスの場合は、固定値を設定
+					bkMail = (document.getElementById("mailaddress").value == '') ? 'koyama_y@use-ebisu.co.jp' : document.getElementById("mailaddress").value;
 					console.log(bkInqType);
 					console.log(bkInqDetail);
 					console.log(bkMail);
