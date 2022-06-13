@@ -379,7 +379,7 @@
                                         // template要素の内容を複製
                                         var clone = template.content.cloneNode(true);
                                         // 複製したtemplate要素にデータを挿入
-                                        clone.querySelector('.inqTitle').textContent = res[i].CreatedDate;
+                                        clone.querySelector('.inqTitle').textContent = res[i].CreatedDate.substr( 0, res[i].CreatedDate.length - 12 ).replace('T','');
                                         clone.querySelector('.inqType').textContent = '問い合わせ種別：' + res[i].subject;
                                         clone.querySelector('.inqstatus').textContent = 'ステータス：' + res[i].Status;
                                         // div#containerの中に追加
