@@ -81,6 +81,13 @@
                 padding: 10px 30px;
                 cursor: pointer;
             }
+            .title{
+                margin: 0;
+                color: #004db1f7;
+            }
+            .inqDetail{
+                margin: 0;
+            }
         </style>
 	</head>
 	<body>
@@ -93,18 +100,18 @@
                 <template id="templateInqList">
                     <tr align="left">
                         <th>
-                            <p style="margin: 0;" class="inqTitle"></p>
+                            <p class="inqTitle title"></p>
                         </th>
                     </tr>
                     <tr>
                         <td>
-                            <p style="margin: 0;" class="inqType"></p>
-                            <p style="margin: 0;" class="inqstatus"></p>
+                            <p class="inqType inqDetail"></p>
+                            <p class="inqstatus inqDetail"></p>
                         </td>
                     </tr>
                     <tr>
                         <td align="right">
-                            <p style="margin: 0;"><button type="button" class="buttonBrue_small">表示</button></p>
+                            <p class="inqDetail"><button type="button" class="buttonBrue_small">表示</button></p>
                         </td>
                     </tr>
                 </template>
