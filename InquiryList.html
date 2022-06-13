@@ -101,6 +101,8 @@
                             <p class="inqType"></p>
                             <p class="inqstatus"></p>
                         </td>
+                    </tr>
+                    <tr>
                         <td align="right">
                             <p><button type="button" class="buttonBrue_small">表示</button></p>
                         </td>
@@ -378,8 +380,8 @@
                                         var clone = template.content.cloneNode(true);
                                         // 複製したtemplate要素にデータを挿入
                                         clone.querySelector('.inqTitle').textContent = res[i].CreatedDate;
-                                        clone.querySelector('.inqType').textContent = res[i].subject;
-                                        clone.querySelector('.inqstatus').textContent = res[i].Status;
+                                        clone.querySelector('.inqType').textContent = '問い合わせ種別：' + res[i].subject;
+                                        clone.querySelector('.inqstatus').textContent = 'ステータス：' + res[i].Status;
                                         // div#containerの中に追加
                                         document.getElementById('outputInqList').appendChild(clone);
                                     }
