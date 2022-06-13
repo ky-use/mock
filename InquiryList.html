@@ -80,15 +80,41 @@
                 padding: 10px 30px;
                 cursor: pointer;
             }
-
-            
         </style>
 	</head>
 	<body>
         <div id="content">
             <!-- お問い合わせ一覧 -->
             <div id="inqList">
-                <p>お問い合わせ一覧</p>
+                <b><p>お問い合わせ一覧</p></b>
+                
+                <!-- 以下テンプレートを書く -->
+                <template id="templateInqList">
+                    <tr align="left">
+                        <th>
+                            <p class="inqTitle"></p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="inqType"></p>
+                            <p class="inqstatus"></p>
+                        </td>
+                        <td align="right">
+                            <p><button type="button" class="buttonBrue_small">表示</button></p>
+                        </td>
+                    </tr>
+                </template>
+                
+                <!-- テンプレート出力 -->
+                <div>
+                    <table id="outputInqList">
+
+                    </table>
+                </div>
+                <!-- /テンプレート出力 -->
+
+
                 <table class="equal_table">
                     <tr align="left" >
                         <th style="color: #004db1f7;">No. 20220602_1000</th>
@@ -171,7 +197,6 @@
                 document.getElementById('inqDetails1').style.display = 'inline';
                 document.getElementById('inq1').style.display = 'inline';
             };
-
             function changeDisplayButton2() {
                 // お問い合わせ一覧非表示
                 document.getElementById('inqList').style.display = 'none';
@@ -180,7 +205,6 @@
                 document.getElementById('inqDetails1').style.display = 'inline';
                 document.getElementById('inq2').style.display = 'inline';
             };
-
             // 戻るボタン
             function changeDisplayBuckButton() {
                 // お問い合わせ一覧表示
@@ -211,7 +235,6 @@
             /***
 			 お問い合わせ詳細の出力処理
 			***/
-
             /*
               配列内：
                 dateTime:画面出力概要（日時）
@@ -249,12 +272,12 @@
             // 画面出力用テキスト
             const fileDowText = 'ファイル（コチラからダウンロード）'; 
             // template要素を取得
-            var template = document.getElementById('template');
+            /*var template = document.getElementById('template');
             // データの数分繰り返し
-            for(var i =0; i < arrayInqDetails.length; i++){
+            for(var i=0; i < arrayInqDetails.length; i++){
                 // template要素の内容を複製
                 var clone = template.content.cloneNode(true);
-                
+
                 // 複製したtemplate要素にデータを挿入
                 //clone.querySelector('.dateTime').textContent = arrayInqDetails[i].dateTime;
                 clone.querySelector('.detailButton').innerHTML = arrayInqDetails[i].dateTime;
@@ -273,14 +296,13 @@
                 clone.querySelector('.fileName').style = 'display:none;';
                 clone.querySelector('.fileName').id = 'fName'+ i;
                 
-                // div#vcontainerの中に追加
+                // div#containerの中に追加
                 document.getElementById('container').appendChild(clone);
-            }
+            }*/
 
 			/***
 			 要素の全表示・部分表示処理
 			***/
-
             /*
                 引数：押下ボタン要素
             */
@@ -318,6 +340,112 @@
                 // ボタンの状態を設定
                 elem.value = openState;
             }
+
+
+            //--------------------- 以下 ---------------------
+            let arrayInq = [];
+            // 初期表示処理
+            window.onload = function(){
+                // アクセストークン取得（リフレッシュトークンフロー） Ajax
+                $.ajax({
+                    type: 'POST',
+                    crossOrigin: true,
+                    url: 'https://protocomdev-dev-ed.my.salesforce.com/services/oauth2/token',
+                    dataType: 'json',
+                    cache :false,
+                    data : {"grant_type":"refresh_token","client_id":"3MVG9pRzvMkjMb6nsLsmTx_FqB0rQ9AHEMYt85TrwFp6b3yeP.ta18VQpmha_Ds31fssFdYib4DdLPcLKqtQG", "client_secret":"F864BDD8ADFB8B17EA27F0623CF9039A503A76F9312032654DBFFDB25E87B142","refresh_token":"5Aep861mdLLi91HqFfCpXYtQXRaOgcHsK1gi36_cVHboubUhDFRrSCX9zyL1KBPgaR5qiKjUA54Q0RZhiN_teRI"},
+                    success : function (connectData) {
+                        var accToken = 'Bearer ' + connectData.access_token;
+                        $.ajax({
+                            type: 'GET',
+                            crossOrigin: true,
+                            url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/Mock_Case/',
+                            dataType: 'json',
+                            cache :false,
+                            headers: {"Authorization" : accToken},
+                            success : function (res) {
+                                // データを取得できた場合
+                                if(res.length != 0){
+                                    arrayInq = res;
+                                    console.log(arrayInq);
+                                    // template要素を取得
+                                    var template = document.getElementById('templateInqList');
+                                    // データの数分繰り返し
+                                    for(var i = 0; i < res.length; i++){
+                                        console.log(i);
+                                        // template要素の内容を複製
+                                        var clone = template.content.cloneNode(true);
+                                        // 複製したtemplate要素にデータを挿入
+                                        clone.querySelector('.inqTitle').textContent = res[i].CreatedDate;
+                                        clone.querySelector('.inqType').textContent = res[i].subject;
+                                        clone.querySelector('.inqstatus').textContent = res[i].Status;
+                                        // div#containerの中に追加
+                                        document.getElementById('outputInqList').appendChild(clone);
+                                    }
+                                    
+                                    console.log('ファイル取得');
+                                    $.ajax({
+                                        //beforeSend: function(xhr){
+                                            //xhr.overrideMimeType('text/html;charset=Shift_JIS');
+                                            //xhr.overrideMimeType('text/html;charset=utf-8');
+                                        //},
+                                        type: 'GET',
+                                        crossOrigin: true,
+                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JD6IAAW/VersionData', // png
+                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEx0AAG/VersionData', // エクセル
+                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzVAAW/VersionData', // ワード
+                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzkAAG/VersionData', // パワポ
+                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzpAAG/VersionData', // PDF
+                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzlAAG/VersionData', // JPG
+                                        url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JF0JAAW/VersionData', // zip
+                                        cache :false,
+                                        //scriptCharset: 'Shift_JIS',
+                                        headers: {"Authorization" : accToken},
+                                        xhrFields : {responseType : 'blob'},
+                                        success : function (dlFile) {
+                                            var binaryData = [];
+                                            binaryData.push(dlFile);
+
+                                            const url = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
+                                            // ボタンでファイルDL 追加
+                                            var target = document.getElementById("searchLink");
+                                            target.href = url;
+                                            target.innerText = "ファイルDL";
+                                            target.download="test.zip"
+                                            // 追加終わり
+                                            /* 自動ファイルDL コメントアウト
+                                            const a = document.createElement("a");
+                                            document.body.appendChild(a);
+                                            //a.download = 'test.png';
+                                            //a.download = 'test.xlsx';
+                                            //a.download = 'test.docx';
+                                            //a.download = 'test.pptx';
+                                            //a.download = 'test.pdf';
+                                            //a.download = 'test.jpg';
+                                            a.download = 'test.zip';
+                                            a.href = url;
+                                            a.click();
+                                            a.remove();*/
+                                        },
+                                        error : function (data, errorThrown,status) {
+                                            console.log(data);
+                                            console.log(errorThrown);
+                                            console.log(status);
+                                        }
+                                    })
+                                }
+                            },
+                            error : function (data, errorThrown,status) {
+                                
+                            }
+                        })
+                        
+                    },
+                    error : function (data, errorThrown,status) {
+                    }
+                });
+            }
+
         </script>
     </body>
 </html>
