@@ -514,9 +514,9 @@
 
                                     // 古いノードを削除
                                     var oldDetailList = document.getElementById('outputInqList_Details');
-                                    var removeOldDetailList = oldDetailList.querySelectorAll(':scope > tbody > tr');
+                                    var removeOldDetailList = oldDetailList.querySelectorAll('tr');
                                     console.log(removeOldDetailList);
-                                    for(var i = 1; i < removeOldDetailList.length; i++){
+                                    for(var i = 0; i < removeOldDetailList.length; i++){
                                         removeOldDetailList[i].parentNode.removeChild(removeOldDetailList[i])
                                     }
 
