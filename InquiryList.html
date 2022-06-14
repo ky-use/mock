@@ -486,6 +486,7 @@
                 });
             }
             function sendCbd(caseNum){
+                changeDisplayButton1();
                 // アクセストークン取得（リフレッシュトークンフロー） Ajax
                 $.ajax({
                     type: 'POST',
@@ -514,6 +515,8 @@
                             dataType: 'json',
                             cache :false,
                             headers: {"Authorization" : accToken},
+                            dataType: 'json',
+                            data : JSON.stringify(caseNum.value),
                             success : function (res) {
                                 // データを取得できた場合
                                 if(res.length != 0){
@@ -527,19 +530,19 @@
                                         var clone = template.content.cloneNode(true);
 
                                         // 複製したtemplate要素にデータを挿入
-                                        clone.querySelector('.detailButton').innerHTML = arrayInqDetails[i].dateTime    ;
+                                        clone.querySelector('.detailButton').innerHTML = arrayCbd[i].CreatedDate.substr( 0, res[i].CreatedDate.length - 12 ).replace(/T|-|:/g,'');
                                         clone.querySelector('.detailButton').Name = 'detail'+ i;
                                         clone.querySelector('.detailButton').id = 'detailButton'+ i;
                                         clone.querySelector('.detailButton').value = false;
-                                        clone.querySelector('.inqDetail').textContent = arrayInqDetails[i].inqDetail.substr(0, 18) + "...";
+                                        clone.querySelector('.inqDetail').textContent = arrayCbd[i].Content__c.substr(0, 18) + "...";
                                         clone.querySelector('.inqDetail').id = 'detail'+ i;
                                         // -----以降は画面表示しない設定で出力-------
-                                        clone.querySelector('.fileDownloadText').textContent = (arrayInqDetails[i].fileDownloadText) ? fileDowText : '';
+                                        //clone.querySelector('.fileDownloadText').textContent = fileDowText;
                                         clone.querySelector('.fileDownloadText').style = 'display:none;';
                                         clone.querySelector('.fileDownloadText').id = 'fdText'+ i;
-                                        clone.querySelector('.fileName').textContent = arrayInqDetails[i].fileName;
-                                        clone.querySelector('.fileName').download = arrayInqDetails[i].fileName;
-                                        clone.querySelector('.fileName').href = fileLink + arrayInqDetails[i].fileName;
+                                        //clone.querySelector('.fileName').textContent = arrayInqDetails[i].fileName;
+                                        //clone.querySelector('.fileName').download = arrayInqDetails[i].fileName;
+                                        //clone.querySelector('.fileName').href = fileLink + arrayInqDetails[i].fileName;
                                         clone.querySelector('.fileName').style = 'display:none;';
                                         clone.querySelector('.fileName').id = 'fName'+ i;
                                         
