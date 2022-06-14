@@ -346,8 +346,17 @@
                                     // ケースをBK
                                     arrayInq = res;
                                     console.log(arrayInq);
-                                    let formElement = document.getElementById("outputInqList_Details_form");
-                                    formElement.reset();
+                                    
+                                    var oldDetailList = document.getElementById('outputInqList_Details');
+                                    var removeOldDetailList = oldDetailList.querySelectorAll('tr');
+                            
+                                    for(var i = 1; i < removeOldDetailList.length; i++){
+                                        removeOldDetailList[i].parentNode.removeChild(removeOldDetailList[i])
+                                    }
+
+                                    //let formElement = document.getElementById("outputInqList_Details_form");
+                                    //formElement.reset();
+
                                     // template要素を取得
                                     var template = document.getElementById('templateInqList');
                                     // データの数分繰り返し
