@@ -111,7 +111,7 @@
                     </tr>
                     <tr>
                         <td align="right">
-                            <p style="margin: 0;"><button type="button" class="buttonBrue_small">表示</button></p>
+                            <p style="margin: 0;"><button type="button" class="inqButton buttonBrue_small">表示</button></p>
                         </td>
                     </tr>
                 </template>
@@ -119,39 +119,10 @@
                 <!-- テンプレート出力 -->
                 <div>
                     <table id="outputInqList">
-
                     </table>
                 </div>
                 <!-- /テンプレート出力 -->
 
-
-                <table class="equal_table">
-                    <tr align="left" >
-                        <th style="color: #004db1f7;">No. 20220602_1000</th>
-                    </tr>
-                    <tr>
-                        <td>問い合わせ種別：ATMについて</td>
-                    </tr>
-                    <tr>
-                        <td>ステータス：回答未確認</td>
-                    </tr>
-                    <tr align="right">
-                        <td><button type="button" id="Button1" class="buttonBrue_small" onclick="changeDisplayButton1()">表示</button></td>
-                    </tr>
-
-                    <tr align="left">
-                        <th style="color: #004db1f7;">No. 20220602_1001</th>
-                    </tr>
-                    <tr>
-                        <td>問い合わせ種別：キャッシュカード・トークンについて</td>
-                    </tr>
-                    <tr>
-                        <td>ステータス：PayPay銀行回答完了</td>
-                    </tr>
-                    <tr align="right">
-                        <td><button type="button" id="Button2" class="buttonBrue_small" onclick="changeDisplayButton2()">表示</button></td>
-                    </tr>
-                </table>
                 <div class="buttonContainer">
                     <b><button type="button" onclick="location.href='./index.html'" class="buttonBrue">コンタクトボード ホーム</button></b>
                 </div>
@@ -161,15 +132,15 @@
             <!-- お問い合わせ詳細 -->
             <div id="inqDetailsList">
                 <div id="inqDetails1">
-                    
+
                     <b><p id='inq1' style='display:none; color: #004db1f7; font-size: 19px;'>No. 20220602_1000</p></b>
                     <b><p id='inq2' style='display:none; color: #004db1f7; font-size: 19px;'>No. 20220602_1001</p></b>
-                    
-                    <template id="template">
+
+                    <!-- 以下テンプレートを書く -->
+                    <template id="templateInqList_Details">
                         <tr align="left">
-                            <th >
-                                <!--ボタンでやらない場合　<b class="dateTime" style="cursor:pointer; color: #0000FF;"></b>-->
-                                <button class="detailButton button" type="button" value="false" onclick="dButton(this)">詳細</button>
+                            <th>
+                                <button class="detailButton button" type="button" value="false" onclick="dButton(this)"></button>
                             </th>
                         </tr>
                         <tr>
@@ -180,10 +151,17 @@
                             </td>
                         </tr>
                     </template>
+
                     <!-- テンプレート出力 -->
-                    <div id="container">
+                    <div>
+                        <table id="outputInqList_Details">
+                        </table>
                     </div>
                     <!-- /テンプレート出力 -->
+
+
+
+
                     <div class="buttonContainer">
                         <p><button type="button" onclick="location.href='./NewReply.html'" class="buttonBrue">返信する</button></p>
                         <button type="button" onclick="changeDisplayBuckButton()" class="buttonBrue_noborder">戻る</button>
@@ -352,8 +330,10 @@
             }
 
 
-            //--------------------- 以下 ---------------------
+            // 取得したケース格納用
             let arrayInq = [];
+            // 取得したコンタクトボード明細格納用
+            let arrayCbd = [];
             // 初期表示処理
             window.onload = function(){
                 // アクセストークン取得（リフレッシュトークンフロー） Ajax
@@ -376,71 +356,121 @@
                             success : function (res) {
                                 // データを取得できた場合
                                 if(res.length != 0){
+                                    // ケースをBK
                                     arrayInq = res;
                                     console.log(arrayInq);
                                     // template要素を取得
                                     var template = document.getElementById('templateInqList');
                                     // データの数分繰り返し
                                     for(var i = 0; i < res.length; i++){
-                                        console.log(i);
                                         // template要素の内容を複製
                                         var clone = template.content.cloneNode(true);
                                         // 複製したtemplate要素にデータを挿入
                                         clone.querySelector('.inqTitle').textContent = 'No.' + res[i].CreatedDate.substr( 0, res[i].CreatedDate.length - 12 ).replace(/T|-|:/g,'');
                                         clone.querySelector('.inqType').textContent = '問い合わせ種別：' + res[i].Subject;
                                         clone.querySelector('.inqstatus').textContent = 'ステータス：' + res[i].Status;
+                                        clone.querySelector('.inqButton').value = res[i].Id;
                                         // div#containerの中に追加
                                         document.getElementById('outputInqList').appendChild(clone);
                                     }
-                                    
-                                    console.log('ファイル取得');
+                                    //--------------------- 以下 ---------------------
+                                    //Apex作成、DateTime整形
+                                    // コンタクトボード明細を取得
                                     $.ajax({
-                                        //beforeSend: function(xhr){
-                                            //xhr.overrideMimeType('text/html;charset=Shift_JIS');
-                                            //xhr.overrideMimeType('text/html;charset=utf-8');
-                                        //},
                                         type: 'GET',
                                         crossOrigin: true,
-                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JD6IAAW/VersionData', // png
-                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEx0AAG/VersionData', // エクセル
-                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzVAAW/VersionData', // ワード
-                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzkAAG/VersionData', // パワポ
-                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzpAAG/VersionData', // PDF
-                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzlAAG/VersionData', // JPG
-                                        url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JF0JAAW/VersionData', // zip
+                                        url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/Mock_CBD/A0000001',
+                                        dataType: 'json',
                                         cache :false,
-                                        //scriptCharset: 'Shift_JIS',
                                         headers: {"Authorization" : accToken},
-                                        xhrFields : {responseType : 'blob'},
-                                        success : function (dlFile) {
-                                            var binaryData = [];
-                                            binaryData.push(dlFile);
+                                        success : function (res) {
+                                            // データを取得できた場合
+                                            if(res.length != 0){
+                                                arrayCbd = res;
+                                                console.log(arrayCbd);
+                                                // template要素を取得
+                                                var template = document.getElementById('templateInqList_Details');
+                                                // データの数分繰り返し
+                                                for(var i=0; i < arrayInqDetails.length; i++){
+                                                    // template要素の内容を複製
+                                                    var clone = template.content.cloneNode(true);
 
-                                            const url = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
-                                            // ボタンでファイルDL 追加
-                                            var target = document.getElementById("searchLink");
-                                            target.href = url;
-                                            target.innerText = "ファイルDL";
-                                            target.download="test.zip"
-                                            // 追加終わり
-                                            /* 自動ファイルDL コメントアウト
-                                            const a = document.createElement("a");
-                                            document.body.appendChild(a);
-                                            //a.download = 'test.png';
-                                            //a.download = 'test.xlsx';
-                                            //a.download = 'test.docx';
-                                            //a.download = 'test.pptx';
-                                            //a.download = 'test.pdf';
-                                            //a.download = 'test.jpg';
-                                            a.download = 'test.zip';
-                                            a.href = url;
-                                            a.click();
-                                            a.remove();*/
+                                                    // 複製したtemplate要素にデータを挿入
+                                                    clone.querySelector('.detailButton').innerHTML = arrayInqDetails[i].dateTime;
+                                                    clone.querySelector('.detailButton').Name = 'detail'+ i;
+                                                    clone.querySelector('.detailButton').id = 'detailButton'+ i;
+                                                    clone.querySelector('.detailButton').value = false;
+                                                    clone.querySelector('.inqDetail').textContent = arrayInqDetails[i].inqDetail.substr(0, 18) + "...";
+                                                    clone.querySelector('.inqDetail').id = 'detail'+ i;
+                                                    // -----以降は画面表示しない設定で出力-------
+                                                    clone.querySelector('.fileDownloadText').textContent = (arrayInqDetails[i].fileDownloadText) ? fileDowText : '';
+                                                    clone.querySelector('.fileDownloadText').style = 'display:none;';
+                                                    clone.querySelector('.fileDownloadText').id = 'fdText'+ i;
+                                                    clone.querySelector('.fileName').textContent = arrayInqDetails[i].fileName;
+                                                    clone.querySelector('.fileName').download = arrayInqDetails[i].fileName;
+                                                    clone.querySelector('.fileName').href = fileLink + arrayInqDetails[i].fileName;
+                                                    clone.querySelector('.fileName').style = 'display:none;';
+                                                    clone.querySelector('.fileName').id = 'fName'+ i;
+                                                    
+                                                    // div#containerの中に追加
+                                                    document.getElementById('outputInqList_Details').appendChild(clone);
+                                                }
+
+                                                //-------------以上-------------
+
+                                                $.ajax({
+                                                    //beforeSend: function(xhr){
+                                                        //xhr.overrideMimeType('text/html;charset=Shift_JIS');
+                                                        //xhr.overrideMimeType('text/html;charset=utf-8');
+                                                    //},
+                                                    type: 'GET',
+                                                    crossOrigin: true,
+                                                    //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JD6IAAW/VersionData', // png
+                                                    //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEx0AAG/VersionData', // エクセル
+                                                    //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzVAAW/VersionData', // ワード
+                                                    //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzkAAG/VersionData', // パワポ
+                                                    //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzpAAG/VersionData', // PDF
+                                                    //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzlAAG/VersionData', // JPG
+                                                    url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JF0JAAW/VersionData', // zip
+                                                    cache :false,
+                                                    //scriptCharset: 'Shift_JIS',
+                                                    headers: {"Authorization" : accToken},
+                                                    xhrFields : {responseType : 'blob'},
+                                                    success : function (dlFile) {
+                                                        var binaryData = [];
+                                                        binaryData.push(dlFile);
+
+                                                        const url = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
+                                                        // ボタンでファイルDL 追加
+                                                        var target = document.getElementById("searchLink");
+                                                        target.href = url;
+                                                        target.innerText = "ファイルDL";
+                                                        target.download="test.zip"
+                                                        // 追加終わり
+                                                        /* 自動ファイルDL コメントアウト
+                                                        const a = document.createElement("a");
+                                                        document.body.appendChild(a);
+                                                        //a.download = 'test.png';
+                                                        //a.download = 'test.xlsx';
+                                                        //a.download = 'test.docx';
+                                                        //a.download = 'test.pptx';
+                                                        //a.download = 'test.pdf';
+                                                        //a.download = 'test.jpg';
+                                                        a.download = 'test.zip';
+                                                        a.href = url;
+                                                        a.click();
+                                                        a.remove();*/
+                                                    },
+                                                    error : function (data, errorThrown,status) {
+                                                        console.log(data);
+                                                        console.log(errorThrown);
+                                                        console.log(status);
+                                                    }
+                                                })
+                                            }
                                         },
                                         error : function (data, errorThrown,status) {
-                                            console.log(data);
-                                            console.log(errorThrown);
-                                            console.log(status);
+                                            
                                         }
                                     })
                                 }
