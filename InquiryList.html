@@ -233,6 +233,13 @@
                         }
                         resetButton.value = 'false';
                 }
+                // 古いノードを削除
+                var oldDetailList = document.getElementById('outputInqList_Details');
+                var removeOldDetailList = oldDetailList.querySelectorAll('tr');
+                console.log(removeOldDetailList);
+                for(var i = 0; i < removeOldDetailList.length; i++){
+                    removeOldDetailList[i].parentNode.removeChild(removeOldDetailList[i])
+                }
             };
             
             /***
@@ -511,14 +518,6 @@
                                 if(res.length != 0){
                                     arrayCbd = res;
                                     console.log(arrayCbd);
-
-                                    // 古いノードを削除
-                                    var oldDetailList = document.getElementById('outputInqList_Details');
-                                    var removeOldDetailList = oldDetailList.querySelectorAll('tr');
-                                    console.log(removeOldDetailList);
-                                    for(var i = 0; i < removeOldDetailList.length; i++){
-                                        removeOldDetailList[i].parentNode.removeChild(removeOldDetailList[i])
-                                    }
 
                                     //let formElement = document.getElementById("outputInqList_Details_form");
                                     //formElement.reset();
