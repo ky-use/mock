@@ -348,8 +348,8 @@
                                     console.log(arrayInq);
                                     
                                     var oldDetailList = document.getElementById('outputInqList_Details');
-                                    var removeOldDetailList = oldDetailList.querySelectorAll('tr');
-                            
+                                    var removeOldDetailList = oldDetailList.querySelectorAll(':scope > tbody > tr');
+                                    console.log(removeOldDetailList);
                                     for(var i = 1; i < removeOldDetailList.length; i++){
                                         removeOldDetailList[i].parentNode.removeChild(removeOldDetailList[i])
                                     }
