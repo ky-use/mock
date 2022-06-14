@@ -2,8 +2,8 @@
 <html lang="ja">
 	<head>
 		<meta charset="shift_jis">
-		<title>PayPayéŠ€è¡Œã€€ãŠå•ã„åˆã‚ã›ä¸€è¦§ç”»é¢</title>
-		<meta name="description" content="é¡§å®¢ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰">
+		<title>PayPay‹âs@‚¨–â‚¢‡‚í‚¹ˆê——‰æ–Ê</title>
+		<meta name="description" content="ŒÚ‹qƒRƒ“ƒ^ƒNƒgƒ{[ƒh">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <style>
@@ -30,7 +30,7 @@
                 overflow-wrap: normal;
             }
             .button {
-                /*æ ç·šã€å¤–æ ã€ã‚¯ãƒªãƒƒã‚¯æ™‚ã®æ ç·šã‚’æ¶ˆå»*/
+                /*˜güAŠO˜gAƒNƒŠƒbƒN‚Ì˜gü‚ğÁ‹*/
                 padding: 1em 0 0;
                 border: none;
                 outline: none;
@@ -92,11 +92,11 @@
 	</head>
 	<body>
         <div id="content">
-            <!-- ãŠå•ã„åˆã‚ã›ä¸€è¦§ -->
+            <!-- ‚¨–â‚¢‡‚í‚¹ˆê—— -->
             <div id="inqList">
-                <b><p>ãŠå•ã„åˆã‚ã›ä¸€è¦§</p></b>
+                <b><p>‚¨–â‚¢‡‚í‚¹ˆê——</p></b>
                 
-                <!-- ä»¥ä¸‹ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’æ›¸ã -->
+                <!-- ˆÈ‰ºƒeƒ“ƒvƒŒ[ƒg‚ğ‘‚­ -->
                 <template id="templateInqList">
                     <tr align="left">
                         <th>
@@ -111,31 +111,31 @@
                     </tr>
                     <tr>
                         <td align="right">
-                            <p style="margin: 0;"><button type="button" class="inqButton buttonBrue_small" onclick="sendCbd(this)">è¡¨ç¤º</button></p>
+                            <p style="margin: 0;"><button type="button" class="inqButton buttonBrue_small" onclick="sendCbd(this)">•\¦</button></p>
                         </td>
                     </tr>
                 </template>
                 
-                <!-- ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆå‡ºåŠ› -->
+                <!-- ƒeƒ“ƒvƒŒ[ƒgo—Í -->
                 <div>
                     <table id="outputInqList">
                     </table>
                 </div>
-                <!-- /ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆå‡ºåŠ› -->
+                <!-- /ƒeƒ“ƒvƒŒ[ƒgo—Í -->
 
                 <div class="buttonContainer">
-                    <b><button type="button" onclick="location.href='./index.html'" class="buttonBrue">ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰ ãƒ›ãƒ¼ãƒ </button></b>
+                    <b><button type="button" onclick="location.href='./index.html'" class="buttonBrue">ƒRƒ“ƒ^ƒNƒgƒ{[ƒh ƒz[ƒ€</button></b>
                 </div>
             </div>
-            <!-- /ãŠå•ã„åˆã‚ã›ä¸€è¦§ -->
+            <!-- /‚¨–â‚¢‡‚í‚¹ˆê—— -->
             
-            <!-- ãŠå•ã„åˆã‚ã›è©³ç´° -->
+            <!-- ‚¨–â‚¢‡‚í‚¹Ú× -->
             <div id="inqDetailsList">
                 <div id="inqDetails1">
 
                     <b><p id='inq1' style='display:none; color: #004db1f7; font-size: 19px;'></p></b>
 
-                    <!-- ä»¥ä¸‹ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’æ›¸ã -->
+                    <!-- ˆÈ‰ºƒeƒ“ƒvƒŒ[ƒg‚ğ‘‚­ -->
                     <template id="templateInqList_Details">
                         <tr align="left">
                             <th>
@@ -151,70 +151,70 @@
                         </tr>
                     </template>
 
-                    <!-- ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆå‡ºåŠ› -->
+                    <!-- ƒeƒ“ƒvƒŒ[ƒgo—Í -->
                     <div>
                         <form id="outputInqList_Details_form">
                             <table id="outputInqList_Details">
                             </table>
                         </form>
                     </div>
-                    <!-- /ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆå‡ºåŠ› -->
+                    <!-- /ƒeƒ“ƒvƒŒ[ƒgo—Í -->
 
                     <div class="buttonContainer">
-                        <p><button type="button" onclick="location.href='./NewReply.html'" class="buttonBrue">è¿”ä¿¡ã™ã‚‹</button></p>
-                        <button type="button" onclick="changeDisplayBuckButton()" class="buttonBrue_noborder">æˆ»ã‚‹</button>
+                        <p><button type="button" onclick="location.href='./NewReply.html'" class="buttonBrue">•ÔM‚·‚é</button></p>
+                        <button type="button" onclick="changeDisplayBuckButton()" class="buttonBrue_noborder">–ß‚é</button>
                     </div>
                 </div>
-                <!-- /ãŠå•ã„åˆã‚ã›è©³ç´° -->
+                <!-- /‚¨–â‚¢‡‚í‚¹Ú× -->
             </div>
         </div>
 
         <script>
             /***
-			 ä¸€è¦§ã¨è©³ç´°ç”»é¢ã®åˆ‡ã‚Šæ›¿ãˆ
+			 ˆê——‚ÆÚ×‰æ–Ê‚ÌØ‚è‘Ö‚¦
 			***/
             
-            // è¡¨ç¤ºãƒœã‚¿ãƒ³
+            // •\¦ƒ{ƒ^ƒ“
             function changeDisplayButton1(Num) {
-                // ãŠå•ã„åˆã‚ã›ä¸€è¦§éè¡¨ç¤º
+                // ‚¨–â‚¢‡‚í‚¹ˆê——”ñ•\¦
                 document.getElementById('inqList').style.display = 'none';
-                // ãŠå•ã„åˆã‚ã›è©³ç´°ã®è¡¨ç¤º
+                // ‚¨–â‚¢‡‚í‚¹Ú×‚Ì•\¦
                 document.getElementById('inqDetailsList').style.display = 'inline';
                 document.getElementById('inqDetails1').style.display = 'inline';
                 document.getElementById('inq1').style.display = 'inline';
-                // ã‚¿ã‚¤ãƒˆãƒ«ã¨ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’åˆæœŸåŒ–
+                // ƒ^ƒCƒgƒ‹‚ÆƒCƒ“ƒfƒbƒNƒX‚ğ‰Šú‰»
                 let title = '';
                 let index = '';
-                // ã‚±ãƒ¼ã‚¹ã®é…åˆ—ã‹ã‚‰ã‚±ãƒ¼ã‚¹Noã®ã¿ã‚’é…åˆ—ã¨ã—ã¦æº–å‚™
+                // ƒP[ƒX‚Ì”z—ñ‚©‚çƒP[ƒXNo‚Ì‚İ‚ğ”z—ñ‚Æ‚µ‚Ä€”õ
                 let caseNumber = arrayInq.map(el => el.CaseNumber);
-                // ã‚±ãƒ¼ã‚¹No.ã‹ã‚‰æ—¥ä»˜ã‚’å–å¾—
+                // ƒP[ƒXNo.‚©‚ç“ú•t‚ğæ“¾
                 index = caseNumber.indexOf(Num);
                 title = arrayInq[index].CreatedDate;
-                // ã‚¿ã‚¤ãƒˆãƒ«ç”¨ã«åŠ å·¥
+                // ƒ^ƒCƒgƒ‹—p‚É‰ÁH
                 title = 'No.' + title.substring( 0, title.length - 12 ).replace(/T|-|:/g,'');
                 console.log(title);
-                // ã‚¿ã‚¤ãƒˆãƒ«ã‚’è¨­å®š
+                // ƒ^ƒCƒgƒ‹‚ğİ’è
                 document.getElementById('inq1').innerHTML = title;
             };
             function changeDisplayButton2() {
-                // ãŠå•ã„åˆã‚ã›ä¸€è¦§éè¡¨ç¤º
+                // ‚¨–â‚¢‡‚í‚¹ˆê——”ñ•\¦
                 document.getElementById('inqList').style.display = 'none';
-                // ãŠå•ã„åˆã‚ã›è©³ç´°ã®è¡¨ç¤º
+                // ‚¨–â‚¢‡‚í‚¹Ú×‚Ì•\¦
                 document.getElementById('inqDetailsList').style.display = 'inline';
                 document.getElementById('inqDetails1').style.display = 'inline';
             };
-            // æˆ»ã‚‹ãƒœã‚¿ãƒ³
+            // –ß‚éƒ{ƒ^ƒ“
             function changeDisplayBuckButton() {
-                // ãŠå•ã„åˆã‚ã›ä¸€è¦§è¡¨ç¤º
+                // ‚¨–â‚¢‡‚í‚¹ˆê——•\¦
                 document.getElementById('inqList').style.display = 'inline';
-                // ãŠå•ã„åˆã‚ã›è©³ç´°ã®éè¡¨ç¤º 
+                // ‚¨–â‚¢‡‚í‚¹Ú×‚Ì”ñ•\¦ 
                 document.getElementById('inqDetailsList').style.display = 'none';
                 document.getElementById('inqDetails1').style.display = 'none';
                 //document.getElementById('inqDetails2').style.display = 'none';
-                // ã‚¿ã‚¤ãƒˆãƒ«ã®éè¡¨ç¤º
+                // ƒ^ƒCƒgƒ‹‚Ì”ñ•\¦
                 document.getElementById('inq1').style.display = 'none';
 
-                // ãƒ†ãƒ¼ãƒ–ãƒ«ã®å­è¦ç´ ã™ã¹ã¦ã‚’å‰Šé™¤
+                // ƒe[ƒuƒ‹‚Ìq—v‘f‚·‚×‚Ä‚ğíœ
                 var oldDetailList = document.getElementById('outputInqList_Details');
                 var removeOldDetailList = oldDetailList.querySelectorAll('tr');
                 if(removeOldDetailList.length != 0){
@@ -223,13 +223,13 @@
                     }
                 }
 
-                // è¡¨ç¤ºåˆæœŸåŒ–
+                // •\¦‰Šú‰»
                 /*for(var i =0; i < arrayInqDetails.length; i++){
                     let resetElement = document.getElementById('detail'+ i); 
                     let resetButton = document.getElementById('detailButton'+ i); 
-                    // è©³ç´°ã‚’éƒ¨åˆ†è¡¨ç¤º
+                    // Ú×‚ğ•”•ª•\¦
                     resetElement.innerHTML = arrayInqDetails[i].inqDetail.substr(0, 20) + "...";
-                        // ãƒ•ã‚¡ã‚¤ãƒ«ãŒã‚ã‚‹å ´åˆã€å›ºå®šæ–‡è¨€ã¨ãƒ•ã‚¡ã‚¤ãƒ«ãƒªãƒ³ã‚¯ã‚’éè¡¨ç¤º
+                        // ƒtƒ@ƒCƒ‹‚ª‚ ‚éê‡AŒÅ’è•¶Œ¾‚Æƒtƒ@ƒCƒ‹ƒŠƒ“ƒN‚ğ”ñ•\¦
                         if(arrayInqDetails[i].fileDownloadText){
                             document.getElementById('fdText'+i).style = 'display:none;';
                             document.getElementById('fName'+i).style = 'display:none;';
@@ -241,65 +241,65 @@
             };
             
             /***
-			 ãŠå•ã„åˆã‚ã›è©³ç´°ã®å‡ºåŠ›å‡¦ç†
+			 ‚¨–â‚¢‡‚í‚¹Ú×‚Ìo—Íˆ—
 			***/
             /*
-              é…åˆ—å†…ï¼š
-                dateTime:ç”»é¢å‡ºåŠ›æ¦‚è¦ï¼ˆæ—¥æ™‚ï¼‰
-                inqDetail:ãŠå•ã„åˆã‚ã›è©³ç´°
-                fileDownloadText:ãƒ•ã‚¡ã‚¤ãƒ«ï¼ˆã‚³ãƒãƒ©ã‹ã‚‰ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ï¼‰ã‚’å‡ºåŠ›ã™ã‚‹ã‹ï¼ˆT/Fï¼‰
-                fileName:ç”»é¢å‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«å
-                fileLink:ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒªãƒ³ã‚¯è¡¨ç¤ºç”¨URL
+              ”z—ñ“àF
+                dateTime:‰æ–Êo—ÍŠT—vi“új
+                inqDetail:‚¨–â‚¢‡‚í‚¹Ú×
+                fileDownloadText:ƒtƒ@ƒCƒ‹iƒRƒ`ƒ‰‚©‚çƒ_ƒEƒ“ƒ[ƒhj‚ğo—Í‚·‚é‚©iT/Fj
+                fileName:‰æ–Êo—Íƒtƒ@ƒCƒ‹–¼
+                fileLink:ƒtƒ@ƒCƒ‹‚ÌƒŠƒ“ƒN•\¦—pURL
             */
-            // ãŠå•ã„åˆã‚ã›è©³ç´°ã®ãƒ‡ãƒ¼ã‚¿
+            // ‚¨–â‚¢‡‚í‚¹Ú×‚Ìƒf[ƒ^
             let arrayInqDetails = [
                 {
-                    dateTime:'2022å¹´06æœˆ02æ—¥ã€€10ï¼š01',
-                    inqDetail:'å•ã„åˆã‚ã›è©³ç´°ï¼šã‚¹ãƒãƒ›ã‚’æ©Ÿç¨®å¤‰æ›´ã—ãŸã®ã§ã™ãŒã€ãƒˆãƒ¼ã‚¯ãƒ³ã‚¢ãƒ—ãƒªã®å¼•ç¶™ãï¼ŸãŒã‚ˆãã‚ã‹ã‚Šã¾ã›ã‚“ã€‚å‰ã®ã‚¹ãƒãƒ›ã¯ã‚‚ã£ã¦ã„ã¾ã›ã‚“ã€‚ã‚¹ãƒãƒ›ã‚’æ©Ÿç¨®å¤‰æ›´ã—ãŸã®ã§ã™ãŒã€ãƒˆãƒ¼ã‚¯ãƒ³ã‚¢ãƒ—ãƒªã®å¼•ç¶™ãï¼ŸãŒã‚ˆãã‚ã‹ã‚Šã¾ã›ã‚“ã€‚å‰ã®ã‚¹ãƒãƒ›ã¯ã‚‚ã£ã¦ã„ã¾ã›ã‚“ã€‚ã‚¹ãƒãƒ›ã‚’æ©Ÿç¨®å¤‰æ›´ã—ãŸã®ã§ã™ãŒã€ãƒˆãƒ¼ã‚¯ãƒ³ã‚¢ãƒ—ãƒªã®å¼•ç¶™ãï¼ŸãŒã‚ˆãã‚ã‹ã‚Šã¾ã›ã‚“ã€‚å‰ã®ã‚¹ãƒãƒ›ã¯ã‚‚ã£ã¦ã„ã¾ã›ã‚“ã€‚',
+                    dateTime:'2022”N06Œ02“ú@10F01',
+                    inqDetail:'–â‚¢‡‚í‚¹Ú×FƒXƒ}ƒz‚ğ‹@í•ÏX‚µ‚½‚Ì‚Å‚·‚ªAƒg[ƒNƒ“ƒAƒvƒŠ‚ÌˆøŒp‚¬H‚ª‚æ‚­‚í‚©‚è‚Ü‚¹‚ñB‘O‚ÌƒXƒ}ƒz‚Í‚à‚Á‚Ä‚¢‚Ü‚¹‚ñBƒXƒ}ƒz‚ğ‹@í•ÏX‚µ‚½‚Ì‚Å‚·‚ªAƒg[ƒNƒ“ƒAƒvƒŠ‚ÌˆøŒp‚¬H‚ª‚æ‚­‚í‚©‚è‚Ü‚¹‚ñB‘O‚ÌƒXƒ}ƒz‚Í‚à‚Á‚Ä‚¢‚Ü‚¹‚ñBƒXƒ}ƒz‚ğ‹@í•ÏX‚µ‚½‚Ì‚Å‚·‚ªAƒg[ƒNƒ“ƒAƒvƒŠ‚ÌˆøŒp‚¬H‚ª‚æ‚­‚í‚©‚è‚Ü‚¹‚ñB‘O‚ÌƒXƒ}ƒz‚Í‚à‚Á‚Ä‚¢‚Ü‚¹‚ñB',
                     fileDownloadText:true,
                     fileName:'aaaaaaaaaaaaaaaaaaa.txt'
                 },{
-                    dateTime:'2022å¹´06æœˆ02æ—¥ã€€10ï¼š02',
-                    inqDetail:'ã”å›ç­”ï¼šã‚«ã‚¹ã‚¿ãƒãƒ¼ã‚»ãƒ³ã‚¿ãƒ¼ã®éˆ´æœ¨ã§ã™ã€‚ãŠå•ã„åˆã‚ã›ã‚ã‚ŠãŒã¨ã†ã”ã–ã„ã¾ã™ã€‚ã‚¹ãƒãƒ¼ãƒˆãƒ•ã‚©ãƒ³ã‚’æ©Ÿç¨®å¤‰æ›´ã—ãŸå ´åˆã€ãƒˆãƒ¼ã‚¯ãƒ³ã‚¢ãƒ—ãƒªã¯å¼•ç¶™ããŒã•ã‚Œã¾ã›ã‚“ã€‚ãŠæ‰‹æ•°ãŠã‹ã‘ã„ãŸã—ã¾ã™ãŒã€ã‚ã‚‰ãŸã‚ã¦ãƒˆãƒ¼ã‚¯ãƒ³ã‚¢ãƒ—ãƒªã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã„ãŸã ãã€å†ç™»éŒ²ã‚’ãŠé¡˜ã„ã„ãŸã—ã¾ã™ã€‚',
+                    dateTime:'2022”N06Œ02“ú@10F02',
+                    inqDetail:'‚²‰ñ“šFƒJƒXƒ^ƒ}[ƒZƒ“ƒ^[‚Ì—é–Ø‚Å‚·B‚¨–â‚¢‡‚í‚¹‚ ‚è‚ª‚Æ‚¤‚²‚´‚¢‚Ü‚·BƒXƒ}[ƒgƒtƒHƒ“‚ğ‹@í•ÏX‚µ‚½ê‡Aƒg[ƒNƒ“ƒAƒvƒŠ‚ÍˆøŒp‚¬‚ª‚³‚ê‚Ü‚¹‚ñB‚¨è”‚¨‚©‚¯‚¢‚½‚µ‚Ü‚·‚ªA‚ ‚ç‚½‚ß‚Äƒg[ƒNƒ“ƒAƒvƒŠ‚ğƒ_ƒEƒ“ƒ[ƒh‚¢‚½‚¾‚«AÄ“o˜^‚ğ‚¨Šè‚¢‚¢‚½‚µ‚Ü‚·B',
                     fileDownloadText:false,
                     fileName:'bbbbbbbbbbbbbbb.txt'
                 },{
-                    dateTime:'2022å¹´06æœˆ02æ—¥ã€€10ï¼š03',
-                    inqDetail:'å•ã„åˆã‚ã›è©³ç´°ï¼šã‚¹ãƒãƒ›ã‚’æ©Ÿç¨®å¤‰æ›´ã—ãŸã®ã§ã™ãŒã€ãƒˆãƒ¼ã‚¯ãƒ³ã‚¢ãƒ—ãƒªã®å¼•ç¶™ãï¼ŸãŒã‚ˆãã‚ã‹ã‚Šã¾ã›ã‚“ã€‚å‰ã®ã‚¹ãƒãƒ›ã¯ã‚‚ã£ã¦ã„ã¾ã›ã‚“ã€‚ã‚¹ãƒãƒ›ã‚’æ©Ÿç¨®å¤‰æ›´ã—ãŸã®ã§ã™ãŒã€ãƒˆãƒ¼ã‚¯ãƒ³ã‚¢ãƒ—ãƒªã®å¼•ç¶™ãï¼ŸãŒã‚ˆãã‚ã‹ã‚Šã¾ã›ã‚“ã€‚å‰ã®ã‚¹ãƒãƒ›ã¯ã‚‚ã£ã¦ã„ã¾ã›ã‚“ã€‚ã‚¹ãƒãƒ›ã‚’æ©Ÿç¨®å¤‰æ›´ã—ãŸã®ã§ã™ãŒã€ãƒˆãƒ¼ã‚¯ãƒ³ã‚¢ãƒ—ãƒªã®å¼•ç¶™ãï¼ŸãŒã‚ˆãã‚ã‹ã‚Šã¾ã›ã‚“ã€‚å‰ã®ã‚¹ãƒãƒ›ã¯ã‚‚ã£ã¦ã„ã¾ã›ã‚“ã€‚',
+                    dateTime:'2022”N06Œ02“ú@10F03',
+                    inqDetail:'–â‚¢‡‚í‚¹Ú×FƒXƒ}ƒz‚ğ‹@í•ÏX‚µ‚½‚Ì‚Å‚·‚ªAƒg[ƒNƒ“ƒAƒvƒŠ‚ÌˆøŒp‚¬H‚ª‚æ‚­‚í‚©‚è‚Ü‚¹‚ñB‘O‚ÌƒXƒ}ƒz‚Í‚à‚Á‚Ä‚¢‚Ü‚¹‚ñBƒXƒ}ƒz‚ğ‹@í•ÏX‚µ‚½‚Ì‚Å‚·‚ªAƒg[ƒNƒ“ƒAƒvƒŠ‚ÌˆøŒp‚¬H‚ª‚æ‚­‚í‚©‚è‚Ü‚¹‚ñB‘O‚ÌƒXƒ}ƒz‚Í‚à‚Á‚Ä‚¢‚Ü‚¹‚ñBƒXƒ}ƒz‚ğ‹@í•ÏX‚µ‚½‚Ì‚Å‚·‚ªAƒg[ƒNƒ“ƒAƒvƒŠ‚ÌˆøŒp‚¬H‚ª‚æ‚­‚í‚©‚è‚Ü‚¹‚ñB‘O‚ÌƒXƒ}ƒz‚Í‚à‚Á‚Ä‚¢‚Ü‚¹‚ñB',
                     fileDownloadText:true,
                     fileName:'cccccccccc.txt'
                 },{
-                    dateTime:'2022å¹´06æœˆ02æ—¥ã€€10ï¼š04',
-                    inqDetail:'ã”å›ç­”ï¼šã‚«ã‚¹ã‚¿ãƒãƒ¼ã‚»ãƒ³ã‚¿ãƒ¼ã®éˆ´æœ¨ã§ã™ã€‚ãŠå•ã„åˆã‚ã›ã‚ã‚ŠãŒã¨ã†ã”ã–ã„ã¾ã™ã€‚ã‚¹ãƒãƒ¼ãƒˆãƒ•ã‚©ãƒ³ã‚’æ©Ÿç¨®å¤‰æ›´ã—ãŸå ´åˆã€ãƒˆãƒ¼ã‚¯ãƒ³ã‚¢ãƒ—ãƒªã¯å¼•ç¶™ããŒã•ã‚Œã¾ã›ã‚“ã€‚ãŠæ‰‹æ•°ãŠã‹ã‘ã„ãŸã—ã¾ã™ãŒã€ã‚ã‚‰ãŸã‚ã¦ãƒˆãƒ¼ã‚¯ãƒ³ã‚¢ãƒ—ãƒªã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã„ãŸã ãã€å†ç™»éŒ²ã‚’ãŠé¡˜ã„ã„ãŸã—ã¾ã™ã€‚',
+                    dateTime:'2022”N06Œ02“ú@10F04',
+                    inqDetail:'‚²‰ñ“šFƒJƒXƒ^ƒ}[ƒZƒ“ƒ^[‚Ì—é–Ø‚Å‚·B‚¨–â‚¢‡‚í‚¹‚ ‚è‚ª‚Æ‚¤‚²‚´‚¢‚Ü‚·BƒXƒ}[ƒgƒtƒHƒ“‚ğ‹@í•ÏX‚µ‚½ê‡Aƒg[ƒNƒ“ƒAƒvƒŠ‚ÍˆøŒp‚¬‚ª‚³‚ê‚Ü‚¹‚ñB‚¨è”‚¨‚©‚¯‚¢‚½‚µ‚Ü‚·‚ªA‚ ‚ç‚½‚ß‚Äƒg[ƒNƒ“ƒAƒvƒŠ‚ğƒ_ƒEƒ“ƒ[ƒh‚¢‚½‚¾‚«AÄ“o˜^‚ğ‚¨Šè‚¢‚¢‚½‚µ‚Ü‚·B',
                     fileDownloadText:true,
                     fileName:'ddddd.txt'
                 }
             ];
-            // ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹(ã‚µãƒ¼ãƒãƒ¼ã‚’ç«‹ã¦ã¦ã„ãªã„ãŸã‚ã€ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã•ã‚Œãšã«ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¸­èº«ãŒWebä¸Šã«è¡¨ç¤ºã•ã‚Œã‚‹)
+            // ƒtƒ@ƒCƒ‹ƒpƒX(ƒT[ƒo[‚ğ—§‚Ä‚Ä‚¢‚È‚¢‚½‚ßAƒ_ƒEƒ“ƒ[ƒh‚³‚ê‚¸‚Éƒtƒ@ƒCƒ‹‚Ì’†g‚ªWebã‚É•\¦‚³‚ê‚é)
             const fileLink = 'download/';
-            // ç”»é¢å‡ºåŠ›ç”¨ãƒ†ã‚­ã‚¹ãƒˆ
-            const fileDowText = 'ãƒ•ã‚¡ã‚¤ãƒ«ï¼ˆã‚³ãƒãƒ©ã‹ã‚‰ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ï¼‰'; 
+            // ‰æ–Êo—Í—pƒeƒLƒXƒg
+            const fileDowText = 'ƒtƒ@ƒCƒ‹iƒRƒ`ƒ‰‚©‚çƒ_ƒEƒ“ƒ[ƒhj'; 
 
 			/***
-			 è¦ç´ ã®å…¨è¡¨ç¤ºãƒ»éƒ¨åˆ†è¡¨ç¤ºå‡¦ç†
+			 —v‘f‚Ì‘S•\¦E•”•ª•\¦ˆ—
 			***/
             /*
-                å¼•æ•°ï¼šæŠ¼ä¸‹ãƒœã‚¿ãƒ³è¦ç´ 
+                ˆø”F‰Ÿ‰ºƒ{ƒ^ƒ“—v‘f
             */
             function dButton(elem){
-                // ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹
-                // openState=å…¨è¡¨ç¤º(true)/éƒ¨åˆ†è¡¨ç¤º(false)ã®çŠ¶æ…‹
+                // ƒ{ƒ^ƒ“‚Ìó‘Ô
+                // openState=‘S•\¦(true)/•”•ª•\¦(false)‚Ìó‘Ô
                 let openState = elem.value;
-                // æŠ¼ã•ã‚ŒãŸãƒœã‚¿ãƒ³No
+                // ‰Ÿ‚³‚ê‚½ƒ{ƒ^ƒ“No
                 let buttonNum = elem.Name.substr(elem.Name.length-1, elem.Name.length);
-                // è©³ç´°è¦ç´ ã®å–å¾—
+                // Ú×—v‘f‚Ìæ“¾
                 let element = document.getElementById(elem.Name);                
                 
-                // ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹ã§è¡¨ç¤ºã‚’åˆ‡ã‚Šæ›¿ãˆ(è¦ç´ ã®valueã¯æ–‡å­—åˆ—)
+                // ƒ{ƒ^ƒ“‚Ìó‘Ô‚Å•\¦‚ğØ‚è‘Ö‚¦(—v‘f‚Ìvalue‚Í•¶š—ñ)
                 if(openState=='true'){
-                    // è©³ç´°ã‚’éƒ¨åˆ†è¡¨ç¤º
+                    // Ú×‚ğ•”•ª•\¦
                     element.innerHTML = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c.substring(0, 12) + "...";
-                    // å†…å®¹ãŒ11æ–‡å­—ä»¥ä¸‹ãªã‚‰ãã®ã¾ã¾ã€ãã‚Œã‚’è¶…ãˆã‚‹å ´åˆçœç•¥
+                    // “à—e‚ª11•¶šˆÈ‰º‚È‚ç‚»‚Ì‚Ü‚ÜA‚»‚ê‚ğ’´‚¦‚éê‡È—ª
                     let text = '';
                     if(arrayCbd[buttonNum].Content__c.length > 12){
                         text = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c.substring(0, 12) + "...";
@@ -307,7 +307,7 @@
                         text = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c;
                     }
                     element.innerHTML = text;
-                    // ãƒ•ã‚¡ã‚¤ãƒ«ãŒã‚ã‚‹å ´åˆã€å›ºå®šæ–‡è¨€ã¨ãƒ•ã‚¡ã‚¤ãƒ«ãƒªãƒ³ã‚¯ã‚’éè¡¨ç¤º
+                    // ƒtƒ@ƒCƒ‹‚ª‚ ‚éê‡AŒÅ’è•¶Œ¾‚Æƒtƒ@ƒCƒ‹ƒŠƒ“ƒN‚ğ”ñ•\¦
                     /*if(arrayCbd[buttonNum].fileDownloadText){
                         document.getElementById('fdText'+buttonNum).style = 'display:none;';
                         document.getElementById('fName'+buttonNum).style = 'display:none;';
@@ -315,9 +315,9 @@
                     openState = 'false';
 
                 } else{
-                    // è©³ç´°ã‚’å…¨è¡¨ç¤º
+                    // Ú×‚ğ‘S•\¦
                     element.innerHTML = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c;
-                    // ãƒ•ã‚¡ã‚¤ãƒ«ãŒã‚ã‚‹å ´åˆã€å›ºå®šæ–‡è¨€ã¨ãƒ•ã‚¡ã‚¤ãƒ«ãƒªãƒ³ã‚¯ã‚’è¡¨ç¤º
+                    // ƒtƒ@ƒCƒ‹‚ª‚ ‚éê‡AŒÅ’è•¶Œ¾‚Æƒtƒ@ƒCƒ‹ƒŠƒ“ƒN‚ğ•\¦
                     /*if(arrayInqDetails[buttonNum].fileDownloadText){
                         document.getElementById('fdText'+buttonNum).style = 'display:inline;';
                         document.getElementById('fName'+buttonNum).style = 'display:inline;';
@@ -325,18 +325,18 @@
                     openState = 'true';
 
                 }
-                // ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹ã‚’è¨­å®š
+                // ƒ{ƒ^ƒ“‚Ìó‘Ô‚ğİ’è
                 elem.value = openState;
             }
 
 
-            // å–å¾—ã—ãŸã‚±ãƒ¼ã‚¹æ ¼ç´ç”¨
+            // æ“¾‚µ‚½ƒP[ƒXŠi”[—p
             let arrayInq = [];
-            // å–å¾—ã—ãŸã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰æ˜ç´°æ ¼ç´ç”¨
+            // æ“¾‚µ‚½ƒRƒ“ƒ^ƒNƒgƒ{[ƒh–¾×Ši”[—p
             let arrayCbd = [];
-            // åˆæœŸè¡¨ç¤ºå‡¦ç†
+            // ‰Šú•\¦ˆ—
             window.onload = function(){
-                // ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³å–å¾—ï¼ˆãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ãƒˆãƒ¼ã‚¯ãƒ³ãƒ•ãƒ­ãƒ¼ï¼‰ Ajax
+                // ƒAƒNƒZƒXƒg[ƒNƒ“æ“¾iƒŠƒtƒŒƒbƒVƒ…ƒg[ƒNƒ“ƒtƒ[j Ajax
                 $.ajax({
                     type: 'POST',
                     crossOrigin: true,
@@ -354,29 +354,29 @@
                             cache :false,
                             headers: {"Authorization" : accToken},
                             success : function (res) {
-                                // ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã§ããŸå ´åˆ
+                                // ƒf[ƒ^‚ğæ“¾‚Å‚«‚½ê‡
                                 if(res.length != 0){
-                                    // ã‚±ãƒ¼ã‚¹ã‚’BK
+                                    // ƒP[ƒX‚ğBK
                                     arrayInq = res;
                                     console.log(arrayInq);
                                     
-                                    // templateè¦ç´ ã‚’å–å¾—
+                                    // template—v‘f‚ğæ“¾
                                     var template = document.getElementById('templateInqList');
-                                    // ãƒ‡ãƒ¼ã‚¿ã®æ•°åˆ†ç¹°ã‚Šè¿”ã—
+                                    // ƒf[ƒ^‚Ì”•ªŒJ‚è•Ô‚µ
                                     for(var i = 0; i < res.length; i++){
-                                        // templateè¦ç´ ã®å†…å®¹ã‚’è¤‡è£½
+                                        // template—v‘f‚Ì“à—e‚ğ•¡»
                                         var clone = template.content.cloneNode(true);
-                                        // è¤‡è£½ã—ãŸtemplateè¦ç´ ã«ãƒ‡ãƒ¼ã‚¿ã‚’æŒ¿å…¥
+                                        // •¡»‚µ‚½template—v‘f‚Éƒf[ƒ^‚ğ‘}“ü
                                         clone.querySelector('.inqTitle').textContent = 'No.' + res[i].CreatedDate.substring(0, res[i].CreatedDate.length - 12).replace(/T|-|:/g,'');
-                                        clone.querySelector('.inqType').textContent = 'å•ã„åˆã‚ã›ç¨®åˆ¥ï¼š' + res[i].Subject;
-                                        clone.querySelector('.inqstatus').textContent = 'ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ï¼š' + res[i].Status;
+                                        clone.querySelector('.inqType').textContent = '–â‚¢‡‚í‚¹í•ÊF' + res[i].Subject;
+                                        clone.querySelector('.inqstatus').textContent = 'ƒXƒe[ƒ^ƒXF' + res[i].Status;
                                         clone.querySelector('.inqButton').value = res[i].CaseNumber;
-                                        // div#containerã®ä¸­ã«è¿½åŠ 
+                                        // div#container‚Ì’†‚É’Ç‰Á
                                         document.getElementById('outputInqList').appendChild(clone);
                                     }
-                                    //--------------------- ä»¥ä¸‹ ---------------------
-                                    //Apexä½œæˆã€DateTimeæ•´å½¢ã€ãƒ•ã‚¡ã‚¤ãƒ«å–å¾—ã—ãŸå¾Œã«ã‚¯ãƒ­ãƒ¼ãƒ³ã™ã‚‹ã¹ãã‹ã‚‚
-                                    // ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰æ˜ç´°ã‚’å–å¾—
+                                    //--------------------- ˆÈ‰º ---------------------
+                                    //Apexì¬ADateTime®Œ`Aƒtƒ@ƒCƒ‹æ“¾‚µ‚½Œã‚ÉƒNƒ[ƒ“‚·‚é‚×‚«‚©‚à
+                                    // ƒRƒ“ƒ^ƒNƒgƒ{[ƒh–¾×‚ğæ“¾
                                     /*$.ajax({
                                         type: 'GET',
                                         crossOrigin: true,
@@ -385,25 +385,25 @@
                                         cache :false,
                                         headers: {"Authorization" : accToken},
                                         success : function (res) {
-                                            // ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã§ããŸå ´åˆ
+                                            // ƒf[ƒ^‚ğæ“¾‚Å‚«‚½ê‡
                                             if(res.length != 0){
                                                 arrayCbd = res;
                                                 console.log(arrayCbd);
-                                                // templateè¦ç´ ã‚’å–å¾—
+                                                // template—v‘f‚ğæ“¾
                                                 var template = document.getElementById('templateInqList_Details');
-                                                // ãƒ‡ãƒ¼ã‚¿ã®æ•°åˆ†ç¹°ã‚Šè¿”ã—
+                                                // ƒf[ƒ^‚Ì”•ªŒJ‚è•Ô‚µ
                                                 for(var i=0; i < arrayInqDetails.length; i++){
-                                                    // templateè¦ç´ ã®å†…å®¹ã‚’è¤‡è£½
+                                                    // template—v‘f‚Ì“à—e‚ğ•¡»
                                                     var clone = template.content.cloneNode(true);
 
-                                                    // è¤‡è£½ã—ãŸtemplateè¦ç´ ã«ãƒ‡ãƒ¼ã‚¿ã‚’æŒ¿å…¥
+                                                    // •¡»‚µ‚½template—v‘f‚Éƒf[ƒ^‚ğ‘}“ü
                                                     clone.querySelector('.detailButton').innerHTML = arrayInqDetails[i].dateTime    ;
                                                     clone.querySelector('.detailButton').Name = 'detail'+ i;
                                                     clone.querySelector('.detailButton').id = 'detailButton'+ i;
                                                     clone.querySelector('.detailButton').value = false;
                                                     clone.querySelector('.inqDetail').textContent = arrayInqDetails[i].inqDetail.substr(0, 18) + "...";
                                                     clone.querySelector('.inqDetail').id = 'detail'+ i;
-                                                    // -----ä»¥é™ã¯ç”»é¢è¡¨ç¤ºã—ãªã„è¨­å®šã§å‡ºåŠ›-------
+                                                    // -----ˆÈ~‚Í‰æ–Ê•\¦‚µ‚È‚¢İ’è‚Åo—Í-------
                                                     clone.querySelector('.fileDownloadText').textContent = (arrayInqDetails[i].fileDownloadText) ? fileDowText : '';
                                                     clone.querySelector('.fileDownloadText').style = 'display:none;';
                                                     clone.querySelector('.fileDownloadText').id = 'fdText'+ i;
@@ -413,11 +413,11 @@
                                                     clone.querySelector('.fileName').style = 'display:none;';
                                                     clone.querySelector('.fileName').id = 'fName'+ i;
                                                     
-                                                    // div#containerã®ä¸­ã«è¿½åŠ 
+                                                    // div#container‚Ì’†‚É’Ç‰Á
                                                     document.getElementById('outputInqList_Details').appendChild(clone);
                                                 }
 
-                                                //-------------ä»¥ä¸Š-------------
+                                                //-------------ˆÈã-------------
 
                                                 $.ajax({
                                                     //beforeSend: function(xhr){
@@ -427,9 +427,9 @@
                                                     type: 'GET',
                                                     crossOrigin: true,
                                                     //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JD6IAAW/VersionData', // png
-                                                    //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEx0AAG/VersionData', // ã‚¨ã‚¯ã‚»ãƒ«
-                                                    //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzVAAW/VersionData', // ãƒ¯ãƒ¼ãƒ‰
-                                                    //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzkAAG/VersionData', // ãƒ‘ãƒ¯ãƒ
+                                                    //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEx0AAG/VersionData', // ƒGƒNƒZƒ‹
+                                                    //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzVAAW/VersionData', // ƒ[ƒh
+                                                    //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzkAAG/VersionData', // ƒpƒƒ|
                                                     //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzpAAG/VersionData', // PDF
                                                     //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzlAAG/VersionData', // JPG
                                                     url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JF0JAAW/VersionData', // zip
@@ -442,13 +442,13 @@
                                                         binaryData.push(dlFile);
 
                                                         const url = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
-                                                        // ãƒœã‚¿ãƒ³ã§ãƒ•ã‚¡ã‚¤ãƒ«DL è¿½åŠ 
+                                                        // ƒ{ƒ^ƒ“‚Åƒtƒ@ƒCƒ‹DL ’Ç‰Á
                                                         var target = document.getElementById("searchLink");
                                                         target.href = url;
-                                                        target.innerText = "ãƒ•ã‚¡ã‚¤ãƒ«DL";
+                                                        target.innerText = "ƒtƒ@ƒCƒ‹DL";
                                                         target.download="test.zip"
-                                                        // è¿½åŠ çµ‚ã‚ã‚Š
-                                                        /* è‡ªå‹•ãƒ•ã‚¡ã‚¤ãƒ«DL ã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆ
+                                                        // ’Ç‰ÁI‚í‚è
+                                                        /* ©“®ƒtƒ@ƒCƒ‹DL ƒRƒƒ“ƒgƒAƒEƒg
                                                         const a = document.createElement("a");
                                                         document.body.appendChild(a);
                                                         //a.download = 'test.png';
@@ -486,10 +486,10 @@
                     }
                 });
             }
-
+            // ˆø”FƒP[ƒXNo
             function sendCbd(caseNum){
                 changeDisplayButton1(caseNum.value);
-                // ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³å–å¾—ï¼ˆãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ãƒˆãƒ¼ã‚¯ãƒ³ãƒ•ãƒ­ãƒ¼ï¼‰ Ajax
+                // ƒAƒNƒZƒXƒg[ƒNƒ“æ“¾iƒŠƒtƒŒƒbƒVƒ…ƒg[ƒNƒ“ƒtƒ[j Ajax
                 $.ajax({
                     type: 'POST',
                     crossOrigin: true,
@@ -498,18 +498,18 @@
                     cache :false,
                     data : {"grant_type":"refresh_token","client_id":"3MVG9pRzvMkjMb6nsLsmTx_FqB0rQ9AHEMYt85TrwFp6b3yeP.ta18VQpmha_Ds31fssFdYib4DdLPcLKqtQG", "client_secret":"F864BDD8ADFB8B17EA27F0623CF9039A503A76F9312032654DBFFDB25E87B142","refresh_token":"5Aep861mdLLi91HqFfCpXYtQXRaOgcHsK1gi36_cVHboubUhDFRrSCX9zyL1KBPgaR5qiKjUA54Q0RZhiN_teRI"},
                     success : function (connectData) {
-                        // ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³
+                        // ƒAƒNƒZƒXƒg[ƒNƒ“
                         var accToken = 'Bearer ' + connectData.access_token;
-                        // æ¡ä»¶ã®ãƒ‘ãƒ©ãƒ ã‚’æº–å‚™
+                        // ğŒ‚Ìƒpƒ‰ƒ€‚ğ€”õ
                         /*var inputData = {};
                         inputData.AccountNumber = caseNum.value;
                         inputData.File = '' ;
-                        // Rest Apexã¸ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’JSONå½¢å¼ã«å¤‰æ›
+                        // Rest Apex‚Öƒpƒ‰ƒ[ƒ^‚ğJSONŒ`®‚É•ÏŠ·
                         var data = JSON.stringify( inputData );*/
-                        console.log(caseNum.value);
-                        //--------------------- ä»¥ä¸‹ ---------------------
-                        //Apexä½œæˆã€DateTimeæ•´å½¢ã€ãƒ•ã‚¡ã‚¤ãƒ«å–å¾—ã—ãŸå¾Œã«ã‚¯ãƒ­ãƒ¼ãƒ³ã™ã‚‹ã¹ãã‹ã‚‚
-                        // ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰æ˜ç´°ã‚’å–å¾—
+                        //console.log(caseNum.value);
+                        //--------------------- ˆÈ‰º ---------------------
+                        //Apexì¬ADateTime®Œ`Aƒtƒ@ƒCƒ‹æ“¾‚µ‚½Œã‚ÉƒNƒ[ƒ“‚·‚é‚×‚«‚©‚à
+                        // ƒRƒ“ƒ^ƒNƒgƒ{[ƒh–¾×‚ğæ“¾
                         $.ajax({
                             type: 'GET',
                             crossOrigin: true,
@@ -520,7 +520,7 @@
                             dataType: 'json',
                             data : JSON.stringify(caseNum.value),
                             success : function (res) {
-                                // ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã§ããŸå ´åˆ
+                                // ƒf[ƒ^‚ğæ“¾‚Å‚«‚½ê‡
                                 if(res.length != 0){
                                     arrayCbd = res;
                                     console.log(arrayCbd);
@@ -528,30 +528,25 @@
                                     //let formElement = document.getElementById("outputInqList_Details_form");
                                     //formElement.reset();
                                     
-                                    // templateè¦ç´ ã‚’å–å¾—
+                                    // template—v‘f‚ğæ“¾
                                     var template = document.getElementById('templateInqList_Details');
-                                    // ãƒ‡ãƒ¼ã‚¿ã®æ•°åˆ†ç¹°ã‚Šè¿”ã—
+                                    // ƒf[ƒ^‚Ì”•ªŒJ‚è•Ô‚µ
                                     for(var i=0; i < arrayCbd.length; i++){
-                                        // templateè¦ç´ ã®å†…å®¹ã‚’è¤‡è£½
+                                        // template—v‘f‚Ì“à—e‚ğ•¡»
                                         var clone = template.content.cloneNode(true);
-                                        // æ—¥ä»˜æ™‚é–“ã‚’æ•´å½¢
+                                        // “ú•tŠÔ‚ğŒ©o‚µ—p‚É®Œ`
                                         let dateTime = arrayCbd[i].CreatedDate.substring( 0, arrayCbd[i].CreatedDate.length - 12 );
                                         let year = dateTime.substring(0, 4);
                                         let month = dateTime.substring(5, 6);
                                         let day = dateTime.substring(8, 9);
                                         let time = dateTime.substring(dateTime.length - 5, dateTime.length);
-                                        /*let year = dateTime.substr(0, 3);
-                                        let month = dateTime.substr(5,2);
-                                        let day = dateTime.substr(8,2);
-                                        let time = dateTime.substr(dateTime.length - 5, 5);*/
-                                        dateTime = year + 'å¹´' + month +  'æœˆ' + day + 'æ—¥ ' + time;
-                                        // è¤‡è£½ã—ãŸtemplateè¦ç´ ã«ãƒ‡ãƒ¼ã‚¿ã‚’æŒ¿å…¥
+                                        dateTime = year + '”N' + month +  'Œ' + day + '“ú ' + time;
+                                        // •¡»‚µ‚½template—v‘f‚Éƒf[ƒ^‚ğ‘}“ü
                                         clone.querySelector('.detailButton').innerHTML = dateTime;
                                         clone.querySelector('.detailButton').Name = 'detail'+ i;
                                         clone.querySelector('.detailButton').id = 'detailButton'+ i;
                                         clone.querySelector('.detailButton').value = false;
-                                        console.log(arrayCbd[i].Content__c.length);
-                                        // å†…å®¹ãŒ11æ–‡å­—ä»¥ä¸‹ãªã‚‰ãã®ã¾ã¾ã€ãã‚Œã‚’è¶…ãˆã‚‹å ´åˆçœç•¥
+                                        // “à—e‚ª12 •¶šˆÈ‰º‚È‚ç‚»‚Ì‚Ü‚ÜA‚»‚ê‚ğ’´‚¦‚éê‡È—ª
                                         let content = '';
                                         if(arrayCbd[i].Content__c.length > 12){
                                             content = arrayCbd[i].RecordType__c + ':' + arrayCbd[i].Content__c.substring(0, 12) + "...";
@@ -560,7 +555,8 @@
                                         }
                                         clone.querySelector('.inqDetail').textContent = content;
                                         clone.querySelector('.inqDetail').id = 'detail'+ i;
-                                        // -----ä»¥é™ã¯ç”»é¢è¡¨ç¤ºã—ãªã„è¨­å®šã§å‡ºåŠ›-------
+
+                                        // -----ˆÈ~‚Í‰æ–Ê•\¦‚µ‚È‚¢İ’è‚Åo—Í-------
                                         //clone.querySelector('.fileDownloadText').textContent = fileDowText;
                                         clone.querySelector('.fileDownloadText').style = 'display:none;';
                                         clone.querySelector('.fileDownloadText').id = 'fdText'+ i;
@@ -570,11 +566,11 @@
                                         clone.querySelector('.fileName').style = 'display:none;';
                                         clone.querySelector('.fileName').id = 'fName'+ i;
                                         
-                                        // div#containerã®ä¸­ã«è¿½åŠ 
+                                        // div#container‚Ì’†‚É’Ç‰Á
                                         document.getElementById('outputInqList_Details').appendChild(clone);
                                     }
 
-                                    //-------------ä»¥ä¸Š-------------
+                                    //-------------ˆÈã-------------
 
                                     $.ajax({
                                         //beforeSend: function(xhr){
@@ -584,9 +580,9 @@
                                         type: 'GET',
                                         crossOrigin: true,
                                         //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JD6IAAW/VersionData', // png
-                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEx0AAG/VersionData', // ã‚¨ã‚¯ã‚»ãƒ«
-                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzVAAW/VersionData', // ãƒ¯ãƒ¼ãƒ‰
-                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzkAAG/VersionData', // ãƒ‘ãƒ¯ãƒ
+                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEx0AAG/VersionData', // ƒGƒNƒZƒ‹
+                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzVAAW/VersionData', // ƒ[ƒh
+                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzkAAG/VersionData', // ƒpƒƒ|
                                         //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzpAAG/VersionData', // PDF
                                         //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzlAAG/VersionData', // JPG
                                         url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JF0JAAW/VersionData', // zip
@@ -599,13 +595,13 @@
                                             binaryData.push(dlFile);
 
                                             const url = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
-                                            // ãƒœã‚¿ãƒ³ã§ãƒ•ã‚¡ã‚¤ãƒ«DL è¿½åŠ 
+                                            // ƒ{ƒ^ƒ“‚Åƒtƒ@ƒCƒ‹DL ’Ç‰Á
                                             var target = document.getElementById("searchLink");
                                             target.href = url;
-                                            target.innerText = "ãƒ•ã‚¡ã‚¤ãƒ«DL";
+                                            target.innerText = "ƒtƒ@ƒCƒ‹DL";
                                             target.download="test.zip"
-                                            // è¿½åŠ çµ‚ã‚ã‚Š
-                                            /* è‡ªå‹•ãƒ•ã‚¡ã‚¤ãƒ«DL ã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆ
+                                            // ’Ç‰ÁI‚í‚è
+                                            /* ©“®ƒtƒ@ƒCƒ‹DL ƒRƒƒ“ƒgƒAƒEƒg
                                             const a = document.createElement("a");
                                             document.body.appendChild(a);
                                             //a.download = 'test.png';
