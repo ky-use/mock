@@ -319,7 +319,7 @@
                 // ボタンの状態で表示を切り替え(要素のvalueは文字列)
                 if(openState=='true'){
                     // 詳細を部分表示
-                    element.innerHTML = arrayCbd[buttonNum].RecordType__c + arrayCbd[buttonNum].Content__c.substr(0, 15) + "...";
+                    element.innerHTML = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c.substr(0, 15) + "...";
                     // ファイルがある場合、固定文言とファイルリンクを非表示
                     /*if(arrayCbd[buttonNum].fileDownloadText){
                         document.getElementById('fdText'+buttonNum).style = 'display:none;';
@@ -329,7 +329,7 @@
 
                 } else{
                     // 詳細を全表示
-                    element.innerHTML = arrayCbd[buttonNum].RecordType__c + arrayCbd[buttonNum].Content__c;
+                    element.innerHTML = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c;
                     // ファイルがある場合、固定文言とファイルリンクを表示
                     /*if(arrayInqDetails[buttonNum].fileDownloadText){
                         document.getElementById('fdText'+buttonNum).style = 'display:inline;';
