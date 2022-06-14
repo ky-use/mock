@@ -177,13 +177,19 @@
 			***/
             
             // 表示ボタン
-            function changeDisplayButton1() {
+            function changeDisplayButton1(Num) {
                 // お問い合わせ一覧非表示
                 document.getElementById('inqList').style.display = 'none';
                 // お問い合わせ詳細の表示
                 document.getElementById('inqDetailsList').style.display = 'inline';
                 document.getElementById('inqDetails1').style.display = 'inline';
                 document.getElementById('inq1').style.display = 'inline';
+                // タイトルを初期化
+                let title = '';
+                // ケースNo.から日付を取得
+                title = arrayInq[arrayInq.indexOf(Num)].CreatedDate.substr( 0, res[i].CreatedDate.length - 12 ).replace(/T|-|:/g,'');
+                // タイトルに日付を設定
+                document.getElementById('inq1').innerHTML = title;
             };
             function changeDisplayButton2() {
                 // お問い合わせ一覧非表示
@@ -486,7 +492,7 @@
                 });
             }
             function sendCbd(caseNum){
-                changeDisplayButton1();
+                changeDisplayButton1(caseNum.value);
                 // アクセストークン取得（リフレッシュトークンフロー） Ajax
                 $.ajax({
                     type: 'POST',
