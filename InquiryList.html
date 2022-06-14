@@ -510,12 +510,12 @@
                         $.ajax({
                             type: 'GET',
                             crossOrigin: true,
-                            url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/Mock_CBD/' + caseNum.value,
+                            url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/Mock_CBD/',
                             dataType: 'json',
                             cache :false,
                             headers: {"Authorization" : accToken},
                             dataType: 'json',
-                            data : data,
+                            data : inputData,
                             success : function (res) {
                                 // データを取得できた場合
                                 if(res.length != 0){
