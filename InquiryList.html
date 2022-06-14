@@ -312,29 +312,29 @@
                 // openState=全表示(true)/部分表示(false)の状態
                 let openState = elem.value;
                 // 押されたボタンNo
-                let num = elem.Name.substr(elem.Name.length-1, elem.Name.length);
+                let buttonNum = elem.Name.substr(elem.Name.length-1, elem.Name.length);
                 // 詳細要素の取得
                 let element = document.getElementById(elem.Name);                
                 
                 // ボタンの状態で表示を切り替え(要素のvalueは文字列)
                 if(openState=='true'){
                     // 詳細を部分表示
-                    element.innerHTML = arrayInqDetails[num].inqDetail.substr(0, 18) + "...";
+                    element.innerHTML = arrayCbd[buttonNum].RecordType__c + arrayCbd[buttonNum].Content__c.substr(0, 15) + "...";
                     // ファイルがある場合、固定文言とファイルリンクを非表示
-                    if(arrayInqDetails[num].fileDownloadText){
-                        document.getElementById('fdText'+num).style = 'display:none;';
-                        document.getElementById('fName'+num).style = 'display:none;';
-                    }
+                    /*if(arrayCbd[buttonNum].fileDownloadText){
+                        document.getElementById('fdText'+buttonNum).style = 'display:none;';
+                        document.getElementById('fName'+buttonNum).style = 'display:none;';
+                    }*/
                     openState = 'false';
 
                 } else{
                     // 詳細を全表示
-                    element.innerHTML = arrayInqDetails[num].inqDetail;
+                    element.innerHTML = arrayCbd[buttonNum].RecordType__c + arrayCbd[buttonNum].Content__c;
                     // ファイルがある場合、固定文言とファイルリンクを表示
-                    if(arrayInqDetails[num].fileDownloadText){
-                        document.getElementById('fdText'+num).style = 'display:inline;';
-                        document.getElementById('fName'+num).style = 'display:inline;';
-                    }
+                    /*if(arrayInqDetails[buttonNum].fileDownloadText){
+                        document.getElementById('fdText'+buttonNum).style = 'display:inline;';
+                        document.getElementById('fName'+buttonNum).style = 'display:inline;';
+                    }*/
                     openState = 'true';
 
                 }
@@ -547,7 +547,7 @@
                                         clone.querySelector('.detailButton').Name = 'detail'+ i;
                                         clone.querySelector('.detailButton').id = 'detailButton'+ i;
                                         clone.querySelector('.detailButton').value = false;
-                                        clone.querySelector('.inqDetail').textContent = arrayCbd[i].Content__c.substr(0, 18) + "...";
+                                        clone.querySelector('.inqDetail').textContent = arrayCbd[i].RecordType__c + arrayCbd[i].Content__c.substr(0, 18) + "...";
                                         clone.querySelector('.inqDetail').id = 'detail'+ i;
                                         // -----以降は画面表示しない設定で出力-------
                                         //clone.querySelector('.fileDownloadText').textContent = fileDowText;
