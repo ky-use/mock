@@ -503,19 +503,17 @@
                         inputData.File = '' ;
                         // Rest ApexへパラメータをJSON形式に変換
                         var data = JSON.stringify( inputData );*/
-
+                        console.log(caseNum.value);
                         //--------------------- 以下 ---------------------
                         //Apex作成、DateTime整形、ファイル取得した後にクローンするべきかも
                         // コンタクトボード明細を取得
                         $.ajax({
                             type: 'GET',
                             crossOrigin: true,
-                            url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/Mock_CBD/',
+                            url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/Mock_CBD/' + caseNum.value,
                             dataType: 'json',
                             cache :false,
                             headers: {"Authorization" : accToken},
-                            dataType: 'json',
-                            data : JSON.stringify(caseNum.value),
                             success : function (res) {
                                 // データを取得できた場合
                                 if(res.length != 0){
