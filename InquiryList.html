@@ -184,18 +184,18 @@
                 document.getElementById('inqDetailsList').style.display = 'inline';
                 document.getElementById('inqDetails1').style.display = 'inline';
                 document.getElementById('inq1').style.display = 'inline';
-                // タイトルを初期化
+                // タイトルとインデックスを初期化
                 let title = '';
                 let index = '';
+                // ケースの配列からケースNoのみを配列として準備
                 let caseNumber = arrayInq.map(el => el.CaseNumber);
-                index = caseNumber.indexOf(Num);
-                console.log(index);
                 // ケースNo.から日付を取得
+                index = caseNumber.indexOf(Num);
                 title = arrayInq[index].CreatedDate;
+                // タイトル用に加工
+                title = 'No.' + title.substr( 0, title.length - 12 ).replace(/T|-|:/g,'');
                 console.log(title);
-                title = title.substr( 0, title.length - 12 ).replace(/T|-|:/g,'');
-                console.log(title);
-                // タイトルに日付を設定
+                // タイトルを設定
                 document.getElementById('inq1').innerHTML = title;
             };
             function changeDisplayButton2() {
