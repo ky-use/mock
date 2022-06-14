@@ -186,8 +186,12 @@
                 document.getElementById('inq1').style.display = 'inline';
                 // タイトルを初期化
                 let title = '';
+                let number = '';
+
                 // ケースNo.から日付を取得
-                title = arrayInq[arrayInq.indexOf(Num)].CreatedDate;
+                number = arrayInq.indexOf(Num);
+                console.log(number);
+                title = arrayInq[number].CreatedDate;
                 console.log(title);
                 // タイトルに日付を設定
                 document.getElementById('inq1').innerHTML = title.substr( 0, res[i].CreatedDate.length - 12 ).replace(/T|-|:/g,'');
