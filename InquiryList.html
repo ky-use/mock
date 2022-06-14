@@ -538,10 +538,10 @@
                                     // template要素を取得
                                     var template = document.getElementById('templateInqList_Details');
                                     // データの数分繰り返し
-                                    for(var i=0; i < arrayInqDetails.length; i++){
+                                    for(var i=0; i < arrayCbd.length; i++){
                                         // template要素の内容を複製
                                         var clone = template.content.cloneNode(true);
-                                        let dateTime = arrayCbd[i].CreatedDate.substr( 0, res[i].CreatedDate.length - 12 );
+                                        let dateTime = arrayCbd[i].CreatedDate.substr( 0, arrayCbd[i].CreatedDate.length - 12 );
                                         let year = dateTime.substr(0,4);
                                         let month = dateTime.substr(5,2);
                                         let day = dateTime.substr(8,2);
