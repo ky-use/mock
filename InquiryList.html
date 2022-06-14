@@ -191,7 +191,7 @@
                 index = caseNumber.indexOf(Num);
                 title = arrayInq[index].CreatedDate;
                 // タイトル用に加工
-                title = 'No.' + title.substr( 0, title.length - 12 ).replace(/T|-|:/g,'');
+                title = 'No.' + title.substring( 0, title.length - 12 ).replace(/T|-|:/g,'');
                 console.log(title);
                 // タイトルを設定
                 document.getElementById('inq1').innerHTML = title;
@@ -217,12 +217,10 @@
                 // テーブルの子要素すべてを削除
                 var oldDetailList = document.getElementById('outputInqList_Details');
                 var removeOldDetailList = oldDetailList.querySelectorAll('tr');
-                console.log(removeOldDetailList.length);
                 if(removeOldDetailList.length != 0){
                     for(var i = 0; i < removeOldDetailList.length; i++){
                         removeOldDetailList[i].parentNode.removeChild(removeOldDetailList[i])
                     }
-                    console.log(removeOldDetailList);
                 }
 
                 // 表示初期化
@@ -300,7 +298,7 @@
                 // ボタンの状態で表示を切り替え(要素のvalueは文字列)
                 if(openState=='true'){
                     // 詳細を部分表示
-                    element.innerHTML = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c.substr(0, 12) + "...";
+                    element.innerHTML = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c.substring(0, 12) + "...";
                     // ファイルがある場合、固定文言とファイルリンクを非表示
                     /*if(arrayCbd[buttonNum].fileDownloadText){
                         document.getElementById('fdText'+buttonNum).style = 'display:none;';
@@ -361,7 +359,7 @@
                                         // template要素の内容を複製
                                         var clone = template.content.cloneNode(true);
                                         // 複製したtemplate要素にデータを挿入
-                                        clone.querySelector('.inqTitle').textContent = 'No.' + res[i].CreatedDate.substr( 0, res[i].CreatedDate.length - 12 ).replace(/T|-|:/g,'');
+                                        clone.querySelector('.inqTitle').textContent = 'No.' + res[i].CreatedDate.substring(0, res[i].CreatedDate.length - 12).replace(/T|-|:/g,'');
                                         clone.querySelector('.inqType').textContent = '問い合わせ種別：' + res[i].Subject;
                                         clone.querySelector('.inqstatus').textContent = 'ステータス：' + res[i].Status;
                                         clone.querySelector('.inqButton').value = res[i].CaseNumber;
@@ -529,18 +527,22 @@
                                         // template要素の内容を複製
                                         var clone = template.content.cloneNode(true);
                                         // 日付時間を整形
-                                        let dateTime = arrayCbd[i].CreatedDate.substr( 0, arrayCbd[i].CreatedDate.length - 12 );
-                                        let year = dateTime.substr(0,4);
+                                        let dateTime = arrayCbd[i].CreatedDate.substring( 0, arrayCbd[i].CreatedDate.length - 12 );
+                                        let year = dateTime.substring(0, 4);
+                                        let month = dateTime.substring(5, 6);
+                                        let day = dateTime.substring(8, 9);
+                                        let time = dateTime.substring(dateTime.length - 5, dateTime.length);
+                                        /*let year = dateTime.substr(0, 3);
                                         let month = dateTime.substr(5,2);
                                         let day = dateTime.substr(8,2);
-                                        let time = dateTime.substr(dateTime.length - 5, 5);
+                                        let time = dateTime.substr(dateTime.length - 5, 5);*/
                                         dateTime = year + '年' + month +  '月' + day + '日 ' + time;
                                         // 複製したtemplate要素にデータを挿入
                                         clone.querySelector('.detailButton').innerHTML = dateTime;
                                         clone.querySelector('.detailButton').Name = 'detail'+ i;
                                         clone.querySelector('.detailButton').id = 'detailButton'+ i;
                                         clone.querySelector('.detailButton').value = false;
-                                        clone.querySelector('.inqDetail').textContent = arrayCbd[i].RecordType__c + ':' + arrayCbd[i].Content__c.substr(0, 12) + "...";
+                                        clone.querySelector('.inqDetail').textContent = arrayCbd[i].RecordType__c + ':' + arrayCbd[i].Content__c.substring(0, 12) + "...";
                                         clone.querySelector('.inqDetail').id = 'detail'+ i;
                                         // -----以降は画面表示しない設定で出力-------
                                         //clone.querySelector('.fileDownloadText').textContent = fileDowText;
