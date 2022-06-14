@@ -36,7 +36,7 @@
                 outline: none;
                 background: transparent;
                 font-weight: bold;
-                color: #3c90fff7;
+                color: #004db1f7;
                 font-size: 100%;
             }
             .equal_table{
@@ -154,8 +154,10 @@
 
                     <!-- テンプレート出力 -->
                     <div>
-                        <table id="outputInqList_Details">
-                        </table>
+                        <form id="outputInqList_Details_form">
+                            <table id="outputInqList_Details">
+                            </table>
+                        </form>
                     </div>
                     <!-- /テンプレート出力 -->
 
@@ -272,34 +274,6 @@
             const fileLink = 'download/';
             // 画面出力用テキスト
             const fileDowText = 'ファイル（コチラからダウンロード）'; 
-            // template要素を取得
-            /*var template = document.getElementById('template');
-            // データの数分繰り返し
-            for(var i=0; i < arrayInqDetails.length; i++){
-                // template要素の内容を複製
-                var clone = template.content.cloneNode(true);
-
-                // 複製したtemplate要素にデータを挿入
-                //clone.querySelector('.dateTime').textContent = arrayInqDetails[i].dateTime;
-                clone.querySelector('.detailButton').innerHTML = arrayInqDetails[i].dateTime;
-                clone.querySelector('.detailButton').Name = 'detail'+ i;
-                clone.querySelector('.detailButton').id = 'detailButton'+ i;
-                clone.querySelector('.detailButton').value = false;
-                clone.querySelector('.inqDetail').textContent = arrayInqDetails[i].inqDetail.substr(0, 18) + "...";
-                clone.querySelector('.inqDetail').id = 'detail'+ i;
-                // -----以降は画面表示しない設定で出力-------
-                clone.querySelector('.fileDownloadText').textContent = (arrayInqDetails[i].fileDownloadText) ? fileDowText : '';
-                clone.querySelector('.fileDownloadText').style = 'display:none;';
-                clone.querySelector('.fileDownloadText').id = 'fdText'+ i;
-                clone.querySelector('.fileName').textContent = arrayInqDetails[i].fileName;
-                clone.querySelector('.fileName').download = arrayInqDetails[i].fileName;
-                clone.querySelector('.fileName').href = fileLink + arrayInqDetails[i].fileName;
-                clone.querySelector('.fileName').style = 'display:none;';
-                clone.querySelector('.fileName').id = 'fName'+ i;
-                
-                // div#containerの中に追加
-                document.getElementById('container').appendChild(clone);
-            }*/
 
 			/***
 			 要素の全表示・部分表示処理
@@ -372,6 +346,8 @@
                                     // ケースをBK
                                     arrayInq = res;
                                     console.log(arrayInq);
+                                    let formElement = ducument.getElementById("outputInqList_Details_form");
+                                    formElement.reset();
                                     // template要素を取得
                                     var template = document.getElementById('templateInqList');
                                     // データの数分繰り返し
@@ -498,6 +474,7 @@
                     }
                 });
             }
+
             function sendCbd(caseNum){
                 changeDisplayButton1(caseNum.value);
                 // アクセストークン取得（リフレッシュトークンフロー） Ajax
@@ -541,13 +518,13 @@
                                     for(var i=0; i < arrayCbd.length; i++){
                                         // template要素の内容を複製
                                         var clone = template.content.cloneNode(true);
+                                        // 日付時間を整形
                                         let dateTime = arrayCbd[i].CreatedDate.substr( 0, arrayCbd[i].CreatedDate.length - 12 );
                                         let year = dateTime.substr(0,4);
                                         let month = dateTime.substr(5,2);
                                         let day = dateTime.substr(8,2);
-                                        let time = dateTime.substr( dateTime.length - 5, 5 )
+                                        let time = dateTime.substr(dateTime.length - 5, 5);
                                         dateTime = year + '年' + month +  '月' + day + '日 ' + time;
-                                        console.log(dateTime);
                                         // 複製したtemplate要素にデータを挿入
                                         clone.querySelector('.detailButton').innerHTML = dateTime;
                                         clone.querySelector('.detailButton').Name = 'detail'+ i;
