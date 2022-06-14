@@ -498,11 +498,11 @@
                         // アクセストークン
                         var accToken = 'Bearer ' + connectData.access_token;
                         // 条件のパラムを準備
-                        var inputData = {};
+                        /*var inputData = {};
                         inputData.AccountNumber = caseNum.value;
                         inputData.File = '' ;
                         // Rest ApexへパラメータをJSON形式に変換
-                        var data = JSON.stringify( inputData );
+                        var data = JSON.stringify( inputData );*/
 
                         //--------------------- 以下 ---------------------
                         //Apex作成、DateTime整形、ファイル取得した後にクローンするべきかも
@@ -515,7 +515,7 @@
                             cache :false,
                             headers: {"Authorization" : accToken},
                             dataType: 'json',
-                            data : inputData,
+                            data : caseNum.value,
                             success : function (res) {
                                 // データを取得できた場合
                                 if(res.length != 0){
