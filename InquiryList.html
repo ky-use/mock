@@ -217,8 +217,11 @@
                 // テーブルの子要素すべてを削除
                 var oldDetailList = document.getElementById('outputInqList_Details');
                 var removeOldDetailList = oldDetailList.querySelectorAll('tr');
-                for(var i = 0; i < removeOldDetailList.length; i++){
-                    removeOldDetailList[i].parentNode.removeChild(removeOldDetailList[i])
+                if(removeOldDetailList.length != 0){
+                    for(var i = 0; i < removeOldDetailList.length; i++){
+                        removeOldDetailList[i].parentNode.removeChild(removeOldDetailList[i])
+                    }
+                    console.log(removeOldDetailList);
                 }
 
                 // 表示初期化
