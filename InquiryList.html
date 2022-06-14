@@ -133,8 +133,7 @@
             <div id="inqDetailsList">
                 <div id="inqDetails1">
 
-                    <b><p id='inq1' style='display:none; color: #004db1f7; font-size: 19px;'>No. 20220602_1000</p></b>
-                    <b><p id='inq2' style='display:none; color: #004db1f7; font-size: 19px;'>No. 20220602_1001</p></b>
+                    <b><p id='inq1' style='display:none; color: #004db1f7; font-size: 19px;'></p></b>
 
                     <!-- 以下テンプレートを書く -->
                     <template id="templateInqList_Details">
@@ -160,9 +159,6 @@
                         </form>
                     </div>
                     <!-- /テンプレート出力 -->
-
-
-
 
                     <div class="buttonContainer">
                         <p><button type="button" onclick="location.href='./NewReply.html'" class="buttonBrue">返信する</button></p>
@@ -206,7 +202,6 @@
                 // お問い合わせ詳細の表示
                 document.getElementById('inqDetailsList').style.display = 'inline';
                 document.getElementById('inqDetails1').style.display = 'inline';
-                document.getElementById('inq2').style.display = 'inline';
             };
             // 戻るボタン
             function changeDisplayBuckButton() {
@@ -218,7 +213,13 @@
                 //document.getElementById('inqDetails2').style.display = 'none';
                 // タイトルの非表示
                 document.getElementById('inq1').style.display = 'none';
-                document.getElementById('inq2').style.display = 'none';
+
+                // テーブルの子要素すべてを削除
+                var oldDetailList = document.getElementById('outputInqList_Details');
+                var removeOldDetailList = oldDetailList.querySelectorAll('tr');
+                for(var i = 0; i < removeOldDetailList.length; i++){
+                    removeOldDetailList[i].parentNode.removeChild(removeOldDetailList[i])
+                }
 
                 // 表示初期化
                 for(var i =0; i < arrayInqDetails.length; i++){
@@ -233,13 +234,8 @@
                         }
                         resetButton.value = 'false';
                 }
-                // 古いノードを削除
-                var oldDetailList = document.getElementById('outputInqList_Details');
-                var removeOldDetailList = oldDetailList.querySelectorAll('tr');
-                console.log(removeOldDetailList);
-                for(var i = 0; i < removeOldDetailList.length; i++){
-                    removeOldDetailList[i].parentNode.removeChild(removeOldDetailList[i])
-                }
+
+                
             };
             
             /***
