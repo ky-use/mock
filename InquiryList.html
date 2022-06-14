@@ -547,7 +547,7 @@
                                         clone.querySelector('.detailButton').Name = 'detail'+ i;
                                         clone.querySelector('.detailButton').id = 'detailButton'+ i;
                                         clone.querySelector('.detailButton').value = false;
-                                        clone.querySelector('.inqDetail').textContent = arrayCbd[i].RecordType__c + arrayCbd[i].Content__c.substr(0, 18) + "...";
+                                        clone.querySelector('.inqDetail').textContent = arrayCbd[i].RecordType__c + ':' + arrayCbd[i].Content__c.substr(0, 18) + "...";
                                         clone.querySelector('.inqDetail').id = 'detail'+ i;
                                         // -----以降は画面表示しない設定で出力-------
                                         //clone.querySelector('.fileDownloadText').textContent = fileDowText;
