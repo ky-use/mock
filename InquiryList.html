@@ -542,10 +542,11 @@
                                         // template要素の内容を複製
                                         var clone = template.content.cloneNode(true);
                                         let dateTime = arrayCbd[i].CreatedDate.substr( 0, res[i].CreatedDate.length - 12 );
-                                        let year = dateTime.substr(0,3);
-                                        let month = dateTime.substr(5,6);
-                                        let day = dateTime.substr(8,9);
-                                        dateTime = year + '年' + month +  '月' + day + '日';
+                                        let year = dateTime.substr(0,4);
+                                        let month = dateTime.substr(5,2);
+                                        let day = dateTime.substr(8,2);
+                                        let time = dateTime.substr( dateTime.length - 5, 5 )
+                                        dateTime = year + '年' + month +  '月' + day + '日 ' + time;
                                         console.log(dateTime);
                                         // 複製したtemplate要素にデータを挿入
                                         clone.querySelector('.detailButton').innerHTML = dateTime;
