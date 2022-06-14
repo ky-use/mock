@@ -193,8 +193,10 @@
                 // ケースNo.から日付を取得
                 title = arrayInq[index].CreatedDate;
                 console.log(title);
+                title = title.substr( 0, title.length - 12 ).replace(/T|-|:/g,'');
+                console.log(title);
                 // タイトルに日付を設定
-                document.getElementById('inq1').innerHTML = title.substr( 0, res[i].CreatedDate.length - 12 ).replace(/T|-|:/g,'');
+                document.getElementById('inq1').innerHTML = title;
             };
             function changeDisplayButton2() {
                 // お問い合わせ一覧非表示
