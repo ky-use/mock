@@ -319,7 +319,7 @@
                 // ボタンの状態で表示を切り替え(要素のvalueは文字列)
                 if(openState=='true'){
                     // 詳細を部分表示
-                    element.innerHTML = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c.substr(0, 15) + "...";
+                    element.innerHTML = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c.substr(0, 12) + "...";
                     // ファイルがある場合、固定文言とファイルリンクを非表示
                     /*if(arrayCbd[buttonNum].fileDownloadText){
                         document.getElementById('fdText'+buttonNum).style = 'display:none;';
@@ -541,13 +541,18 @@
                                     for(var i=0; i < arrayInqDetails.length; i++){
                                         // template要素の内容を複製
                                         var clone = template.content.cloneNode(true);
-
+                                        let dateTime = arrayCbd[i].CreatedDate.substr( 0, res[i].CreatedDate.length - 12 );
+                                        let year = dateTime.substr(0,3);
+                                        let month = dateTime.substr(5,6);
+                                        let day = dateTime.substr(8,9);
+                                        dateTime = year + '年' + month +  '月' + day + '日';
+                                        console.log(dateTime);
                                         // 複製したtemplate要素にデータを挿入
-                                        clone.querySelector('.detailButton').innerHTML = arrayCbd[i].CreatedDate.substr( 0, res[i].CreatedDate.length - 12 ).replace(/T|-|:/g,'');
+                                        clone.querySelector('.detailButton').innerHTML = ;
                                         clone.querySelector('.detailButton').Name = 'detail'+ i;
                                         clone.querySelector('.detailButton').id = 'detailButton'+ i;
                                         clone.querySelector('.detailButton').value = false;
-                                        clone.querySelector('.inqDetail').textContent = arrayCbd[i].RecordType__c + ':' + arrayCbd[i].Content__c.substr(0, 18) + "...";
+                                        clone.querySelector('.inqDetail').textContent = arrayCbd[i].RecordType__c + ':' + arrayCbd[i].Content__c.substr(0, 12) + "...";
                                         clone.querySelector('.inqDetail').id = 'detail'+ i;
                                         // -----以降は画面表示しない設定で出力-------
                                         //clone.querySelector('.fileDownloadText').textContent = fileDowText;
