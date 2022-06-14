@@ -515,7 +515,7 @@
                             cache :false,
                             headers: {"Authorization" : accToken},
                             dataType: 'json',
-                            data : caseNum.value,
+                            data : JSON.stringify(caseNum.value),
                             success : function (res) {
                                 // データを取得できた場合
                                 if(res.length != 0){
