@@ -347,16 +347,6 @@
                                     arrayInq = res;
                                     console.log(arrayInq);
                                     
-                                    var oldDetailList = document.getElementById('outputInqList_Details');
-                                    var removeOldDetailList = oldDetailList.querySelectorAll(':scope > tbody > tr');
-                                    console.log(removeOldDetailList);
-                                    for(var i = 1; i < removeOldDetailList.length; i++){
-                                        removeOldDetailList[i].parentNode.removeChild(removeOldDetailList[i])
-                                    }
-
-                                    //let formElement = document.getElementById("outputInqList_Details_form");
-                                    //formElement.reset();
-
                                     // template要素を取得
                                     var template = document.getElementById('templateInqList');
                                     // データの数分繰り返し
@@ -521,6 +511,18 @@
                                 if(res.length != 0){
                                     arrayCbd = res;
                                     console.log(arrayCbd);
+
+                                    // 古いノードを削除
+                                    var oldDetailList = document.getElementById('outputInqList_Details');
+                                    var removeOldDetailList = oldDetailList.querySelectorAll(':scope > tbody > tr');
+                                    console.log(removeOldDetailList);
+                                    for(var i = 1; i < removeOldDetailList.length; i++){
+                                        removeOldDetailList[i].parentNode.removeChild(removeOldDetailList[i])
+                                    }
+
+                                    //let formElement = document.getElementById("outputInqList_Details_form");
+                                    //formElement.reset();
+                                    
                                     // template要素を取得
                                     var template = document.getElementById('templateInqList_Details');
                                     // データの数分繰り返し
