@@ -489,34 +489,35 @@
                                             let cdlList = cdl;
                                             let cbdIdList = cdlList.map(el => el.ContentDocumentId);
 
-                                            // Rest ApexへパラメータをJSON形式に変換
-                                            var data = JSON.stringify( inputData );
+                                            for (let i=0; i < cbdIdList.length; i++){
+                                            // forで以下をIdの件数分回す
+                                                $.ajax({
+                                                    type: 'GET',
+                                                    crossOrigin: true,
+                                                    url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + cbdIdList[i] + '/VersionData', // 
+                                                    cache :false,
+                                                    //scriptCharset: 'Shift_JIS',
+                                                    headers: {"Authorization" : accToken},
+                                                    xhrFields : {responseType : 'blob'},
+                                                    success : function (dlFile) {
+                                                        let binaryData = [];
+                                                        binaryData.push(dlFile);
 
-                                            $.ajax({
-                                                type: 'GET',
-                                                crossOrigin: true,
-                                                url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/', // zip
-                                                cache :false,
-                                                //scriptCharset: 'Shift_JIS',
-                                                headers: {"Authorization" : accToken},
-                                                xhrFields : {responseType : 'blob'},
-                                                success : function (dlFile) {
-                                                    var binaryData = [];
-                                                    binaryData.push(dlFile);
-
-                                                    const url = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
-                                                    // ボタンでファイルDL 追加
-                                                    var target = document.getElementById("searchLink");
-                                                    target.href = url;
-                                                    target.innerText = "ファイルDL";
-                                                    target.download="test.zip"
-                                                },
-                                                error : function (data, errorThrown,status) {
-                                                    console.log(data);
-                                                    console.log(errorThrown);
-                                                    console.log(status);
-                                                }
-                                            })
+                                                        let url = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
+                                                        console.log(url);
+                                                        // ボタンでファイルDL 追加
+                                                        /*var target = document.getElementById("searchLink");
+                                                        target.href = url;
+                                                        target.innerText = "ファイルDL";
+                                                        target.download="test.zip"*/
+                                                    },
+                                                    error : function (data, errorThrown,status) {
+                                                        console.log(data);
+                                                        console.log(errorThrown);
+                                                        console.log(status);
+                                                    }
+                                                })
+                                            }
                                         },
                                         error : function (data, errorThrown,status) {
                                             console.log(data);
