@@ -374,106 +374,6 @@
                                         // div#containerの中に追加
                                         document.getElementById('outputInqList').appendChild(clone);
                                     }
-                                    //--------------------- 以下 ---------------------
-                                    //Apex作成、DateTime整形、ファイル取得した後にクローンするべきかも
-                                    // コンタクトボード明細を取得
-                                    /*$.ajax({
-                                        type: 'GET',
-                                        crossOrigin: true,
-                                        url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/Mock_CBD/A0000001',
-                                        dataType: 'json',
-                                        cache :false,
-                                        headers: {"Authorization" : accToken},
-                                        success : function (res) {
-                                            // データを取得できた場合
-                                            if(res.length != 0){
-                                                arrayCbd = res;
-                                                console.log(arrayCbd);
-                                                // template要素を取得
-                                                var template = document.getElementById('templateInqList_Details');
-                                                // データの数分繰り返し
-                                                for(var i=0; i < arrayInqDetails.length; i++){
-                                                    // template要素の内容を複製
-                                                    var clone = template.content.cloneNode(true);
-
-                                                    // 複製したtemplate要素にデータを挿入
-                                                    clone.querySelector('.detailButton').innerHTML = arrayInqDetails[i].dateTime    ;
-                                                    clone.querySelector('.detailButton').Name = 'detail'+ i;
-                                                    clone.querySelector('.detailButton').id = 'detailButton'+ i;
-                                                    clone.querySelector('.detailButton').value = false;
-                                                    clone.querySelector('.inqDetail').textContent = arrayInqDetails[i].inqDetail.substr(0, 18) + "...";
-                                                    clone.querySelector('.inqDetail').id = 'detail'+ i;
-                                                    // -----以降は画面表示しない設定で出力-------
-                                                    clone.querySelector('.fileDownloadText').textContent = (arrayInqDetails[i].fileDownloadText) ? fileDowText : '';
-                                                    clone.querySelector('.fileDownloadText').style = 'display:none;';
-                                                    clone.querySelector('.fileDownloadText').id = 'fdText'+ i;
-                                                    clone.querySelector('.fileName').textContent = arrayInqDetails[i].fileName;
-                                                    clone.querySelector('.fileName').download = arrayInqDetails[i].fileName;
-                                                    clone.querySelector('.fileName').href = fileLink + arrayInqDetails[i].fileName;
-                                                    clone.querySelector('.fileName').style = 'display:none;';
-                                                    clone.querySelector('.fileName').id = 'fName'+ i;
-                                                    
-                                                    // div#containerの中に追加
-                                                    document.getElementById('outputInqList_Details').appendChild(clone);
-                                                }
-
-                                                //-------------以上-------------
-
-                                                $.ajax({
-                                                    //beforeSend: function(xhr){
-                                                        //xhr.overrideMimeType('text/html;charset=Shift_JIS');
-                                                        //xhr.overrideMimeType('text/html;charset=utf-8');
-                                                    //},
-                                                    type: 'GET',
-                                                    crossOrigin: true,
-                                                    //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JD6IAAW/VersionData', // png
-                                                    //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEx0AAG/VersionData', // エクセル
-                                                    //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzVAAW/VersionData', // ワード
-                                                    //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzkAAG/VersionData', // パワポ
-                                                    //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzpAAG/VersionData', // PDF
-                                                    //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzlAAG/VersionData', // JPG
-                                                    url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JF0JAAW/VersionData', // zip
-                                                    cache :false,
-                                                    //scriptCharset: 'Shift_JIS',
-                                                    headers: {"Authorization" : accToken},
-                                                    xhrFields : {responseType : 'blob'},
-                                                    success : function (dlFile) {
-                                                        var binaryData = [];
-                                                        binaryData.push(dlFile);
-
-                                                        const url = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
-                                                        // ボタンでファイルDL 追加
-                                                        var target = document.getElementById("searchLink");
-                                                        target.href = url;
-                                                        target.innerText = "ファイルDL";
-                                                        target.download="test.zip"
-                                                        // 追加終わり
-                                                        /* 自動ファイルDL コメントアウト
-                                                        const a = document.createElement("a");
-                                                        document.body.appendChild(a);
-                                                        //a.download = 'test.png';
-                                                        //a.download = 'test.xlsx';
-                                                        //a.download = 'test.docx';
-                                                        //a.download = 'test.pptx';
-                                                        //a.download = 'test.pdf';
-                                                        //a.download = 'test.jpg';
-                                                        a.download = 'test.zip';
-                                                        a.href = url;
-                                                        a.click();
-                                                        a.remove(); *
-                                                    },
-                                                    error : function (data, errorThrown,status) {
-                                                        console.log(data);
-                                                        console.log(errorThrown);
-                                                        console.log(status);
-                                                    }
-                                                })
-                                            }
-                                        },
-                                        error : function (data, errorThrown,status) {
-                                            
-                                        }
-                                    })*/
                                 }
                             },
                             error : function (data, errorThrown,status) {
@@ -524,6 +424,9 @@
                                 if(res.length != 0){
                                     arrayCbd = res;
                                     console.log(arrayCbd);
+                                    // コンタクトボードの配列からIdのみを準備
+                                    //let cbdIdList = arrayCbd.map(el => el.Id);
+                                    //console.log(cbdIdList);
 
                                     //let formElement = document.getElementById("outputInqList_Details_form");
                                     //formElement.reset();
@@ -571,49 +474,49 @@
                                     }
 
                                     //-------------以上-------------
-
+                                    // コンタクトボードIDからコンテンツバージョンのID取得
                                     $.ajax({
-                                        //beforeSend: function(xhr){
-                                            //xhr.overrideMimeType('text/html;charset=Shift_JIS');
-                                            //xhr.overrideMimeType('text/html;charset=utf-8');
-                                        //},
                                         type: 'GET',
                                         crossOrigin: true,
-                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JD6IAAW/VersionData', // png
-                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEx0AAG/VersionData', // エクセル
-                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzVAAW/VersionData', // ワード
-                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzkAAG/VersionData', // パワポ
-                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzpAAG/VersionData', // PDF
-                                        //url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JEzlAAG/VersionData', // JPG
-                                        url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/0685j000009JF0JAAW/VersionData', // zip
+                                        url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/Mock_File/' + caseNum.value,
+                                        dataType: 'json',
                                         cache :false,
-                                        //scriptCharset: 'Shift_JIS',
                                         headers: {"Authorization" : accToken},
-                                        xhrFields : {responseType : 'blob'},
-                                        success : function (dlFile) {
-                                            var binaryData = [];
-                                            binaryData.push(dlFile);
+                                        dataType: 'json',
+                                        data : JSON.stringify(caseNum.value),
+                                        success : function (cdl) {
+                                            console.log(cdl);
+                                            let cdlList = cdl;
+                                            let cbdIdList = cdlList.map(el => el.ContentDocumentId);
 
-                                            const url = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
-                                            // ボタンでファイルDL 追加
-                                            var target = document.getElementById("searchLink");
-                                            target.href = url;
-                                            target.innerText = "ファイルDL";
-                                            target.download="test.zip"
-                                            // 追加終わり
-                                            /* 自動ファイルDL コメントアウト
-                                            const a = document.createElement("a");
-                                            document.body.appendChild(a);
-                                            //a.download = 'test.png';
-                                            //a.download = 'test.xlsx';
-                                            //a.download = 'test.docx';
-                                            //a.download = 'test.pptx';
-                                            //a.download = 'test.pdf';
-                                            //a.download = 'test.jpg';
-                                            a.download = 'test.zip';
-                                            a.href = url;
-                                            a.click();
-                                            a.remove();*/
+                                            // Rest ApexへパラメータをJSON形式に変換
+                                            var data = JSON.stringify( inputData );
+
+                                            $.ajax({
+                                                type: 'GET',
+                                                crossOrigin: true,
+                                                url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/', // zip
+                                                cache :false,
+                                                //scriptCharset: 'Shift_JIS',
+                                                headers: {"Authorization" : accToken},
+                                                xhrFields : {responseType : 'blob'},
+                                                success : function (dlFile) {
+                                                    var binaryData = [];
+                                                    binaryData.push(dlFile);
+
+                                                    const url = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
+                                                    // ボタンでファイルDL 追加
+                                                    var target = document.getElementById("searchLink");
+                                                    target.href = url;
+                                                    target.innerText = "ファイルDL";
+                                                    target.download="test.zip"
+                                                },
+                                                error : function (data, errorThrown,status) {
+                                                    console.log(data);
+                                                    console.log(errorThrown);
+                                                    console.log(status);
+                                                }
+                                            })
                                         },
                                         error : function (data, errorThrown,status) {
                                             console.log(data);

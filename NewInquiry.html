@@ -2,8 +2,8 @@
 <html lang="ja">
 	<head>
 		<meta charset="shift_jis">
-		<title>PayPayéŠ€è¡Œã€€æ–°è¦å•ã„åˆã‚ã›ç”»é¢</title>
-		<meta name="description" content="é¡§å®¢ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰">
+		<title>PayPay‹âs@V‹K–â‚¢‡‚í‚¹‰æ–Ê</title>
+		<meta name="description" content="ŒÚ‹qƒRƒ“ƒ^ƒNƒgƒ{[ƒh">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<style>
@@ -47,140 +47,140 @@
 			<form id="inquiryForm">
 
 				<template id="template">
-					<option class="inqTypeOption" value="">é¸æŠã—ã¦ãã ã•ã„</option>
+					<option class="inqTypeOption" value="">‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢</option>
 				</template>
 
-				<b><p>ãŠå•ã„åˆã‚ã›ç¨®åˆ¥</p></b>
+				<b><p>‚¨–â‚¢‡‚í‚¹í•Ê</p></b>
 				<p>
 					<select name="inqType" id="inqType" style="color: #3c90fff7; border: none;" required>
-						<option value="">é¸æŠã—ã¦ãã ã•ã„</option>
+						<option value="">‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢</option>
 					</select>
 				</p>
 
-				<b><p>å•ã„åˆã‚ã›è©³ç´°</p></b>
-				<p><textarea id="inqDetail" name="inqDetail" rows="4" cols="40" placeholder="å…¥åŠ›ã—ã¦ãã ã•ã„" required></textarea></p>
+				<b><p>–â‚¢‡‚í‚¹Ú×</p></b>
+				<p><textarea id="inqDetail" name="inqDetail" rows="4" cols="40" placeholder="“ü—Í‚µ‚Ä‚­‚¾‚³‚¢" required></textarea></p>
 				
-				<b style="color: #3c90fff7;">ãƒ•ã‚¡ã‚¤ãƒ«ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ï¼ˆä»»æ„ï¼‰</b><br>
+				<b style="color: #3c90fff7;">ƒtƒ@ƒCƒ‹ƒAƒbƒvƒ[ƒhi”CˆÓj</b><br>
 				<input type="file" id="file" style="cursor:pointer;" hidden>
 				<input type="text" id="fileName" name="attachment" value="" size="35" readonly onClick="$('#file').click();">
 				
-				<b><p>é€šçŸ¥ç”¨ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹<br>
-					<label><input type="radio" name="mailSelect" id="radio1" value="ç™»éŒ²ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹å®›ã«é€ä»˜" checked> ç™»éŒ²ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹å®›ã«é€ä»˜</label><br>
-					<label><input type="radio" name="mailSelect" id="radio2" value="é€šçŸ¥ç”¨ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ç™»éŒ²ã™ã‚‹"> é€šçŸ¥ç”¨ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ç™»éŒ²ã™ã‚‹</label><br>
+				<b><p>’Ê’m—pƒ[ƒ‹ƒAƒhƒŒƒX<br>
+					<label><input type="radio" name="mailSelect" id="radio1" value="“o˜^ƒ[ƒ‹ƒAƒhƒŒƒXˆ¶‚É‘—•t" checked> “o˜^ƒ[ƒ‹ƒAƒhƒŒƒXˆ¶‚É‘—•t</label><br>
+					<label><input type="radio" name="mailSelect" id="radio2" value="’Ê’m—pƒ[ƒ‹ƒAƒhƒŒƒX‚ğ“o˜^‚·‚é"> ’Ê’m—pƒ[ƒ‹ƒAƒhƒŒƒX‚ğ“o˜^‚·‚é</label><br>
 				</p></b>
 				<input type="email" id="mailaddress" class="inpBox" disabled></input>
 				
-				<b><p disabled>ï¼ˆç¢ºèªç”¨ï¼‰</p></b>
+				<b><p disabled>iŠm”F—pj</p></b>
 				<input type="email" id="confirmationMailaddress" class="inpBox" disabled></input>
 				
-				<b><p>ã“ã“ã§ç™»éŒ²ã•ã‚Œã‚‹ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹ã¯é¡§å®¢ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰ã®é€šçŸ¥ç”¨ã«ã®ã¿ä½¿ç”¨ã•ã‚Œã¾ã™ã€‚</p></b>
+				<b><p>‚±‚±‚Å“o˜^‚³‚ê‚éƒ[ƒ‹ƒAƒhƒŒƒX‚ÍŒÚ‹qƒRƒ“ƒ^ƒNƒgƒ{[ƒh‚Ì’Ê’m—p‚É‚Ì‚İg—p‚³‚ê‚Ü‚·B</p></b>
 				
 				<div class="buttonContainer">
-					<p><button type="button" id="nextButton" class="buttonGray_small" disabled>æ¬¡ã¸</button></p>
+					<p><button type="button" id="nextButton" class="buttonGray_small" disabled>Ÿ‚Ö</button></p>
 				</div>
 			</form>
 		</div>
 		
 		<script>
-			// ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³
+			// ƒ‰ƒWƒIƒ{ƒ^ƒ“
 			const radio1 = document.getElementById('radio1');
 			const radio2 = document.getElementById('radio2');
-			// æ¬¡ã¸ãƒœã‚¿ãƒ³
+			// Ÿ‚Öƒ{ƒ^ƒ“
 			const button = document.getElementById('nextButton');
-			// å•ã„åˆã‚ã›ç¨®åˆ¥
+			// –â‚¢‡‚í‚¹í•Ê
 			const inqType = document.getElementById('inqType');
-			// å•ã„åˆã‚ã›è©³ç´°
+			// –â‚¢‡‚í‚¹Ú×
 			let inqDetail = document.getElementById('inqDetail');
-			// ãƒ¡ãƒ¼ãƒ«ã®å…¥åŠ›æ¬„
+			// ƒ[ƒ‹‚Ì“ü—Í—“
 			const mail = document.getElementById('mailaddress');
 			const conMail = document.getElementById('confirmationMailaddress');
-			// ãƒ•ã‚©ãƒ¼ãƒ å…¨ä½“
+			// ƒtƒH[ƒ€‘S‘Ì
 			const form = document.getElementById('inquiryForm');
 			
-			// é¸æŠè‚¢ãƒ‡ãƒ¼ã‚¿
+			// ‘I‘ğˆƒf[ƒ^
 			let optionData = [
-				'ATMã«ã¤ã„ã¦',
-				'ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚«ãƒ¼ãƒ‰ãƒ»ãƒˆãƒ¼ã‚¯ãƒ³ã«ã¤ã„ã¦',
-				'ãƒ­ã‚°ã‚¤ãƒ³ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãƒ»æš—è¨¼ç•ªå·ãƒ»ä¸æ˜ãƒ»å¤‰æ›´ã«ã¤ã„ã¦',
-				'Visaãƒ‡ãƒ“ãƒƒãƒˆã«ã¤ã„ã¦',
-				'ãƒ­ãƒ¼ãƒ³ãƒ»ä½å®…ãƒ­ãƒ¼ãƒ³ã«ã¤ã„ã¦',
-				'å£åº§é–‹è¨­ãƒ»å£åº§åˆ©ç”¨é–‹å§‹ã«ã¤ã„ã¦',
-				'FXãƒ»æŠ•ä¿¡ãƒ»å¤–è²¨é é‡‘ã«ã¤ã„ã¦',
-				'ç™»éŒ²æƒ…å ±å¤‰æ›´ã€€ä½æ‰€å¤‰æ›´ç­‰ã«ã¤ã„ã¦',
-				'æ˜ç´°ãƒ»æŒ¯è¾¼ãƒ»æŒ¯æ›¿ç­‰ã«ã¤ã„ã¦',
-				'ãã®ä»–ãŠå•ã„åˆã‚ã›'
+				'ATM‚É‚Â‚¢‚Ä',
+				'ƒLƒƒƒbƒVƒ…ƒJ[ƒhEƒg[ƒNƒ“‚É‚Â‚¢‚Ä',
+				'ƒƒOƒCƒ“ƒpƒXƒ[ƒhEˆÃØ”Ô†E•s–¾E•ÏX‚É‚Â‚¢‚Ä',
+				'Visaƒfƒrƒbƒg‚É‚Â‚¢‚Ä',
+				'ƒ[ƒ“EZ‘îƒ[ƒ“‚É‚Â‚¢‚Ä',
+				'ŒûÀŠJİEŒûÀ—˜—pŠJn‚É‚Â‚¢‚Ä',
+				'FXE“ŠMEŠO‰İ—a‹à‚É‚Â‚¢‚Ä',
+				'“o˜^î•ñ•ÏX@ZŠ•ÏX“™‚É‚Â‚¢‚Ä',
+				'–¾×EUEU‘Ö“™‚É‚Â‚¢‚Ä',
+				'‚»‚Ì‘¼‚¨–â‚¢‡‚í‚¹'
 			];
-			// templateè¦ç´ ã‚’å–å¾—
+			// template—v‘f‚ğæ“¾
             var template = document.getElementById('template');
-            // ãƒ‡ãƒ¼ã‚¿ã®æ•°åˆ†ç¹°ã‚Šè¿”ã—
+            // ƒf[ƒ^‚Ì”•ªŒJ‚è•Ô‚µ
             for(var i =0; i < optionData.length; i++){
-                // templateè¦ç´ ã®å†…å®¹ã‚’è¤‡è£½
+                // template—v‘f‚Ì“à—e‚ğ•¡»
                 var clone = template.content.cloneNode(true);
-                // è¤‡è£½ã—ãŸtemplateè¦ç´ ã«ãƒ‡ãƒ¼ã‚¿ã‚’æŒ¿å…¥
+                // •¡»‚µ‚½template—v‘f‚Éƒf[ƒ^‚ğ‘}“ü
                 clone.querySelector('.inqTypeOption').innerHTML = optionData[i];
                 clone.querySelector('.inqTypeOption').value = optionData[i];
-                // div#containerã®ä¸­ã«è¿½åŠ 
+                // div#container‚Ì’†‚É’Ç‰Á
                 document.getElementById('inqType').appendChild(clone);
             }
 
 			/***
-			 ãƒ¡ãƒ¼ãƒ«å…¥åŠ›æ¬„æ´»æ€§
+			 ƒ[ƒ‹“ü—Í—“Šˆ«
 			***/
-			// ãƒ•ã‚©ãƒ¼ãƒ ã®çŠ¶æ…‹ãŒå¤‰æ›´ã•ã‚ŒãŸã¨ã
+			// ƒtƒH[ƒ€‚Ìó‘Ô‚ª•ÏX‚³‚ê‚½‚Æ‚«
 			radio2.addEventListener('change', function() {
-				// ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã®å–å¾—
+				// ƒvƒƒpƒeƒB‚Ìæ“¾
 				mail.required;
 				conMail.required;
-				// ã€Œé€šçŸ¥ç”¨ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ç™»éŒ²ã™ã‚‹ã€ãŒãƒã‚§ãƒƒã‚¯ã•ã‚ŒãŸå ´åˆ
+				// u’Ê’m—pƒ[ƒ‹ƒAƒhƒŒƒX‚ğ“o˜^‚·‚év‚ªƒ`ƒFƒbƒN‚³‚ê‚½ê‡
 				if (radio2.checked) {
-					// å¿…é ˆã«è¨­å®š
+					// •K{‚Éİ’è
 					mail.required = true;
 					conMail.required = true;
-					// ç„¡åŠ¹ã‚’è§£é™¤
+					// –³Œø‚ğ‰ğœ
 					mail.disabled = false;
 					conMail.disabled = false;
 				}
 			})
-			//ãƒ•ã‚©ãƒ¼ãƒ ã®çŠ¶æ…‹ãŒå¤‰æ›´ã•ã‚ŒãŸã¨ã
+			//ƒtƒH[ƒ€‚Ìó‘Ô‚ª•ÏX‚³‚ê‚½‚Æ‚«
 			radio1.addEventListener('change', function() {
-				//ã€Œç™»éŒ²ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹å®›ã«é€ä»˜ã€ãŒãƒã‚§ãƒƒã‚¯ã•ã‚ŒãŸå ´åˆ
+				//u“o˜^ƒ[ƒ‹ƒAƒhƒŒƒXˆ¶‚É‘—•tv‚ªƒ`ƒFƒbƒN‚³‚ê‚½ê‡
 				if (radio1.checked) {
-					// å¿…é ˆã‚’è§£é™¤
+					// •K{‚ğ‰ğœ
 					mail.required = false;
 					conMail.required = false;
-					// ç„¡åŠ¹ã«è¨­å®š
+					// –³Œø‚Éİ’è
 					mail.disabled = true;
 					conMail.disabled = true;
-					// å€¤ã‚’å‰Šé™¤
+					// ’l‚ğíœ
 					mail.value = '';
 					conMail.value = '';
 				}
 			})
 
 			/***
-			 æ¬¡ã¸ãƒœã‚¿ãƒ³æ´»æ€§
+			 Ÿ‚Öƒ{ƒ^ƒ“Šˆ«
 			***/
-			// ãƒ•ã‚©ãƒ¼ãƒ ï¼ˆãƒ†ã‚­ã‚¹ãƒˆãŒå¤‰ã‚ã£ãŸå ´åˆã®inputã€ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹ã‚„ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³ã«å…¥åŠ›ãŒã‚ã£ãŸå ´åˆã®changeï¼‰
+			// ƒtƒH[ƒ€iƒeƒLƒXƒg‚ª•Ï‚í‚Á‚½ê‡‚ÌinputAƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚âƒ‰ƒWƒIƒ{ƒ^ƒ“‚É“ü—Í‚ª‚ ‚Á‚½ê‡‚Ìchangej
 			form.addEventListener("input", update)
 			form.addEventListener("change", update)
 			
 			function update() {
-				// ãƒ•ã‚©ãƒ¼ãƒ ã®å¿…é ˆé …ç›®ãŒå…¥åŠ›ã•ã‚Œã¦ã„ã‚‹ã‹ç¢ºèªã™ã‚‹
+				// ƒtƒH[ƒ€‚Ì•K{€–Ú‚ª“ü—Í‚³‚ê‚Ä‚¢‚é‚©Šm”F‚·‚é
 				const isRequired = form.checkValidity()
-				// å¿…é ˆé …ç›®ãŒå…¥åŠ›ã•ã‚Œã¦ã„ã‚‹ãªã‚‰ã€ãƒœã‚¿ãƒ³ã®ç„¡åŠ¹ã‚’è§£é™¤
+				// •K{€–Ú‚ª“ü—Í‚³‚ê‚Ä‚¢‚é‚È‚çAƒ{ƒ^ƒ“‚Ì–³Œø‚ğ‰ğœ
 				if (isRequired) {
-					// ãƒœã‚¿ãƒ³ã‚’æ´»æ€§
+					// ƒ{ƒ^ƒ“‚ğŠˆ«
 					button.disabled = false;
 					button.classList.remove('buttonGray_small');
 					button.classList.add('buttonBrue_small');
 					/* 
-						æ¡ä»¶ï¼šãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³TRUE ã‹ã¤ ãƒ¡ãƒ¼ãƒ«å…¥åŠ›ãªã—ã¾ãŸã¯ã€ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³FALSE ã‹ã¤ ãƒ¡ãƒ¼ãƒ«å…¥åŠ›ã‚ã‚Š
-						â€»ãŸã ã—ã€ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³ã®åˆ‡ã‚Šæ›¿ãˆã§å€¤ã®ã‚’æ®‹ã•ãªã„å ´åˆã¯ä¿®æ­£ãŒå¿…è¦ï¼ˆç¾çŠ¶ã¯æ®‹ã‚‹ï¼‰
+						ğŒFƒ‰ƒWƒIƒ{ƒ^ƒ“TRUE ‚©‚Â ƒ[ƒ‹“ü—Í‚È‚µ‚Ü‚½‚ÍAƒ‰ƒWƒIƒ{ƒ^ƒ“FALSE ‚©‚Â ƒ[ƒ‹“ü—Í‚ ‚è
+						¦‚½‚¾‚µAƒ‰ƒWƒIƒ{ƒ^ƒ“‚ÌØ‚è‘Ö‚¦‚Å’l‚Ì‚ğc‚³‚È‚¢ê‡‚ÍC³‚ª•K—viŒ»ó‚Íc‚éj
 					*/
-					// ãƒ¡ãƒ¼ãƒ«æ–°è¦ç™»éŒ²ã®å ´åˆã€å…¥åŠ›ãƒã‚§ãƒƒã‚¯
+					// ƒ[ƒ‹V‹K“o˜^‚Ìê‡A“ü—Íƒ`ƒFƒbƒN
 					if((radio2.checked && (mail.value=="" || conMail.value=="")) ||
 					(!radio2.checked && (mail.value!="" || conMail.value!=""))) {
-					//ãƒœã‚¿ãƒ³ã‚’éæ´»æ€§
+					//ƒ{ƒ^ƒ“‚ğ”ñŠˆ«
 					button.disabled = true;
 					//button.style.cursor = "default";
 					button.classList.remove('buttonBrue_small');
@@ -188,7 +188,7 @@
 					return;
 					}
 					if(mail.value != conMail.value) {
-						//ãƒœã‚¿ãƒ³ã‚’éæ´»æ€§
+						//ƒ{ƒ^ƒ“‚ğ”ñŠˆ«
 						button.disabled = true;
 						//button.style.cursor = "default";
 						button.classList.remove('buttonBrue_small');
@@ -197,7 +197,7 @@
 					}
 					return;
 				} else{
-					// ãƒœã‚¿ãƒ³ã‚’éæ´»æ€§
+					// ƒ{ƒ^ƒ“‚ğ”ñŠˆ«
 					button.disabled = true;
 					//button.style.cursor = "default";
 					button.classList.remove('buttonBrue_small');
@@ -208,28 +208,28 @@
 			}
 
 			/***
-			 å…¥åŠ›é‡ã«å¿œã˜ãŸå…¥åŠ›é ˜åŸŸæ‹¡å¼µ
+			 “ü—Í—Ê‚É‰‚¶‚½“ü—Í—ÌˆæŠg’£
 			***/
-			// textareaã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®è¦ç´ ã®é«˜ã•ã‚’å–å¾—
+			// textarea‚ÌƒfƒtƒHƒ‹ƒg‚Ì—v‘f‚Ì‚‚³‚ğæ“¾
 			let clientHeight = inqDetail.clientHeight;
-			// textareaã®inputã‚¤ãƒ™ãƒ³ãƒˆ
+			// textarea‚ÌinputƒCƒxƒ“ƒg
 			inqDetail.addEventListener('input', ()=>{
-				// textareaã®è¦ç´ ã®é«˜ã•ã‚’è¨­å®š
+				// textarea‚Ì—v‘f‚Ì‚‚³‚ğİ’è
 				inqDetail.style.height = clientHeight + 'px';
-				// textareaã®å…¥åŠ›å†…å®¹ã®é«˜ã•ã‚’å–å¾—
+				// textarea‚Ì“ü—Í“à—e‚Ì‚‚³‚ğæ“¾
 				let scrollHeight = inqDetail.scrollHeight;                            
-				// textareaã®é«˜ã•ã«å…¥åŠ›å†…å®¹ã®é«˜ã•ã‚’è¨­å®š
+				// textarea‚Ì‚‚³‚É“ü—Í“à—e‚Ì‚‚³‚ğİ’è
 				inqDetail.style.height = scrollHeight + 'px';
 			});
 
 			/***
-			 ç¢ºèªç”»é¢
+			 Šm”F‰æ–Ê
 			***/
 			let bkInqType;
 			let bkInqDetail;
 			let bkMail;
 
-			// ã‚¤ãƒ™ãƒ³ãƒˆã‚’éåŒæœŸã§å–å¾—ã™ã‚‹
+			// ƒCƒxƒ“ƒg‚ğ”ñ“¯Šú‚Åæ“¾‚·‚é
 			HTMLElement.prototype.observe = function (type) {
 				const getHandler = resolve => {
 					const result =  () => {
@@ -242,67 +242,67 @@
 			};
 			(async () => {
 				while (true) {
-					// ãƒœã‚¿ãƒ³ã‚¯ãƒªãƒƒã‚¯ã‚’å¾…ã¤
+					// ƒ{ƒ^ƒ“ƒNƒŠƒbƒN‚ğ‘Ò‚Â
 					await document.getElementById("nextButton").observe("click");
-					// ãƒ¯ãƒ¼ã‚¯ã‚¨ãƒªã‚¢ã‚’å–å¾—
+					// ƒ[ƒNƒGƒŠƒA‚ğæ“¾
 					const workArea = document.getElementById("work");
 					
-					// å…¥åŠ›å†…å®¹ã®å–å¾—(SFé€ä¿¡ç”¨)
+					// “ü—Í“à—e‚Ìæ“¾(SF‘—M—p)
 					bkInqType = document.getElementById("inqType").value;
 					bkInqDetail = document.getElementById("inqDetail").value;
-					// ç™»éŒ²ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹ã®å ´åˆã¯ã€å›ºå®šå€¤ã‚’è¨­å®š
+					// “o˜^ƒ[ƒ‹ƒAƒhƒŒƒX‚Ìê‡‚ÍAŒÅ’è’l‚ğİ’è
 					bkMail = (document.getElementById("mailaddress").value == '') ? 'koyama_y@use-ebisu.co.jp' : document.getElementById("mailaddress").value;
 					console.log(bkInqType);
 					console.log(bkInqDetail);
 					console.log(bkMail);
 
-					// ãƒ¯ãƒ¼ã‚¯ã‚¨ãƒªã‚¢ã‚’ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—
+					// ƒ[ƒNƒGƒŠƒA‚ğƒoƒbƒNƒAƒbƒv
 					const backup = workArea.cloneNode(true);
-					// æ·»ä»˜ãƒ•ã‚¡ã‚¤ãƒ«å
+					// “Y•tƒtƒ@ƒCƒ‹–¼
 					let attachmentName = document.getElementById('file').value;
-					// ãƒãƒƒã‚¯ã‚¹ãƒ©ãƒƒã‚·ãƒ¥
+					// ƒoƒbƒNƒXƒ‰ƒbƒVƒ…
 					const regex = /\\/;
-					// æ·»ä»˜ãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¿”å´
+					// “Y•tƒtƒ@ƒCƒ‹–¼‚ğ•Ô‹p
 					function splitFileName(fileName){
 						let array = attachmentName.split(regex);
-						return (array[array.length - 1]=='') ? 'ãƒ•ã‚¡ã‚¤ãƒ«ãªã—' : array[array.length - 1];
+						return (array[array.length - 1]=='') ? 'ƒtƒ@ƒCƒ‹‚È‚µ' : array[array.length - 1];
 					}
-					// ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³ã®å…¥åŠ›çŠ¶æ³ã‚’è¿”å´
+					// ƒ‰ƒWƒIƒ{ƒ^ƒ“‚Ì“ü—Íó‹µ‚ğ•Ô‹p
 					function radioChecked(radio){
 						return(radio ? 'checked' : 'disabled');
 					}
 					/*
-						pã‚¿ã‚°ã¯æŠ˜ã‚Šè¿”ã—ã‚’ã—ãªã„(CSSã§)
+						pƒ^ƒO‚ÍÜ‚è•Ô‚µ‚ğ‚µ‚È‚¢(CSS‚Å)
 					*/
-					// ãƒ¯ãƒ¼ã‚¯ã‚¨ãƒªã‚¢ã‚’çµæœã§æ›¸ãæ›ãˆã‚‹(ç¢ºèªç”»é¢)
+					// ƒ[ƒNƒGƒŠƒA‚ğŒ‹‰Ê‚Å‘‚«Š·‚¦‚é(Šm”F‰æ–Ê)
 					workArea.innerHTML = `
-						<b><p>ãŠå•ã„åˆã‚ã›ç¨®åˆ¥</p></b>
+						<b><p>‚¨–â‚¢‡‚í‚¹í•Ê</p></b>
 						<p>${document.getElementById("inqType").value}</p>
 
-						<b><p>å•ã„åˆã‚ã›è©³ç´°</p></b>
+						<b><p>–â‚¢‡‚í‚¹Ú×</p></b>
 						<p>${document.getElementsByName("inqDetail")[0].value}</p>
 
-						<b><p>ãƒ•ã‚¡ã‚¤ãƒ«ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰</p></b>
+						<b><p>ƒtƒ@ƒCƒ‹ƒAƒbƒvƒ[ƒh</p></b>
 						<p>${splitFileName(attachmentName)}</p>
 
-						<b><p>é€šçŸ¥ç”¨ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹<br>
-							<input type="radio" name="mailSelect" value="ç™»éŒ²ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹å®›ã«é€ä»˜" ${radioChecked(radio1.checked)}> ç™»éŒ²ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹å®›ã«é€ä»˜<br>
-							<input type="radio" name="mailSelect" value="é€šçŸ¥ç”¨ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ç™»éŒ²ã™ã‚‹" ${radioChecked(radio2.checked)}> é€šçŸ¥ç”¨ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ç™»éŒ²ã™ã‚‹
+						<b><p>’Ê’m—pƒ[ƒ‹ƒAƒhƒŒƒX<br>
+							<input type="radio" name="mailSelect" value="“o˜^ƒ[ƒ‹ƒAƒhƒŒƒXˆ¶‚É‘—•t" ${radioChecked(radio1.checked)}> “o˜^ƒ[ƒ‹ƒAƒhƒŒƒXˆ¶‚É‘—•t<br>
+							<input type="radio" name="mailSelect" value="’Ê’m—pƒ[ƒ‹ƒAƒhƒŒƒX‚ğ“o˜^‚·‚é" ${radioChecked(radio2.checked)}> ’Ê’m—pƒ[ƒ‹ƒAƒhƒŒƒX‚ğ“o˜^‚·‚é
 						</p></b>
 						<p>${document.getElementById("mailaddress").value}</p>
 
-						<b><p>ï¼ˆç¢ºèªç”¨ï¼‰</p></b>
+						<b><p>iŠm”F—pj</p></b>
 						<p>${document.getElementById("confirmationMailaddress").value}</p>
 
-						<b><p>ã“ã“ã§ç™»éŒ²ã•ã‚Œã‚‹ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹ã¯é¡§å®¢ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰ã®é€šçŸ¥ç”¨ã«ã®ã¿ä½¿ç”¨ã•ã‚Œã¾ã™ã€‚</p></b>
+						<b><p>‚±‚±‚Å“o˜^‚³‚ê‚éƒ[ƒ‹ƒAƒhƒŒƒX‚ÍŒÚ‹qƒRƒ“ƒ^ƒNƒgƒ{[ƒh‚Ì’Ê’m—p‚É‚Ì‚İg—p‚³‚ê‚Ü‚·B</p></b>
 						<div class="buttonContainer">
-							<p><input id="nextCompletion" type="button" class="buttonBrue_small" onclick="send()" value="å•ã„åˆã‚ã›ã‚’é€ã‚‹"></p>
-							<input id="back" type="button" class="buttonBrue_noborder" value="æˆ»ã‚‹">
+							<p><input id="nextCompletion" type="button" class="buttonBrue_small" onclick="send()" value="–â‚¢‡‚í‚¹‚ğ‘—‚é"></p>
+							<input id="back" type="button" class="buttonBrue_noborder" value="–ß‚é">
 						</div>
 					`;
-					// æˆ»ã‚‹ãƒœã‚¿ãƒ³ã®ã‚¯ãƒªãƒƒã‚¯ã‚’å¾…ã¤
+					// –ß‚éƒ{ƒ^ƒ“‚ÌƒNƒŠƒbƒN‚ğ‘Ò‚Â
 					await document.getElementById("back").observe("click");
-					// ãƒ¯ãƒ¼ã‚¯ã‚¨ãƒªã‚¢ã‚’æˆ»ã™
+					// ƒ[ƒNƒGƒŠƒA‚ğ–ß‚·
 					document.body.replaceChild(backup, workArea);
 				}
 			})();
@@ -310,36 +310,36 @@
 			var files = document.getElementById( "file" ) ;
 			var inputFile;
 			var fileName;
-			// éåŒæœŸã§File ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä¸­èº«ã‚’èª­ã¿è¾¼ã‚€
+			// ”ñ“¯Šú‚ÅFile ƒIƒuƒWƒFƒNƒg‚Ì’†g‚ğ“Ç‚İ‚Ş
 			files.onchange = function () {
-				// ãƒ•ã‚¡ã‚¤ãƒ«åè¡¨ç¤ºinputå–å¾—
+				// ƒtƒ@ƒCƒ‹–¼•\¦inputæ“¾
 				let attText = document.getElementById("fileName");
-				// ãƒ•ã‚¡ã‚¤ãƒ«åã®ã¿ã‚’å–å¾—(ãƒ‘ã‚¹ã®å‰Šé™¤)
+				// ƒtƒ@ƒCƒ‹–¼‚Ì‚İ‚ğæ“¾(ƒpƒX‚Ìíœ)
 				let onlyFileName = document.getElementById("file").value.replace(/^.*[\\\/]/, '');
-				// ãƒ•ã‚¡ã‚¤ãƒ«åã‚’inputã«å·®ã—è¾¼ã‚€
+				// ƒtƒ@ƒCƒ‹–¼‚ğinput‚É·‚µ‚Ş
 				attText.value = onlyFileName;
 				
-				// ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æº–å‚™
+				// ƒtƒ@ƒCƒ‹ƒIƒuƒWƒFƒNƒg‚ğ€”õ
 				var fileReader = new FileReader() ;
 				fileReader.onload = function () {
-					// ãƒ•ã‚¡ã‚¤ãƒ«å†…å®¹ã‚’å–å¾—
+					// ƒtƒ@ƒCƒ‹“à—e‚ğæ“¾
 					var baseFile = this.result ;
 					var spFile = baseFile.split(',');
-					// å…ˆé ­ã®ä½™è¨ˆãªæ–‡å­—åˆ—ã‚’é™¤ã„ãŸBlobãƒ‡ãƒ¼ã‚¿ã®ã¿ã«ã™ã‚‹(Data-URL ã®å®£è¨€ã‚’å‰Šé™¤(spFile[0] = 'data:*/*;base64,'))
+					// æ“ª‚Ì—]Œv‚È•¶š—ñ‚ğœ‚¢‚½Blobƒf[ƒ^‚Ì‚İ‚É‚·‚é(Data-URL ‚ÌéŒ¾‚ğíœ(spFile[0] = 'data:*/*;base64,'))
 					inputFile = spFile[1];
 				}
-				// ãƒ•ã‚¡ã‚¤ãƒ«ã®1å€‹ç›®
+				// ƒtƒ@ƒCƒ‹‚Ì1ŒÂ–Ú
 				var file = files.files[0] ;
 				fileName = file.name;
-				// æŒ‡å®šã—ãŸBlobå‹ã‹FIleå‹ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚€(èª­ã¿è¾¼ã‚€ã¨resultå±æ€§ã«ãƒ•ã‚¡ã‚¤ãƒ«ã®urlã‚’æ ¼ç´(Data URI(Base64)))
+				// w’è‚µ‚½BlobŒ^‚©FIleŒ^‚Ìƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ş(“Ç‚İ‚Ş‚Æresult‘®«‚Éƒtƒ@ƒCƒ‹‚Ìurl‚ğŠi”[(Data URI(Base64)))
 				fileReader.readAsDataURL( file ) ;
 			}
 
 			/***
-			 Salesforceã¸ãƒ‡ãƒ¼ã‚¿ç™»éŒ²å‡¦ç†
+			 Salesforce‚Öƒf[ƒ^“o˜^ˆ—
 			***/
 			function send() {
-				// ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³å–å¾—ï¼ˆãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ãƒˆãƒ¼ã‚¯ãƒ³ãƒ•ãƒ­ãƒ¼ï¼‰ Ajax
+				// ƒAƒNƒZƒXƒg[ƒNƒ“æ“¾iƒŠƒtƒŒƒbƒVƒ…ƒg[ƒNƒ“ƒtƒ[j Ajax
 				$.ajax({
 					type: 'POST',
 					crossOrigin: true,
@@ -348,18 +348,18 @@
 					cache :false,
 					data : {"grant_type":"refresh_token","client_id":"3MVG9pRzvMkjMb6nsLsmTx_FqB0rQ9AHEMYt85TrwFp6b3yeP.ta18VQpmha_Ds31fssFdYib4DdLPcLKqtQG", "client_secret":"F864BDD8ADFB8B17EA27F0623CF9039A503A76F9312032654DBFFDB25E87B142","refresh_token":"5Aep861mdLLi91HqFfCpXYtQXRaOgcHsK1gi36_cVHboubUhDFRrSCX9zyL1KBPgaR5qiKjUA54Q0RZhiN_teRI"},
 					success : function (connectData) {
-						// ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿
+						// ƒtƒ@ƒCƒ‹“Ç‚İ‚İ
 						var reader = new FileReader();
-						// ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³
+						// ƒAƒNƒZƒXƒg[ƒNƒ“
 						var accToken = 'Bearer ' + connectData.access_token;
-						// é€ä¿¡ãƒ‡ãƒ¼ã‚¿æº–å‚™
+						// ‘—Mƒf[ƒ^€”õ
 						var inputData = {};
 						inputData.AccountNumber = 'A0000001';
 						inputData.Classification = bkInqType;
 						inputData.InquiryDetail = bkInqDetail;
 						inputData.Mail = bkMail;
 						inputData.File = '' ;
-						// Rest Apexã¸ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’JSONå½¢å¼ã«å¤‰æ›
+						// Rest Apex‚Öƒpƒ‰ƒ[ƒ^‚ğJSONŒ`®‚É•ÏŠ·
 						var data = JSON.stringify( inputData );
 						
 						$.ajax({
@@ -372,12 +372,12 @@
 							data : data,
 							success : function (res) {
 								if(res.length != 0){
-									// ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰ã®IDã‚’å–å¾—
+									// ƒRƒ“ƒ^ƒNƒgƒ{[ƒh‚ÌID‚ğæ“¾
 									var insId = res;
 
-									//Salesforceã«ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ã™ã‚‹ãŸã‚ã®bodyã‚’ä½œæˆ
+									//Salesforce‚ÉƒAƒbƒvƒ[ƒh‚·‚é‚½‚ß‚Ìbody‚ğì¬
 									var cvJson = {
-										"Title" : fileName,  //ã‚¢ãƒƒãƒ—ã•ã‚Œã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¿ã‚¤ãƒˆãƒ«
+										"Title" : fileName,  //ƒAƒbƒv‚³‚ê‚éƒtƒ@ƒCƒ‹‚Ìƒ^ƒCƒgƒ‹
 										"PathOnClient" : fileName, 
 										"VersionData" : inputFile
 									};
@@ -392,7 +392,7 @@
 										success : function (contentversionres) {
 											var cvId = contentversionres.id;
 
-											// content versionã«ç´ä»˜ã„ã¦ä½œæˆã•ã‚ŒãŸcontent documentã®IDã‚’å–å¾—
+											// content version‚É•R•t‚¢‚Äì¬‚³‚ê‚½content document‚ÌID‚ğæ“¾
 											var query = "SELECT+ContentDocumentId+FROM+ContentVersion+WHERE+Id+=+'" + cvId + "'"
 											$.ajax({
 												type: 'GET',
@@ -404,11 +404,11 @@
 													var cdRecords = DocumentIdRes["records"];
 													var cdId = cdRecords[0].ContentDocumentId;
 
-													// ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰æ˜ç´°ãƒ¬ã‚³ãƒ¼ãƒ‰ã¨ãƒªãƒ³ã‚¯ã•ã›ã‚‹ãŸã‚ã®bodyã‚’ä½œæˆ
+													// ƒRƒ“ƒ^ƒNƒgƒ{[ƒh–¾×ƒŒƒR[ƒh‚ÆƒŠƒ“ƒN‚³‚¹‚é‚½‚ß‚Ìbody‚ğì¬
 													var linkJson = {
 														"ContentDocumentId" : cdId,
-														"LinkedEntityId" : insId, //ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰æ˜ç´°ã®ãƒ¬ã‚³ãƒ¼ãƒ‰ID
-														"Visibility" : "AllUsers" //é–²è¦§ã§ãã‚‹äººã®åˆ¶é™
+														"LinkedEntityId" : insId, //ƒRƒ“ƒ^ƒNƒgƒ{[ƒh–¾×‚ÌƒŒƒR[ƒhID
+														"Visibility" : "AllUsers" //‰{——‚Å‚«‚él‚Ì§ŒÀ
 													};
 
 													console.log(cdId);
@@ -423,8 +423,8 @@
 														dataType: 'json',
 														data : JSON.stringify(linkJson),
 														success : function (contentdocumentRes) {
-															console.log('é€ä¿¡å®Œäº†');
-															// å®Œäº†ç”»é¢ã«é·ç§»
+															console.log('‘—MŠ®—¹');
+															// Š®—¹‰æ–Ê‚É‘JˆÚ
 															window.location.href = './NewCompletion.html';
 														},
 														error : function (data, errorThrown,status) {
@@ -447,7 +447,7 @@
 											console.log(status);
 										}
 									})
-									//ã“ã“ã¾ã§
+									//‚±‚±‚Ü‚Å
 								}
 							},
 							error : function (data, errorThrown,status) {
