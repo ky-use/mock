@@ -484,17 +484,17 @@
                                         headers: {"Authorization" : accToken},
                                         dataType: 'json',
                                         data : JSON.stringify(caseNum.value),
-                                        success : function (cdl) {
-                                            console.log(cdl);
-                                            let cdlList = cdl;
-                                            let cbdIdList = cdlList.map(el => el.ContentDocumentId);
+                                        success : function (Cv) {
+                                            console.log(Cv);
+                                            let cvList = Cv;
+                                            let cvIdList = cvList.map(el => el.ContentDocumentId);
 
-                                            for (let i=0; i < cbdIdList.length; i++){
                                             // for‚ÅˆÈ‰º‚ðId‚ÌŒ”•ª‰ñ‚·
+                                            //for (let i=0; i < cbdIdList.length; i++){
                                                 $.ajax({
                                                     type: 'GET',
                                                     crossOrigin: true,
-                                                    url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + cbdIdList[i] + '/VersionData', // 
+                                                    url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + cbdIdList[0] + '/VersionData', // 
                                                     cache :false,
                                                     //scriptCharset: 'Shift_JIS',
                                                     headers: {"Authorization" : accToken},
@@ -517,7 +517,7 @@
                                                         console.log(status);
                                                     }
                                                 })
-                                            }
+                                            //}
                                         },
                                         error : function (data, errorThrown,status) {
                                             console.log(data);
