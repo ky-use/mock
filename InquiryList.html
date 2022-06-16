@@ -487,14 +487,14 @@
                                         success : function (Cv) {
                                             console.log(Cv);
                                             let cvList = Cv;
-                                            let cvIdList = cvList.map(el => el.ContentDocumentId);
+                                            let cvIdList = cvList.map(el => el.CvId);
 
                                             // Id‚ÌŒ”•ªŒJ‚è•Ô‚µ
                                             for (let i=0; i < cvList.length; i++){
                                                 $.ajax({
                                                     type: 'GET',
                                                     crossOrigin: true,
-                                                    url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + cvIdList[i].CvId + '/VersionData', 
+                                                    url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + cvList[i].CvId + '/VersionData', 
                                                     cache :false,
                                                     //scriptCharset: 'Shift_JIS',
                                                     headers: {"Authorization" : accToken},
