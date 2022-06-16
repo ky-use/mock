@@ -494,7 +494,7 @@
                                                 $.ajax({
                                                     type: 'GET',
                                                     crossOrigin: true,
-                                                    url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + cvIdList[0] + '/VersionData', 
+                                                    url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + cvIdList[i].CvId + '/VersionData', 
                                                     cache :false,
                                                     //scriptCharset: 'Shift_JIS',
                                                     headers: {"Authorization" : accToken},
