@@ -489,12 +489,12 @@
                                             let cvList = Cv;
                                             let cvIdList = cvList.map(el => el.ContentDocumentId);
 
-                                            // for‚ÅˆÈ‰º‚ğId‚ÌŒ”•ª‰ñ‚·
-                                            //for (let i=0; i < cbdIdList.length; i++){
+                                            // Id‚ÌŒ”•ªŒJ‚è•Ô‚µ
+                                            for (let i=0; i < cvList.length; i++){
                                                 $.ajax({
                                                     type: 'GET',
                                                     crossOrigin: true,
-                                                    url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + cbdIdList[0] + '/VersionData', // 
+                                                    url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + cvIdList[0] + '/VersionData', 
                                                     cache :false,
                                                     //scriptCharset: 'Shift_JIS',
                                                     headers: {"Authorization" : accToken},
@@ -517,7 +517,7 @@
                                                         console.log(status);
                                                     }
                                                 })
-                                            //}
+                                            }
                                         },
                                         error : function (data, errorThrown,status) {
                                             console.log(data);
