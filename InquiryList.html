@@ -135,7 +135,7 @@
 
                     <b><p id='inq1' style='display:none; color: #004db1f7; font-size: 19px;'></p></b>
 
-                    <!-- 以下テンプレートを書く -->
+                    <!-- テンプレート -->
                     <template id="templateInqList_Details">
                         <tr align="left">
                             <th>
@@ -146,15 +146,20 @@
                             <td>
                                 <p class="inqDetail"></p>
                             </td>
-                            <!-- ファイル出力用テンプレート -->
-                            <template id="fileList">
-                                <td>
-                                    <p class="fileDownloadText">ファイル（コチラからダウンロード）</p>
-                                    <p><a class="attachment" download></a></p>
-                                </td>
-                            </template>
                         </tr>
                     </template>
+                    <!-- /テンプレート -->
+
+                    <!-- ファイルテンプレート -->
+                    <template id="fileList">
+                        <tr>
+                            <td>
+                                <p class="fileDownloadText">ファイル（コチラからダウンロード）</p>
+                                <p><a class="attachment" download></a></p>
+                            </td>
+                        </tr>
+                    </template>
+                    <!-- /ファイルテンプレート -->
 
                     <!-- テンプレート出力 -->
                     <div>
@@ -530,6 +535,9 @@
                                                 }
                                                 clone.querySelector('.inqDetail').textContent = content;
                                                 clone.querySelector('.inqDetail').id = 'detail'+ i;
+                                                
+                                                // div#outputInqList_Detailsの中に追加
+                                                document.getElementById('outputInqList_Details').appendChild(clone);
 
                                                 // 添付ファイル用のtemplate要素を取得
                                                 let fileListTemplate = document.getElementById('fileList');
@@ -548,10 +556,8 @@
                                                     //clone.querySelector('.attachment').style = 'display:none;';
 
                                                     // div#fileListの中に追加
-                                                    document.getElementById('fileList').appendChild(fileListClone);
+                                                    document.getElementById('outputInqList_Details').appendChild(fileListClone);
                                                 }
-                                                // div#outputInqList_Detailsの中に追加
-                                                document.getElementById('outputInqList_Details').appendChild(clone);
 
                                             }
 
