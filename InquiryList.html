@@ -431,8 +431,14 @@
                                             console.log('Cv:' + Cv);
                                             // cvList = [Id LinkEntityId(コンタクトボードID), List CvIdList(コンテンツバージョンID), CvName]
                                             let cvList = Cv;
+                                            let cbdIdList = cvList.map(el => el.LinkEntityId);
                                             let cvNameList = cvList.map(el => el.CvNameList);
                                             let cvIdList = cvList.map(el => el.CvIdList);
+
+                                            console.log('cbdIdList:' + cbdIdList);
+                                            console.log('cvNameList:' + cvNameList);
+                                            console.log('cvIdList:' + cvIdList);
+
                                             // ファイルとコンタクトボードのID
                                             let fileList = [];
 
@@ -504,7 +510,7 @@
                                                 //
                                                 //for文でファイルの件数分回す　Id一致した回数分クローンする（別でテンプレート用意するべきかも）
                                                 for(let j=0; j < fileList.length; j++){
-                                                    if(arrayCbd[i].Id == fileList[i].cbdId){
+                                                    if(arrayCbd[i].Id == cbdIdList[i]){
                                                         //for(let k=0; k < fileList[j].url.length; k++){
                                                         for(let k in fileList[i].url){
                                                             let clone = template.content.cloneNode(true);
