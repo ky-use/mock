@@ -296,7 +296,7 @@
                 // ボタンの状態
                 // openState=全表示(true)/部分表示(false)の状態
                 let openState = elem.value;
-                // 押されたボタンNo
+                // 押されたボタンNo(二桁の時動かない)
                 let buttonNum = elem.Name.substr(elem.Name.length-1, elem.Name.length);
                 // 詳細要素の取得
                 let element = document.getElementById(elem.Name);                
@@ -313,6 +313,7 @@
                         text = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c;
                     }
                     element.innerHTML = text;
+                    Console.log(arrayCbd[buttonNum].fileDownloadText);
                     // ファイルがある場合、固定文言とファイルリンクを非表示
                     if(arrayCbd[buttonNum].fileDownloadText){
                         document.getElementById('fdText'+buttonNum).style = 'display:none;';
