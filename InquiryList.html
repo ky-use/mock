@@ -429,8 +429,10 @@
                                         data : JSON.stringify(caseNum.value),
                                         success : function (Cv) {
                                             console.log('Cv:' + Cv);
-                                            // cvList = [Id CvId(コンテンツバージョンID), Id LinkEntityId(コンタクトボードID)]
+                                            // cvList = [Id LinkEntityId(コンタクトボードID), List CvIdList(コンテンツバージョンID), CvName]
                                             let cvList = Cv;
+                                            let cvNameList = cvList.map(el => el.CvNameList);
+                                            let cvIdList = cvList.map(el => el.CvIdList);
                                             // ファイルとコンタクトボードのID
                                             let fileList = [];
 
@@ -439,7 +441,7 @@
                                                 // 添付ファイルの件数分繰り返し
                                                 let fileUrlList = [];
                                                 let fileNameList = [];
-                                                for (let j=0; j < cvList.CvIdList.length; j++){
+                                                for (let j=0; j < cvIdList.length; j++){
                                                     $.ajax({
                                                         type: 'GET',
                                                         crossOrigin: true,
