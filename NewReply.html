@@ -49,7 +49,7 @@
 		<div id="work">
 			<form id="testForm">
 				<b><p>返信内容</p></b>
-				<textarea id="replyDeteil" name="replyDeteil" rows="4" cols="40" placeholder="入力してください" required></textarea><br>
+				<textarea id="textarea" name="replyDeteil" rows="4" cols="40" placeholder="入力してください" required></textarea><br>
 				<b style="color: #3c90fff7;">ファイルアップロード（任意）</b><br>
 				<input type="file" id="file" style="cursor:pointer;" onchange="$('#fileName').val($(this).val().replace(/^.*[\\\/]/, ''))" hidden>
 				<input type="text" id="fileName" name="attachment" value="" size="35" readonly onClick="$('#file').click();">
@@ -63,8 +63,8 @@
 		<script>
 			// 次へボタン
 			const button = document.getElementById('nextButton');
-			// 返信内容
-			let textarea = document.getElementById('replyDeteil');
+			// 問い合わせ詳細
+			let textarea = document.getElementById('textarea');
 			// フォーム全体
 			const form = document.getElementById('testForm');
 
@@ -83,7 +83,6 @@
 					button.disabled = false;
 					button.classList.remove('buttonGray_small');
 					button.classList.add('buttonBrue_small');
-					return;
 				} else{
 					// ボタンを非活性
 					button.disabled = true;
@@ -122,27 +121,27 @@
 				};
 				return new Promise(resolve => this.addEventListener(type, getHandler(resolve)));
 			};
-
 			(async () => {
 				while (true) {
 					// ボタンクリックを待つ
 					await document.getElementById("nextButton").observe("click");
 					// ワークエリアを取得
 					const workArea = document.getElementById("work");
-
-					// 入力内容の取得(SF送信用)
-					bkRepDeteil = document.getElementById("replyDeteil").value;
-
 					// ワークエリアをバックアップ
 					const backup = workArea.cloneNode(true);
 					// 添付ファイル名
-					let attachmentName = document.getElementsByName('attachment')[0].value;		
+					let attachmentName = document.getElementsByName('attachment')[0].value;
+					// バックスラッシュ
+					const regex = /\\/;		
 					// 添付ファイル名を返却
 					function splitFileName(fileName){
-						let array = attachmentName.split(/\\/);
+						let array = attachmentName.split(regex);
 						return (array[array.length - 1]=='') ? 'ファイルなし' : array[array.length - 1];
 					}
-					/*pタグは折り返しなし(CSSで)*/
+					// ラジオボタンの入力状況を返却
+					function radioChecked(radio){
+						return(radio ? 'checked' : 'disabled');
+					}
 					// ワークエリアを結果で書き換える(確認画面)
 					workArea.innerHTML = `
 						<b><p>返信内容</p></b>
@@ -150,7 +149,7 @@
 						<b><p>ファイルアップロード</p></b>
 						<p>${splitFileName(attachmentName)}</p>
 						<div class="buttonContainer">
-							<p><input id="nextCompletion" type="button" class="buttonBrue_small" onclick="send()" value="返信を送る"></p>
+							<input id="nextCompletion" type="button" class="buttonBrue_small" onclick="location.href='./NewCompletion.html'" value="返信を送る"><br>
 							<p><input id="back" type="button" class="buttonBrue_noborder" value="戻る"></p>
 						</div>
 					`;
@@ -160,159 +159,6 @@
 					document.body.replaceChild(backup, workArea);
 				}
 			})();
-
-			var files = document.getElementById( "file" ) ;
-			var inputFile;
-			var fileName;
-			// 非同期でFile オブジェクトの中身を読み込む
-			files.onchange = function () {
-				// ファイル名表示input取得
-				let attText = document.getElementById("fileName");
-				// ファイル名のみを取得(パスの削除)
-				let onlyFileName = document.getElementById("file").value.replace(/^.*[\\\/]/, '');
-				// ファイル名をinputに差し込む
-				attText.value = onlyFileName;
-				
-				// ファイルオブジェクトを準備
-				var fileReader = new FileReader() ;
-				fileReader.onload = function () {
-					// ファイル内容を取得
-					var baseFile = this.result ;
-					var spFile = baseFile.split(',');
-					// 先頭の余計な文字列を除いたBlobデータのみにする(Data-URL の宣言を削除(spFile[0] = 'data:*/*;base64,'))
-					inputFile = spFile[1];
-				}
-				// ファイルの1個目
-				var file = files.files[0] ;
-				fileName = file.name;
-				// 指定したBlob型かFIle型のファイルを読み込む(読み込むとresult属性にファイルのurlを格納(Data URI(Base64)))
-				fileReader.readAsDataURL( file ) ;
-			}
-			/***
-			 Salesforceへデータ登録処理
-			***/
-			function send() {
-				// アクセストークン取得（リフレッシュトークンフロー） Ajax
-				$.ajax({
-					type: 'POST',
-					crossOrigin: true,
-					url: 'https://protocomdev-dev-ed.my.salesforce.com/services/oauth2/token',
-					dataType: 'json',
-					cache :false,
-					data : {"grant_type":"refresh_token","client_id":"3MVG9pRzvMkjMb6nsLsmTx_FqB0rQ9AHEMYt85TrwFp6b3yeP.ta18VQpmha_Ds31fssFdYib4DdLPcLKqtQG", "client_secret":"F864BDD8ADFB8B17EA27F0623CF9039A503A76F9312032654DBFFDB25E87B142","refresh_token":"5Aep861mdLLi91HqFfCpXYtQXRaOgcHsK1gi36_cVHboubUhDFRrSCX9zyL1KBPgaR5qiKjUA54Q0RZhiN_teRI"},
-					success : function (connectData) {
-						// ファイル読み込み
-						var reader = new FileReader();
-						// アクセストークン
-						var accToken = 'Bearer ' + connectData.access_token;
-						// 送信データ準備
-						var inputData = {};
-						// ケースのIDは取得したものを持たせる
-						inputData.CaseId = '5005j00000QyilYAAR';
-						inputData.ReplyDeteil = bkRepDeteil;
-						inputData.File = '' ;
-						// Rest ApexへパラメータをJSON形式に変換
-						var data = JSON.stringify( inputData );
-						
-						$.ajax({
-							type: 'POST',
-							crossOrigin: true,
-							url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/Mock_CBD/',
-							cache :false,
-							headers: {"Authorization" : accToken, "Content-Type" : "application/json"},
-							dataType: 'json',
-							data : data,
-							success : function (res) {
-								if(res.length != 0){
-									// コンタクトボードのIDを取得
-									var insId = res;
-
-									//Salesforceにアップロードするためのbodyを作成
-									var cvJson = {
-										"Title" : fileName,  //アップされるファイルのタイトル
-										"PathOnClient" : fileName, 
-										"VersionData" : inputFile
-									};
-									$.ajax({
-										type: 'POST',
-										crossOrigin: true,
-										url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion',
-										cache :false,
-										headers: {"Authorization" : accToken, "Content-Type" : "application/json"},
-										dataType: 'json',
-										data : JSON.stringify(cvJson),
-										success : function (contentversionres) {
-											var cvId = contentversionres.id;
-
-											// content versionに紐付いて作成されたcontent documentのIDを取得
-											var query = "SELECT+ContentDocumentId+FROM+ContentVersion+WHERE+Id+=+'" + cvId + "'"
-											$.ajax({
-												type: 'GET',
-												crossOrigin: true,
-												url: "https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/query/?q=" + query,
-												cache :false,
-												headers: {"Authorization" : accToken, "Content-Type" : "application/json"},
-												success : function (DocumentIdRes) {
-													var cdRecords = DocumentIdRes["records"];
-													var cdId = cdRecords[0].ContentDocumentId;
-
-													// コンタクトボード明細レコードとリンクさせるためのbodyを作成
-													var linkJson = {
-														"ContentDocumentId" : cdId,
-														"LinkedEntityId" : insId, //コンタクトボード明細のレコードID
-														"Visibility" : "AllUsers" //閲覧できる人の制限
-													};
-													console.log(cdId);
-													console.log(insId);
-													
-													$.ajax({
-														type: 'POST',
-														crossOrigin: true,
-														url: "https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentDocumentLink",
-														cache :false,
-														headers: {"Authorization" : accToken, "Content-Type" : "application/json"},
-														dataType: 'json',
-														data : JSON.stringify(linkJson),
-														success : function (contentdocumentRes) {
-															console.log('送信完了');
-															// 完了画面に遷移
-															window.location.href = './NewCompletion.html';
-														},
-														error : function (data, errorThrown,status) {
-															console.log(data);
-															console.log(errorThrown);
-															console.log(status);
-														}
-													})
-												},
-												error : function (data, errorThrown,status) {
-													console.log(data);
-													console.log(errorThrown);
-													console.log(status);
-												}
-											})
-										},
-										error : function (data, errorThrown,status) {
-											console.log(data);
-											console.log(errorThrown);
-											console.log(status);
-										}
-									})
-									//ここまで
-								}
-							},
-							error : function (data, errorThrown,status) {
-								console.log(data);
-								console.log(errorThrown);
-								console.log(status);
-							}
-						})
-					},
-					error : function (data, errorThrown,status) {
-					}
-				});
-			}
-
 		</script>
 	</body>
 </html>
