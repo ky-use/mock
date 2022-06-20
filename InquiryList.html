@@ -431,29 +431,38 @@
                                             console.log('Cv:' + Cv);
                                             // cvList = [Id LinkEntityId(コンタクトボードID), List CvIdList(コンテンツバージョンID), CvName]
                                             let cvList = Cv;
-                                            let cbdIdArray = cvList.map(el => el.LinkEntityId);
-                                            let cvNameArray = cvList.map(el => el.CvNameList);
-                                            let cvIdArrary = cvList.map(el => el.CvIdList);
+                                            
                                             for (i=0; i < cvList.length; i++){
-                                                let entries = Object.entries(cvList[i])
+                                                let entries = Object.entries(cvList[i]);
+                                                console.log(`---------------------`);
                                                 for(let [fruits, count] of entries) {
-                                                    console.log(`${fruits}は、${count}`)
+                                                    console.log(`${fruits}は、${count}`);
                                                 }
                                             }
-                                            console.log('cbdIdList:' + cbdIdArray);
-                                            console.log('cvNameList:' + cvNameArray);
-                                            console.log('cvIdList:' + cvIdArrary);
+                                            //console.log('cbdIdList:' + cbdIdArray);
+                                            //console.log('cvNameList:' + cvNameArray);
+                                            //console.log('cvIdList:' + cvIdArrary);
 
                                             // ファイルとコンタクトボードのID
                                             let fileList = [];
 
                                             // コンタクトボードの件数分繰り返し
                                             for (let i=0; i < cvList.length; i++){
-                                                // 添付ファイルの件数分繰り返し
                                                 let fileUrlList = [];
                                                 let fileNameList = [];
+
+                                                const cbdId = cvList[i].LinkEntityId;
+                                                const cvNameArray = cvList[i].CvNameList;
+                                                const cvIdArrary = cvList[i].CvIdList;
+                                                console.log('cbdId:' + cbdId);
+                                                console.log('cvNameArray:' + cvNameArray);
+                                                console.log('cvIdArrary:' + cvIdArrary);
+
+                                                //const cvIdArrary = cvList.map(el => el.CvIdList);
+                                                // 添付ファイルの件数分繰り返し
                                                 //console.log(cvList[0].cvIdList[0]);
                                                 for (let j=0; j < cvIdList.length; j++){
+
                                                     $.ajax({
                                                         type: 'GET',
                                                         crossOrigin: true,
