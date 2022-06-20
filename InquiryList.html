@@ -431,13 +431,18 @@
                                             console.log('Cv:' + Cv);
                                             // cvList = [Id LinkEntityId(コンタクトボードID), List CvIdList(コンテンツバージョンID), CvName]
                                             let cvList = Cv;
-                                            let cbdIdList = cvList.map(el => el.LinkEntityId);
-                                            let cvNameList = cvList.map(el => el.CvNameList);
-                                            let cvIdList = cvList.map(el => el.CvIdList);
-
-                                            console.log('cbdIdList:' + cbdIdList);
-                                            console.log('cvNameList:' + cvNameList);
-                                            console.log('cvIdList:' + cvIdList);
+                                            let cbdIdArray = cvList.map(el => el.LinkEntityId);
+                                            let cvNameArray = cvList.map(el => el.CvNameList);
+                                            let cvIdArrary = cvList.map(el => el.CvIdList);
+                                            for (i=0; i < cvList.length; i++){
+                                                let entries = Object.entries(cvList[i])
+                                                for(let [fruits, count] of entries) {
+                                                    console.log(`${fruits}は、${count}`)
+                                                }
+                                            }
+                                            console.log('cbdIdList:' + cbdIdArray);
+                                            console.log('cvNameList:' + cvNameArray);
+                                            console.log('cvIdList:' + cvIdArrary);
 
                                             // ファイルとコンタクトボードのID
                                             let fileList = [];
@@ -447,7 +452,7 @@
                                                 // 添付ファイルの件数分繰り返し
                                                 let fileUrlList = [];
                                                 let fileNameList = [];
-                                                console.log(cvList[0].cvIdList[0]);
+                                                //console.log(cvList[0].cvIdList[0]);
                                                 for (let j=0; j < cvIdList.length; j++){
                                                     $.ajax({
                                                         type: 'GET',
