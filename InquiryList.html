@@ -458,9 +458,9 @@
                                                 let cvIdArrary = [];
 
                                                 // 1ÉãÅ[ÉvÇ≤Ç∆Ç…ê›íË
-                                                let cbdId = cvList.LinkEntityId;
-                                                let cvNameArray = cvList[i].CvNameList;
-                                                let cvIdArrary = cvList[i].CvIdList;
+                                                cbdId = cvList[i].LinkEntityId;
+                                                cvNameArray = cvList[i].CvNameList;
+                                                cvIdArrary = cvList[i].CvIdList;
                                                 console.log(`---------------------`);
                                                 console.log('cbdId:' + cbdId);
                                                 console.log('cvNameArray:' + cvNameArray);
@@ -497,11 +497,9 @@
                                                 let cbdRecType = arrayCbd[cbdIndex].RecordType__c;
                                                 let cbdContent = arrayCbd[cbdIndex].Content__c;
                                                 let cbdCreatedDate = arrayCbd[cbdIndex].CreatedDate;
-
                                                 console.log('cbdRecType'+cbdRecType);
                                                 console.log('cbdContent'+cbdContent);
                                                 console.log('cbdCreatedDate'+cbdCreatedDate);
-
 
                                                 // templateóvëfÇéÊìæ
                                                 let template = document.getElementById('templateInqList_Details');
