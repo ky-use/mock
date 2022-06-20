@@ -414,7 +414,7 @@
                             success : function (res) {
                                 // データを取得できた場合（）
                                 if(res.length != 0){
-                                    arrayCbd = res;
+                                    arrayCbd = res; // [{Id, RecordType__c, Content__c, Case__c, CreatedDate}]
                                     console.log('arrayCbd:' + arrayCbd);
 
                                     // コンタクトボードIDからコンテンツバージョンのID取得
@@ -445,28 +445,33 @@
 
                                             // ファイルとコンタクトボードのID
                                             let fileList = [];
+                                            // List<obj>から取得用
+                                            let cbdNumber = arrayCbd.map(el => el.Id);
 
                                             // コンタクトボードの件数分繰り返し
                                             for (let i=0; i < cvList.length; i++){
                                                 let fileUrlList = [];
                                                 let fileNameList = [];
-                                                for (let q=0; q < cvList.length; q++){
-                                                const cbdId = cvList[q].LinkEntityId;
-                                                const cvNameArray = cvList[q].CvNameList;
-                                                const cvIdArrary = cvList[q].CvIdList;
+
+                                                let cbdId = [];
+                                                let cvNameArray = [];
+                                                let cvIdArrary = [];
+
+                                                // 1ループごとに設定
+                                                let cbdId = cvList[q].LinkEntityId;
+                                                let cvNameArray = cvList[q].CvNameList;
+                                                let cvIdArrary = cvList[q].CvIdList;
+                                                console.log(`---------------------`);
                                                 console.log('cbdId:' + cbdId);
                                                 console.log('cvNameArray:' + cvNameArray);
                                                 console.log('cvIdArrary:' + cvIdArrary);
-                                                }
-                                                //const cvIdArrary = cvList.map(el => el.CvIdList);
+                                                
                                                 // 添付ファイルの件数分繰り返し
-                                                //console.log(cvList[0].cvIdList[0]);
-                                                for (let j=0; j < cvIdList.length; j++){
-
+                                                for (let j=0; j < cvIdArrary.length; j++){
                                                     $.ajax({
                                                         type: 'GET',
                                                         crossOrigin: true,
-                                                        url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + cvList[i].cvIdList[j] + '/VersionData', 
+                                                        url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + cvIdArrary[i] + '/VersionData', 
                                                         cache :false,
                                                         //scriptCharset: 'Shift_JIS',
                                                         headers: {"Authorization" : accToken},
@@ -474,9 +479,9 @@
                                                         success : function (dlFile) {
                                                             let binaryData = [];
                                                             binaryData.push(dlFile);
+
                                                             let fileUrl = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
                                                             fileUrlList.push(fileUrl);
-                                                            fileNameList.push(cvNameList[j]);
                                                         },
                                                         error : function (data, errorThrown,status) {
                                                             console.log(data);
@@ -485,18 +490,76 @@
                                                         }
                                                     })
                                                 }
-                                                // セットで配列に格納
-                                                let file = {
-                                                    cbdId : cvList[i].LinkEntityId,
-                                                    fileName : cvNameList,
-                                                    url : fileUrlList
+                                                
+                                                // コンタクトボードの情報を取得
+                                                cbdIndex = cbdNumber.indexOf(cbdId);
+                                                console.log(cbdIndex);
+                                                let cbdRecType = arrayCbd[cbdIndex].RecordType__c;
+                                                let cbdContent = arrayCbd[cbdIndex].Content__c;
+                                                let cbdCreatedDate = arrayCbd[cbdIndex].CreatedDate;
+
+                                                console.log('cbdRecType'+cbdRecType);
+                                                console.log('cbdContent'+cbdContent);
+                                                console.log('cbdCreatedDate'+cbdCreatedDate);
+
+
+                                                // template要素を取得
+                                                let template = document.getElementById('templateInqList_Details');
+                                                // template要素の内容を複製
+                                                let clone = template.content.cloneNode(true);
+                                                // 日付時間を見出し用に整形
+                                                let dateTime = arrayCbd[i].CreatedDate.substring( 0, arrayCbd[i].CreatedDate.length - 12 );
+                                                let year = dateTime.substring(0, 4);
+                                                let month = dateTime.substring(5, 6);
+                                                let day = dateTime.substring(8, 9);
+                                                let time = dateTime.substring(dateTime.length - 5, dateTime.length);
+                                                dateTime = year + '年' + month +  '月' + day + '日 ' + time;
+                                                // 複製したtemplate要素にデータを挿入
+                                                clone.querySelector('.detailButton').innerHTML = dateTime;
+                                                clone.querySelector('.detailButton').Name = 'detail'+ i;
+                                                clone.querySelector('.detailButton').id = 'detailButton'+ i;
+                                                clone.querySelector('.detailButton').value = false;
+                                                let content = '';
+                                                // 返信内容が12 文字以下ならそのまま、それを超える場合省略
+                                                if(arrayCbd[i].Content__c.length > 12){
+                                                    content = arrayCbd[i].RecordType__c + ':' + arrayCbd[i].Content__c.substring(0, 12) + "...";
+                                                } else{
+                                                    content = arrayCbd[i].RecordType__c + ':' + arrayCbd[i].Content__c;
                                                 }
-                                                fileList.push(file);
-                                                console.log('file:' + file);
+                                                clone.querySelector('.inqDetail').textContent = content;
+                                                clone.querySelector('.inqDetail').id = 'detail'+ i;
+
+                                                // 添付ファイル部分のテンプレート作成
+                                                let fileListTemplate = document.getElementById('fileList');
+                                                //for文でファイルの件数分回す　Id一致した回数分クローンする（別でテンプレート用意するべきかも）
+                                                for(let j=0; j < fileList.length; j++){
+                                                    if(arrayCbd[i].Id == cbdIdList[i]){
+                                                        //for(let k=0; k < fileList[j].url.length; k++){
+                                                        for(let k in fileList[i].url){
+                                                            let clone = fileListTemplate.content.cloneNode(true);
+                                                            // -----以降は画面表示しない設定で出力-------
+                                                            // 固定文字出力用
+                                                            //clone.querySelector('.fileDownloadText').style = 'display:none;';
+                                                            clone.querySelector('.fileDownloadText').id = 'fdText'+ i;
+                                                            // ファイル
+                                                            clone.querySelector('.attachment').innerText = fileList[i].url;
+                                                            clone.querySelector('.attachment').href = fileList[i].fileName;
+                                                            clone.querySelector('.attachment').download = fileList[i].fileName;
+                                                            clone.querySelector('.attachment').id = 'fName'+ i;
+                                                            //clone.querySelector('.attachment').style = 'display:none;';
+
+                                                            // div#fileListの中に追加
+                                                            document.getElementById('fileList').appendChild(clone);
+                                                        }
+                                                    }
+                                                }
+                                                // div#outputInqList_Detailsの中に追加
+                                                document.getElementById('outputInqList_Details').appendChild(clone);
+
                                             }
 
                                             // template要素を取得
-                                            let template = document.getElementById('templateInqList_Details');
+                                            /*let template = document.getElementById('templateInqList_Details');
                                             // データの数分繰り返し
                                             for(let i=0; i < arrayCbd.length; i++){
                                                 // template要素の内容を複製
@@ -522,13 +585,15 @@
                                                 }
                                                 clone.querySelector('.inqDetail').textContent = content;
                                                 clone.querySelector('.inqDetail').id = 'detail'+ i;
-                                                //
+
+                                                // 添付ファイル部分のテンプレート作成
+                                                let fileListTemplate = document.getElementById('fileList');
                                                 //for文でファイルの件数分回す　Id一致した回数分クローンする（別でテンプレート用意するべきかも）
                                                 for(let j=0; j < fileList.length; j++){
                                                     if(arrayCbd[i].Id == cbdIdList[i]){
                                                         //for(let k=0; k < fileList[j].url.length; k++){
                                                         for(let k in fileList[i].url){
-                                                            let clone = template.content.cloneNode(true);
+                                                            let clone = fileListTemplate.content.cloneNode(true);
                                                             // -----以降は画面表示しない設定で出力-------
                                                             // 固定文字出力用
                                                             //clone.querySelector('.fileDownloadText').style = 'display:none;';
@@ -547,7 +612,7 @@
                                                 }
                                                 // div#outputInqList_Detailsの中に追加
                                                 document.getElementById('outputInqList_Details').appendChild(clone);
-                                            }
+                                            }*/
                                         },
                                         error : function (data, errorThrown,status) {
                                             console.log(data);
