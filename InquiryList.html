@@ -455,7 +455,7 @@
                                                             binaryData.push(dlFile);
                                                             let fileUrl = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
                                                             fileUrlList.push(fileUrl);
-                                                            fileNameList.push(CvNameList[j]);
+                                                            fileNameList.push(cvNameList[j]);
                                                         },
                                                         error : function (data, errorThrown,status) {
                                                             console.log(data);
@@ -467,7 +467,7 @@
                                                 // ƒZƒbƒg‚Å”z—ñ‚ÉŠi”[
                                                 let file = {
                                                     cbdId : cvList[i].LinkEntityId,
-                                                    fileName : CvNameList,
+                                                    fileName : cvNameList,
                                                     url : fileUrlList
                                                 }
                                                 fileList.push(file);
