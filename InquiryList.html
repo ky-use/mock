@@ -154,7 +154,7 @@
                     <template id="fileList">
                         <tr>
                             <td>
-                                <p class="fileDownloadText">ファイル（コチラからダウンロード）</p>
+                                <p class="fileDownloadText"></p>
                                 <p><a class="attachment" download></a></p>
                             </td>
                         </tr>
@@ -494,8 +494,8 @@
                                                 // 日付時間を見出し用に整形
                                                 let dateTime = arrayCbd[i].CreatedDate.substring( 0, cbdCreatedDate.length - 12 );
                                                 let year = dateTime.substring(0, 4);
-                                                let month = dateTime.substring(5, 6);
-                                                let day = dateTime.substring(8, 9);
+                                                let month = dateTime.substring(5, 7);
+                                                let day = dateTime.substring(8, 10);
                                                 let time = dateTime.substring(dateTime.length - 5, dateTime.length);
                                                 dateTime = year + '年' + month +  '月' + day + '日 ' + time;
                                                 // 複製したtemplate要素にデータを挿入
@@ -543,6 +543,7 @@
                                                             // template要素の内容を複製
                                                             let fileListClone = fileListTemplate.content.cloneNode(true);
                                                             // 固定文字出力用
+                                                            fileListClone.querySelector('.fileDownloadText').innerHTML = 'ファイル（コチラからダウンロード）';
                                                             fileListClone.querySelector('.fileDownloadText').id = 'fdText'+ j;
                                                             //fileListClone.querySelector('.fileDownloadText').style = 'display:none;';
                                                             // ファイル
