@@ -531,24 +531,24 @@
                                                 clone.querySelector('.inqDetail').textContent = content;
                                                 clone.querySelector('.inqDetail').id = 'detail'+ i;
 
-                                                // template要素を取得
+                                                // 添付ファイル用のtemplate要素を取得
                                                 let fileListTemplate = document.getElementById('fileList');
                                                 // 取得できたURLの件数分、画面に出力
                                                 for(let j=0; j < fileUrlList.length; j++){
                                                     // template要素の内容を複製
-                                                    let clone = fileListTemplate.content.cloneNode(true);
+                                                    let fileListClone = fileListTemplate.content.cloneNode(true);
                                                     // 固定文字出力用
-                                                    clone.querySelector('.fileDownloadText').id = 'fdText'+ i;
+                                                    fileClone.querySelector('.fileDownloadText').id = 'fdText'+ i;
                                                     //clone.querySelector('.fileDownloadText').style = 'display:none;';
                                                     // ファイル
-                                                    clone.querySelector('.attachment').innerText = cvNameArray;
-                                                    clone.querySelector('.attachment').href = fileUrlList;
-                                                    clone.querySelector('.attachment').download = cvNameArray;
-                                                    clone.querySelector('.attachment').id = 'fName'+ i;
+                                                    fileListClone.querySelector('.attachment').innerText = cvNameArray;
+                                                    fileListClone.querySelector('.attachment').href = fileUrlList;
+                                                    fileListClone.querySelector('.attachment').download = cvNameArray;
+                                                    fileListClone.querySelector('.attachment').id = 'fName'+ i;
                                                     //clone.querySelector('.attachment').style = 'display:none;';
 
                                                     // div#fileListの中に追加
-                                                    document.getElementById('fileList').appendChild(clone);
+                                                    document.getElementById('fileList').appendChild(fileListClone);
                                                 }
                                                 // div#outputInqList_Detailsの中に追加
                                                 document.getElementById('outputInqList_Details').appendChild(clone);
