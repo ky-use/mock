@@ -505,7 +505,8 @@
                                                 //for文でファイルの件数分回す　Id一致した回数分クローンする（別でテンプレート用意するべきかも）
                                                 for(let j=0; j < fileList.length; j++){
                                                     if(arrayCbd[i].Id == fileList[i].cbdId){
-                                                        for(let k=0; k < fileList[j].url.length; k++){
+                                                        //for(let k=0; k < fileList[j].url.length; k++){
+                                                        for(let k in fileList[i].url){
                                                             let clone = template.content.cloneNode(true);
                                                             // -----以降は画面表示しない設定で出力-------
                                                             // 固定文字出力用
