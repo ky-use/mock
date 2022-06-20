@@ -484,7 +484,7 @@
                                                     $.ajax({
                                                         type: 'GET',
                                                         crossOrigin: true,
-                                                        url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + cvIdArrary[i] + '/VersionData', 
+                                                        url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + cvIdArrary[j] + '/VersionData', 
                                                         cache :false,
                                                         //scriptCharset: 'Shift_JIS',
                                                         headers: {"Authorization" : accToken},
@@ -492,9 +492,10 @@
                                                         success : function (dlFile) {
                                                             let binaryData = [];
                                                             binaryData.push(dlFile);
-
                                                             let fileUrl = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
                                                             fileUrlList.push(fileUrl);
+                                                            console.log(binaryData);
+                                                            console.log(fileUrlList);
                                                         },
                                                         error : function (data, errorThrown,status) {
                                                             console.log(data);
