@@ -412,6 +412,7 @@
 
                                             // コンタクトボードの件数分、画面出力処理
                                             for (let i=0; i < cvList.length; i++){
+                                                console.log('i:'+i);
                                                 // ファイルURL
                                                 let fileUrlList = [];
                                                 // Apex返却値
@@ -487,7 +488,7 @@
                                                         headers: {"Authorization" : accToken},
                                                         xhrFields : {responseType : 'blob'},
                                                         success : function (dlFile) {
-                                                            console.log(j);
+                                                            console.log('j:'+j);
                                                             let binaryData = [];
                                                             binaryData.push(dlFile);
                                                             let fileUrl = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
