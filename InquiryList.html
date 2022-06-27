@@ -377,7 +377,7 @@
                                 // データを取得できた場合（）
                                 if(res.length != 0){
                                     arrayCbd = res; // [{Id, RecordType__c, Content__c, Case__c, CreatedDate}]
-                                    console.log('arrayCbd:' + arrayCbd);
+                                    //console.log('arrayCbd:' + arrayCbd);
 
                                     // コンタクトボードIDからコンテンツバージョンのID取得
                                     $.ajax({
@@ -487,6 +487,7 @@
                                                         headers: {"Authorization" : accToken},
                                                         xhrFields : {responseType : 'blob'},
                                                         success : function (dlFile) {
+                                                            console.log(j);
                                                             let binaryData = [];
                                                             binaryData.push(dlFile);
                                                             let fileUrl = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
