@@ -2,8 +2,8 @@
 <html lang="ja">
 	<head>
 		<meta charset="shift_jis">
-		<title>PayPay‹âs@•ÔM‰æ–Ê</title>
-		<meta name="description" content="ŒÚ‹qƒRƒ“ƒ^ƒNƒgƒ{[ƒh">
+		<title>PayPayéŠ€è¡Œã€€è¿”ä¿¡ç”»é¢</title>
+		<meta name="description" content="é¡§å®¢ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<style>
@@ -11,7 +11,7 @@
 				margin: 1.5em 1.5em;
 			}
 			.buttonContainer{
-                width: 22em;/*‘¼‚Ìƒy[ƒW‚Í30w’è*/
+                width: 22em;/*ä»–ã®ãƒšãƒ¼ã‚¸ã¯30æŒ‡å®š*/
                 max-width: 100%;
                 text-align: center;
             }
@@ -48,44 +48,44 @@
 	<body>
 		<div id="work">
 			<form id="testForm">
-				<b><p>•ÔM“à—e</p></b>
-				<textarea id="replyDeteil" name="replyDeteil" rows="4" cols="40" placeholder="“ü—Í‚µ‚Ä‚­‚¾‚³‚¢" required></textarea><br>
-				<b style="color: #3c90fff7;">ƒtƒ@ƒCƒ‹ƒAƒbƒvƒ[ƒhi”CˆÓj</b><br>
+				<b><p>è¿”ä¿¡å†…å®¹</p></b>
+				<textarea id="replyDeteil" name="replyDeteil" rows="4" cols="40" placeholder="å…¥åŠ›ã—ã¦ãã ã•ã„" required></textarea><br>
+				<b style="color: #3c90fff7;">ãƒ•ã‚¡ã‚¤ãƒ«ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ï¼ˆä»»æ„ï¼‰</b><br>
 				<input type="file" id="file" style="cursor:pointer;" onchange="$('#fileName').val($(this).val().replace(/^.*[\\\/]/, ''))" hidden>
 				<input type="text" id="fileName" name="attachment" value="" size="35" readonly onClick="$('#file').click();">
 				<div class="buttonContainer">
-					<p><button type="button" id="nextButton" class="buttonGray_small" disabled>Ÿ‚Ö</button></p>
-					<p><button type="button" class="buttonBrue_noborder" onclick="location.href='./InquiryList.html'">–ß‚é</button></p>
+					<p><button type="button" id="nextButton" class="buttonGray_small" disabled>æ¬¡ã¸</button></p>
+					<p><button type="button" class="buttonBrue_noborder" onclick="location.href='./InquiryList.html'">æˆ»ã‚‹</button></p>
 				</div>
 			</form>
 		</div>
 
 		<script>
-			// Ÿ‚Öƒ{ƒ^ƒ“
+			// æ¬¡ã¸ãƒœã‚¿ãƒ³
 			const button = document.getElementById('nextButton');
-			// •ÔM“à—e
+			// è¿”ä¿¡å†…å®¹
 			let textarea = document.getElementById('replyDeteil');
-			// ƒtƒH[ƒ€‘S‘Ì
+			// ãƒ•ã‚©ãƒ¼ãƒ å…¨ä½“
 			const form = document.getElementById('testForm');
 
 			/***
-			 Ÿ‚Öƒ{ƒ^ƒ“Šˆ«
+			 æ¬¡ã¸ãƒœã‚¿ãƒ³æ´»æ€§
 			***/
-			// ƒtƒH[ƒ€iƒeƒLƒXƒg‚ª•Ï‚í‚Á‚½ê‡‚ÌinputAƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚âƒ‰ƒWƒIƒ{ƒ^ƒ“‚É“ü—Í‚ª‚ ‚Á‚½ê‡‚Ìchangej
+			// ãƒ•ã‚©ãƒ¼ãƒ ï¼ˆãƒ†ã‚­ã‚¹ãƒˆãŒå¤‰ã‚ã£ãŸå ´åˆã®inputã€ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹ã‚„ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³ã«å…¥åŠ›ãŒã‚ã£ãŸå ´åˆã®changeï¼‰
 			form.addEventListener("input", update)
 			form.addEventListener("change", update)
 			function update() {
-				// ƒtƒH[ƒ€‚Ì•K{€–Ú‚ª“ü—Í‚³‚ê‚Ä‚¢‚é‚©Šm”F‚·‚é
+				// ãƒ•ã‚©ãƒ¼ãƒ ã®å¿…é ˆé …ç›®ãŒå…¥åŠ›ã•ã‚Œã¦ã„ã‚‹ã‹ç¢ºèªã™ã‚‹
 				const isRequired = form.checkValidity()
-				// •K{€–Ú‚ª“ü—Í‚³‚ê‚Ä‚¢‚é‚È‚çAƒ{ƒ^ƒ“‚Ì–³Œø‚ğ‰ğœ
+				// å¿…é ˆé …ç›®ãŒå…¥åŠ›ã•ã‚Œã¦ã„ã‚‹ãªã‚‰ã€ãƒœã‚¿ãƒ³ã®ç„¡åŠ¹ã‚’è§£é™¤
 				if (isRequired) {
-					// ƒ{ƒ^ƒ“‚ğŠˆ«
+					// ãƒœã‚¿ãƒ³ã‚’æ´»æ€§
 					button.disabled = false;
 					button.classList.remove('buttonGray_small');
 					button.classList.add('buttonBrue_small');
 					return;
 				} else{
-					// ƒ{ƒ^ƒ“‚ğ”ñŠˆ«
+					// ãƒœã‚¿ãƒ³ã‚’éæ´»æ€§
 					button.disabled = true;
 					button.classList.remove('buttonBrue_small');
 					button.classList.add('buttonGray_small');
@@ -94,24 +94,24 @@
 			}
 
 			/***
-			 “ü—Í—Ê‚É‰‚¶‚½“ü—Í—ÌˆæŠg’£
+			 å…¥åŠ›é‡ã«å¿œã˜ãŸå…¥åŠ›é ˜åŸŸæ‹¡å¼µ
 			***/
-			// textarea‚ÌƒfƒtƒHƒ‹ƒg‚Ì—v‘f‚Ì‚‚³‚ğæ“¾
+			// textareaã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®è¦ç´ ã®é«˜ã•ã‚’å–å¾—
 			let clientHeight = textarea.clientHeight;
-			// textarea‚ÌinputƒCƒxƒ“ƒg
+			// textareaã®inputã‚¤ãƒ™ãƒ³ãƒˆ
 			textarea.addEventListener('input', ()=>{
-				// textarea‚Ì—v‘f‚Ì‚‚³‚ğİ’è
+				// textareaã®è¦ç´ ã®é«˜ã•ã‚’è¨­å®š
 				textarea.style.height = clientHeight + 'px';
-				// textarea‚Ì“ü—Í“à—e‚Ì‚‚³‚ğæ“¾
+				// textareaã®å…¥åŠ›å†…å®¹ã®é«˜ã•ã‚’å–å¾—
 				let scrollHeight = textarea.scrollHeight;                            
-				// textarea‚Ì‚‚³‚É“ü—Í“à—e‚Ì‚‚³‚ğİ’è
+				// textareaã®é«˜ã•ã«å…¥åŠ›å†…å®¹ã®é«˜ã•ã‚’è¨­å®š
 				textarea.style.height = scrollHeight + 'px';
 			});
 
 			/***
-			 Šm”F‰æ–Ê
+			 ç¢ºèªç”»é¢
 			***/
-			// ƒCƒxƒ“ƒg‚ğ”ñ“¯Šú‚Åæ“¾‚·‚é
+			// ã‚¤ãƒ™ãƒ³ãƒˆã‚’éåŒæœŸã§å–å¾—ã™ã‚‹
 			HTMLElement.prototype.observe = function (type) {
 				const getHandler = resolve => {
 					const result =  () => {
@@ -125,38 +125,38 @@
 
 			(async () => {
 				while (true) {
-					// ƒ{ƒ^ƒ“ƒNƒŠƒbƒN‚ğ‘Ò‚Â
+					// ãƒœã‚¿ãƒ³ã‚¯ãƒªãƒƒã‚¯ã‚’å¾…ã¤
 					await document.getElementById("nextButton").observe("click");
-					// ƒ[ƒNƒGƒŠƒA‚ğæ“¾
+					// ãƒ¯ãƒ¼ã‚¯ã‚¨ãƒªã‚¢ã‚’å–å¾—
 					const workArea = document.getElementById("work");
 
-					// “ü—Í“à—e‚Ìæ“¾(SF‘—M—p)
+					// å…¥åŠ›å†…å®¹ã®å–å¾—(SFé€ä¿¡ç”¨)
 					bkRepDeteil = document.getElementById("replyDeteil").value;
 
-					// ƒ[ƒNƒGƒŠƒA‚ğƒoƒbƒNƒAƒbƒv
+					// ãƒ¯ãƒ¼ã‚¯ã‚¨ãƒªã‚¢ã‚’ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—
 					const backup = workArea.cloneNode(true);
-					// “Y•tƒtƒ@ƒCƒ‹–¼
+					// æ·»ä»˜ãƒ•ã‚¡ã‚¤ãƒ«å
 					let attachmentName = document.getElementsByName('attachment')[0].value;		
-					// “Y•tƒtƒ@ƒCƒ‹–¼‚ğ•Ô‹p
+					// æ·»ä»˜ãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¿”å´
 					function splitFileName(fileName){
 						let array = attachmentName.split(/\\/);
-						return (array[array.length - 1]=='') ? 'ƒtƒ@ƒCƒ‹‚È‚µ' : array[array.length - 1];
+						return (array[array.length - 1]=='') ? 'ãƒ•ã‚¡ã‚¤ãƒ«ãªã—' : array[array.length - 1];
 					}
-					/*pƒ^ƒO‚ÍÜ‚è•Ô‚µ‚È‚µ(CSS‚Å)*/
-					// ƒ[ƒNƒGƒŠƒA‚ğŒ‹‰Ê‚Å‘‚«Š·‚¦‚é(Šm”F‰æ–Ê)
+					/*pã‚¿ã‚°ã¯æŠ˜ã‚Šè¿”ã—ãªã—(CSSã§)*/
+					// ãƒ¯ãƒ¼ã‚¯ã‚¨ãƒªã‚¢ã‚’çµæœã§æ›¸ãæ›ãˆã‚‹(ç¢ºèªç”»é¢)
 					workArea.innerHTML = `
-						<b><p>•ÔM“à—e</p></b>
+						<b><p>è¿”ä¿¡å†…å®¹</p></b>
 						<p>${document.getElementsByName("replyDeteil")[0].value}</p>
-						<b><p>ƒtƒ@ƒCƒ‹ƒAƒbƒvƒ[ƒh</p></b>
+						<b><p>ãƒ•ã‚¡ã‚¤ãƒ«ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰</p></b>
 						<p>${splitFileName(attachmentName)}</p>
 						<div class="buttonContainer">
-							<p><input id="nextCompletion" type="button" class="buttonBrue_small" onclick="send()" value="•ÔM‚ğ‘—‚é"></p>
-							<p><input id="back" type="button" class="buttonBrue_noborder" value="–ß‚é"></p>
+							<p><input id="nextCompletion" type="button" class="buttonBrue_small" onclick="send()" value="è¿”ä¿¡ã‚’é€ã‚‹"></p>
+							<p><input id="back" type="button" class="buttonBrue_noborder" value="æˆ»ã‚‹"></p>
 						</div>
 					`;
-					// –ß‚éƒ{ƒ^ƒ“‚ÌƒNƒŠƒbƒN‚ğ‘Ò‚Â
+					// æˆ»ã‚‹ãƒœã‚¿ãƒ³ã®ã‚¯ãƒªãƒƒã‚¯ã‚’å¾…ã¤
 					await document.getElementById("back").observe("click");
-					// ƒ[ƒNƒGƒŠƒA‚ğ–ß‚·
+					// ãƒ¯ãƒ¼ã‚¯ã‚¨ãƒªã‚¢ã‚’æˆ»ã™
 					document.body.replaceChild(backup, workArea);
 				}
 			})();
@@ -164,35 +164,35 @@
 			var files = document.getElementById( "file" ) ;
 			var inputFile;
 			var fileName;
-			// ”ñ“¯Šú‚ÅFile ƒIƒuƒWƒFƒNƒg‚Ì’†g‚ğ“Ç‚İ‚Ş
+			// éåŒæœŸã§File ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä¸­èº«ã‚’èª­ã¿è¾¼ã‚€
 			files.onchange = function () {
-				// ƒtƒ@ƒCƒ‹–¼•\¦inputæ“¾
+				// ãƒ•ã‚¡ã‚¤ãƒ«åè¡¨ç¤ºinputå–å¾—
 				let attText = document.getElementById("fileName");
-				// ƒtƒ@ƒCƒ‹–¼‚Ì‚İ‚ğæ“¾(ƒpƒX‚Ìíœ)
+				// ãƒ•ã‚¡ã‚¤ãƒ«åã®ã¿ã‚’å–å¾—(ãƒ‘ã‚¹ã®å‰Šé™¤)
 				let onlyFileName = document.getElementById("file").value.replace(/^.*[\\\/]/, '');
-				// ƒtƒ@ƒCƒ‹–¼‚ğinput‚É·‚µ‚Ş
+				// ãƒ•ã‚¡ã‚¤ãƒ«åã‚’inputã«å·®ã—è¾¼ã‚€
 				attText.value = onlyFileName;
 				
-				// ƒtƒ@ƒCƒ‹ƒIƒuƒWƒFƒNƒg‚ğ€”õ
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æº–å‚™
 				var fileReader = new FileReader() ;
 				fileReader.onload = function () {
-					// ƒtƒ@ƒCƒ‹“à—e‚ğæ“¾
+					// ãƒ•ã‚¡ã‚¤ãƒ«å†…å®¹ã‚’å–å¾—
 					var baseFile = this.result ;
 					var spFile = baseFile.split(',');
-					// æ“ª‚Ì—]Œv‚È•¶š—ñ‚ğœ‚¢‚½Blobƒf[ƒ^‚Ì‚İ‚É‚·‚é(Data-URL ‚ÌéŒ¾‚ğíœ(spFile[0] = 'data:*/*;base64,'))
+					// å…ˆé ­ã®ä½™è¨ˆãªæ–‡å­—åˆ—ã‚’é™¤ã„ãŸBlobãƒ‡ãƒ¼ã‚¿ã®ã¿ã«ã™ã‚‹(Data-URL ã®å®£è¨€ã‚’å‰Šé™¤(spFile[0] = 'data:*/*;base64,'))
 					inputFile = spFile[1];
 				}
-				// ƒtƒ@ƒCƒ‹‚Ì1ŒÂ–Ú
+				// ãƒ•ã‚¡ã‚¤ãƒ«ã®1å€‹ç›®
 				var file = files.files[0] ;
 				fileName = file.name;
-				// w’è‚µ‚½BlobŒ^‚©FIleŒ^‚Ìƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ş(“Ç‚İ‚Ş‚Æresult‘®«‚Éƒtƒ@ƒCƒ‹‚Ìurl‚ğŠi”[(Data URI(Base64)))
+				// æŒ‡å®šã—ãŸBlobå‹ã‹FIleå‹ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã‚€(èª­ã¿è¾¼ã‚€ã¨resultå±æ€§ã«ãƒ•ã‚¡ã‚¤ãƒ«ã®urlã‚’æ ¼ç´(Data URI(Base64)))
 				fileReader.readAsDataURL( file ) ;
 			}
 			/***
-			 Salesforce‚Öƒf[ƒ^“o˜^ˆ—
+			 Salesforceã¸ãƒ‡ãƒ¼ã‚¿ç™»éŒ²å‡¦ç†
 			***/
 			function send() {
-				// ƒAƒNƒZƒXƒg[ƒNƒ“æ“¾iƒŠƒtƒŒƒbƒVƒ…ƒg[ƒNƒ“ƒtƒ[j Ajax
+				// ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³å–å¾—ï¼ˆãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ãƒˆãƒ¼ã‚¯ãƒ³ãƒ•ãƒ­ãƒ¼ï¼‰ Ajax
 				$.ajax({
 					type: 'POST',
 					crossOrigin: true,
@@ -201,17 +201,17 @@
 					cache :false,
 					data : {"grant_type":"refresh_token","client_id":"3MVG9pRzvMkjMb6nsLsmTx_FqB0rQ9AHEMYt85TrwFp6b3yeP.ta18VQpmha_Ds31fssFdYib4DdLPcLKqtQG", "client_secret":"F864BDD8ADFB8B17EA27F0623CF9039A503A76F9312032654DBFFDB25E87B142","refresh_token":"5Aep861mdLLi91HqFfCpXYtQXRaOgcHsK1gi36_cVHboubUhDFRrSCX9zyL1KBPgaR5qiKjUA54Q0RZhiN_teRI"},
 					success : function (connectData) {
-						// ƒtƒ@ƒCƒ‹“Ç‚İ‚İ
+						// ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿
 						var reader = new FileReader();
-						// ƒAƒNƒZƒXƒg[ƒNƒ“
+						// ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³
 						var accToken = 'Bearer ' + connectData.access_token;
-						// ‘—Mƒf[ƒ^€”õ
+						// é€ä¿¡ãƒ‡ãƒ¼ã‚¿æº–å‚™
 						var inputData = {};
-						// ƒP[ƒX‚ÌID‚Íæ“¾‚µ‚½‚à‚Ì‚ğ‚½‚¹‚é
+						// ã‚±ãƒ¼ã‚¹ã®IDã¯å–å¾—ã—ãŸã‚‚ã®ã‚’æŒãŸã›ã‚‹
 						inputData.CaseId = '5005j00000QyilYAAR';
 						inputData.ReplyDeteil = bkRepDeteil;
 						inputData.File = '' ;
-						// Rest Apex‚Öƒpƒ‰ƒ[ƒ^‚ğJSONŒ`®‚É•ÏŠ·
+						// Rest Apexã¸ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’JSONå½¢å¼ã«å¤‰æ›
 						var data = JSON.stringify( inputData );
 						
 						$.ajax({
@@ -224,12 +224,12 @@
 							data : data,
 							success : function (res) {
 								if(res.length != 0){
-									// ƒRƒ“ƒ^ƒNƒgƒ{[ƒh‚ÌID‚ğæ“¾
+									// ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰ã®IDã‚’å–å¾—
 									var insId = res;
 
-									//Salesforce‚ÉƒAƒbƒvƒ[ƒh‚·‚é‚½‚ß‚Ìbody‚ğì¬
+									//Salesforceã«ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ã™ã‚‹ãŸã‚ã®bodyã‚’ä½œæˆ
 									var cvJson = {
-										"Title" : fileName,  //ƒAƒbƒv‚³‚ê‚éƒtƒ@ƒCƒ‹‚Ìƒ^ƒCƒgƒ‹
+										"Title" : fileName,  //ã‚¢ãƒƒãƒ—ã•ã‚Œã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¿ã‚¤ãƒˆãƒ«
 										"PathOnClient" : fileName, 
 										"VersionData" : inputFile
 									};
@@ -244,7 +244,7 @@
 										success : function (contentversionres) {
 											var cvId = contentversionres.id;
 
-											// content version‚É•R•t‚¢‚Äì¬‚³‚ê‚½content document‚ÌID‚ğæ“¾
+											// content versionã«ç´ä»˜ã„ã¦ä½œæˆã•ã‚ŒãŸcontent documentã®IDã‚’å–å¾—
 											var query = "SELECT+ContentDocumentId+FROM+ContentVersion+WHERE+Id+=+'" + cvId + "'"
 											$.ajax({
 												type: 'GET',
@@ -256,11 +256,11 @@
 													var cdRecords = DocumentIdRes["records"];
 													var cdId = cdRecords[0].ContentDocumentId;
 
-													// ƒRƒ“ƒ^ƒNƒgƒ{[ƒh–¾×ƒŒƒR[ƒh‚ÆƒŠƒ“ƒN‚³‚¹‚é‚½‚ß‚Ìbody‚ğì¬
+													// ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰æ˜ç´°ãƒ¬ã‚³ãƒ¼ãƒ‰ã¨ãƒªãƒ³ã‚¯ã•ã›ã‚‹ãŸã‚ã®bodyã‚’ä½œæˆ
 													var linkJson = {
 														"ContentDocumentId" : cdId,
-														"LinkedEntityId" : insId, //ƒRƒ“ƒ^ƒNƒgƒ{[ƒh–¾×‚ÌƒŒƒR[ƒhID
-														"Visibility" : "AllUsers" //‰{——‚Å‚«‚él‚Ì§ŒÀ
+														"LinkedEntityId" : insId, //ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰æ˜ç´°ã®ãƒ¬ã‚³ãƒ¼ãƒ‰ID
+														"Visibility" : "AllUsers" //é–²è¦§ã§ãã‚‹äººã®åˆ¶é™
 													};
 													console.log(cdId);
 													console.log(insId);
@@ -274,8 +274,8 @@
 														dataType: 'json',
 														data : JSON.stringify(linkJson),
 														success : function (contentdocumentRes) {
-															console.log('‘—MŠ®—¹');
-															// Š®—¹‰æ–Ê‚É‘JˆÚ
+															console.log('é€ä¿¡å®Œäº†');
+															// å®Œäº†ç”»é¢ã«é·ç§»
 															window.location.href = './NewCompletion.html';
 														},
 														error : function (data, errorThrown,status) {
@@ -298,7 +298,7 @@
 											console.log(status);
 										}
 									})
-									//‚±‚±‚Ü‚Å
+									//ã“ã“ã¾ã§
 								}
 							},
 							error : function (data, errorThrown,status) {
