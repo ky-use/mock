@@ -88,6 +88,13 @@
             .inqDetail{
                 margin: 0 0 0 15px;
             }
+
+            .fileDownloadText{
+                border: none;
+                outline: none;
+                background: transparent;
+                font-weight: bold;
+            }
         </style>
 	</head>
 	<body>
@@ -154,7 +161,7 @@
                     <template id="fileList">
                         <tr>
                             <td>
-                                <button class="fileDownloadText"></button>
+                                <button class="fileDownloadText"  value="false"></button>
                                 <p><a class="attachment" download></a></p>
                             </td>
                         </tr>
@@ -232,59 +239,8 @@
                         removeOldDetailList[i].parentNode.removeChild(removeOldDetailList[i])
                     }
                 }
-
-                // 表示初期化
-                /*for(let i =0; i < arrayInqDetails.length; i++){
-                    let resetElement = document.getElementById('detail'+ i); 
-                    let resetButton = document.getElementById('detailButton'+ i); 
-                    // 詳細を部分表示
-                    resetElement.innerHTML = arrayInqDetails[i].inqDetail.substr(0, 20) + "...";
-                        // ファイルがある場合、固定文言とファイルリンクを非表示
-                        if(arrayInqDetails[i].fileDownloadText){
-                            document.getElementById('fdText'+i).style = 'display:none;';
-                            document.getElementById('fName'+i).style = 'display:none;';
-                        }
-                        resetButton.value = 'false';
-                }*/
-
                 
             };
-            
-            /***
-			 お問い合わせ詳細の出力処理
-			***/
-            /*
-              配列内：
-                dateTime:画面出力概要（日時）
-                inqDetail:お問い合わせ詳細
-                fileDownloadText:ファイル（コチラからダウンロード）を出力するか（T/F）
-                fileName:画面出力ファイル名
-                fileLink:ファイルのリンク表示用URL
-            */
-            // お問い合わせ詳細のデータ
-            let arrayInqDetails = [
-                {
-                    dateTime:'2022年06月02日　10：01',
-                    inqDetail:'問い合わせ詳細：スマホを機種変更したのですが、トークンアプリの引継ぎ？がよくわかりません。前のスマホはもっていません。スマホを機種変更したのですが、トークンアプリの引継ぎ？がよくわかりません。前のスマホはもっていません。スマホを機種変更したのですが、トークンアプリの引継ぎ？がよくわかりません。前のスマホはもっていません。',
-                    fileDownloadText:true,
-                    fileName:'aaaaaaaaaaaaaaaaaaa.txt'
-                },{
-                    dateTime:'2022年06月02日　10：02',
-                    inqDetail:'ご回答：カスタマーセンターの鈴木です。お問い合わせありがとうございます。スマートフォンを機種変更した場合、トークンアプリは引継ぎがされません。お手数おかけいたしますが、あらためてトークンアプリをダウンロードいただき、再登録をお願いいたします。',
-                    fileDownloadText:false,
-                    fileName:'bbbbbbbbbbbbbbb.txt'
-                },{
-                    dateTime:'2022年06月02日　10：03',
-                    inqDetail:'問い合わせ詳細：スマホを機種変更したのですが、トークンアプリの引継ぎ？がよくわかりません。前のスマホはもっていません。スマホを機種変更したのですが、トークンアプリの引継ぎ？がよくわかりません。前のスマホはもっていません。スマホを機種変更したのですが、トークンアプリの引継ぎ？がよくわかりません。前のスマホはもっていません。',
-                    fileDownloadText:true,
-                    fileName:'cccccccccc.txt'
-                },{
-                    dateTime:'2022年06月02日　10：04',
-                    inqDetail:'ご回答：カスタマーセンターの鈴木です。お問い合わせありがとうございます。スマートフォンを機種変更した場合、トークンアプリは引継ぎがされません。お手数おかけいたしますが、あらためてトークンアプリをダウンロードいただき、再登録をお願いいたします。',
-                    fileDownloadText:true,
-                    fileName:'ddddd.txt'
-                }
-            ];
 
 			/***
 			 要素の全表示・部分表示処理
@@ -300,6 +256,8 @@
                 let buttonNum = elem.Name.substr(elem.Name.length-1, elem.Name.length);
                 // 詳細要素の取得
                 let element = document.getElementById(elem.Name);                
+                // ファイル有無
+                let fileElemValue = document.getElementById('fdText'+buttonNum).value;
                 
                 // ボタンの状態で表示を切り替え(要素のvalueは文字列)
                 if(openState=='true'){
@@ -315,7 +273,7 @@
                     element.innerHTML = text;
                     Console.log(arrayCbd[buttonNum].fileDownloadText);
                     // ファイルがある場合、固定文言とファイルリンクを非表示
-                    if(arrayCbd[buttonNum].fileDownloadText){
+                    if(fileElemValue=='true'){
                         document.getElementById('fdText'+buttonNum).style = 'display:none;';
                         document.getElementById('fName'+buttonNum).style = 'display:none;';
                     }
@@ -325,7 +283,7 @@
                     // 詳細を全表示
                     element.innerHTML = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c;
                     // ファイルがある場合、固定文言とファイルリンクを表示
-                    if(arrayInqDetails[buttonNum].fileDownloadText){
+                    if(fileElemValue=='true'){
                         document.getElementById('fdText'+buttonNum).style = 'display:inline;';
                         document.getElementById('fName'+buttonNum).style = 'display:inline;';
                     }
@@ -443,7 +401,8 @@
                                                 for(let [fruits, count] of entries) {
                                                     console.log(`${fruits}は、${count}`);
                                                 }
-                                            }*/
+                                            }
+                                            */
                                             //console.log('cbdIdList:' + cbdIdArray);
                                             //console.log('cvNameList:' + cvNameArray);
                                             //console.log('cvIdList:' + cvIdArrary);
@@ -545,13 +504,14 @@
                                                             // 固定文字出力用
                                                             fileListClone.querySelector('.fileDownloadText').innerHTML = 'ファイル（コチラからダウンロード）';
                                                             fileListClone.querySelector('.fileDownloadText').id = 'fdText'+ j;
-                                                            //fileListClone.querySelector('.fileDownloadText').style = 'display:none;';
+                                                            fileListClone.querySelector('.fileDownloadText').value = 'true';
+                                                            fileListClone.querySelector('.fileDownloadText').style = 'display:none;';
                                                             // ファイル
                                                             fileListClone.querySelector('.attachment').innerText = cvNameArray[j];
                                                             fileListClone.querySelector('.attachment').href = fileUrlList;
                                                             fileListClone.querySelector('.attachment').download = cvNameArray[j];
                                                             fileListClone.querySelector('.attachment').id = 'fName'+ j;
-                                                            //fileListClone.querySelector('.attachment').style = 'display:none;';
+                                                            fileListClone.querySelector('.attachment').style = 'display:none;';
 
                                                             // div#fileListの中に追加
                                                             document.getElementById('outputInqList_Details').appendChild(fileListClone);
