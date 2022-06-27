@@ -348,6 +348,17 @@
                     }
                 });
             }
+
+            /*** コンタクトボード明細1:ファイルNのコンストラクタ ***/
+            function cbdList(cbdId, cvNameArray, cvIdArrary) {
+                'use strict'; //strictモード（newの付け忘れによるグローバル変数宣言の回避（エラー））
+                this.cbdId = cbdId;
+                this.cvNameArray = cvNameArray;
+                this.cvIdArrary = cvIdArrary;
+            }
+
+            //let kobito = new KobitoDukan("クサマダラオオコビト");
+
             // 引数：ケースNo
             function sendCbd(caseNum){
                 changeDisplayButton1(caseNum.value);
@@ -428,10 +439,13 @@
                                                 cbdId = cvList[i].LinkEntityId;
                                                 cvNameArray = cvList[i].CvNameList;
                                                 cvIdArrary = cvList[i].CvIdList;
-                                                console.log(`~~` + i + `番目~~`);
+                                                /*console.log(`~~` + i + `番目~~`);
                                                 console.log('cbdId:' + cbdId);
                                                 console.log('cvNameArray:' + cvNameArray);
-                                                console.log('cvIdArrary:' + cvIdArrary);
+                                                console.log('cvIdArrary:' + cvIdArrary);*/
+
+                                                let cbdObj = new cbdList(cbdId, cvNameArray, cvIdArrary);
+                                                console.log('cbdObj'+cbdObj);
 
                                                 // コンタクトボードの情報を取得
                                                 cbdIndex = cbdNumber.indexOf(cbdId);
@@ -533,6 +547,7 @@
 
                                             }
 
+
                                             // template要素を取得
                                             /*let template = document.getElementById('templateInqList_Details');
                                             // データの数分繰り返し
@@ -587,7 +602,9 @@
                                                 }
                                                 // div#outputInqList_Detailsの中に追加
                                                 document.getElementById('outputInqList_Details').appendChild(clone);
-                                            }*/
+
+                                            }
+                                            */
                                         },
                                         error : function (data, errorThrown,status) {
                                             console.log(data);
