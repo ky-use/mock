@@ -565,19 +565,19 @@
                                                 let cbdContent = '';
                                                 let cbdCreatedDate = '';
 
-                                                cbdObjList.forEach(elem => {
+                                                /*cbdObjList.forEach(elem => {
                                                     conId = elem.LinkEntityId;
                                                     contentVersionNameArray = elem.CvNameList;
                                                     contentVersionIdArrary = elem.CvIdList;
-                                                    console.log(conId);
-                                                    console.log(contentVersionNameArray);
-                                                    console.log(contentVersionIdArrary);
-                                                })
+                                                })*/
                                                 // 1ループごとに設定
-                                                /*conId = cbdObjList[i].LinkEntityId;
+                                                conId = cbdObjList[i].LinkEntityId;
                                                 contentVersionNameArray = cbdObjList[i].CvNameList;
-                                                contentVersionIdArrary = cbdObjList[i].CvIdList;*/
-
+                                                contentVersionIdArrary = cbdObjList[i].CvIdList;
+                                                console.log(conId);
+                                                console.log(contentVersionNameArray);
+                                                console.log(contentVersionIdArrary);
+                                                
                                                 // コンタクトボードの情報を取得
                                                 cbdIndex = cbdNumber.indexOf(conId);
                                                 // コンタクトボード明細の値を設定
