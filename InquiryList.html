@@ -552,8 +552,7 @@
                                             let template = document.getElementById('templateInqList_Details');
                                             // データの数分繰り返し
                                             for(let i=0; i < cbdObjList.length; i++){
-                                                // template要素の内容を複製
-                                                let clone = template.content.cloneNode(true);
+                                                
                                                 // Apex返却値
                                                 let Id = '';
                                                 let contentVersionNameArray = [];
@@ -611,23 +610,25 @@
 
                                                 // 添付ファイル部分のテンプレート作成
                                                 let fileListTemplate = document.getElementById('fileList');
-                                                //if(){}
-                                                //for文でファイルの件数分回す　Id一致した回数分クローンする（別でテンプレート用意するべきかも）
-                                                for(let j=0; j < contentVersionIdArrary.length; j++){
-                                                    let fileListClone = fileListTemplate.content.cloneNode(true);
-                                                    // 固定文字出力用
-                                                    fileListClone.querySelector('.fileDownloadText').innerHTML = 'ファイル（コチラからダウンロード）';
-                                                    fileListClone.querySelector('.fileDownloadText').id = 'fdText'+ j;
-                                                    fileListClone.querySelector('.fileDownloadText').value = 'true';
-                                                    fileListClone.querySelector('.fileDownloadText').style = 'display:none;';
-                                                    // ファイル
-                                                    fileListClone.querySelector('.attachment').innerText = contentVersionNameArray[j];
-                                                    fileListClone.querySelector('.attachment').href = fileUrlList;
-                                                    fileListClone.querySelector('.attachment').download = contentVersionNameArray[j];
-                                                    fileListClone.querySelector('.attachment').id = 'fName'+ j;
-                                                    fileListClone.querySelector('.attachment').style = 'display:none;';
-                                                    // div#fileListの中に追加
-                                                    document.getElementById('outputInqList_Details').appendChild(clone);
+
+                                                //for文でファイルの件数分クローンする
+                                                if(contentVersionIdArrary != 0){
+                                                    for(let j=0; j < contentVersionIdArrary.length; j++){
+                                                        let fileListClone = fileListTemplate.content.cloneNode(true);
+                                                        // 固定文字出力用
+                                                        fileListClone.querySelector('.fileDownloadText').innerHTML = 'ファイル（コチラからダウンロード）';
+                                                        fileListClone.querySelector('.fileDownloadText').id = 'fdText'+ j;
+                                                        fileListClone.querySelector('.fileDownloadText').value = 'true';
+                                                        fileListClone.querySelector('.fileDownloadText').style = 'display:none;';
+                                                        // ファイル
+                                                        fileListClone.querySelector('.attachment').innerText = contentVersionNameArray[j];
+                                                        fileListClone.querySelector('.attachment').href = fileUrlList;
+                                                        fileListClone.querySelector('.attachment').download = contentVersionNameArray[j];
+                                                        fileListClone.querySelector('.attachment').id = 'fName'+ j;
+                                                        fileListClone.querySelector('.attachment').style = 'display:none;';
+                                                        // div#fileListの中に追加
+                                                        document.getElementById('outputInqList_Details').appendChild(clone);
+                                                    }
                                                 }
                                             }
                                             
