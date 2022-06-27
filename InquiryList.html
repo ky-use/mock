@@ -271,18 +271,18 @@
                         text = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c;
                     }
                     element.innerHTML = text;
-                    Console.log('fileElemValue:'+fileElemValue.value);
+                    console.log(fileElemValue.value);
                     // ファイルがある場合、固定文言とファイルリンクを非表示
                     if(fileElemValue.value=='true'){
                         document.getElementById('fdText'+buttonNum).style = 'display:none;';
                         document.getElementById('fName'+buttonNum).style = 'display:none;';
                     }
                     openState = 'false';
-
+                    
                 } else{
                     // 詳細を全表示
                     element.innerHTML = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c;
-                    Console.log('fileElemValue:'+fileElemValue.value);
+                    console.log(fileElemValue.value);
                     // ファイルがある場合、固定文言とファイルリンクを表示
                     if(fileElemValue.value=='true'){
                         document.getElementById('fdText'+buttonNum).style = 'display:inline;';
