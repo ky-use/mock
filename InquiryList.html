@@ -351,7 +351,7 @@
 
             /*** コンタクトボード明細1:ファイルNのコンストラクタ ***/
             function cbdList(cbdId, cvNameArray, cvIdArrary, fileUrlArray) {
-                'use strict'; //strictモード（newの付け忘れによるグローバル変数宣言の回避（エラー））
+                'use strict'; //strictモード（newの付け忘れによるグローバル変数宣言回避（new付け忘れでエラー））
                 this.cbdId = cbdId;
                 this.cvNameArray = cvNameArray;
                 this.cvIdArrary = cvIdArrary;
@@ -419,8 +419,7 @@
 
                                             // ファイルとコンタクトボードのID
                                             let fileList = [];
-                                            // List<obj>から取得用
-                                            let cbdNumber = arrayCbd.map(el => el.Id);
+                                            // コンタクトボード明細と添付ファイルの組み合わせを格納するリスト
                                             let cbdObjList = [];
 
                                             // コンタクトボードの件数分、画面出力処理
@@ -547,6 +546,9 @@
                                             }
                                             console.log('cbdObjList' + JSON.stringify(cbdObjList));
 
+                                            // List<obj>から取得用
+                                            let cbdNumber = arrayCbd.map(el => el.Id);
+
                                             // template要素を取得
                                             let template = document.getElementById('templateInqList_Details');
                                             // データの数分繰り返し
@@ -566,10 +568,10 @@
                                                 contentVersionNameArray = cbdObjList[i].CvNameList;
                                                 contentVersionIdArrary = cbdObjList[i].CvIdList;
 
-                                                // コンタクトボードの情報を取得
-                                                cbdIndex = cbdNumber.indexOf(conId);
                                                 console.log(cbdIndex);
                                                 console.log(arrayCbd);
+                                                // コンタクトボードの情報を取得
+                                                cbdIndex = cbdNumber.indexOf(conId);
                                                 // コンタクトボード明細の値を設定
                                                 cbdRecType = arrayCbd[cbdIndex].RecordType__c;
                                                 cbdContent = arrayCbd[cbdIndex].Content__c;
@@ -632,7 +634,6 @@
                                                     }
                                                 }
                                             }
-                                            
                                         },
                                         error : function (data, errorThrown,status) {
                                             console.log(data);
