@@ -271,7 +271,7 @@
                         text = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c;
                     }
                     element.innerHTML = text;
-                    Console.log(arrayCbd[buttonNum].fileDownloadText);
+                    Console.log('fileElemValue:'+fileElemValue);
                     // ファイルがある場合、固定文言とファイルリンクを非表示
                     if(fileElemValue=='true'){
                         document.getElementById('fdText'+buttonNum).style = 'display:none;';
