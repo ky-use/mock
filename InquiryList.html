@@ -199,7 +199,7 @@
                 document.getElementById('inqDetailsList').style.display = 'inline';
                 document.getElementById('inqDetails1').style.display = 'inline';
                 document.getElementById('inq1').style.display = 'inline';
-                // タイトルとインデックスを初期化
+                // タイトルとインデックス
                 let title = '';
                 let index = '';
                 // ケースの配列からケースNoのみを配列として準備
@@ -239,7 +239,6 @@
                         removeOldDetailList[i].parentNode.removeChild(removeOldDetailList[i])
                     }
                 }
-                
             };
 
 			/***
@@ -260,6 +259,7 @@
                 let fileElemValue = document.getElementById('fdText'+buttonNum);
                 console.log(buttonNum);
                 console.log(fileElemValue);
+                console.log(fileElemValue).value;
                 
                 // ボタンの状態で表示を切り替え(要素のvalueは文字列)
                 if(openState=='true'){
