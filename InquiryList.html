@@ -568,10 +568,11 @@
                                                 contentVersionNameArray = cbdObjList[i].CvNameList;
                                                 contentVersionIdArrary = cbdObjList[i].CvIdList;
 
-                                                console.log(cbdIndex);
-                                                console.log(arrayCbd);
+                                                console.log(conId);
                                                 // コンタクトボードの情報を取得
                                                 cbdIndex = cbdNumber.indexOf(conId);
+                                                console.log(cbdIndex);
+                                                console.log(arrayCbd);
                                                 // コンタクトボード明細の値を設定
                                                 cbdRecType = arrayCbd[cbdIndex].RecordType__c;
                                                 cbdContent = arrayCbd[cbdIndex].Content__c;
