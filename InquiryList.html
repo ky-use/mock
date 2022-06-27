@@ -257,9 +257,6 @@
                 let element = document.getElementById(elem.Name);                
                 // ファイル有無
                 let fileElemValue = document.getElementById('fdText'+buttonNum);
-                console.log(buttonNum);
-                console.log(fileElemValue);
-                console.log(fileElemValue.Value);
                 console.log(fileElemValue.value);
                 
                 // ボタンの状態で表示を切り替え(要素のvalueは文字列)
@@ -274,9 +271,9 @@
                         text = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c;
                     }
                     element.innerHTML = text;
-                    Console.log('fileElemValue:'+fileElemValue);
+                    Console.log('fileElemValue:'+fileElemValue.value);
                     // ファイルがある場合、固定文言とファイルリンクを非表示
-                    if(fileElemValue=='true'){
+                    if(fileElemValue.value=='true'){
                         document.getElementById('fdText'+buttonNum).style = 'display:none;';
                         document.getElementById('fName'+buttonNum).style = 'display:none;';
                     }
@@ -285,8 +282,9 @@
                 } else{
                     // 詳細を全表示
                     element.innerHTML = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c;
+                    Console.log('fileElemValue:'+fileElemValue.value);
                     // ファイルがある場合、固定文言とファイルリンクを表示
-                    if(fileElemValue=='true'){
+                    if(fileElemValue.value=='true'){
                         document.getElementById('fdText'+buttonNum).style = 'display:inline;';
                         document.getElementById('fName'+buttonNum).style = 'display:inline;';
                     }
