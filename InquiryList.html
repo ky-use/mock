@@ -420,6 +420,7 @@
                                             let fileList = [];
                                             // List<obj>から取得用
                                             let cbdNumber = arrayCbd.map(el => el.Id);
+                                            let cbdObjList = [];
 
                                             // コンタクトボードの件数分、画面出力処理
                                             for (let i=0; i < cvList.length; i++){
@@ -445,7 +446,8 @@
                                                 console.log('cvIdArrary:' + cvIdArrary);*/
 
                                                 let cbdObj = new cbdList(cbdId, cvNameArray, cvIdArrary);
-                                                console.log('cbdObj'+JSON.stringify(cbdObj));
+                                                cbdObjList.push(cbdObj);
+                                                //console.log('cbdObj'+JSON.stringify(cbdObj));
 
                                                 // コンタクトボードの情報を取得
                                                 cbdIndex = cbdNumber.indexOf(cbdId);
@@ -538,7 +540,7 @@
                                                         }
                                                     })
                                                 }
-
+                                                
                                                 /*ファイル画面出力処理*/
                                                 // 取得できたURLの件数分、画面に出力
                                                 //for(let j=0; j < fileUrlList.length; j++){
@@ -546,7 +548,7 @@
                                                 //}
 
                                             }
-
+                                            console.log('cbdObjList' + cbdObjList);
 
                                             // template要素を取得
                                             /*let template = document.getElementById('templateInqList_Details');
