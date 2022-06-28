@@ -209,7 +209,7 @@
                 title = arrayInq[index].CreatedDate;
                 // タイトル用に加工
                 title = 'No.' + title.substring( 0, title.length - 12 ).replace(/T|-|:/g,'');
-                console.log(title);
+                //console.log(title);
                 // タイトルを設定
                 document.getElementById('inq1').innerHTML = title;
             };
@@ -321,7 +321,7 @@
                                 if(res.length != 0){
                                     // ケースをBK
                                     arrayInq = res;
-                                    console.log(arrayInq);
+                                    //console.log(arrayInq);
                                     
                                     // template要素を取得
                                     let template = document.getElementById('templateInqList');
@@ -356,10 +356,6 @@
                 this.cvNameArray = cvNameArray;
                 this.fileUrlArray = fileUrlArray;
             }
-            
-
-
-            //let kobito = new KobitoDukan("クサマダラオオコビト");
 
             // 引数：ケースNo
             function sendCbd(caseNum){
@@ -390,7 +386,6 @@
                                 // データを取得できた場合
                                 if(res.length != 0){
                                     arrayCbd = res; // [{Id, RecordType__c, Content__c, Case__c, CreatedDate}]
-                                    //console.log('arrayCbd:' + arrayCbd);
 
                                     // コンタクトボードIDからコンテンツバージョンのID取得
                                     $.ajax({
@@ -405,18 +400,6 @@
                                         success : function (Cv) {
                                             //console.log('Cv:' + Cv);
                                             let cvList = Cv; // [Id LinkEntityId(コンタクトボードID), List CvIdList(コンテンツバージョンID), CvName]
-                                            
-                                            /*for (i=0; i < cvList.length; i++){
-                                                let entries = Object.entries(cvList[i]);
-                                                console.log(`---------------------`);
-                                                for(let [fruits, count] of entries) {
-                                                    console.log(`${fruits}は、${count}`);
-                                                }
-                                            }
-                                            */
-                                            //console.log('cbdIdList:' + cbdIdArray);
-                                            //console.log('cvNameList:' + cvNameArray);
-                                            //console.log('cvIdList:' + contentversionIdArrary);
 
                                             // ファイルとコンタクトボードのID
                                             let fileList = [];
@@ -460,18 +443,6 @@
                                                     'cbdCreatedDate':cbdCreatedDate
                                                 };
                                                 //console.log(cbd);
-
-                                                /*console.log(`~~` + i + `番目~~`);
-                                                console.log('cbdId:' + cbdId);
-                                                console.log('cvNameArray:' + cvNameArray);
-                                                console.log('contentversionIdArrary:' + contentversionIdArrary);*/
-                                                
-                                                //console.log('cbdObj'+JSON.stringify(cbdObj));
-
-                                                
-                                                /*console.log('cbdRecType:'+cbdRecType);
-                                                console.log('cbdContent:'+cbdContent);
-                                                console.log('cbdCreatedDate:'+cbdCreatedDate);*/
                                                 
                                                 // コンタクトボード明細に紐づく、添付ファイルを取得し、画面出力
                                                 for (let j=0; j < contentversionIdArrary.length; j++){
@@ -490,7 +461,6 @@
                                                             let fileUrl = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
                                                             console.log('fileUrl: '+fileUrl);
                                                             fileUrlArray.push(fileUrl);
-
                                                         },
                                                         error : function (data, errorThrown,status) {
                                                             console.log(data);
@@ -502,12 +472,8 @@
                                                 // クラスにつめて、配列に入れる
                                                 let cbdObj = new cbdList(cbd, cvNameArray, fileUrlArray);
                                                 cbdObjList.push(cbdObj);
-
                                             }
                                             console.log('cbdObjList' + JSON.stringify(cbdObjList));
-
-                                            // List<obj>から取得用
-                                            //let cbdNumber = arrayCbd.map(el => el.Id);
                                             
                                             /*** タグを作成 ***/
                                             /***
@@ -518,6 +484,7 @@
                                              * ]
                                              ***/
                                             // cbdObjListをループ
+                                            /*
                                             cbdObjList.forEach(elm => {
                                                 console.log('elm'+ JSON.stringify(elm));
                                                 // オブジェクトの要素をループ
@@ -538,8 +505,10 @@
                                                     }
                                                 })
                                             })
+                                            */
 
                                             // template要素を取得
+                                            /*
                                             let template = document.getElementById('templateInqList_Details');
                                             // データの数分繰り返し
                                             for(let i=0; i < cbdObjList.length; i++){
@@ -552,11 +521,6 @@
                                                 let cbdContent = '';
                                                 let cbdCreatedDate = '';
 
-                                                /*cbdObjList.forEach(elem => {
-                                                    conId = elem.LinkEntityId;
-                                                    contentversionNameArray = elem.CvNameList;
-                                                    contentversionIdArrary = elem.CvIdList;
-                                                })*/
                                                 // 1ループごとに設定
                                                 conId = cbdObjList[i].LinkEntityId;
                                                 contentversionNameArray = cbdObjList[i].CvNameList;
@@ -571,11 +535,6 @@
                                                 cbdRecType = arrayCbd[cbdIndex].RecordType__c;
                                                 cbdContent = arrayCbd[cbdIndex].Content__c;
                                                 cbdCreatedDate = arrayCbd[cbdIndex].CreatedDate;
-                                                /*console.log('cbdRecType:'+cbdRecType);
-                                                console.log('cbdContent:'+cbdContent);
-                                                console.log('cbdCreatedDate:'+cbdCreatedDate);*/
-                                                
-                                                /*元ファイル取得処理位置*/
 
                                                 // template要素を取得
                                                 let template = document.getElementById('templateInqList_Details');
@@ -629,6 +588,7 @@
                                                     }
                                                 }
                                             }
+                                            */
                                         },
                                         error : function (data, errorThrown,status) {
                                             console.log(data);
@@ -637,10 +597,40 @@
                                         }
                                     })
                                 }
+                                /*** タグを作成 ***/
+                                /***
+                                 * cbdObjList = [
+                                 *  cbd = {cbdId, cbdRecType, cbdContent, cbdCreatedDate} // コンタクトボード明細の情報
+                                 *  contentversionNameArray  // ファイルの名前
+                                 *  fileUrlArray             // ファイルのURL
+                                 * ]
+                                 ***/
+                                // cbdObjListをループ
+                                cbdObjList.forEach(elm => {
+                                    console.log('elm'+ JSON.stringify(elm));
+                                    // オブジェクトの要素をループ
+                                    Object.keys(elm).forEach(key => {
+                                        console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
+                                        let childElm = elm[key];
+                                        // 要素のデータ型によってループ方法を変更
+                                        if(key == 'cbd'){
+                                            // オブジェクトの要素をループ
+                                            Object.keys(childElm).forEach(childKey => {
+                                                console.log(`childKey: ${childKey} childValue: ${JSON.stringify(childElm[childKey])}`)
+                                            })
+                                        } else {
+                                            // 配列の要素をループ
+                                            childElm.forEach(childElem => {
+                                                console.log('childElm'+ JSON.stringify(childElem));
+                                            })
+                                        }
+                                    })
+                                })
                             },
                             error : function (data, errorThrown,status) {
                                 
                             }
+                            
                         })
                     },
                     error : function (data, errorThrown,status) {
