@@ -521,7 +521,7 @@
                                                 Object.keys(elm).forEach(key => {
                                                     console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
                                                     // 要素のデータ型によってループ方法を変更
-                                                    if(elm[key] == 'cbd'){
+                                                    if(key == 'cbd'){
                                                         Object.keys(elm[key]).forEach(childKey => {
                                                             console.log(`key: ${elm[key]} value: ${JSON.stringify(childKey[elm[key]])}`)
                                                         })
