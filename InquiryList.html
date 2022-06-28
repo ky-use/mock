@@ -416,7 +416,7 @@
                                                 fileUrlArray = [];
                                                 // Apex返却値
                                                 let cbd = {};
-                                                let cvNameArray = [];
+                                                let contentversionNameArray = [];
                                                 let contentversionIdArrary = [];
                                                 // コンタクトボード明細
                                                 
@@ -472,7 +472,7 @@
                                                     })
                                                 }
                                                 // クラスにつめて、配列に入れる
-                                                let cbdObj = new cbdList(cbd, cvNameArray, fileUrlArray);
+                                                let cbdObj = new cbdList(cbd, contentversionNameArray, fileUrlArray);
                                                 cbdObjList.push(cbdObj);
                                             }
                                             console.log('cbdObjList' + JSON.stringify(cbdObjList));
