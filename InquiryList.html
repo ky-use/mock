@@ -516,11 +516,16 @@
                                              ***/
 
                                              cbdObjList.forEach(elm => {
-                                                console.log('elm'+ elm);
+                                                console.log('elm'+ JSON.stringify(elm));
                                                 Object.keys(elm).forEach(key => {
-                                                    console.log(`key: ${key} value: ${elm[key]}`)
+                                                    console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
                                                     elm[key].forEach(childElm => {
-                                                        console.log('childElm'+ childElm);
+                                                        if(elm[key] == 'cbd'){
+                                                            Object.keys(elm[key]).forEach(childKey => {
+                                                                console.log(`key: ${elm[key]} value: ${JSON.stringify(childKey[elm[key]])}`)
+                                                            })
+                                                        }
+                                                        console.log('childElm'+ JSON.stringify(childElm));
                                                     })
                                                 })
                                             })
