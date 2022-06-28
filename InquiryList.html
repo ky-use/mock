@@ -403,7 +403,7 @@
                                         dataType: 'json',
                                         data : JSON.stringify(caseNum.value),
                                         success : function (Cv) {
-                                            console.log('Cv:' + Cv);
+                                            //console.log('Cv:' + Cv);
                                             let cvList = Cv; // [Id LinkEntityId(コンタクトボードID), List CvIdList(コンテンツバージョンID), CvName]
                                             
                                             /*for (i=0; i < cvList.length; i++){
@@ -416,7 +416,7 @@
                                             */
                                             //console.log('cbdIdList:' + cbdIdArray);
                                             //console.log('cvNameList:' + cvNameArray);
-                                            //console.log('cvIdList:' + cvIdArrary);
+                                            //console.log('cvIdList:' + contentversionIdArrary);
 
                                             // ファイルとコンタクトボードのID
                                             let fileList = [];
@@ -426,13 +426,13 @@
                                             let cbdNumber = arrayCbd.map(el => el.Id);
                                             // コンタクトボードの件数分、画面出力処理
                                             for (let i=0; i < cvList.length; i++){
-                                                console.log('i:'+i);
+                                                //console.log('i:'+i);
                                                 // ファイルURL
                                                 let fileUrlArray = [];
                                                 // Apex返却値
                                                 let cbd = {};
                                                 let cvNameArray = [];
-                                                let cvIdArrary = [];
+                                                let contentversionIdArrary = [];
                                                 // コンタクトボード明細
                                                 
                                                 let cbdRecType = '';
@@ -459,12 +459,12 @@
                                                     'cbdContent':cbdContent,
                                                     'cbdCreatedDate':cbdCreatedDate
                                                 };
-                                                console.log(cbd);
+                                                //console.log(cbd);
 
                                                 /*console.log(`~~` + i + `番目~~`);
                                                 console.log('cbdId:' + cbdId);
                                                 console.log('cvNameArray:' + cvNameArray);
-                                                console.log('cvIdArrary:' + cvIdArrary);*/
+                                                console.log('contentversionIdArrary:' + contentversionIdArrary);*/
                                                 
                                                 //console.log('cbdObj'+JSON.stringify(cbdObj));
 
@@ -474,17 +474,17 @@
                                                 console.log('cbdCreatedDate:'+cbdCreatedDate);*/
                                                 
                                                 // コンタクトボード明細に紐づく、添付ファイルを取得し、画面出力
-                                                for (let j=0; j < cvIdArrary.length; j++){
+                                                for (let j=0; j < contentversionIdArrary.length; j++){
                                                     $.ajax({
                                                         type: 'GET',
                                                         crossOrigin: true,
-                                                        url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + cvIdArrary[j] + '/VersionData', 
+                                                        url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + contentversionIdArrary[j] + '/VersionData', 
                                                         cache :false,
                                                         //scriptCharset: 'Shift_JIS',
                                                         headers: {"Authorization" : accToken},
                                                         xhrFields : {responseType : 'blob'},
                                                         success : function (dlFile) {
-                                                            console.log('j:'+j);
+                                                            //console.log('j:'+j);
                                                             let binaryData = [];
                                                             binaryData.push(dlFile);
                                                             let fileUrl = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
