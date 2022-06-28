@@ -418,7 +418,7 @@
                                 // データを取得できた場合
                                 if(res.length != 0){
                                     arrayCbd = res; // [{Id, RecordType__c, Content__c, Case__c, CreatedDate}]
-
+                                    console.log('res : ' + res);
                                     // コンタクトボードIDからコンテンツバージョンのID取得
                                     $.ajax({
                                         type: 'GET',
