@@ -483,6 +483,7 @@
                                                         xhrFields : {responseType : 'blob'},
                                                         success : function (dlFile) {
                                                             //console.log('j:'+j);
+                                                            console.log('dlfile: '+ JSON.stringify(dlFile));
                                                             let binaryData = [];
                                                             binaryData.push(dlFile);
                                                             let fileUrl = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
@@ -499,8 +500,8 @@
                                                 // クラスにつめて、配列に入れる
                                                 let cbdObj = new cbdList(cbd, contentversionNameArray, fileUrlArray);
                                                 cbdObjList.push(cbdObj);
+                                                console.log('cbdObjList' + JSON.stringify(cbdObjList));
                                             }
-                                            console.log('cbdObjList' + JSON.stringify(cbdObjList));
                                             
                                             /*** タグを作成 ***/
                                             /***
