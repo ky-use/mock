@@ -348,7 +348,35 @@
                     }
                 });
             }
-            
+
+            /*** 引数： cbdObjList***/
+            function makeTags(list){
+                if(list.length != 0){
+                    // cbdObjListをループ
+                    list.forEach(elm => {
+                        console.log('elm'+ JSON.stringify(elm));
+                        // オブジェクト要素をループ
+                        Object.keys(elm).forEach(key => {
+                            console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
+                            let childElm = elm[key];
+                            // 要素のデータ型によってループ方法を変更
+                            if(key == 'cbd'){
+                                // オブジェクト要素をループ
+                                Object.keys(childElm).forEach(childKey => {
+                                    console.log(`childKey: ${childKey} childValue: ${JSON.stringify(childElm[childKey])}`)
+                                })
+                            } else {
+                                // 配列要素をループ
+                                childElm.forEach(childElem => {
+                                    console.log('childElm'+ JSON.stringify(childElem));
+                                })
+                            }
+                        })
+                    })
+                }
+            }
+
+
             /*** コンタクトボード明細1:ファイルNのコンストラクタ ***/
             function cbdList(cbd, cvNameArray, fileUrlArray) {
                 'use strict'; //strictモード（newの付け忘れによるグローバル変数宣言回避（new付け忘れでエラー））
@@ -483,7 +511,7 @@
                                              * ]
                                              ***/
                                             // cbdObjListをループ
-                                            
+                                            /*
                                             cbdObjList.forEach(elm => {
                                                 console.log('elm'+ JSON.stringify(elm));
                                                 // オブジェクトの要素をループ
@@ -504,7 +532,7 @@
                                                     }
                                                 })
                                             })
-                                            
+                                            */
 
                                             // template要素を取得
                                             /*
@@ -632,6 +660,26 @@
                                 
                             }
                             
+                        })
+                        cbdObjList.forEach(elm => {
+                            console.log('elm'+ JSON.stringify(elm));
+                            // オブジェクトの要素をループ
+                            Object.keys(elm).forEach(key => {
+                                console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
+                                let childElm = elm[key];
+                                // 要素のデータ型によってループ方法を変更
+                                if(key == 'cbd'){
+                                    // オブジェクトの要素をループ
+                                    Object.keys(childElm).forEach(childKey => {
+                                        console.log(`childKey: ${childKey} childValue: ${JSON.stringify(childElm[childKey])}`)
+                                    })
+                                } else {
+                                    // 配列の要素をループ
+                                    childElm.forEach(childElem => {
+                                        console.log('childElm'+ JSON.stringify(childElem));
+                                    })
+                                }
+                            })
                         })
                     },
                     error : function (data, errorThrown,status) {
