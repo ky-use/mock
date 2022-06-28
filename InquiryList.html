@@ -520,14 +520,17 @@
                                                 // オブジェクトの要素をループ
                                                 Object.keys(elm).forEach(key => {
                                                     console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
+                                                    let childElm = elm[key];
                                                     // 要素のデータ型によってループ方法を変更
                                                     if(key == 'cbd'){
-                                                        Object.keys(elm[key]).forEach(childKey => {
-                                                            console.log(`childKey: ${childKey} childValue: ${JSON.stringify(childKey[childKey])}`)
+                                                        // オブジェクトの要素をループ
+                                                        Object.keys(childElm).forEach(childKey => {
+                                                            console.log(`childKey: ${childKey} childValue: ${JSON.stringify(childElm[childKey])}`)
                                                         })
                                                     } else {
-                                                        elm[key].forEach(childElm => {
-                                                            console.log('childElm'+ JSON.stringify(childElm));
+                                                        // 配列の要素をループ
+                                                        childElm.forEach(childElem => {
+                                                            console.log('childElm'+ JSON.stringify(childElem));
                                                         })
                                                     }
                                                 })
