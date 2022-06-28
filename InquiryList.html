@@ -422,7 +422,8 @@
                                             let fileList = [];
                                             // コンタクトボード明細と添付ファイルの組み合わせを格納するリスト
                                             let cbdObjList = [];
-
+                                            // List<obj>から取得用
+                                            let cbdNumber = arrayCbd.map(el => el.Id);
                                             // コンタクトボードの件数分、画面出力処理
                                             for (let i=0; i < cvList.length; i++){
                                                 console.log('i:'+i);
