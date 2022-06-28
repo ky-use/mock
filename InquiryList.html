@@ -514,19 +514,22 @@
                                              *  fileUrlArray             // ファイルのURL
                                              * ]
                                              ***/
-
-                                             cbdObjList.forEach(elm => {
+                                            // cbdObjListをループ
+                                            cbdObjList.forEach(elm => {
                                                 console.log('elm'+ JSON.stringify(elm));
+                                                // オブジェクトの要素をループ
                                                 Object.keys(elm).forEach(key => {
                                                     console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
-                                                    elm[key].forEach(childElm => {
-                                                        if(elm[key] == 'cbd'){
-                                                            Object.keys(elm[key]).forEach(childKey => {
-                                                                console.log(`key: ${elm[key]} value: ${JSON.stringify(childKey[elm[key]])}`)
-                                                            })
-                                                        }
-                                                        console.log('childElm'+ JSON.stringify(childElm));
-                                                    })
+                                                    // 要素のデータ型によってループ方法を変更
+                                                    if(elm[key] == 'cbd'){
+                                                        Object.keys(elm[key]).forEach(childKey => {
+                                                            console.log(`key: ${elm[key]} value: ${JSON.stringify(childKey[elm[key]])}`)
+                                                        })
+                                                    } else {
+                                                        elm[key].forEach(childElm => {
+                                                            console.log('childElm'+ JSON.stringify(childElm));
+                                                        })
+                                                    }
                                                 })
                                             })
 
