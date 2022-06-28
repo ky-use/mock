@@ -483,7 +483,7 @@
                                                         xhrFields : {responseType : 'blob'},
                                                         success : function (dlFile) {
                                                             //console.log('j:'+j);
-                                                            console.log('dlfile: '+ JSON.stringify(dlFile));
+                                                            console.log('dlfile: '+ dlFile);
                                                             let binaryData = [];
                                                             binaryData.push(dlFile);
                                                             let fileUrl = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
