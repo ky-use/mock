@@ -356,7 +356,11 @@
                 this.cvNameArray = cvNameArray;
                 this.fileUrlArray = fileUrlArray;
             }
-
+            // コンタクトボード明細と添付ファイルの組み合わせを格納するリスト
+            let cbdObjList = [];
+            // ファイルURL
+            let fileUrlArray = [];
+            
             // 引数：ケースNo
             function sendCbd(caseNum){
                 changeDisplayButton1(caseNum.value);
@@ -401,17 +405,15 @@
                                             //console.log('Cv:' + Cv);
                                             let cvList = Cv; // [Id LinkEntityId(コンタクトボードID), List CvIdList(コンテンツバージョンID), CvName]
 
-                                            // ファイルとコンタクトボードのID
-                                            let fileList = [];
                                             // コンタクトボード明細と添付ファイルの組み合わせを格納するリスト
-                                            let cbdObjList = [];
+                                            cbdObjList = [];
                                             // List<obj>から取得用
                                             let cbdNumber = arrayCbd.map(el => el.Id);
                                             // コンタクトボードの件数分、画面出力処理
                                             for (let i=0; i < cvList.length; i++){
                                                 //console.log('i:'+i);
                                                 // ファイルURL
-                                                let fileUrlArray = [];
+                                                fileUrlArray = [];
                                                 // Apex返却値
                                                 let cbd = {};
                                                 let cvNameArray = [];
@@ -606,6 +608,7 @@
                                  * ]
                                  ***/
                                 // cbdObjListをループ
+                                
                                 cbdObjList.forEach(elm => {
                                     console.log('elm'+ JSON.stringify(elm));
                                     // オブジェクトの要素をループ
@@ -626,6 +629,7 @@
                                         }
                                     })
                                 })
+                                
                             },
                             error : function (data, errorThrown,status) {
                                 
