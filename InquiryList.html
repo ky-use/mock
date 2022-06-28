@@ -523,7 +523,7 @@
                                                     // 要素のデータ型によってループ方法を変更
                                                     if(key == 'cbd'){
                                                         Object.keys(elm[key]).forEach(childKey => {
-                                                            console.log(`key: ${elm[key]} value: ${JSON.stringify(childKey[elm[key]])}`)
+                                                            console.log(`childKey: ${childKey} childValue: ${JSON.stringify(childKey[childKey])}`)
                                                         })
                                                     } else {
                                                         elm[key].forEach(childElm => {
