@@ -447,11 +447,11 @@
                                                     versionDataArray.push({cvId: vdList[i].contentVersionIdList, versionData: fileUrl});
                                                     console.log(versionDataArray);
                                                     count++;
-                                                    console.log(count);
-                                                    console.log(vdList.length);
-                                                    console.log(count == vdList.length);
+                                                    console.log('i : ' + i);
+                                                    console.log('vdList.length : ' + vdList.length);
+                                                    console.log(i == vdList.length);
 
-                                                    if(count == vdList.length){
+                                                    if(i == vdList.length){
                                                         console.log('resolve');
                                                         resolve();
                                                     }
