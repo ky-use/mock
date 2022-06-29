@@ -416,9 +416,9 @@
                             cache :false,
                             headers: {"Authorization" : accToken},
                             success : function (res) {
-                                const asyncFunc = async () => {
+                                //const asyncFunc = async () => {
                                     // ファイル取得が完了してから、タグの生成
-                                    await new Promise((resolve) => {
+                                    //await new Promise((resolve) => {
                                     // データを取得できた場合
                                         if(res.length != 0){
                                             vdList = res;
@@ -443,49 +443,50 @@
                                                             // URL生成
                                                             let fileUrl = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
                                                             versionDataArray.push({cvId: vdList[i].contentVersionIdList, versionData: fileUrl});
+                                                            if(i == vdList.length - 1){
+                                                                console.log('最後');
+
+                                                                // template要素を取得
+                                                                let template = document.getElementById('templateInqList_Details');
+                                                                // ファイルのtemplate要素を取得
+                                                                let templateFile = document.getElementById('fileList');
+
+                                                                // コンタクトボード明細の数分繰り返し
+                                                                for(let j = 0; j < vdList.length; j++){
+                                                                    // template要素の内容を複製
+                                                                    let clone = template.content.cloneNode(true);
+                                                                    // 複製したtemplate要素にデータを挿入
+                                                                    clone.querySelector('.detailButton').textContent = vdList[j].cbd.CreatedDate;
+                                                                    clone.querySelector('.inqDetail').textContent = vdList[j].cbd.Content__c;
+                                                                    // div#containerの中に追加
+                                                                    document.getElementById('outputInqList_Details').appendChild(clone);
+                                                                    //console.log('作成日：' + vdList[j].cbd.CreatedDate);
+                                                                    
+                                                                    // ファイルの数分繰り返し
+                                                                    for(let k = 0; k < versionDataArray.length; k++){
+                                                                        //console.log('versionDataArray:' + versionDataArray[k].cvId);
+                                                                        if(vdList[j].contentVersionIdList == versionDataArray[k].cvId){
+                                                                            console.log('入ってる');
+                                                                            // template要素の内容を複製
+                                                                            let cloneFile = templateFile.content.cloneNode(true);
+                                                                            // 複製したtemplate要素にデータを挿入
+                                                                            cloneFile.querySelector('.attachment').textContent = versionDataArray[k].fileUrl;
+                                                                            // div#containerの中に追加
+                                                                            document.getElementById('outputInqList_Details').appendChild(cloneFile);
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
                                                         }
                                                     })
                                                 }
                                             }
                                         }
-                                    });
+                                    //});
                                     /*** タグの生成 ***/
-                                    if(i == vdList.length - 1){
-                                    console.log('最後');
-
-                                    // template要素を取得
-                                    let template = document.getElementById('templateInqList_Details');
-                                    // ファイルのtemplate要素を取得
-                                    let templateFile = document.getElementById('fileList');
-
-                                    // コンタクトボード明細の数分繰り返し
-                                    for(let j = 0; j < vdList.length; j++){
-                                        // template要素の内容を複製
-                                        let clone = template.content.cloneNode(true);
-                                        // 複製したtemplate要素にデータを挿入
-                                        clone.querySelector('.detailButton').textContent = vdList[j].cbd.CreatedDate;
-                                        clone.querySelector('.inqDetail').textContent = vdList[j].cbd.Content__c;
-                                        // div#containerの中に追加
-                                        document.getElementById('outputInqList_Details').appendChild(clone);
-                                        //console.log('作成日：' + vdList[j].cbd.CreatedDate);
-                                        
-                                        // ファイルの数分繰り返し
-                                        for(let k = 0; k < versionDataArray.length; k++){
-                                            //console.log('versionDataArray:' + versionDataArray[k].cvId);
-                                            if(vdList[j].contentVersionIdList == versionDataArray[k].cvId){
-                                                console.log('入ってる');
-                                                // template要素の内容を複製
-                                                let cloneFile = templateFile.content.cloneNode(true);
-                                                // 複製したtemplate要素にデータを挿入
-                                                cloneFile.querySelector('.attachment').textContent = versionDataArray[k].fileUrl;
-                                                // div#containerの中に追加
-                                                document.getElementById('outputInqList_Details').appendChild(cloneFile);
-                                            }
-                                        }
-                                    }
+                                    
                                     /*** //タグの生成 ***/
-                                    }
-                                };
+                                //};
                             },
                             error : function (data, errorThrown,status) {
                                 
