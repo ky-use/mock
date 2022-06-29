@@ -425,7 +425,7 @@
                                 let promise1 = new Promise((resolve) => {
                                     // データを取得できた場合
                                     //if(vdList.length != 0){
-                                    let count = 0;
+                                    let count = 1;
                                     // ファイルを取得
                                     for(let i = 0; i < vdList.length; i++){
                                         if(vdList[i].contentVersionIdList){
@@ -447,11 +447,10 @@
                                                     versionDataArray.push({cvId: vdList[i].contentVersionIdList, versionData: fileUrl});
                                                     console.log(versionDataArray);
                                                     count++;
-                                                    console.log('i : ' + i);
-                                                    console.log('vdList.length : ' + vdList.length);
+                                                    console.log('count : ' + count);
                                                     console.log(i == vdList.length);
 
-                                                    if(i == vdList.length){
+                                                    if(count == vdList.length){
                                                         console.log('resolve');
                                                         resolve();
                                                     }
