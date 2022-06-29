@@ -415,6 +415,7 @@
                             dataType: 'json',
                             cache :false,
                             headers: {"Authorization" : accToken},
+                            data : JSON.stringify(caseNum.value),
                             success : function (res) {
                                 //const asyncFunc = async () => {
                                     // ファイル取得が完了してから、タグの生成
