@@ -420,11 +420,11 @@
                                 console.log(res);
                                 // ファイルの中身を格納する配列を定義
                                 let versionDataArray = [];
+                                vdList = res;
                                 const asyncFunc = async () => {
                                     await new Promise((resolve) => {
                                         // データを取得できた場合
-                                        if(res.length != 0){
-                                            vdList = res;
+                                        if(vdList.length != 0){
                                             
                                             // ファイルを取得
                                             for(let i = 0; i < vdList.length; i++){
