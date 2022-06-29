@@ -384,6 +384,31 @@
                 this.cvNameArray = cvNameArray;
                 this.fileUrlArray = fileUrlArray;
             }
+            /*** 
+             * 引数　：2022-06-06T04:43:08.000+0000
+             * 返却値：2022年06月06日 04:43
+             ***/
+            /*function tranceDate(dateTime){
+                let dt = dateTime.substring( 0, cbdCreatedDate.length - 12 );
+                let year = dt.substring(0, 4);
+                let month = dt.substring(5, 7);
+                let day = dt.substring(8, 10);
+                let hour = dt.substring(dt.length - 5, dt.length-3);
+                let minute = dt.substring(dt.length - 2, dt.length);
+                let time = dt.substring(dt.length - 5, dt.length);
+                dt = year + '年' + month +  '月' + day + '日 ' + time;
+                return dt;
+            }*/
+            function changeDate(dateTime){
+                const newDate = new Date(dateTime);
+                const year = newDate.getFullYear();
+                const month = newDate.getMonth() + 1;
+                const day = newDate.getDate();
+                const hour = (`0` + (newDate.getHours())).slice(-2)
+                const minute = (`0` + (newDate.getMinutes())).slice(-2)
+                return `${year}年${month}月${day}日 ${hour}:${minute}`;
+            }
+
             // コンタクトボード明細と添付ファイルの組み合わせを格納するリスト
             let cbdObjList = [];
             // ファイルURL
@@ -421,12 +446,15 @@
                                 // ファイルの中身を格納する配列を定義
                                 let versionDataArray = [];
                                 vdList = res;
+                                // ファイルのId
+                                let cvIdList = vdList.map(el => el.contentVersionIdList);
 
                                 let promise1 = new Promise((resolve) => {
                                     // データを取得できた場合
                                     //if(vdList.length != 0){
-                                    let count = 1;
+                                    let count = 0;
                                     // ファイルを取得
+                                    // iの順番がajaxを含んでいるため順不同
                                     for(let i = 0; i < vdList.length; i++){
                                         if(vdList[i].contentVersionIdList){
                                             console.log(vdList[i]);
@@ -449,17 +477,13 @@
                                                     count++;
                                                     console.log('count : ' + count);
                                                     console.log(i == vdList.length);
-
-                                                    if(count == vdList.length){
+                                                    // ファイルのIdの件数動いたらresolve
+                                                    if(count == cvIdList.length){
                                                         console.log('resolve');
                                                         resolve();
                                                     }
                                                 }
                                             })
-                                        }
-                                        if(i == vdList.length){
-                                            console.log('resolve');
-                                            resolve();
                                         }
                                     }
 
@@ -476,9 +500,20 @@
                                     for(let j = 0; j < vdList.length; j++){
                                         // template要素の内容を複製
                                         let clone = template.content.cloneNode(true);
+                                        // 返信内容が12 文字以下ならそのまま、それを超える場合省略
+                                        let content = '';
+                                        if(vdList[j].cbd.Content__c.length > 12){
+                                            content = vdList[j].cbd.RecordType__c + ':' + vdList[j].cbd.Content__c.substring(0, 12) + "...";
+                                        } else{
+                                            content = vdList[j].cbd.RecordType__c + ':' + vdList[j].cbd.Content__c;
+                                        }
                                         // 複製したtemplate要素にデータを挿入
-                                        clone.querySelector('.detailButton').textContent = vdList[j].cbd.CreatedDate;
-                                        clone.querySelector('.inqDetail').textContent = vdList[j].cbd.Content__c;
+                                        clone.querySelector('.detailButton').innerHTML = changeDate(vdList[j].cbd.CreatedDate);
+                                        clone.querySelector('.detailButton').Name = 'detail'+ i;
+                                        clone.querySelector('.detailButton').id = 'detailButton'+ i;
+                                        clone.querySelector('.detailButton').value = false;
+                                        clone.querySelector('.inqDetail').textContent = content;
+                                        clone.querySelector('.inqDetail').id = 'detail'+ i;
                                         // div#containerの中に追加
                                         document.getElementById('outputInqList_Details').appendChild(clone);
                                         //console.log('作成日：' + vdList[j].cbd.CreatedDate);
