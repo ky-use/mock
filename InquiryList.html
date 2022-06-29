@@ -388,6 +388,9 @@
             let cbdObjList = [];
             // ファイルURL
             let fileUrlArray = [];
+            // responseを受け取るリスト
+            let vdList = [];
+
             
             // 引数：ケースNo
             function sendCbd(caseNum){
@@ -404,283 +407,89 @@
                         // アクセストークン
                         let accToken = 'Bearer ' + connectData.access_token;
 
-                        // コンタクトボード明細を取得
+                        // コンタクトボード明細取得
                         $.ajax({
                             type: 'GET',
                             crossOrigin: true,
-                            url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/Mock_CBD/' + caseNum.value,
+                            url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/Mock_File/' + caseNum.value,
                             dataType: 'json',
                             cache :false,
                             headers: {"Authorization" : accToken},
-                            dataType: 'json',
-                            data : JSON.stringify(caseNum.value),
                             success : function (res) {
-                                // データを取得できた場合
-                                if(res.length != 0){
-                                    arrayCbd = res; // [{Id, RecordType__c, Content__c, Case__c, CreatedDate}]
-                                    console.log('res : ' + res);
-                                    // コンタクトボードIDからコンテンツバージョンのID取得
-                                    $.ajax({
-                                        type: 'GET',
-                                        crossOrigin: true,
-                                        url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/Mock_File/' + caseNum.value,
-                                        dataType: 'json',
-                                        cache :false,
-                                        headers: {"Authorization" : accToken},
-                                        dataType: 'json',
-                                        data : JSON.stringify(caseNum.value),
-                                        success : function (Cv) {
-                                            //console.log('Cv:' + Cv);
-                                            let cvList = Cv; // [Id LinkEntityId(コンタクトボードID), List CvIdList(コンテンツバージョンID), CvName]
+                                const asyncFunc = async () => {
+                                    // ファイル取得が完了してから、タグの生成
+                                    await new Promise((resolve) => {
+                                    // データを取得できた場合
+                                        if(res.length != 0){
+                                            vdList = res;
+                                            //console.log(res);
 
-                                            // コンタクトボード明細と添付ファイルの組み合わせを格納するリスト
-                                            cbdObjList = [];
-                                            // List<obj>から取得用
-                                            let cbdNumber = arrayCbd.map(el => el.Id);
-                                            // コンタクトボードの件数分、画面出力処理
-                                            for (let i=0; i < cvList.length; i++){
-                                                //console.log('i:'+i);
-                                                // ファイルURL
-                                                fileUrlArray = [];
-                                                // Apex返却値
-                                                let cbd = {};
-                                                let contentversionNameArray = [];
-                                                let contentversionIdArrary = [];
-                                                // コンタクトボード明細
-                                                
-                                                let cbdRecType = '';
-                                                let cbdContent = '';
-                                                let cbdCreatedDate = '';
-                                                
-                                                // 1ループごとに設定
-                                                conId = cvList[i].LinkEntityId;
-                                                //console.log('cvList['+ i +'].CvNameList: ' + cvList[i].CvNameList);
-                                                contentversionNameArray = cvList[i].CvNameList;
-                                                contentversionIdArrary = cvList[i].CvIdList;
-                                                // コンタクトボードの情報を取得
-                                                cbdIndex = cbdNumber.indexOf(conId);
-                                                // コンタクトボード明細の値を設定
-                                                cbdRecType = arrayCbd[cbdIndex].RecordType__c;
-                                                cbdContent = arrayCbd[cbdIndex].Content__c;
-                                                cbdCreatedDate = arrayCbd[cbdIndex].CreatedDate;
-                                                // cbdをオブジェクト化
-                                                cbd = {
-                                                    'cbdId':conId,
-                                                    'cbdRecType':cbdRecType,
-                                                    'cbdContent':cbdContent,
-                                                    'cbdCreatedDate':cbdCreatedDate
-                                                };
-                                                
-                                                // コンタクトボード明細に紐づく、添付ファイルを取得し、画面出力
-                                                for (let j=0; j < contentversionIdArrary.length; j++){
+                                            // ファイルの中身を格納する配列を定義
+                                            let versionDataArray = [];
+                                            
+                                            // ファイルを取得
+                                            for(let i = 0; i < vdList.length; i++){
+                                                if(vdList[i].contentVersionIdList){
                                                     $.ajax({
                                                         type: 'GET',
                                                         crossOrigin: true,
-                                                        url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + contentversionIdArrary[j] + '/VersionData', 
+                                                        url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + res[i].contentVersionIdList + '/VersionData',
                                                         cache :false,
-                                                        //scriptCharset: 'Shift_JIS',
                                                         headers: {"Authorization" : accToken},
                                                         xhrFields : {responseType : 'blob'},
                                                         success : function (dlFile) {
-                                                            //console.log('j:'+j);
-                                                            console.log('dlfile: '+ dlFile);
-                                                            let binaryData = [];
-                                                            binaryData.push(dlFile);
+                                                            //let versionData = {cvId: res[i].contentVersionIdList, versionData: dlFile};
+                                                            //console.log('versionData:' + versionData);
+                                                            // URL生成
                                                             let fileUrl = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
-                                                            console.log('fileUrl: '+fileUrl);
-                                                            fileUrlArray.push(fileUrl);
-                                                        },
-                                                        error : function (data, errorThrown,status) {
-                                                            console.log(data);
-                                                            console.log(errorThrown);
-                                                            console.log(status);
+                                                            versionDataArray.push({cvId: vdList[i].contentVersionIdList, versionData: fileUrl});
                                                         }
                                                     })
                                                 }
-                                                // クラスにつめて、配列に入れる
-                                                let cbdObj = new cbdList(cbd, contentversionNameArray, fileUrlArray);
-                                                cbdObjList.push(cbdObj);
-                                                console.log('cbdObjList' + JSON.stringify(cbdObjList));
                                             }
-                                            
-                                            /*** タグを作成 ***/
-                                            /***
-                                             * cbdObjList = [
-                                             *  cbd = {cbdId, cbdRecType, cbdContent, cbdCreatedDate} // コンタクトボード明細の情報
-                                             *  contentversionNameArray  // ファイルの名前
-                                             *  fileUrlArray             // ファイルのURL
-                                             * ]
-                                             ***/
-                                            // cbdObjListをループ
-                                            /*
-                                            cbdObjList.forEach(elm => {
-                                                console.log('elm'+ JSON.stringify(elm));
-                                                // オブジェクトの要素をループ
-                                                Object.keys(elm).forEach(key => {
-                                                    console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
-                                                    let childElm = elm[key];
-                                                    // 要素のデータ型によってループ方法を変更
-                                                    if(key == 'cbd'){
-                                                        // オブジェクトの要素をループ
-                                                        Object.keys(childElm).forEach(childKey => {
-                                                            console.log(`childKey: ${childKey} childValue: ${JSON.stringify(childElm[childKey])}`)
-                                                        })
-                                                    } else {
-                                                        // 配列の要素をループ
-                                                        childElm.forEach(childElem => {
-                                                            console.log('childElm'+ JSON.stringify(childElem));
-                                                        })
-                                                    }
-                                                })
-                                            })
-                                            */
+                                        }
+                                    });
+                                    /*** タグの生成 ***/
+                                    if(i == vdList.length - 1){
+                                    console.log('最後');
 
-                                            // template要素を取得
-                                            /*
-                                            let template = document.getElementById('templateInqList_Details');
-                                            // データの数分繰り返し
-                                            for(let i=0; i < cbdObjList.length; i++){
-                                                
-                                                // Apex返却値
-                                                let Id = '';
-                                                let contentversionNameArray = [];
-                                                // コンタクトボード明細
-                                                let cbdRecType = '';
-                                                let cbdContent = '';
-                                                let cbdCreatedDate = '';
+                                    // template要素を取得
+                                    let template = document.getElementById('templateInqList_Details');
+                                    // ファイルのtemplate要素を取得
+                                    let templateFile = document.getElementById('fileList');
 
-                                                // 1ループごとに設定
-                                                conId = cbdObjList[i].LinkEntityId;
-                                                contentversionNameArray = cbdObjList[i].CvNameList;
-                                                contentversionIdArrary = cbdObjList[i].CvIdList;
-                                                console.log(conId);
-                                                console.log(contentversionNameArray);
-                                                console.log(contentversionIdArrary);
-                                                
-                                                // コンタクトボードの情報を取得
-                                                cbdIndex = cbdNumber.indexOf(conId);
-                                                // コンタクトボード明細の値を設定
-                                                cbdRecType = arrayCbd[cbdIndex].RecordType__c;
-                                                cbdContent = arrayCbd[cbdIndex].Content__c;
-                                                cbdCreatedDate = arrayCbd[cbdIndex].CreatedDate;
-
-                                                // template要素を取得
-                                                let template = document.getElementById('templateInqList_Details');
+                                    // コンタクトボード明細の数分繰り返し
+                                    for(let j = 0; j < vdList.length; j++){
+                                        // template要素の内容を複製
+                                        let clone = template.content.cloneNode(true);
+                                        // 複製したtemplate要素にデータを挿入
+                                        clone.querySelector('.CreatedDate').textContent = vdList[j].cbd.CreatedDate;
+                                        clone.querySelector('.Content__c').textContent = vdList[j].cbd.Content__c;
+                                        // div#containerの中に追加
+                                        document.getElementById('outputInqList_Details').appendChild(clone);
+                                        //console.log('作成日：' + vdList[j].cbd.CreatedDate);
+                                        
+                                        // ファイルの数分繰り返し
+                                        for(let k = 0; k < versionDataArray.length; k++){
+                                            //console.log('versionDataArray:' + versionDataArray[k].cvId);
+                                            if(vdList[j].contentVersionIdList == versionDataArray[k].cvId){
+                                                console.log('入ってる');
                                                 // template要素の内容を複製
-                                                let clone = template.content.cloneNode(true);
-                                                // 日付時間を見出し用に整形
-                                                let dateTime = arrayCbd[i].CreatedDate.substring( 0, cbdCreatedDate.length - 12 );
-                                                let year = dateTime.substring(0, 4);
-                                                let month = dateTime.substring(5, 7);
-                                                let day = dateTime.substring(8, 10);
-                                                let time = dateTime.substring(dateTime.length - 5, dateTime.length);
-                                                dateTime = year + '年' + month +  '月' + day + '日 ' + time;
+                                                let cloneFile = templateFile.content.cloneNode(true);
                                                 // 複製したtemplate要素にデータを挿入
-                                                clone.querySelector('.detailButton').innerHTML = dateTime;
-                                                clone.querySelector('.detailButton').Name = 'detail'+ i;
-                                                clone.querySelector('.detailButton').id = 'detailButton'+ i;
-                                                clone.querySelector('.detailButton').value = false;
-                                                let content = '';
-                                                // 返信内容が12 文字以下ならそのまま、それを超える場合省略
-                                                if(arrayCbd[i].Content__c.length > 12){
-                                                    content = cbdRecType + ':' + cbdContent.substring(0, 12) + "...";
-                                                } else{
-                                                    content = cbdRecType + ':' + cbdContent;
-                                                }
-                                                clone.querySelector('.inqDetail').textContent = content;
-                                                clone.querySelector('.inqDetail').id = 'detail'+ i;
-                                                
-                                                // div#outputInqList_Detailsの中に追加
-                                                document.getElementById('outputInqList_Details').appendChild(clone);
-
-                                                // 添付ファイル部分のテンプレート作成
-                                                let fileListTemplate = document.getElementById('fileList');
-
-                                                //for文でファイルの件数分クローンする
-                                                if(contentversionIdArrary != 0){
-                                                    for(let j=0; j < contentversionIdArrary.length; j++){
-                                                        let fileListClone = fileListTemplate.content.cloneNode(true);
-                                                        // 固定文字出力用
-                                                        fileListClone.querySelector('.fileDownloadText').innerHTML = 'ファイル（コチラからダウンロード）';
-                                                        fileListClone.querySelector('.fileDownloadText').id = 'fdText'+ j;
-                                                        fileListClone.querySelector('.fileDownloadText').value = 'true';
-                                                        fileListClone.querySelector('.fileDownloadText').style = 'display:none;';
-                                                        // ファイル
-                                                        fileListClone.querySelector('.attachment').innerText = contentversionNameArray[j];
-                                                        fileListClone.querySelector('.attachment').href = fileUrlList;
-                                                        fileListClone.querySelector('.attachment').download = contentversionNameArray[j];
-                                                        fileListClone.querySelector('.attachment').id = 'fName'+ j;
-                                                        fileListClone.querySelector('.attachment').style = 'display:none;';
-                                                        // div#fileListの中に追加
-                                                        document.getElementById('outputInqList_Details').appendChild(clone);
-                                                    }
-                                                }
+                                                cloneFile.querySelector('.attachment').textContent = versionDataArray[k].fileUrl;
+                                                // div#containerの中に追加
+                                                document.getElementById('outputInqList_Details').appendChild(cloneFile);
                                             }
-                                            */
-                                        },
-                                        error : function (data, errorThrown,status) {
-                                            console.log(data);
-                                            console.log(errorThrown);
-                                            console.log(status);
                                         }
-                                    })
-                                }
-                                /*** タグを作成 ***/
-                                /***
-                                 * cbdObjList = [
-                                 *  cbd = {cbdId, cbdRecType, cbdContent, cbdCreatedDate} // コンタクトボード明細の情報
-                                 *  contentversionNameArray  // ファイルの名前
-                                 *  fileUrlArray             // ファイルのURL
-                                 * ]
-                                 ***/
-                                // cbdObjListをループ
-                                /*
-                                cbdObjList.forEach(elm => {
-                                    console.log('elm'+ JSON.stringify(elm));
-                                    // オブジェクトの要素をループ
-                                    Object.keys(elm).forEach(key => {
-                                        console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
-                                        let childElm = elm[key];
-                                        // 要素のデータ型によってループ方法を変更
-                                        if(key == 'cbd'){
-                                            // オブジェクトの要素をループ
-                                            Object.keys(childElm).forEach(childKey => {
-                                                console.log(`childKey: ${childKey} childValue: ${JSON.stringify(childElm[childKey])}`)
-                                            })
-                                        } else {
-                                            // 配列の要素をループ
-                                            childElm.forEach(childElem => {
-                                                console.log('childElm'+ JSON.stringify(childElem));
-                                            })
-                                        }
-                                    })
-                                })
-                                */
+                                    }
+                                    /*** //タグの生成 ***/
+                                    }
+                                };
                             },
                             error : function (data, errorThrown,status) {
                                 
                             }
-                            
-                        })
-                        cbdObjList.forEach(elm => {
-                            console.log('elm'+ JSON.stringify(elm));
-                            // オブジェクトの要素をループ
-                            Object.keys(elm).forEach(key => {
-                                console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
-                                let childElm = elm[key];
-                                // 要素のデータ型によってループ方法を変更
-                                if(key == 'cbd'){
-                                    // オブジェクトの要素をループ
-                                    Object.keys(childElm).forEach(childKey => {
-                                        console.log(`childKey: ${childKey} childValue: ${JSON.stringify(childElm[childKey])}`)
-                                    })
-                                } else {
-                                    // 配列の要素をループ
-                                    childElm.forEach(childElem => {
-                                        console.log('childElm'+ JSON.stringify(childElem));
-                                    })
-                                }
-                            })
                         })
                     },
                     error : function (data, errorThrown,status) {
