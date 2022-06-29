@@ -453,7 +453,7 @@
 
                                 let promise1 = new Promise((resolve) => {
                                     // データを取得できた場合
-                                    //if(vdList.length != 0){
+                                    if(vdList.length != 0){
                                     let count = 0;
                                     // ファイルを取得
                                     // iの順番がajaxを含んでいるため順不同
@@ -489,8 +489,7 @@
                                             })
                                         }
                                     }
-
-                                    //}
+                                    }
                                 }).then(() => {
                                     /*** タグの生成 ***/
                                     console.log('タグの生成');
