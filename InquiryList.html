@@ -417,14 +417,12 @@
                             headers: {"Authorization" : accToken},
                             data : JSON.stringify(caseNum.value),
                             success : function (res) {
+                                console.log(res);
                                 const asyncFunc = async () => {
-                                    // ファイル取得が完了してから、タグの生成
                                     await new Promise((resolve) => {
-                                    // データを取得できた場合
-                                    console.log(res);
+                                        // データを取得できた場合
                                         if(res.length != 0){
                                             vdList = res;
-                                            
                                             // ファイルの中身を格納する配列を定義
                                             let versionDataArray = [];
                                             
@@ -448,14 +446,12 @@
                                                             let fileUrl = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
                                                             versionDataArray.push({cvId: vdList[i].contentVersionIdList, versionData: fileUrl});
                                                             console.log(versionDataArray);
-                                                            
-                                                            if(i == vdList.length - 1){
-                                                                
-                                                            }
+
                                                         }
                                                     })
                                                 }
                                             }
+
                                         }
                                     });
                                     /*** タグの生成 ***/
