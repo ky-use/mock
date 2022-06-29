@@ -421,43 +421,42 @@
                                 // ファイルの中身を格納する配列を定義
                                 let versionDataArray = [];
                                 vdList = res;
-                                
-                                const asyncFunc = async () => {
-                                    await new Promise((resolve) => {
-                                        // データを取得できた場合
-                                        //if(vdList.length != 0){
-                                            
-                                            // ファイルを取得
-                                            for(let i = 0; i < vdList.length; i++){
-                                                if(vdList[i].contentVersionIdList){
-                                                    console.log(vdList[i]);
-                                                    $.ajax({
-                                                        type: 'GET',
-                                                        crossOrigin: true,
-                                                        url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + vdList[i].contentVersionIdList + '/VersionData',
-                                                        cache :false,
-                                                        headers: {"Authorization" : accToken},
-                                                        xhrFields : {responseType : 'blob'},
-                                                        success : function (dlFile) {
-                                                            //let versionData = {cvId: res[i].contentVersionIdList, versionData: dlFile};
-                                                            //console.log('versionData:' + versionData);
-                                                            // URL生成
-                                                            let binaryData = [];
-                                                            binaryData.push(dlFile);
-                                                            let fileUrl = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
-                                                            versionDataArray.push({cvId: vdList[i].contentVersionIdList, versionData: fileUrl});
-                                                            console.log(versionDataArray);
 
-                                                        }
-                                                    })
-                                                }
-                                                if(i == vdList.length){
-                                                    resolve();
-                                                }
-                                            }
+                                let promise1 = new Promise((resolve) => {
+                                    // データを取得できた場合
+                                    //if(vdList.length != 0){
+                                    
+                                    // ファイルを取得
+                                    for(let i = 0; i < vdList.length; i++){
+                                        if(vdList[i].contentVersionIdList){
+                                            console.log(vdList[i]);
+                                            $.ajax({
+                                                type: 'GET',
+                                                crossOrigin: true,
+                                                url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + vdList[i].contentVersionIdList + '/VersionData',
+                                                cache :false,
+                                                headers: {"Authorization" : accToken},
+                                                xhrFields : {responseType : 'blob'},
+                                                success : function (dlFile) {
+                                                    //let versionData = {cvId: res[i].contentVersionIdList, versionData: dlFile};
+                                                    //console.log('versionData:' + versionData);
+                                                    // URL生成
+                                                    let binaryData = [];
+                                                    binaryData.push(dlFile);
+                                                    let fileUrl = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
+                                                    versionDataArray.push({cvId: vdList[i].contentVersionIdList, versionData: fileUrl});
+                                                    console.log(versionDataArray);
 
-                                        //}
-                                    });
+                                                }
+                                            })
+                                        }
+                                        if(i == vdList.length){
+                                            resolve();
+                                        }
+                                    }
+
+                                    //}
+                                }).then(() => {
                                     /*** タグの生成 ***/
                                     console.log('タグの生成');
                                     // template要素を取得
@@ -491,7 +490,7 @@
                                         }
                                     }
                                     /*** //タグの生成 ***/
-                                };
+                                });
                             },
                             error : function (data, errorThrown,status) {
                                 
