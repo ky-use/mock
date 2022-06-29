@@ -418,13 +418,13 @@
                             data : JSON.stringify(caseNum.value),
                             success : function (res) {
                                 console.log(res);
+                                // ファイルの中身を格納する配列を定義
+                                let versionDataArray = [];
                                 const asyncFunc = async () => {
                                     await new Promise((resolve) => {
                                         // データを取得できた場合
                                         if(res.length != 0){
                                             vdList = res;
-                                            // ファイルの中身を格納する配列を定義
-                                            let versionDataArray = [];
                                             
                                             // ファイルを取得
                                             for(let i = 0; i < vdList.length; i++){
@@ -449,6 +449,9 @@
 
                                                         }
                                                     })
+                                                }
+                                                if(i == vdList.length){
+                                                    resolve();
                                                 }
                                             }
 
