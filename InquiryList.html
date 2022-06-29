@@ -424,14 +424,14 @@
                                     console.log(res);
                                         if(res.length != 0){
                                             vdList = res;
-                                            console.log(vdList);
-
+                                            
                                             // ファイルの中身を格納する配列を定義
                                             let versionDataArray = [];
                                             
                                             // ファイルを取得
                                             for(let i = 0; i < vdList.length; i++){
                                                 if(vdList[i].contentVersionIdList){
+                                                    console.log(vdList[i]);
                                                     $.ajax({
                                                         type: 'GET',
                                                         crossOrigin: true,
