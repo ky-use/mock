@@ -454,41 +454,42 @@
                                 let promise1 = new Promise((resolve) => {
                                     // データを取得できた場合
                                     if(vdList.length != 0){
-                                    let count = 0;
-                                    // ファイルを取得
-                                    // iの順番がajaxを含んでいるため順不同
-                                    for(let i = 0; i < vdList.length; i++){
-                                        if(vdList[i].contentVersionIdList){
-                                            console.log(vdList[i]);
-                                            $.ajax({
-                                                type: 'GET',
-                                                crossOrigin: true,
-                                                url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + vdList[i].contentVersionIdList + '/VersionData',
-                                                cache :false,
-                                                headers: {"Authorization" : accToken},
-                                                xhrFields : {responseType : 'blob'},
-                                                success : function (dlFile) {
-                                                    //let versionData = {cvId: res[i].contentVersionIdList, versionData: dlFile};
-                                                    //console.log('versionData:' + versionData);
-                                                    // URL生成
-                                                    let binaryData = [];
-                                                    binaryData.push(dlFile);
-                                                    let fileUrl = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
-                                                    versionDataArray.push({cvId: vdList[i].contentVersionIdList, versionData: fileUrl});
-                                                    console.log(versionDataArray);
-                                                    count++;
-                                                    console.log('count : ' + count);
-                                                    console.log('cvIdList.length : ' + cvIdList.length);
-                                                    console.log(count == cvIdList.length);
-                                                    // ファイルのIdの件数動いたらresolve
-                                                    if(count == cvIdList.length){
-                                                        console.log('resolve');
-                                                        resolve();
+                                        let count = 0;
+                                        // ファイルを取得
+                                        // iの順番がajaxを含んでいるため順不同
+                                        for(let i = 0; i < vdList.length; i++){
+                                            if(vdList[i].contentVersionIdList){
+                                                console.log(vdList[i]);
+                                                $.ajax({
+                                                    type: 'GET',
+                                                    crossOrigin: true,
+                                                    url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + vdList[i].contentVersionIdList + '/VersionData',
+                                                    cache :false,
+                                                    headers: {"Authorization" : accToken},
+                                                    xhrFields : {responseType : 'blob'},
+                                                    success : function (dlFile) {
+                                                        //let versionData = {cvId: res[i].contentVersionIdList, versionData: dlFile};
+                                                        //console.log('versionData:' + versionData);
+                                                        // URL生成
+                                                        let binaryData = [];
+                                                        binaryData.push(dlFile);
+                                                        let fileUrl = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
+                                                        versionDataArray.push({cvId: vdList[i].contentVersionIdList, versionData: fileUrl});
+                                                        console.log(versionDataArray);
+                                                        count++;
+                                                        console.log('i : ' + i);
+                                                        console.log('count : ' + count);
+                                                        console.log('cvIdList.length : ' + cvIdList.length);
+                                                        console.log(count == cvIdList.length);
+                                                        // ファイルのIdの件数動いたらresolve
+                                                        if(count == cvIdList.length){
+                                                            console.log('resolve');
+                                                            resolve();
+                                                        }
                                                     }
-                                                }
-                                            })
+                                                })
+                                            }
                                         }
-                                    }
                                     }
                                 }).then(() => {
                                     /*** タグの生成 ***/
@@ -511,11 +512,11 @@
                                         }
                                         // 複製したtemplate要素にデータを挿入
                                         clone.querySelector('.detailButton').innerHTML = changeDate(vdList[j].cbd.CreatedDate);
-                                        clone.querySelector('.detailButton').Name = 'detail'+ i;
-                                        clone.querySelector('.detailButton').id = 'detailButton'+ i;
+                                        clone.querySelector('.detailButton').Name = 'detail'+ j;
+                                        clone.querySelector('.detailButton').id = 'detailButton'+ j;
                                         clone.querySelector('.detailButton').value = false;
                                         clone.querySelector('.inqDetail').textContent = content;
-                                        clone.querySelector('.inqDetail').id = 'detail'+ i;
+                                        clone.querySelector('.inqDetail').id = 'detail'+ j;
                                         // div#containerの中に追加
                                         document.getElementById('outputInqList_Details').appendChild(clone);
                                         //console.log('作成日：' + vdList[j].cbd.CreatedDate);
