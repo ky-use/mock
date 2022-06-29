@@ -448,6 +448,8 @@
                                 vdList = res;
                                 // ファイルのId
                                 let cvIdList = vdList.map(el => el.contentVersionIdList);
+                                // nullを削除
+                                cvIdList = cvIdList.filter(el => el);
 
                                 let promise1 = new Promise((resolve) => {
                                     // データを取得できた場合
