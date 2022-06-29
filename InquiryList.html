@@ -447,6 +447,7 @@
                                                             binaryData.push(dlFile);
                                                             let fileUrl = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
                                                             versionDataArray.push({cvId: vdList[i].contentVersionIdList, versionData: fileUrl});
+                                                            console.log(versionDataArray);
                                                             if(i == vdList.length - 1){
                                                                 console.log('ç≈å„');
 
