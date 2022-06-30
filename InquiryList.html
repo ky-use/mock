@@ -90,7 +90,7 @@
             window.onload = function(){
                 let caseNum = '00001056';
                 // タイトル
-                let title = document.getElementById(contbrdTitle);
+                let title = document.getElementById('contbrdTitle');
                 title.innerHTML = 'お問い合わせ番号：No.' + caseNum;
                 // アクセストークン取得（リフレッシュトークンフロー） Ajax
                 $.ajax({
@@ -208,8 +208,8 @@
                                                 }*/
                                                 // ファイル
                                                 cloneFile.querySelector('.contbrd-file').innerText = versionDataArray[k].cvName;
-                                                cloneFile.querySelector('.contbrd-file').href = versionDataArray[k].fileUrl;
                                                 cloneFile.querySelector('.contbrd-file').download = versionDataArray[k].cvName;
+                                                cloneFile.querySelector('.contbrd-file').href = versionDataArray[k].fileUrl;
                                                 // div#containerの中に追加
                                                 document.getElementById('contbrdBody' + j).appendChild(cloneFile);
                                                 // クローン回数をインクリメント
