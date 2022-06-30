@@ -7,349 +7,70 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <style>
-            #inqList{
-                display:inline;
-            }
-            #inqDetailsList{
-                display:none;
-            }
-            #inqDetails1{
-                display:none;
-            }
-            #inqDetails2{
-                display:none;
-            }
-            #content{
-                margin: 1.5em 1.5em;
-            }
-            .elementHidden{
-                display:none;
-            }
-
-            .overflow-wrap-normal {
-                overflow-wrap: normal;
-            }
-            .button {
-                /*枠線、外枠、クリック時の枠線を消去*/
-                padding: 1em 0 0;
-                border: none;
-                outline: none;
-                background: transparent;
-                font-weight: bold;
-                color: #004db1f7;
-                font-size: 100%;
-            }
-            .equal_table{
-                table-layout: fixed;
-                width: 30em;
-                max-width: 100%;
-            }
-            .equal_table td{
-                word-wrap: break-word;
-            }
-            .buttonContainer{
-                width: 30em;
-                max-width: 100%;
-                text-align: center;
-            }
-            .buttonBrue{
-                color: #3c90fff7;
-                border-color: #3c90fff7;
-                background: none;
-                border-radius: 5px;
-                border: 1px solid #3c90fff7;
-                font-weight: bold;
-                padding: 10px 30px;
-                cursor: pointer;
-            }
-            .buttonBrue_small{
-                color: #3c90fff7;
-                border-color: #3c90fff7;
-                background: none;
-                border-radius: 5px;
-                border: 1px solid #3c90fff7;
-                font-weight: bold;
-                padding: 5px 10px;
-                cursor: pointer;
-            }
-            .buttonBrue_noborder{
-                color: #3c90fff7;
-                outline: none;
-                border: none;
-                background: none;
-                font-weight: bold;
-                padding: 10px 30px;
-                cursor: pointer;
-            }
-            .title{
-                margin: 0;
-                color: #004db1f7;
-            }
-            .inqDetail{
-                margin: 0 0 0 15px;
-            }
-
-            .fileDownloadText{
-                border: none;
-                outline: none;
-                background: transparent;
-                font-weight: bold;
-            }
+            /*contactboardContents*/
+            #contact .contbrd-title{margin:0 0 16px;border-radius:8px;padding:8px;background-color:#606060;color:#ffffff;text-align:center;}
+            /*contactboard*/
+            #contact .contbrd-head{position:relative;margin-bottom:16px;}
+            #contact .contbrd-head::before{content:"";display:inline-block;width:64px;height:64px;margin:0 16px 0 0;background-size:contain;}
+            #contact .contbrd-head.customer::before{background:transparent url(/commontpl/images/category/contact_ic001.svg) no-repeat center center;}
+            #contact .contbrd-head.answer::before{background:transparent url(/commontpl/images/category/contact_ic002.svg) no-repeat center center;}
+            #contact .contbrd-wrap .contbrd-cont{padding:24px 0;border-bottom:1px solid #bababa;}
+            #contact .contbrd-wrap .contbrd-cont:first-of-type{padding-top:0;}
+            #contact .contbrd-wrap .contbrd-cont:last-of-type{border-bottom:none;}
+            #contact .contbrd-wrap .contbrd-cont dl{position:absolute;display:inline-block;width:72%;top:8px;}
+            #contact .contbrd-wrap .contbrd-cont dl dt{color:#606060;display:flex;justify-content:space-between;}
+            #contact .contbrd-wrap .contbrd-cont dl dt .new-icon{width:46px;height:18px;margin-left:5px;border-radius:15px;background-color:#ffb900;color:#ffffff;text-align:center;font-size:1.2rem;}
+            #contact .contbrd-wrap .contbrd-cont dl dd{margin:6px 0;color:#606060;}
+            #contact .contbrd-wrap .contbrd-cont dl dd::before{content:"";display: inline-block;width:20px;height:20px;margin:0 11px 0 0;background:transparent url(/commontpl/images/category/contact_ic003.svg) no-repeat center center;background-size:contain;vertical-align:top;}
+            #contact .contbrd-body{position:relative;}
+            #contact .contbrd-body::after{content:"";width:8px;height:8px;border:0px;border-right:2px solid #bababa;border-top:2px solid #bababa;transform:rotate(135deg);position:absolute;top:5px;right:0.5em;}
+            #contact .contbrd-body.first::after{display:none;}
+            #contact .contbrd-body.first .contbrd-txt,#contact .contbrd-cont.open .contbrd-body.first .contbrd-txt{width:100%;}
+            #contact .contbrd-cont.open .contbrd-body::after{transform:rotate(-45deg);}
+            #contact .contbrd-txt p{display:none;}
+            #contact .contbrd-txt,#contact .contbrd-txt p:first-of-type{width:90%;-webkit-line-clamp:1;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;}
+            #contact .contbrd-body.first .contbrd-txt,#contact .contbrd-body.first .contbrd-txt p,#contact .contbrd-cont.open .contbrd-txt,#contact .contbrd-cont.open .contbrd-txt p:first-of-type,#contact .contbrd-cont.open .contbrd-txt p{-webkit-line-clamp:unset;display:block;}
+            #contact .contbrd-cont.open .contbrd-txt,#contact .contbrd-cont.open .contbrd-txt p:first-of-type,#contact .contbrd-cont.open .contbrd-txt p{width:95%;}
+            #contact .contbrd-txt + .h301{padding-top:16px; /*追加display:none;/追加*/}
         </style>
 	</head>
 	<body>
-        <div id="content">
-            <!-- お問い合わせ一覧 -->
-            <div id="inqList">
-                <b><p>お問い合わせ一覧</p></b>
-                
-                <!-- 以下テンプレートを書く -->
-                <template id="templateInqList">
-                    <tr align="left">
-                        <th>
-                            <p class="inqTitle title"></p>
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p class="inqType inqDetail"></p>
-                            <p class="inqstatus inqDetail"></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="right">
-                            <p style="margin: 0;"><button type="button" class="inqButton buttonBrue_small" onclick="sendCbd(this)">表示</button></p>
-                        </td>
-                    </tr>
-                </template>
-                
-                <!-- テンプレート出力 -->
-                <div>
-                    <table id="outputInqList">
-                    </table>
+        <!--template-->
+        <template id="contbrdTemplate">
+            <div class="contbrd-cont">
+                <div class="contbrd-head">
+                    <dl>
+                        <dt><span class="actor-type"></span></dt>
+                        <dd class="date-time"></dd>
+                    </dl>
                 </div>
-                <!-- /テンプレート出力 -->
-
-                <div class="buttonContainer">
-                    <b><button type="button" onclick="location.href='./index.html'" class="buttonBrue">コンタクトボード ホーム</button></b>
+                <div class="contbrd-body">
+                    <div class="contbrd-txt"><p class="contbrd-p"></p></div>
                 </div>
             </div>
-            <!-- /お問い合わせ一覧 -->
-            
-            <!-- お問い合わせ詳細 -->
-            <div id="inqDetailsList">
-                <div id="inqDetails1">
+        </template>
+        <!--/template-->
+        <!--fileTemplate-->
+        <template id="fileTemplate">
+            <h3 class="h301">ファイル</h3>
+            <p><a class="contbrd-file" href=""></a></p>
+        </template>
+        <!--fileTemplate-->
+        
 
-                    <b><p id='inq1' style='display:none; color: #004db1f7; font-size: 19px;'></p></b>
+        <!--contents-->
+        <p id="contbrdTitle" class="contbrd-title"></p>
 
-                    <!-- テンプレート -->
-                    <template id="template_inqListDetails">
-                        <tr align="left">
-                            <th>
-                                <button class="detailButton button" type="button" value="false" onclick="dButton(this)"></button>
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p class="inqDetail"></p>
-                            </td>
-                        </tr>
-                    </template>
-                    <!-- /テンプレート -->
-
-                    <!-- ファイルテンプレート -->
-                    <template id="template_fileList">
-                        <tr>
-                            <td>
-                                <button class="fileDownloadText" style="display: none;" value="false"></button>
-                                <p><a class="attachment" download></a></p>
-                            </td>
-                        </tr>
-                    </template>
-                    <!-- /ファイルテンプレート -->
-
-                    <!-- テンプレート出力 -->
-                    <div>
-                        <form id="outputInqList_Details_form">
-                            <table id="outputInqList_Details">
-                            </table>
-                        </form>
-                    </div>
-                    <!-- /テンプレート出力 -->
-
-                    <div class="buttonContainer">
-                        <p><button type="button" onclick="location.href='./NewReply.html'" class="buttonBrue">返信する</button></p>
-                        <button type="button" onclick="changeDisplayBuckButton()" class="buttonBrue_noborder">戻る</button>
-                    </div>
-                </div>
-                <!-- /お問い合わせ詳細 -->
-            </div>
+        <!--output_template-->
+        <div id="outputContbrd" class="contbrd-wrap">
         </div>
+        <!--/output_template-->
 
-        <script>
-            /***
-			 一覧と詳細画面の切り替え
-			***/
-            
-            // 表示ボタン
-            function changeDisplayButton1(Num) {
-                // お問い合わせ一覧非表示
-                document.getElementById('inqList').style.display = 'none';
-                // お問い合わせ詳細の表示
-                document.getElementById('inqDetailsList').style.display = 'inline';
-                document.getElementById('inqDetails1').style.display = 'inline';
-                document.getElementById('inq1').style.display = 'inline';
-                // タイトルとインデックス
-                let title = '';
-                let index = '';
-                // ケースの配列からケースNoのみを配列として準備
-                let caseNumber = arrayInq.map(el => el.CaseNumber);
-                // ケースNo.から日付を取得
-                index = caseNumber.indexOf(Num);
-                title = arrayInq[index].CreatedDate;
-                // タイトル用に加工
-                title = 'No.' + title.substring( 0, title.length - 12 ).replace(/T|-|:/g,'');
-                //console.log(title);
-                // タイトルを設定
-                document.getElementById('inq1').innerHTML = title;
-            };
-            function changeDisplayButton2() {
-                // お問い合わせ一覧非表示
-                document.getElementById('inqList').style.display = 'none';
-                // お問い合わせ詳細の表示
-                document.getElementById('inqDetailsList').style.display = 'inline';
-                document.getElementById('inqDetails1').style.display = 'inline';
-            };
-            // 戻るボタン
-            function changeDisplayBuckButton() {
-                // お問い合わせ一覧表示
-                document.getElementById('inqList').style.display = 'inline';
-                // お問い合わせ詳細の非表示 
-                document.getElementById('inqDetailsList').style.display = 'none';
-                document.getElementById('inqDetails1').style.display = 'none';
-                //document.getElementById('inqDetails2').style.display = 'none';
-                // タイトルの非表示
-                document.getElementById('inq1').style.display = 'none';
-
-                // テーブルの子要素すべてを削除
-                let oldDetailList = document.getElementById('outputInqList_Details');
-                let removeOldDetailList = oldDetailList.querySelectorAll('tr');
-                if(removeOldDetailList.length != 0){
-                    for(let i = 0; i < removeOldDetailList.length; i++){
-                        removeOldDetailList[i].parentNode.removeChild(removeOldDetailList[i])
-                    }
-                }
-            };
-
-			/***
-			 要素の全表示・部分表示処理
-			***/
-            /*
-                引数：押下ボタン要素
-            */
-            function dButton(elem){
-                // ボタンの状態
-                // openState=全表示(true)/部分表示(false)の状態
-                let openState = elem.value;
-                // 押されたボタンNo(二桁の時動かない)
-                let buttonNum = elem.Name.substr(elem.Name.length-1, elem.Name.length);
-                // 詳細要素の取得
-                let element = document.getElementById(elem.Name);                
-                // ファイル有無
-                let fileElem = document.getElementById('fdText'+buttonNum);
-                let fileLinkElem = document.getElementById('fdText'+buttonNum);
-                //console.log('fileElemValue :'+fileElemValue);
-                
-                // ボタンの状態で表示を切り替え(要素のvalueは文字列)
-                if(openState=='true'){
-                    // 詳細を部分表示
-                    element.innerHTML = vdList[buttonNum].cbd.RecordType__c + ':' + vdList[buttonNum].cbd.Content__c.substring(0, 12) + "...";
-                    // 内容が11文字以下ならそのまま、それを超える場合省略
-                    let text = '';
-                    if(vdList[buttonNum].cbd.Content__c.length > 12){
-                        text = vdList[buttonNum].cbd.RecordType__c + ':' + vdList[buttonNum].cbd.Content__c.substring(0, 12) + "...";
-                    }else{
-                        text = vdList[buttonNum].cbd.RecordType__c + ':' + vdList[buttonNum].cbd.Content__c;
-                    }
-                    element.innerHTML = text;
-                    // ファイルがある場合、固定文言とファイルリンクを非表示
-                    if(fileElem.style.display=='inline'){
-                        fileElem.style.display = 'none;';
-                        fileLinkElem.style.display = 'none;';
-                    }
-                    openState = 'false';
-                    
-                } else{
-                    // 詳細を全表示
-                    element.innerHTML = vdList[buttonNum].cbd.RecordType__c + ':' + vdList[buttonNum].cbd.Content__c;
-                    // ファイルがある場合、固定文言とファイルリンクを表示
-                    if(fileElem.style.display=='none'){
-                        fileElem.style.display = 'inline;';
-                        fileLinkElem.style.display = 'inline;';
-                    }
-                    openState = 'true';
-
-                }
-                // ボタンの状態を設定
-                elem.value = openState;
-            }
-
-            // 取得したケース格納用
-            let arrayInq = [];
-            // 初期表示処理
-            window.onload = function(){
-                // アクセストークン取得（リフレッシュトークンフロー） Ajax
-                $.ajax({
-                    type: 'POST',
-                    crossOrigin: true,
-                    url: 'https://protocomdev-dev-ed.my.salesforce.com/services/oauth2/token',
-                    dataType: 'json',
-                    cache :false,
-                    data : {"grant_type":"refresh_token","client_id":"3MVG9pRzvMkjMb6nsLsmTx_FqB0rQ9AHEMYt85TrwFp6b3yeP.ta18VQpmha_Ds31fssFdYib4DdLPcLKqtQG", "client_secret":"F864BDD8ADFB8B17EA27F0623CF9039A503A76F9312032654DBFFDB25E87B142","refresh_token":"5Aep861mdLLi91HqFfCpXYtQXRaOgcHsK1gi36_cVHboubUhDFRrSCX9zyL1KBPgaR5qiKjUA54Q0RZhiN_teRI"},
-                    success : function (connectData) {
-                        let accToken = 'Bearer ' + connectData.access_token;
-                        $.ajax({
-                            type: 'GET',
-                            crossOrigin: true,
-                            url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/Mock_Case/A0000001',
-                            dataType: 'json',
-                            cache :false,
-                            headers: {"Authorization" : accToken},
-                            success : function (res) {
-                                // データを取得できた場合
-                                if(res.length != 0){
-                                    // ケースをBK
-                                    arrayInq = res;
-                                    //console.log(arrayInq);
-                                    
-                                    // template要素を取得
-                                    let template = document.getElementById('templateInqList');
-                                    // データの数分繰り返し
-                                    for(let i = 0; i < res.length; i++){
-                                        // template要素の内容を複製
-                                        let clone = template.content.cloneNode(true);
-                                        // 複製したtemplate要素にデータを挿入
-                                        clone.querySelector('.inqTitle').textContent = 'No.' + res[i].CreatedDate.substring(0, res[i].CreatedDate.length - 12).replace(/T|-|:/g,'');
-                                        clone.querySelector('.inqType').textContent = '問い合わせ種別：' + res[i].Subject;
-                                        clone.querySelector('.inqstatus').textContent = 'ステータス：' + res[i].Status;
-                                        clone.querySelector('.inqButton').value = res[i].CaseNumber;
-                                        // div#containerの中に追加
-                                        document.getElementById('outputInqList').appendChild(clone);
-                                    }
-                                }
-                            },
-                            error : function (data, errorThrown,status) {
-                                
-                            }
-                        })
-                    },
-                    error : function (data, errorThrown,status) {
-                    }
-                });
-            }
-
+        <!--/contents-->
+        
+        <script type="text/javascript">
             /*** 
-             * SFから取得した日付は
+             * SFから取得した日付をJSTに変換して、フォーマットにはめて返却
              * 引数　：2022-06-06T04:43:08.000+0000
              * 返却値：2022年06月06日 04:43
              ***/
@@ -362,13 +83,15 @@
                 const minute = (`0` + (newDate.getMinutes())).slice(-2)
                 return `${year}年${month}月${day}日 ${hour}:${minute}`;
             }
-
-
+            
             // responseを受け取るリスト
             let vdList = [];
-            // 引数：ケースNo
-            function sendCbd(caseNum){
-                changeDisplayButton1(caseNum.value);
+            // 初期表示処理
+            window.onload = function(){
+                let caseNum = '00001056';
+                // タイトル
+                let title = document.getElementById(contbrdTitle);
+                title.innerHTML = 'お問い合わせ番号：No.' + caseNum;
                 // アクセストークン取得（リフレッシュトークンフロー） Ajax
                 $.ajax({
                     type: 'POST',
@@ -380,35 +103,31 @@
                     success : function (connectData) {
                         // アクセストークン
                         let accToken = 'Bearer ' + connectData.access_token;
-
                         // コンタクトボード明細取得
                         $.ajax({
                             type: 'GET',
                             crossOrigin: true,
-                            url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/Mock_File/' + caseNum.value,
+                            url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/Mock_File/' + caseNum,
                             dataType: 'json',
                             cache :false,
                             headers: {"Authorization" : accToken},
-                            data : JSON.stringify(caseNum.value),
+                            data : JSON.stringify(caseNum),
                             success : function (res) {
-                                //console.log(res);
+                                console.log(res);
                                 // ファイルの中身を格納する配列を定義
                                 let versionDataArray = [];
                                 vdList = res;
-                                // ファイルのId
+                                // ファイルのId(ファイルの件数確認用)
                                 let cvIdList = vdList.map(el => el.contentVersionIdList);
                                 // nullを削除
                                 cvIdList = cvIdList.filter(el => el);
-
                                 const promise = new Promise((resolve) => {
                                     // データを取得できた場合
                                     if(vdList.length != 0){
                                         let count = 0;
-                                        // ファイルを取得
-                                        // iの順番がajaxを含んでいるため順不同
+                                        // ファイルを取得（処理が順不同）
                                         for(let i = 0; i < vdList.length; i++){
                                             if(vdList[i].contentVersionIdList){
-                                                //console.log(vdList[i]);
                                                 $.ajax({
                                                     type: 'GET',
                                                     crossOrigin: true,
@@ -432,6 +151,7 @@
                                                         console.log('count : ' + count);
                                                         console.log('cvIdList.length : ' + cvIdList.length);
                                                         console.log(count == cvIdList.length);*/
+                                                        
                                                         // ファイルのIdの件数分動いたらresolve
                                                         if(count == cvIdList.length){
                                                             console.log('resolve');
@@ -447,59 +167,52 @@
                                     /*** タグの生成 ***/
                                     console.log('タグの生成');
                                     // template要素を取得
-                                    let template = document.getElementById('template_inqListDetails');
+                                    let template = document.getElementById('contbrdTemplate');
                                     // ファイルのtemplate要素を取得
-                                    let templateFile = document.getElementById('template_fileList');
-
+                                    let templateFile = document.getElementById('fileTemplate');
                                     // コンタクトボード明細の数分繰り返し
                                     for(let j = 0; j < vdList.length; j++){
                                         // template要素の内容を複製
                                         let clone = template.content.cloneNode(true);
                                         // 返信内容が12 文字以下ならそのまま、それを超える場合省略
-                                        let content = '';
-                                        if(vdList[j].cbd.Content__c.length > 12){
-                                            content = vdList[j].cbd.RecordType__c + ':' + vdList[j].cbd.Content__c.substring(0, 12) + "...";
-                                        } else{
-                                            content = vdList[j].cbd.RecordType__c + ':' + vdList[j].cbd.Content__c;
-                                        }
+                                        /*let content = vdList[j].cbd.RecordType__c + ':' + vdList[j].cbd.Content__c;
+                                        if(content.length > 12){
+                                            content = content.substring(0, 12) + "...";
+                                        }*/
                                         // 複製したtemplate要素にデータを挿入
-                                        clone.querySelector('.detailButton').innerHTML = changeDate(vdList[j].cbd.CreatedDate);
-                                        clone.querySelector('.detailButton').Name = 'detail'+ j;
-                                        clone.querySelector('.detailButton').id = 'detailButton'+ j;
-                                        clone.querySelector('.detailButton').value = false;
-                                        clone.querySelector('.inqDetail').textContent = content;
-                                        clone.querySelector('.inqDetail').id = 'detail'+ j;
+                                        // クローン初回のみ
+                                        if(i == 0){
+                                            // 全表示
+                                            cloneFile.querySelector('.contbrd-body').calss = 'contbrd-body first';
+                                        }
+                                        clone.querySelector('.actor-type').innerHTML = 'お客様';
+                                        clone.querySelector('.date-time').innerHTML = changeDate(vdList[j].cbd.CreatedDate);
+                                        clone.querySelector('.contbrd-p').innerHTML = vdList[j].cbd.RecordType__c + ':' + vdList[j].cbd.Content__c;
+                                        // 追加先用のidを追加
+                                        clone.querySelector('.contbrd-body').id = 'contbrdBody' + j;
+
                                         // div#containerの中に追加
                                         document.getElementById('outputInqList_Details').appendChild(clone);
-                                        //console.log('作成日：' + vdList[j].cbd.CreatedDate);
-                                        
-                                        console.log('j : ' + j);
+                                        // クローン回数カウント
                                         let c = 0;
                                         // ファイルの数分繰り返し
                                         for(let k = 0; k < versionDataArray.length; k++){
                                             if(vdList[j].contentVersionIdList == versionDataArray[k].cvId){
-                                                console.log('k : ' + k);
                                                 // template要素の内容を複製
                                                 let cloneFile = templateFile.content.cloneNode(true);
                                                 // 複製したtemplate要素にデータを挿入
-                                                //　初回のみ
-                                                if(c==0){
-                                                    cloneFile.querySelector('.fileDownloadText').innerHTML = 'ファイル（コチラからダウンロード）';
-                                                    cloneFile.querySelector('.fileDownloadText').id = 'fdText'+ j;
-                                                    cloneFile.querySelector('.fileDownloadText').value = 'true';
-                                                    //cloneFile.querySelector('.fileDownloadText').style = 'display:none;';
-                                                    cloneFile.querySelector('.fileDownloadText').style = 'display:inline;';
-                                                }
+                                                // クローン初回のみ
+                                                /*if(c == 0){
+                                                    // 固定文字を表示
+                                                    cloneFile.querySelector('.h301').style.display = 'inline';
+                                                }*/
                                                 // ファイル
-                                                //cloneFile.querySelector('.attachment').textContent = versionDataArray[k].fileUrl;
-                                                cloneFile.querySelector('.attachment').innerText = versionDataArray[k].cvName;
-                                                cloneFile.querySelector('.attachment').href = versionDataArray[k].fileUrl;
-                                                cloneFile.querySelector('.attachment').download = versionDataArray[k].cvName;
-                                                cloneFile.querySelector('.attachment').id = 'fName'+ j;
-                                                //cloneFile.querySelector('.attachment').style = 'display:none;';
+                                                cloneFile.querySelector('.contbrd-file').innerText = versionDataArray[k].cvName;
+                                                cloneFile.querySelector('.contbrd-file').href = versionDataArray[k].fileUrl;
+                                                cloneFile.querySelector('.contbrd-file').download = versionDataArray[k].cvName;
                                                 // div#containerの中に追加
-                                                document.getElementById('outputInqList_Details').appendChild(cloneFile);
-                                                console.log('c : ' + c);
+                                                document.getElementById('contbrdBody' + j).appendChild(cloneFile);
+                                                // クローン回数をインクリメント
                                                 c++;
                                             }
                                         }
@@ -515,6 +228,15 @@
                     error : function (data, errorThrown,status) {
                     }
                 });
+                
+            }
+
+
+
+
+
+            // 引数：ケースNo
+            function sendCbd(caseNum){
                 
             }
         </script>
