@@ -381,21 +381,11 @@
                 this.cvNameArray = cvNameArray;
                 this.fileUrlArray = fileUrlArray;
             }
+
             /*** 
              * 引数　：2022-06-06T04:43:08.000+0000
              * 返却値：2022年06月06日 04:43
              ***/
-            /*function tranceDate(dateTime){
-                let dt = dateTime.substring( 0, cbdCreatedDate.length - 12 );
-                let year = dt.substring(0, 4);
-                let month = dt.substring(5, 7);
-                let day = dt.substring(8, 10);
-                let hour = dt.substring(dt.length - 5, dt.length-3);
-                let minute = dt.substring(dt.length - 2, dt.length);
-                let time = dt.substring(dt.length - 5, dt.length);
-                dt = year + '年' + month +  '月' + day + '日 ' + time;
-                return dt;
-            }*/
             function changeDate(dateTime){
                 const newDate = new Date(dateTime);
                 const year = newDate.getFullYear();
@@ -465,8 +455,6 @@
                                                     headers: {"Authorization" : accToken},
                                                     xhrFields : {responseType : 'blob'},
                                                     success : function (dlFile) {
-                                                        //let versionData = {cvId: res[i].contentVersionIdList, versionData: dlFile};
-                                                        //console.log('versionData:' + versionData);
                                                         // URL生成
                                                         let binaryData = [];
                                                         binaryData.push(dlFile);
@@ -476,13 +464,13 @@
                                                             cvName: vdList[i].fileNameList, 
                                                             versionData: fileUrl
                                                         });
-                                                        //console.log(versionDataArray);
+                                                        console.log(versionDataArray);
                                                         count++;
-                                                        /*console.log('i : ' + i);
+                                                        console.log('i : ' + i);
                                                         console.log('count : ' + count);
                                                         console.log('cvIdList.length : ' + cvIdList.length);
-                                                        console.log(count == cvIdList.length);*/
-                                                        // ファイルのIdの件数動いたらresolve
+                                                        console.log(count == cvIdList.length);
+                                                        // ファイルのIdの件数分動いたらresolve
                                                         if(count == cvIdList.length){
                                                             console.log('resolve');
                                                             resolve();
