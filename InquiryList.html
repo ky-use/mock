@@ -161,7 +161,7 @@
                     <template id="template_fileList">
                         <tr>
                             <td>
-                                <button class="fileDownloadText" value="false"></button>
+                                <button class="fileDownloadText" style="display: none;" value="false"></button>
                                 <p><a class="attachment" download></a></p>
                             </td>
                         </tr>
@@ -502,7 +502,6 @@
                                         } else{
                                             content = vdList[j].cbd.RecordType__c + ':' + vdList[j].cbd.Content__c;
                                         }
-                                        console.log('CreatedDate: ' +vdList[j].cbd.CreatedDate);
                                         // 複製したtemplate要素にデータを挿入
                                         clone.querySelector('.detailButton').innerHTML = changeDate(vdList[j].cbd.CreatedDate);
                                         clone.querySelector('.detailButton').Name = 'detail'+ j;
@@ -523,15 +522,17 @@
                                                 // template要素の内容を複製
                                                 let cloneFile = templateFile.content.cloneNode(true);
                                                 // 複製したtemplate要素にデータを挿入
+                                                //　初回のみ
                                                 if(c==0){
                                                     cloneFile.querySelector('.fileDownloadText').innerHTML = 'ファイル（コチラからダウンロード）';
-                                                cloneFile.querySelector('.fileDownloadText').id = 'fdText'+ j;
-                                                cloneFile.querySelector('.fileDownloadText').value = 'true';
-                                                //cloneFile.querySelector('.fileDownloadText').style = 'display:none;';
+                                                    cloneFile.querySelector('.fileDownloadText').id = 'fdText'+ j;
+                                                    cloneFile.querySelector('.fileDownloadText').value = 'true';
+                                                    //cloneFile.querySelector('.fileDownloadText').style = 'display:none;';
+                                                    cloneFile.querySelector('.fileDownloadText').style = 'display:inline;';
                                                 }
                                                 // ファイル
                                                 //cloneFile.querySelector('.attachment').textContent = versionDataArray[k].fileUrl;
-                                                cloneFile.querySelector('.attachment').innerText = 'ファイル（コチラからダウンロード）<br>' + versionDataArray[k].cvName;
+                                                cloneFile.querySelector('.attachment').innerText = versionDataArray[k].cvName;
                                                 cloneFile.querySelector('.attachment').href = versionDataArray[k].fileUrl;
                                                 cloneFile.querySelector('.attachment').download = versionDataArray[k].cvName;
                                                 cloneFile.querySelector('.attachment').id = 'fName'+ j;
