@@ -464,12 +464,12 @@
                                                             cvName: vdList[i].fileNameList, 
                                                             versionData: fileUrl
                                                         });
-                                                        console.log(versionDataArray);
+                                                        /*console.log(versionDataArray);
                                                         count++;
                                                         console.log('i : ' + i);
                                                         console.log('count : ' + count);
                                                         console.log('cvIdList.length : ' + cvIdList.length);
-                                                        console.log(count == cvIdList.length);
+                                                        console.log(count == cvIdList.length);*/
                                                         // ファイルのIdの件数分動いたらresolve
                                                         if(count == cvIdList.length){
                                                             console.log('resolve');
@@ -480,6 +480,7 @@
                                             }
                                         }
                                     }
+                                // promiseがresolveしたら実行
                                 }).then(() => {
                                     /*** タグの生成 ***/
                                     console.log('タグの生成');
