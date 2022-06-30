@@ -405,7 +405,6 @@
             let fileUrlArray = [];
             // responseを受け取るリスト
             let vdList = [];
-
             
             // 引数：ケースNo
             function sendCbd(caseNum){
@@ -525,7 +524,7 @@
                                                 let cloneFile = templateFile.content.cloneNode(true);
                                                 // 複製したtemplate要素にデータを挿入
                                                 if(c==0){
-                                                cloneFile.querySelector('.fileDownloadText').innerHTML = 'ファイル（コチラからダウンロード）';
+                                                    cloneFile.querySelector('.fileDownloadText').innerHTML = 'ファイル（コチラからダウンロード）';
                                                 cloneFile.querySelector('.fileDownloadText').id = 'fdText'+ j;
                                                 cloneFile.querySelector('.fileDownloadText').value = 'true';
                                                 //cloneFile.querySelector('.fileDownloadText').style = 'display:none;';
@@ -539,6 +538,7 @@
                                                 //cloneFile.querySelector('.attachment').style = 'display:none;';
                                                 // div#containerの中に追加
                                                 document.getElementById('outputInqList_Details').appendChild(cloneFile);
+                                                console.log('c : ' + c);
                                                 c++;
                                             }
                                         }
