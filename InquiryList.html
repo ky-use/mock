@@ -439,7 +439,7 @@
                             headers: {"Authorization" : accToken},
                             data : JSON.stringify(caseNum.value),
                             success : function (res) {
-                                console.log(res);
+                                //console.log(res);
                                 // ファイルの中身を格納する配列を定義
                                 let versionDataArray = [];
                                 vdList = res;
@@ -456,7 +456,7 @@
                                         // iの順番がajaxを含んでいるため順不同
                                         for(let i = 0; i < vdList.length; i++){
                                             if(vdList[i].contentVersionIdList){
-                                                console.log(vdList[i]);
+                                                //console.log(vdList[i]);
                                                 $.ajax({
                                                     type: 'GET',
                                                     crossOrigin: true,
@@ -471,13 +471,17 @@
                                                         let binaryData = [];
                                                         binaryData.push(dlFile);
                                                         let fileUrl = URL.createObjectURL(new Blob(binaryData, {type: "application/octet-stream"}));
-                                                        versionDataArray.push({cvId: vdList[i].contentVersionIdList, versionData: fileUrl});
-                                                        console.log(versionDataArray);
+                                                        versionDataArray.push({
+                                                            cvId: vdList[i].contentVersionIdList, 
+                                                            cvName: vdList[i].fileNameList, 
+                                                            versionData: fileUrl
+                                                        });
+                                                        //console.log(versionDataArray);
                                                         count++;
-                                                        console.log('i : ' + i);
+                                                        /*console.log('i : ' + i);
                                                         console.log('count : ' + count);
                                                         console.log('cvIdList.length : ' + cvIdList.length);
-                                                        console.log(count == cvIdList.length);
+                                                        console.log(count == cvIdList.length);*/
                                                         // ファイルのIdの件数動いたらresolve
                                                         if(count == cvIdList.length){
                                                             console.log('resolve');
@@ -526,7 +530,17 @@
                                                 // template要素の内容を複製
                                                 let cloneFile = templateFile.content.cloneNode(true);
                                                 // 複製したtemplate要素にデータを挿入
-                                                cloneFile.querySelector('.attachment').textContent = versionDataArray[k].fileUrl;
+                                                cloneFile.querySelector('.fileDownloadText').innerHTML = 'ファイル（コチラからダウンロード）';
+                                                cloneFile.querySelector('.fileDownloadText').id = 'fdText'+ k;
+                                                cloneFile.querySelector('.fileDownloadText').value = 'true';
+                                                cloneFile.querySelector('.fileDownloadText').style = 'display:none;';
+                                                // ファイル
+                                                //cloneFile.querySelector('.attachment').textContent = versionDataArray[k].fileUrl;
+                                                cloneFile.querySelector('.attachment').innerText = versionDataArray[k].cvName;
+                                                cloneFile.querySelector('.attachment').href = versionDataArray[k].fileUrl;
+                                                cloneFile.querySelector('.attachment').download = versionDataArray[k].cvName;
+                                                cloneFile.querySelector('.attachment').id = 'fName'+ j;
+                                                cloneFile.querySelector('.attachment').style = 'display:none;';
                                                 // div#containerの中に追加
                                                 document.getElementById('outputInqList_Details').appendChild(cloneFile);
                                             }
