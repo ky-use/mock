@@ -261,13 +261,13 @@
                 // ボタンの状態で表示を切り替え(要素のvalueは文字列)
                 if(openState=='true'){
                     // 詳細を部分表示
-                    element.innerHTML = vdList[buttonNum].RecordType__c + ':' + vdList[buttonNum].Content__c.substring(0, 12) + "...";
+                    element.innerHTML = vdList[buttonNum].cbd.RecordType__c + ':' + vdList[buttonNum].cbd.Content__c.substring(0, 12) + "...";
                     // 内容が11文字以下ならそのまま、それを超える場合省略
                     let text = '';
                     if(vdList[buttonNum].Content__c.length > 12){
-                        text = vdList[buttonNum].RecordType__c + ':' + vdList[buttonNum].Content__c.substring(0, 12) + "...";
+                        text = vdList[buttonNum].cbd.RecordType__c + ':' + vdList[buttonNum].cbd.Content__c.substring(0, 12) + "...";
                     }else{
-                        text = vdList[buttonNum].RecordType__c + ':' + vdList[buttonNum].Content__c;
+                        text = vdList[buttonNum].cbd.RecordType__c + ':' + vdList[buttonNum].cbd.Content__c;
                     }
                     element.innerHTML = text;
                     // ファイルがある場合、固定文言とファイルリンクを非表示
@@ -279,7 +279,7 @@
                     
                 } else{
                     // 詳細を全表示
-                    element.innerHTML = vdList[buttonNum].RecordType__c + ':' + vdList[buttonNum].Content__c;
+                    element.innerHTML = vdList[buttonNum].cbd.RecordType__c + ':' + vdList[buttonNum].cbd.Content__c;
                     // ファイルがある場合、固定文言とファイルリンクを表示
                     if(fileElemValue.value=='true'){
                         document.getElementById('fdText'+buttonNum).style = 'display:inline;';
