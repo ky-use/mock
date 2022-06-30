@@ -264,7 +264,7 @@
                     element.innerHTML = vdList[buttonNum].cbd.RecordType__c + ':' + vdList[buttonNum].cbd.Content__c.substring(0, 12) + "...";
                     // “à—e‚ª11•¶ŽšˆÈ‰º‚È‚ç‚»‚Ì‚Ü‚ÜA‚»‚ê‚ð’´‚¦‚éê‡È—ª
                     let text = '';
-                    if(vdList[buttonNum].Content__c.length > 12){
+                    if(vdList[buttonNum].cbd.Content__c.length > 12){
                         text = vdList[buttonNum].cbd.RecordType__c + ':' + vdList[buttonNum].cbd.Content__c.substring(0, 12) + "...";
                     }else{
                         text = vdList[buttonNum].cbd.RecordType__c + ':' + vdList[buttonNum].cbd.Content__c;
