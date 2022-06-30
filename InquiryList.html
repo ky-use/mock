@@ -261,13 +261,13 @@
                 // ボタンの状態で表示を切り替え(要素のvalueは文字列)
                 if(openState=='true'){
                     // 詳細を部分表示
-                    element.innerHTML = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c.substring(0, 12) + "...";
+                    element.innerHTML = vdList[buttonNum].RecordType__c + ':' + vdList[buttonNum].Content__c.substring(0, 12) + "...";
                     // 内容が11文字以下ならそのまま、それを超える場合省略
                     let text = '';
-                    if(arrayCbd[buttonNum].Content__c.length > 12){
-                        text = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c.substring(0, 12) + "...";
+                    if(vdList[buttonNum].Content__c.length > 12){
+                        text = vdList[buttonNum].RecordType__c + ':' + vdList[buttonNum].Content__c.substring(0, 12) + "...";
                     }else{
-                        text = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c;
+                        text = vdList[buttonNum].RecordType__c + ':' + vdList[buttonNum].Content__c;
                     }
                     element.innerHTML = text;
                     // ファイルがある場合、固定文言とファイルリンクを非表示
@@ -279,7 +279,7 @@
                     
                 } else{
                     // 詳細を全表示
-                    element.innerHTML = arrayCbd[buttonNum].RecordType__c + ':' + arrayCbd[buttonNum].Content__c;
+                    element.innerHTML = vdList[buttonNum].RecordType__c + ':' + vdList[buttonNum].Content__c;
                     // ファイルがある場合、固定文言とファイルリンクを表示
                     if(fileElemValue.value=='true'){
                         document.getElementById('fdText'+buttonNum).style = 'display:inline;';
@@ -292,11 +292,8 @@
                 elem.value = openState;
             }
 
-
             // 取得したケース格納用
             let arrayInq = [];
-            // 取得したコンタクトボード明細格納用
-            let arrayCbd = [];
             // 初期表示処理
             window.onload = function(){
                 // アクセストークン取得（リフレッシュトークンフロー） Ajax
@@ -451,7 +448,7 @@
                                 // nullを削除
                                 cvIdList = cvIdList.filter(el => el);
 
-                                let promise1 = new Promise((resolve) => {
+                                const promise = new Promise((resolve) => {
                                     // データを取得できた場合
                                     if(vdList.length != 0){
                                         let count = 0;
