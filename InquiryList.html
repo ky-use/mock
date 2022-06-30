@@ -510,11 +510,12 @@
                                         document.getElementById('outputInqList_Details').appendChild(clone);
                                         //console.log('作成日：' + vdList[j].cbd.CreatedDate);
                                         
+                                        console.log('j : ' + j);
                                         // ファイルの数分繰り返し
                                         for(let k = 0; k < versionDataArray.length; k++){
                                             //console.log('versionDataArray:' + versionDataArray[k].cvId);
                                             if(vdList[j].contentVersionIdList == versionDataArray[k].cvId){
-                                                console.log('入ってる');
+                                                console.log('k : ' + k);
                                                 // template要素の内容を複製
                                                 let cloneFile = templateFile.content.cloneNode(true);
                                                 // 複製したtemplate要素にデータを挿入
