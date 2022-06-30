@@ -161,7 +161,7 @@
                     <template id="template_fileList">
                         <tr>
                             <td>
-                                <button class="fileDownloadText" style="display: none;" value="false"></button>
+                                <button class="fileDownloadText" value="false"></button>
                                 <p><a class="attachment" download></a></p>
                             </td>
                         </tr>
@@ -385,6 +385,7 @@
             }
 
             /*** 
+             * SFから取得した日付は
              * 引数　：2022-06-06T04:43:08.000+0000
              * 返却値：2022年06月06日 04:43
              ***/
@@ -502,6 +503,7 @@
                                         } else{
                                             content = vdList[j].cbd.RecordType__c + ':' + vdList[j].cbd.Content__c;
                                         }
+                                        console.log('CreatedDate: ' +vdList[j].cbd.CreatedDate);
                                         // 複製したtemplate要素にデータを挿入
                                         clone.querySelector('.detailButton').innerHTML = changeDate(vdList[j].cbd.CreatedDate);
                                         clone.querySelector('.detailButton').Name = 'detail'+ j;
@@ -514,25 +516,27 @@
                                         //console.log('作成日：' + vdList[j].cbd.CreatedDate);
                                         
                                         console.log('j : ' + j);
+                                        let c = 0;
                                         // ファイルの数分繰り返し
                                         for(let k = 0; k < versionDataArray.length; k++){
-                                            //console.log('versionDataArray:' + versionDataArray[k].cvId);
                                             if(vdList[j].contentVersionIdList == versionDataArray[k].cvId){
                                                 console.log('k : ' + k);
                                                 // template要素の内容を複製
                                                 let cloneFile = templateFile.content.cloneNode(true);
                                                 // 複製したtemplate要素にデータを挿入
+                                                if(c==0){
                                                 cloneFile.querySelector('.fileDownloadText').innerHTML = 'ファイル（コチラからダウンロード）';
                                                 cloneFile.querySelector('.fileDownloadText').id = 'fdText'+ j;
                                                 cloneFile.querySelector('.fileDownloadText').value = 'true';
-                                                cloneFile.querySelector('.fileDownloadText').style = 'display:none;';
+                                                //cloneFile.querySelector('.fileDownloadText').style = 'display:none;';
+                                                }
                                                 // ファイル
                                                 //cloneFile.querySelector('.attachment').textContent = versionDataArray[k].fileUrl;
                                                 cloneFile.querySelector('.attachment').innerText = 'ファイル（コチラからダウンロード）<br>' + versionDataArray[k].cvName;
                                                 cloneFile.querySelector('.attachment').href = versionDataArray[k].fileUrl;
                                                 cloneFile.querySelector('.attachment').download = versionDataArray[k].cvName;
                                                 cloneFile.querySelector('.attachment').id = 'fName'+ j;
-                                                cloneFile.querySelector('.attachment').style = 'display:none;';
+                                                //cloneFile.querySelector('.attachment').style = 'display:none;';
                                                 // div#containerの中に追加
                                                 document.getElementById('outputInqList_Details').appendChild(cloneFile);
                                             }
