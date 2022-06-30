@@ -258,7 +258,7 @@
                 // ファイル有無
                 let fileElem = document.getElementById('fdText'+buttonNum);
                 let fileLinkElem = document.getElementById('fdText'+buttonNum);
-                console.log('fileElemValue :'+fileElemValue);
+                //console.log('fileElemValue :'+fileElemValue);
                 
                 // ボタンの状態で表示を切り替え(要素のvalueは文字列)
                 if(openState=='true'){
@@ -348,42 +348,6 @@
                 });
             }
 
-            /*** 引数： cbdObjList***/
-            function makeTags(list){
-                if(list.length != 0){
-                    // cbdObjListをループ
-                    list.forEach(elm => {
-                        console.log('elm'+ JSON.stringify(elm));
-                        // オブジェクト要素をループ
-                        Object.keys(elm).forEach(key => {
-                            console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
-                            let childElm = elm[key];
-                            // 要素のデータ型によってループ方法を変更
-                            if(key == 'cbd'){
-                                // オブジェクト要素をループ
-                                Object.keys(childElm).forEach(childKey => {
-                                    console.log(`childKey: ${childKey} childValue: ${JSON.stringify(childElm[childKey])}`)
-                                })
-                            } else {
-                                // 配列要素をループ
-                                childElm.forEach(childElem => {
-                                    console.log('childElm'+ JSON.stringify(childElem));
-                                })
-                            }
-                        })
-                    })
-                }
-            }
-
-
-            /*** コンタクトボード明細1:ファイルNのコンストラクタ ***/
-            function cbdList(cbd, cvNameArray, fileUrlArray) {
-                'use strict'; //strictモード（newの付け忘れによるグローバル変数宣言回避（new付け忘れでエラー））
-                this.cbd = cbd;
-                this.cvNameArray = cvNameArray;
-                this.fileUrlArray = fileUrlArray;
-            }
-
             /*** 
              * SFから取得した日付は
              * 引数　：2022-06-06T04:43:08.000+0000
@@ -399,13 +363,9 @@
                 return `${year}年${month}月${day}日 ${hour}:${minute}`;
             }
 
-            // コンタクトボード明細と添付ファイルの組み合わせを格納するリスト
-            let cbdObjList = [];
-            // ファイルURL
-            let fileUrlArray = [];
+
             // responseを受け取るリスト
             let vdList = [];
-            
             // 引数：ケースNo
             function sendCbd(caseNum){
                 changeDisplayButton1(caseNum.value);
