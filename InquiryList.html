@@ -7,8 +7,16 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <style>
+            /*body*/
+            body#contact{width:100%;}
             /*contactboardContents*/
+            #contact .smtOnlyBr{display:block;}
+            #contact .note + .note{margin-top:16px;}
             #contact .contbrd-title{margin:0 0 16px;border-radius:8px;padding:8px;background-color:#606060;color:#ffffff;text-align:center;}
+            #contact .blkCont.contbrd-btnArea-box{padding:36px 0;}
+            #contact .contbrd-btnArea-box{padding:24px 0;}
+            #contact .contbrd-formBtn{padding:8px 0 24px;text-align:right;}
+            #contact .contbrd-formTitle{font-size:1.6rem;font-weight:bold;text-align:center;color:#002970;}
             /*contactboard*/
             #contact .contbrd-head{position:relative;margin-bottom:16px;}
             #contact .contbrd-head::before{content:"";display:inline-block;width:64px;height:64px;margin:0 16px 0 0;background-size:contain;}
