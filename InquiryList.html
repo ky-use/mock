@@ -7,6 +7,21 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <style>
+
+            /* 	reset.css
+            ====================================== */
+            body, div, dl, dt, dd, ul, ol, li,
+            h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td{ margin:0; padding:0;}
+            table{ border-collapse: collapse; border-spacing: 0;}
+            fieldset, img{ border: 0;}
+            address, caption, cite, code, dfn, em, strong, th, var{	font-style:normal; font-weight:normal;}
+            ol, ul{ list-style:none;}
+            caption, th{ text-align:left;}
+            h1, h2, h3, h4, h5, h6{ font-size:100%; font-weight:normal;}
+            q:before, q:after{ content:'';}
+            abbr, acronym{ border:0;}
+            hr{	display:none;}
+
             /*body*/
             body#contact{width:100%;}
             /*contactboardContents*/
@@ -42,7 +57,7 @@
             #contact .contbrd-txt + .h301{padding-top:16px; /*追加display:none;/追加*/}
         </style>
 	</head>
-	<body>
+	<body id="contact">
         <!--template-->
         <template id="contbrdTemplate">
             <div class="contbrd-cont">
@@ -65,18 +80,39 @@
         </template>
         <!--fileTemplate-->
         
-
-        <!--contents-->
-        <p id="contbrdTitle" class="contbrd-title"></p>
-
-        <!--output_template-->
-        <div id="outputContbrd" class="contbrd-wrap">
+        <div class="bodyWrapper">
+            <main>
+                <!--incontainer-->
+                <div id="inContainer" class="inC1c">
+                    <!--main-->
+                    <div id="mainArea">
+                        <!--contents-->
+                        <div class="contents no-title-h1 contbrd-pt-cont">
+                            <div class="blk">
+                                <div class="blkCont bdrT0">
+                                    <p id="contbrdTitle" class="contbrd-title"></p>
+                                    <!--output_template-->
+                                    <div id="outputContbrd" class="contbrd-wrap">
+                                    </div>
+                                    <!--/output_template-->
+                                </div>
+                            </div>
+                        </div>
+                        <!--/contents-->
+                    </div>
+                    <!--/main-->
+                </div>
+                <!--/incontainer-->
+            </main>
         </div>
-        <!--/output_template-->
-
-        <!--/contents-->
+        <!--/bodyWrapper-->
         
         <script type="text/javascript">
+            $(function(){
+                $(".contbrd-cont").click(function(){
+                    $(this).toggleClass("open");
+                });
+            });
             /*** 
              * SFから取得した日付をJSTに変換して、フォーマットにはめて返却
              * 引数　：2022-06-06T04:43:08.000+0000
