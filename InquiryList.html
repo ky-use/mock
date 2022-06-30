@@ -161,7 +161,7 @@
                     <template id="template_fileList">
                         <tr>
                             <td>
-                                <button class="fileDownloadText"  value="false"></button>
+                                <button class="fileDownloadText" style="display: none;" value="false"></button>
                                 <p><a class="attachment" download></a></p>
                             </td>
                         </tr>
@@ -256,7 +256,8 @@
                 // 詳細要素の取得
                 let element = document.getElementById(elem.Name);                
                 // ファイル有無
-                let fileElemValue = document.getElementById('fdText'+buttonNum);
+                let fileElem = document.getElementById('fdText'+buttonNum);
+                let fileLinkElem = document.getElementById('fdText'+buttonNum);
                 console.log('fileElemValue :'+fileElemValue);
                 
                 // ボタンの状態で表示を切り替え(要素のvalueは文字列)
@@ -272,9 +273,9 @@
                     }
                     element.innerHTML = text;
                     // ファイルがある場合、固定文言とファイルリンクを非表示
-                    if(fileElemValue.value=='true'){
-                        document.getElementById('fdText'+buttonNum).style = 'display:none;';
-                        document.getElementById('fName'+buttonNum).style = 'display:none;';
+                    if(fileElem.style.display=='inline'){
+                        fileElem.style.display = 'none;';
+                        fileLinkElem.style.display = 'none;';
                     }
                     openState = 'false';
                     
@@ -282,9 +283,9 @@
                     // 詳細を全表示
                     element.innerHTML = vdList[buttonNum].cbd.RecordType__c + ':' + vdList[buttonNum].cbd.Content__c;
                     // ファイルがある場合、固定文言とファイルリンクを表示
-                    if(fileElemValue.value=='true'){
-                        document.getElementById('fdText'+buttonNum).style = 'display:inline;';
-                        document.getElementById('fName'+buttonNum).style = 'display:inline;';
+                    if(fileElem.style.display=='none'){
+                        fileElem.style.display = 'inline;';
+                        fileLinkElem.style.display = 'inline;';
                     }
                     openState = 'true';
 
@@ -527,7 +528,7 @@
                                                 cloneFile.querySelector('.fileDownloadText').style = 'display:none;';
                                                 // ファイル
                                                 //cloneFile.querySelector('.attachment').textContent = versionDataArray[k].fileUrl;
-                                                cloneFile.querySelector('.attachment').innerText = versionDataArray[k].cvName;
+                                                cloneFile.querySelector('.attachment').innerText = 'ファイル（コチラからダウンロード）<br>' + versionDataArray[k].cvName;
                                                 cloneFile.querySelector('.attachment').href = versionDataArray[k].fileUrl;
                                                 cloneFile.querySelector('.attachment').download = versionDataArray[k].cvName;
                                                 cloneFile.querySelector('.attachment').id = 'fName'+ j;
