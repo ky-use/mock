@@ -100,23 +100,30 @@
             <main>
 
                 <!--template-->
+                <!--caseTemplate-->
                 <template id="contbrdTemplate">
                     <dl>
                         <a href="javascript:void(0);">
-                        <dt class="inqTitle"></dt>
-                        <dd>
-                            <div class="list-qa-box">
-                                <p class="list-qa-cont cbdContent"></p>
-                                <p class="list-qa-ic">NEW</p>
+                            <dt class="inq-title"></dt>
+                            <dd>
+                            <div id="cbdContent" class="list-qa-box">
+                                <p class="list-qa-cont cbd-content"></p>
+
                             </div>
-                            <p class="list-qa-time inqCreatedate"></p>
-                            <p class="list-qa-txt"><span>お問い合わせ種類</span><span class="inqType"></span></p>
-                            <p class="list-qa-txt"><span>ステータス</span><span class="txt-fin inqstatus"></span></p>
+                            <p class="list-qa-time inq-createdate"></p>
+                            <p class="list-qa-txt"><span>お問い合わせ種類</span><span class="inq-type"></span></p>
+                            <p class="list-qa-txt"><span>ステータス</span><span class="txt-fin inq-status"></span></p>
                         </dd>
                         </a>
                     </dl>
                 </template>
+                <!--newIconTemplate-->
+                <template id="newIconTemplate">
+                    <p class="list-qa-ic">NEW</p>
+                </template>
                 <!--/template-->
+
+                
             
                 <!--title-->
                 <div id="title">
@@ -198,25 +205,30 @@
             }
 
             /***
-             * cookieを設定
+             * cookie
              ***/
-            //
+            // cookie用配列
             let cookieArray = new Array();
+            // cookieの値を設定
+            // ケースをクリックしたときに設定
             cookieArray.push({'5000l000008UmxJAAS': ['a1B0l0000012pQvEAI','a1B0l0000012pQvEAI']})
             cookieArray.push({'5000l000008UxXbAAK': ['a1B0l0000012pRPEAY']});
-            
+            // 有効期限を設定
             let now = new Date();
             now.setMinutes(now.getDate() + 5);  // 5日後
+            // cookieを設定
             document.cookie = 'dispCookie=' + JSON.stringify(cookieArray) + ";expires=" + now.toUTCString();
             
+            
+            /*
             let disp = document.cookie.split(',');
             disp.forEach(elm => {
                 console.log('elm'+ JSON.stringify(elm));
-                // オブジェクト要素をループ
                 Object.keys(elm).forEach(key => {
                     console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
                 })
             })
+            */
 
 
             // 取得したケース格納用
@@ -250,24 +262,41 @@
                                     // ケースをBK
                                     arrayInq = res;
                                     console.log(arrayInq);
+
+                                    let disp = document.cookie.split(',');
+                                    disp.forEach(elm => {
+                                        console.log('elm'+ JSON.stringify(elm));
+                                        Object.keys(elm).forEach(key => {
+                                            console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
+                                        })
+                                    })
                                     
                                     // template要素を取得
                                     let template = document.getElementById('contbrdTemplate');
+                                    // template要素を取得
+                                    let iconTemplate = document.getElementById('newIconTemplate');
                                     // データの数分繰り返し
                                     for(let i = 0; i < res.length; i++){
                                         // template要素の内容を複製
                                         let clone = template.content.cloneNode(true);
+                                        
                                         let content = res[i].MatterContent__c;
-                                        console.log(content);
-                                        if(content.length > 12){
-                                            content = content.substring(0, 12) + "...";
+                                        if(content != null){
+                                            if(content.length > 12){
+                                                content = content.substring(0, 12) + "...";
+                                            }
                                         }
+                                        if(res[i].Id){
+                                            let iconClone = iconTemplate.content.cloneNode(true);
+
+                                        }
+
                                         // 複製したtemplate要素にデータを挿入
-                                        clone.querySelector('.inqTitle').textContent = 'No.' + res[i].CaseNumber;
-                                        clone.querySelector('.cbdContent').textContent = content;
-                                        clone.querySelector('.inqCreatedate').textContent = changeSlashDate(res[i].CreatedDate);
-                                        clone.querySelector('.inqType').textContent = res[i].Subject;
-                                        clone.querySelector('.inqstatus').textContent = res[i].Status;
+                                        clone.querySelector('.inq-title').textContent = 'No.' + res[i].CaseNumber + ' ' + res[i].Id;
+                                        clone.querySelector('.cbd-content').textContent = content;
+                                        clone.querySelector('.inq-createdate').textContent = changeSlashDate(res[i].CreatedDate);
+                                        clone.querySelector('.inq-type').textContent = res[i].Subject;
+                                        clone.querySelector('.inq-status').textContent = res[i].Status;
 
                                         // div#containerの中に追加
                                         document.getElementById('listQa').appendChild(clone);
