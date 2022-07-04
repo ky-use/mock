@@ -260,6 +260,7 @@
                                     disp.forEach(elm => {
                                         console.log('elm: '+ elm);
                                         console.log('elm_j: '+ JSON.stringify(elm));
+                                        elm = JSON.parse(elm);
                                         Object.keys(elm).forEach(key => {
                                             console.log(`key: ${JSON.parse(key)} value: ${JSON.parse(elm[key])}`)
                                         })
