@@ -242,12 +242,14 @@
                                         // template要素の内容を複製
                                         let clone = template.content.cloneNode(true);
                                         let content = res[i].MatterContent__c;
+                                        console.log(res[i].CaseNumber);
+                                        console.log(res[i].CaseNumber);
                                         if(res[i].MatterContent__c.length > 12){
                                             content = content.substring(0, 12) + "...";
                                         }
                                         // 複製したtemplate要素にデータを挿入
-                                        clone.querySelector('.inqTitle').value = 'No.' + res[i].CaseNumber;
-                                        clone.querySelector('.cbdContent').value = content;
+                                        clone.querySelector('.inqTitle').textContent = 'No.' + res[i].CaseNumber;
+                                        clone.querySelector('.cbdContent').textContent = content;
                                         clone.querySelector('.inqCreatedate').textContent = changeSlashDate(res[i].CreatedDate);
                                         clone.querySelector('.inqType').textContent = res[i].Subject;
                                         clone.querySelector('.inqstatus').textContent = res[i].Status;
