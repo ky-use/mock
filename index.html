@@ -264,6 +264,8 @@
                                     console.log(arrayInq);
 
                                     let disp = document.cookie.split(';');
+                                    console.log(JSON.stringify(disp));
+                                    console.log(decodeURIComponent(disp));
                                     disp.forEach(elm => {
                                         console.log('elm'+ JSON.stringify(elm));
                                         Object.keys(elm).forEach(key => {
