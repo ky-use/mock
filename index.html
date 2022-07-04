@@ -187,11 +187,6 @@
                 const minute = (`0` + (newDate.getMinutes())).slice(-2)
                 return `${year}年${month}月${day}日 ${hour}:${minute}`;
             }
-            /*** 
-             * SFから取得した日付をJSTに変換して、フォーマットにはめて返却
-             * 引数　：2022-06-06T04:43:08.000+0000
-             * 返却値：2022/06/06 04:43
-             ***/
             function changeSlashDate(dateTime){
                 const newDate = new Date(dateTime);
                 const year = newDate.getFullYear();
@@ -201,6 +196,27 @@
                 const minute = (`0` + (newDate.getMinutes())).slice(-2)
                 return `${year}/${month}/${day} ${hour}:${minute}`;
             }
+
+            /***
+             * cookieを設定
+             ***/
+            //
+            let cookieArray = new Array();
+            cookieArray.push({'5000l000008UmxJAAS': ['a1B0l0000012pQvEAI','a1B0l0000012pQvEAI']})
+            cookieArray.push({'5000l000008UxXbAAK': ['a1B0l0000012pRPEAY']});
+            
+            let now = new Date();
+            now.setMinutes(now.getDate() + 5);  // 5日後
+            document.cookie = 'dispCookie=' + JSON.stringify(cookieArray) + ";expires=" + now.toUTCString();
+            
+            let disp = document.cookie.split(',');
+            disp.forEach(elm => {
+                console.log('elm'+ JSON.stringify(elm));
+                // オブジェクト要素をループ
+                Object.keys(elm).forEach(key => {
+                    console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
+                })
+            })
 
 
             // 取得したケース格納用
