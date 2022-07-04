@@ -4,34 +4,263 @@
 		<meta charset="Shift_JIS">
 		<title>PayPay銀行　ホーム画面</title>
 		<meta name="description" content="顧客コンタクトボード">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes">
         <style>
-            #container{
-                text-align: center;
-                margin: 1.5em 1.5em;
-            }
-            .buttonBrue{
-                color: #3c90fff7;
-                border-color: #3c90fff7;
-                background: none;
-                border-radius: 5px;
-                border: 1px solid #3c90fff7;
-                font-weight: bold;
-                padding: 10px 40px;
-                cursor: pointer;
-            }
-            p {
-                font-size: 12px;
-            }
+
+            /* 	reset.css
+            ====================================== */
+            body, div, dl, dt, dd, ul, ol, li,
+            h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td{ margin:0; padding:0;}
+            table{ border-collapse: collapse; border-spacing: 0;}
+            fieldset, img{ border: 0;}
+            address, caption, cite, code, dfn, em, strong, th, var{	font-style:normal; font-weight:normal;}
+            ol, ul{ list-style:none;}
+            caption, th{ text-align:left;}
+            h1, h2, h3, h4, h5, h6{ font-size:100%; font-weight:normal;}
+            q:before, q:after{ content:'';}
+            abbr, acronym{ border:0;}
+            hr{	display:none;}
+            
+            /*--component_smt.css--*/
+            /*#bodyWrapper*/
+            #bodyWrapper{margin:0;padding:0;}
+            /*contents*/
+            .contents{margin-bottom:16px; background-color:#fff;}
+            /*block*/
+            .blk{padding:0 16px;}
+            .blkTitle{padding:16px 0 0;position:relative;background:#fff;display:flex;justify-content: space-between;}
+            .blkTitleR{width:100%;margin:3px 0 -10px 0;text-align:right;font-size:1.4rem;white-space:nowrap;}
+            .blkTitleOc .ocDown::before,.blkTitleOc .ocUp::before{right:0.8em;top:0.7em;}
+            .blkTitleOc .ocDown::after,.blkTitleOc .ocUp::after{right:1.2em;}
+            .blkTitleOc .ocDown::after{top:1.3em;}
+            .blkTitleOc .ocUp::after{top:0.8em;}
+
+            .h201{font-size:1.6rem;font-weight:bold;white-space:nowrap;}
+            .h301{font-size:1.4rem;font-weight:bold;}
+
+            .blkCont{padding:16px 0;}
+            .blkCont+.blkCont{padding-top:0;}
+            .blkCont.layout-form{padding:16px 24px;}
+            .blkCont.layout-form.layout-form-login.layout-form-login-noborder{padding: 16px 0;}
+
+            /*--category/contact_smt.css--*/
+            /*body*/
+            body#contact{width:100%;}
+            /*contactboardContents*/
+            #contact .smtOnlyBr{display:block;}
+            #contact .note + .note{margin-top:16px;}
+            #contact .contbrd-title{margin:0 0 16px;border-radius:8px;padding:8px;background-color:#606060;color:#ffffff;text-align:center;}
+            #contact .blkCont.contbrd-btnArea-box{padding:36px 0;}
+            #contact .contbrd-btnArea-box{padding:24px 0;}
+            #contact .contbrd-formBtn{padding:8px 0 24px;text-align:right;}
+            #contact .contbrd-formTitle{font-size:1.6rem;font-weight:bold;text-align:center;color:#002970;}
+            /*contactboard*/
+            #contact .contbrd-head{position:relative;margin-bottom:16px;}
+            #contact .contbrd-head::before{content:"";display:inline-block;width:64px;height:64px;margin:0 16px 0 0;background-size:contain;}
+            #contact .contbrd-head.customer::before{background:transparent url(/commontpl/images/category/contact_ic001.svg) no-repeat center center;}
+            #contact .contbrd-head.answer::before{background:transparent url(/commontpl/images/category/contact_ic002.svg) no-repeat center center;}
+            #contact .contbrd-wrap .contbrd-cont{padding:24px 0;border-bottom:1px solid #bababa;}
+            #contact .contbrd-wrap .contbrd-cont:first-of-type{padding-top:0;}
+            #contact .contbrd-wrap .contbrd-cont:last-of-type{border-bottom:none;}
+            #contact .contbrd-wrap .contbrd-cont dl{position:absolute;display:inline-block;width:72%;top:8px;}
+            #contact .contbrd-wrap .contbrd-cont dl dt{color:#606060;display:flex;justify-content:space-between;}
+            #contact .contbrd-wrap .contbrd-cont dl dt .new-icon{width:46px;height:18px;margin-left:5px;border-radius:15px;background-color:#ffb900;color:#ffffff;text-align:center;font-size:1.2rem;}
+            #contact .contbrd-wrap .contbrd-cont dl dd{margin:6px 0;color:#606060;}
+            #contact .contbrd-wrap .contbrd-cont dl dd::before{content:"";display: inline-block;width:20px;height:20px;margin:0 11px 0 0;background:transparent url(/commontpl/images/category/contact_ic003.svg) no-repeat center center;background-size:contain;vertical-align:top;}
+            #contact .contbrd-body{position:relative;}
+            #contact .contbrd-body::after{content:"";width:8px;height:8px;border:0px;border-right:2px solid #bababa;border-top:2px solid #bababa;transform:rotate(135deg);position:absolute;top:5px;right:0.5em;}
+            #contact .contbrd-body.first::after{display:none;}
+            #contact .contbrd-body.first .contbrd-txt,#contact .contbrd-cont.open .contbrd-body.first .contbrd-txt{width:100%;}
+            #contact .contbrd-cont.open .contbrd-body::after{transform:rotate(-45deg);}
+            #contact .contbrd-txt p{display:none;}
+            #contact .contbrd-txt,#contact .contbrd-txt p:first-of-type{width:90%;-webkit-line-clamp:1;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;}
+            #contact .contbrd-body.first .contbrd-txt,#contact .contbrd-body.first .contbrd-txt p,#contact .contbrd-cont.open .contbrd-txt,#contact .contbrd-cont.open .contbrd-txt p:first-of-type,#contact .contbrd-cont.open .contbrd-txt p{-webkit-line-clamp:unset;display:block;}
+            #contact .contbrd-cont.open .contbrd-txt,#contact .contbrd-cont.open .contbrd-txt p:first-of-type,#contact .contbrd-cont.open .contbrd-txt p{width:95%;}
+            #contact .contbrd-txt + .h301{padding-top:16px; /*追加display:none;/追加*/}
+            /*list-qa*/
+            #contact .list-qa dl{padding:24px 0 32px 0;border-bottom:1px solid #bababa;}
+            #contact .list-qa dl:last-of-type{border-bottom:none;}
+            #contact .list-qa dl a{color:#242323;text-decoration:none;}
+            #contact .list-qa dt{color:#002970;padding-bottom:12px;}
+            #contact .list-qa .list-qa-box{position:relative;display:flex;}
+            #contact .list-qa .list-qa-box .list-qa-cont{width:88%;font-weight:bold;}
+            #contact .list-qa .list-qa-box .list-qa-ic{width:46px;height:18px;margin-left:5px;border-radius:15px;background-color:#ffb900;color:#ffffff;text-align:center;font-size:1.2rem;}
+            #contact .list-qa .list-qa-time{margin:12px 0;color:#606060;}
+            #contact .list-qa .list-qa-time::before{content:"";display:inline-block;width:20px;height:20px;margin:0 11px 0 0;background:transparent url(/commontpl/images/category/contact_ic003.svg) no-repeat center center;background-size:contain;position:relative;top:1px;vertical-align:top;}
+            #contact .list-qa .list-qa-txt{color:#606060;}
+            #contact .list-qa .list-qa-txt span{padding-right:15px;font-weight:bold;}
+            #contact .list-qa .list-qa-txt .txt-fin{padding-right:0;font-weight:normal;color:#20bf7a;}
+            #contact .list-qa .list-qa-txt .txt-not-fin{padding-right:0;font-weight:normal;}
+
         </style>
 	</head>
-	<body>
-        <div id="container">
-            <button type="button" class="buttonBrue" onclick="location.href='./NewInquiry.html'">新規問い合わせ</button>
-            <p style>はじめての方はこちら</p>
-            <button type="button" class="buttonBrue" onclick="location.href='./InquiryList.html'">問い合わせ一覧</button>
-            <p>問い合わせ中の方はこちら</p>
-            <a href="./HowToUse.html">顧客コンタクトボードの使い方</a>
-        </div>
+	<body id="contact">
+        <div class="bodyWrapper">
+            <main>
+
+                <!--template-->
+                <template id="contbrdTemplate">
+                    <dl>
+                        <a href="javascript:void(0);">
+                        <dt class="inqTitle"></dt>
+                        <dd>
+                            <div class="list-qa-box">
+                                <p class="list-qa-cont cbdContent"></p>
+                                <p class="list-qa-ic">NEW</p>
+                            </div>
+                            <p class="list-qa-time inqCreatedate"></p>
+                            <p class="list-qa-txt"><span>お問い合わせ種類</span><span class="inqType"></span></p>
+                            <p class="list-qa-txt"><span>ステータス</span><span class="txt-fin inqstatus"></span></p>
+                        </dd>
+                        </a>
+                    </dl>
+                </template>
+                <!--/template-->
+            
+                <!--title-->
+                <div id="title">
+                <div class="titleL"><h1>お問い合わせフォーム</h1></div>
+                </div>
+                <!--/title-->
+                <!--incontainer-->
+                <div id="inContainer" class="inC1c">
+                
+                    <!--main-->
+                    <div id="mainArea">
+                    
+                        <!--contents-->
+                        <div class="contents">
+                        
+                            <div class="blk">
+                                <div class="blkCont bdrT0">
+                                
+                                <div class="note">
+                                <p>お問い合わせの回答目安は原則、翌営業日です。</p>
+                                </div>
+                                
+                                <p class="txtR mt-16"><a href="javascript:void(0);" class="btn btn02">新規お問い合わせ</a></p>
+                                
+                                <!--outputTemplate-->
+                                <div id="listQa" class="list-qa">
+                                </div>
+                                <!--/outputTemplate-->
+                                
+                                <p><a href="javascript:commonSubmit('ln0001')" title="Welcome Pageに戻る" class="btn btn02 btnL">Welcome Page</a></p>
+                                
+                                </div>
+                            </div>
+                        
+                        </div>
+                        <!--/contents-->
+                        
+                    </div>
+                    <!--/main-->
+                
+                </div>
+                <!--/incontainer-->
+            
+            </main>
+        </div><!--/bodyWrapper-->
+        <script>
+
+            /*** 
+             * SFから取得した日付をJSTに変換して、フォーマットにはめて返却
+             * 引数　：2022-06-06T04:43:08.000+0000
+             * 返却値：2022年06月06日 04:43
+             ***/
+            function changeJstDate(dateTime){
+                const newDate = new Date(dateTime);
+                const year = newDate.getFullYear();
+                const month = newDate.getMonth() + 1;
+                const day = newDate.getDate();
+                const hour = (`0` + (newDate.getHours())).slice(-2)
+                const minute = (`0` + (newDate.getMinutes())).slice(-2)
+                return `${year}年${month}月${day}日 ${hour}:${minute}`;
+            }
+            /*** 
+             * SFから取得した日付をJSTに変換して、フォーマットにはめて返却
+             * 引数　：2022-06-06T04:43:08.000+0000
+             * 返却値：2022/06/06 04:43
+             ***/
+            function changeSlashDate(dateTime){
+                const newDate = new Date(dateTime);
+                const year = newDate.getFullYear();
+                const month = newDate.getMonth() + 1;
+                const day = newDate.getDate();
+                const hour = (`0` + (newDate.getHours())).slice(-2)
+                const minute = (`0` + (newDate.getMinutes())).slice(-2)
+                return `${year}/${month}/${day} ${hour}:${minute}`;
+            }
+
+
+            // タイトル
+            let title = document.getElementById('contbrdTitle');
+            title.innerHTML = 'お問い合わせ番号：No.' + caseNum;
+            // 取得したケース格納用
+            let arrayInq = [];
+            // 初期表示処理
+            let acconutNum = 'A0000001';
+            let caseNum = '00001056';
+
+            window.onload = function(){
+                // アクセストークン取得（リフレッシュトークンフロー） Ajax
+                $.ajax({
+                    type: 'POST',
+                    crossOrigin: true,
+                    url: 'https://protocomdev-dev-ed.my.salesforce.com/services/oauth2/token',
+                    dataType: 'json',
+                    cache :false,
+                    data : {"grant_type":"refresh_token","client_id":"3MVG9pRzvMkjMb6nsLsmTx_FqB0rQ9AHEMYt85TrwFp6b3yeP.ta18VQpmha_Ds31fssFdYib4DdLPcLKqtQG", "client_secret":"F864BDD8ADFB8B17EA27F0623CF9039A503A76F9312032654DBFFDB25E87B142","refresh_token":"5Aep861mdLLi91HqFfCpXYtQXRaOgcHsK1gi36_cVHboubUhDFRrSCX9zyL1KBPgaR5qiKjUA54Q0RZhiN_teRI"},
+                    success : function (connectData) {
+                        let accToken = 'Bearer ' + connectData.access_token;
+                        $.ajax({
+                            type: 'GET',
+                            crossOrigin: true,
+                            url: 'https://protocomdev-dev-ed.my.salesforce.com/services/apexrest/Mock_Case/',
+                            dataType: 'json',
+                            cache :false,
+                            headers: {"Authorization" : accToken},
+                            data : JSON.stringify(acconutNum),
+                            success : function (res) {
+                                // データを取得できた場合
+                                if(res.length != 0){
+                                    // ケースをBK
+                                    arrayInq = res;
+                                    console.log(arrayInq);
+                                    
+                                    // template要素を取得
+                                    let template = document.getElementById('contbrdTemplate');
+                                    // データの数分繰り返し
+                                    for(let i = 0; i < res.length; i++){
+                                        // template要素の内容を複製
+                                        let clone = template.content.cloneNode(true);
+                                        let content = res[i].MatterContent__c;
+                                        if(res[i].MatterContent__c.length > 12){
+                                            content = content.substring(0, 12) + "...";
+                                        }
+                                        // 複製したtemplate要素にデータを挿入
+                                        clone.querySelector('.inqTitle').value = 'No.' + res[i].CaseNumber;
+                                        clone.querySelector('.cbdContent').value = content;
+                                        clone.querySelector('.inqCreatedate').textContent = changeSlashDate(res[i].CreatedDate);
+                                        clone.querySelector('.inqType').textContent = res[i].Subject;
+                                        clone.querySelector('.inqstatus').textContent = res[i].Status;
+
+                                        // div#containerの中に追加
+                                        document.getElementById('listQa').appendChild(clone);
+                                    }
+                                }
+                            },
+                            error : function (data, errorThrown,status) {
+                                
+                            }
+                        })
+                    },
+                    error : function (data, errorThrown,status) {
+                    }
+                });
+
+
+            }
+        </script>
     </body>
 </html>
