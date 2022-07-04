@@ -207,10 +207,36 @@
             /***
              * cookie
              ***/
+            // cookie用配列
+            let cookieArray = new Array();
+            // cookieの値を設定
+            // ケースをクリックしたときに設定
+            cookieArray.push({'5000l000008UmxJAAS': ['a1B0l0000012pQvEAI','a1B0l0000012pQvEAI']})
+            cookieArray.push({'5000l000008UxXbAAK': ['a1B0l0000012pRPEAY']});
+            // 有効期限を設定
+            let now = new Date();
+            now.setMinutes(now.getDate() + 5);  // 5日後
+            // cookieを設定
+            document.cookie = 'dispCookie=' + JSON.stringify(cookieArray) + ";expires=" + JSON.stringify(now.toUTCString());
             
+            let cookies = '';
+            cookies = document.cookie;
+
+            if(cookies){
+                cookieArray = cookies.split(';');
+                
+                cookieArray.forEach(data => {
+                    data = data.split('=');
+
+                    //data[0]: Cookieの名前（例では「user」）
+                    //data[1]: Cookieの値（例では「json」）
+
+                    result[data[0]] = JSON.parse(data[1]);
+                    console.log(result[data[0]]);
+                });
+            }
             
-            
-            /*
+            console.log('----------------');
             let disp = document.cookie.split(',');
             disp.forEach(elm => {
                 console.log('elm'+ JSON.stringify(elm));
@@ -218,7 +244,7 @@
                     console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
                 })
             })
-            */
+            
 
 
             // 取得したケース格納用
@@ -229,17 +255,7 @@
                 let acconutNum = 'A0000001';
                 let caseNum = '00001056';
 
-                // cookie用配列
-                let cookieArray = new Array();
-                // cookieの値を設定
-                // ケースをクリックしたときに設定
-                cookieArray.push({'5000l000008UmxJAAS': ['a1B0l0000012pQvEAI','a1B0l0000012pQvEAI']})
-                cookieArray.push({'5000l000008UxXbAAK': ['a1B0l0000012pRPEAY']});
-                // 有効期限を設定
-                let now = new Date();
-                now.setMinutes(now.getDate() + 5);  // 5日後
-                // cookieを設定
-                document.cookie = 'dispCookie=' + JSON.stringify(cookieArray) + ";expires=" + JSON.stringify(now.toUTCString());
+
 
                 // アクセストークン取得（リフレッシュトークンフロー） Ajax
                 $.ajax({
