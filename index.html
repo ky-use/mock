@@ -231,9 +231,6 @@
                 cArray.forEach(data => {
                     data = data.split('=');
 
-                    //data[0]: Cookieの名前（例では「user」）
-                    //data[1]: Cookieの値（例では「json」）
-
                     result[data[0]] = JSON.parse(data[1]);
                     console.log('result[data[0]] :' + result[data[0]]);
                 });
@@ -284,15 +281,6 @@
                                     // ケースをBK
                                     arrayInq = res;
                                     console.log(arrayInq);
-
-                                    let disp = document.cookie.split(',');
-
-                                    disp.forEach(elm => {
-                                        console.log('elm'+ JSON.stringify(elm));
-                                        Object.keys(elm).forEach(key => {
-                                            console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
-                                        })
-                                    })
                                     
                                     // template要素を取得
                                     let template = document.getElementById('contbrdTemplate');
