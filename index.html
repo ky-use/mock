@@ -204,46 +204,6 @@
                 return `${year}/${month}/${day} ${hour}:${minute}`;
             }
 
-            /***
-             * cookie
-             ***/
-            // cookie用配列
-            let cookieArray = new Array();
-            // cookieの値を設定
-            // ケースをクリックしたときに設定
-            cookieArray.push({'5000l000008UmxJAAS': ['a1B0l0000012pQvEAI','a1B0l0000012pQvEAI']})
-            cookieArray.push({'5000l000008UxXbAAK': ['a1B0l0000012pRPEAY']});
-            // 有効期限を設定
-            let now = new Date();
-            now.setMinutes(now.getDate() + 5);  // 5日後
-            // cookieを設定
-            document.cookie = 'dispCookie=' + JSON.stringify(cookieArray) + ";expires=" + JSON.stringify(now.toUTCString());
-            
-            let cookies = '';
-            let cArray = new Array();
-            let result = new Array();
-            cookies = document.cookie;
-
-            if(cookies){
-                console.log('★★★★★★');
-                cArray = cookies.split(';');
-                
-                cArray.forEach(data => {
-                    data = data.split('=');
-
-                    result[data[0]] = JSON.parse(data[1]);
-                    console.log('result[data[0]] :' + result[data[0]]);
-                });
-            }
-            
-            console.log('----------------');
-            let disp = document.cookie.split(',');
-            disp.forEach(elm => {
-                console.log('elm'+ JSON.stringify(elm));
-                Object.keys(elm).forEach(key => {
-                    console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
-                })
-            })
             
 
 
@@ -325,6 +285,49 @@
 
 
             }
+
+
+            /***
+             * cookie
+             ***/
+            // cookie用配列
+            let cookieArray = new Array();
+            // cookieの値を設定
+            // ケースをクリックしたときに設定
+            cookieArray.push({'5000l000008UmxJAAS': ['a1B0l0000012pQvEAI','a1B0l0000012pQvEAI']})
+            cookieArray.push({'5000l000008UxXbAAK': ['a1B0l0000012pRPEAY']});
+            // 有効期限を設定
+            let now = new Date();
+            now.setMinutes(now.getDate() + 5);  // 5日後
+            // cookieを設定
+            document.cookie = 'dispCookie=' + JSON.stringify(cookieArray) + ";expires=" + JSON.stringify(now.toUTCString());
+            
+            let cookies = '';
+            let cArray = new Array();
+            let result = new Array();
+            cookies = document.cookie;
+
+            if(cookies){
+                console.log('★★★★★★');
+                cArray = cookies.split(';');
+                
+                cArray.forEach(data => {
+                    data = data.split('=');
+
+                    result[data[0]] = JSON.parse(data[1]);
+                    console.log('result[data[0]] :' + result[data[0]]);
+                });
+            }
+            
+            console.log('----------------');
+            let disp = document.cookie.split(',');
+            disp.forEach(elm => {
+                console.log('elm'+ JSON.stringify(elm));
+                Object.keys(elm).forEach(key => {
+                    console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
+                })
+            })
+            
         </script>
     </body>
 </html>
