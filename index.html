@@ -163,10 +163,10 @@
         </div><!--/bodyWrapper-->
 
 
-        <div id="container">
-            <button type="button" class="buttonBrue" onclick="location.href='./NewInquiry.html'">新規問い合わせ</button>
+        <div >
+            <button type="button" onclick="location.href='./NewInquiry.html'">新規問い合わせ</button>
             <p style>はじめての方はこちら</p>
-            <button type="button" class="buttonBrue" onclick="location.href='./InquiryList.html'">問い合わせ一覧</button>
+            <button type="button" onclick="location.href='./InquiryList.html'">問い合わせ一覧</button>
             <p>問い合わせ中の方はこちら</p>
             <a href="./HowToUse.html">顧客コンタクトボードの使い方</a>
         </div>
@@ -205,10 +205,10 @@
             // 取得したケース格納用
             let arrayInq = [];
             // 初期表示処理
-            let acconutNum = 'A0000001';
-            let caseNum = '00001056';
-
+            
             window.onload = function(){
+                let acconutNum = 'A0000001';
+                let caseNum = '00001056';
                 // アクセストークン取得（リフレッシュトークンフロー） Ajax
                 $.ajax({
                     type: 'POST',
