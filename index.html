@@ -258,9 +258,9 @@
                                     console.log('--------start--------');
                                     let disp = document.cookie.split(',');
                                     disp.forEach(elm => {
-                                        console.log('elm'+ JSON.stringify(elm));
+                                        console.log('elm: '+ JSON.parse(elm));
                                         Object.keys(elm).forEach(key => {
-                                            console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
+                                            console.log(`key: ${key} value: ${JSON.parse(elm[key])}`)
                                         })
                                     })
                                     console.log('--------end--------');
