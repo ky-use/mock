@@ -220,14 +220,15 @@
             document.cookie = 'dispCookie=' + JSON.stringify(cookieArray) + ";expires=" + JSON.stringify(now.toUTCString());
             
             let cookies = '';
+            let cArray = new Array();
             let result = new Array();
             cookies = document.cookie;
 
             if(cookies){
                 console.log('★★★★★★');
-                cookieArray = cookies.split(';');
+                cArray = cookies.split(';');
                 
-                cookieArray.forEach(data => {
+                cArray.forEach(data => {
                     data = data.split('=');
 
                     //data[0]: Cookieの名前（例では「user」）
