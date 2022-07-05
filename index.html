@@ -256,13 +256,13 @@
                                     //document.cookie = 'dispCookie=' + JSON.stringify(cookieArray) + ";expires=" + JSON.stringify(now.toUTCString()) + ';';
                                     
                                     console.log('--------start--------');
-                                    let disp = document.cookie.split(',');
+                                    let disp = document.cookie.split(';');
                                     disp.forEach(elm => {
                                         console.log('elm: '+ elm);
                                         console.log('elm_j: '+ JSON.stringify(elm));
-                                        elm = JSON.stringify(elm);
+                                        //elm = JSON.stringify(elm);
                                         Object.keys(elm).forEach(key => {
-                                            console.log(`key: ${JSON.parse(key)} value: ${JSON.parse(elm[key])}`)
+                                            console.log(`key: ${key} value: ${JSON.stringify(elm[key])}`)
                                         })
                                     })
                                     console.log('--------end--------');
