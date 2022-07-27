@@ -183,6 +183,7 @@
                                             tempFileList.push(tempFile);
                                             // 実行回数をインクリメント
                                             count++;
+                                            console.log(tempFileList)
                                             // ファイルのIdの件数分動いたら
                                             if(count == res.cbdFileList.length){
                                                 // セッションストレージに取得した値を退避
@@ -205,6 +206,7 @@
                 }
                 
             }).then(() => {
+                console.log('res: ' + JSON.stringify(res))
                 console.log('res: ' + JSON.stringify(res))
                 // セッションストレージに取得した値を退避
                 window.sessionStorage.setItem(['IMFCaseResponseData'],[JSON.stringify(res)]);
