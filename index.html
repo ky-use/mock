@@ -182,6 +182,7 @@
                                             console.log('tempFileList :'+tempFileList)
                                             // ファイルのIdの件数分動いたら
                                             if(count == res.cbdFileList.length){
+                                                console.log('----------------------')
                                                 // セッションストレージに取得した値を退避
                                                 window.sessionStorage.setItem(['IMFFileData'],[JSON.stringify(tempFileList)]);
                                                 // 次の処理へ
