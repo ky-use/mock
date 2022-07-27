@@ -429,17 +429,35 @@
 
         function getContentVersion(fileId){
             $.ajax({
-                type: 'GET',
-                crossOrigin: true,
-                url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + fileId + '/VersionData',
-                cache :false,
-                headers: {"Authorization" : accToken},
-                xhrFields : {responseType : 'blob'},
-                success : function (fileContent) {
-                    console.log(JSON.stringify(fileContent))
-                    return fileContent;
-                }
-            })
+                    type: 'POST',
+                    crossOrigin: true,
+                    url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/oauth2/token',
+                    dataType: 'json',
+                    cache :false,
+                    data : {"grant_type":"refresh_token",
+                            "client_id":"3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ", 
+                            "refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"},
+                    success : function (connectData) {
+                        var accToken = 'Bearer ' + connectData.access_token;
+                        $.ajax({
+                            type: 'GET',
+                            crossOrigin: true,
+                            url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + fileId + '/VersionData',
+                            cache :false,
+                            headers: {"Authorization" : accToken},
+                            xhrFields : {responseType : 'blob'},
+                            success : function (fileContent) {
+                                console.log(JSON.stringify(fileContent))
+                                return fileContent;
+                            }
+                        })
+                    },
+                    error : function (data, errorThrown,status) {
+                        console.log(data);
+                        console.log(errorThrown);
+                        console.log(status);
+                    }
+                });
             // ファイル取得
             //let fileContent = 'https://www.google.com/';
         }
