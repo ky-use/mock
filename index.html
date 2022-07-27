@@ -92,6 +92,7 @@
             // ファイル内容を退避する配列
             let tempFileList = [];
             const promise = new Promise((resolve) => {
+                console.log('0----------------------')
                 // エラー格納用
                 let errorInfo = {
                     data: '', // データ
@@ -136,6 +137,7 @@
         
             // promise処理がすべて完了してから実行
             }).then(() => {
+                console.log('then1----------------------')
                 // ケースのリストサイズが0でない
                 if(res.caseList.length != 0){
                     // 実行回数
@@ -187,6 +189,7 @@
                                                 window.sessionStorage.setItem(['IMFFileData'],[JSON.stringify(tempFileList)]);
                                                 // 次の処理へ
                                                 resolve();
+                                                
                                             }
                                         }
                                     })
@@ -203,6 +206,7 @@
                 }
                 
             }).then(() => {
+                console.log('then2----------------------')
                 // セッションストレージに取得した値を退避
                 window.sessionStorage.setItem(['IMFFileData'],[JSON.stringify(tempFileList)]);
                 // セッションストレージに取得した値を退避
