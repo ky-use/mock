@@ -206,8 +206,6 @@
                 }
                 
             }).then(() => {
-                console.log('res: ' + JSON.stringify(res))
-                console.log('res: ' + JSON.stringify(res))
                 // セッションストレージに取得した値を退避
                 window.sessionStorage.setItem(['IMFCaseResponseData'],[JSON.stringify(res)]);
                 // Cookie取得処理を呼び出す
@@ -309,11 +307,11 @@
                     }
                 }
             });
+            console.log('IMFCaseResponseData_j :' + JSON.parse(window.sessionStorage.getItem(['IMFCaseResponseData'])));
+            console.log('IMFFileData_j :' + JSON.parse(window.sessionStorage.getItem(['IMFFileData'])));
+            console.log('IMFCaseResponseData :' + window.sessionStorage.getItem(['IMFCaseResponseData']));
+            console.log('IMFFileData :' + window.sessionStorage.getItem(['IMFFileData']));
         }
-        console.log('IMFCaseResponseData_j :' + JSON.parse(window.sessionStorage.getItem(['IMFCaseResponseData'])));
-        console.log('IMFFileData_j :' + JSON.parse(window.sessionStorage.getItem(['IMFFileData'])));
-        console.log('IMFCaseResponseData :' + window.sessionStorage.getItem(['IMFCaseResponseData']));
-        console.log('IMFFileData :' + window.sessionStorage.getItem(['IMFFileData']));
 
 
         /***
