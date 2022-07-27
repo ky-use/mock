@@ -144,7 +144,6 @@
                     // コンテンツバージョンIDリストの件数分
                     for(i=0; i < res.cbdFileList.length; i++){
                         if(res.cbdFileList[i].contentVersionId){
-                            console.log(i + ' ' + res.cbdFileList[i].contentVersionId)
                             let fileId = res.cbdFileList[i].contentVersionId;
                             let fileName = res.cbdFileList[i].fileName;
                             // コンテンツバージョンIDを引数に取得処理を呼び出し
@@ -187,8 +186,8 @@
                                                 // セッションストレージに取得した値を退避
                                                 window.sessionStorage.setItem(['IMFFileData'],[JSON.stringify(tempFileList)]);
                                                 // 次の処理へ
-                                                resolve();
                                             }
+                                            resolve();
                                         }
                                     })
                                 },
@@ -208,6 +207,12 @@
                 window.sessionStorage.setItem(['IMFFileData'],[JSON.stringify(tempFileList)]);
                 // セッションストレージに取得した値を退避
                 window.sessionStorage.setItem(['IMFCaseResponseData'],[JSON.stringify(res)]);
+
+                //console.log('IMFCaseResponseData_j :' + JSON.stringify( JSON.parse(window.sessionStorage.getItem(['IMFCaseResponseData']))));
+                console.log('IMFFileData_j :' + JSON.stringify( JSON.parse(window.sessionStorage.getItem(['IMFFileData']))));
+                //console.log('IMFCaseResponseData :' + window.sessionStorage.getItem(['IMFCaseResponseData']));
+                console.log('IMFFileData :' + window.sessionStorage.getItem(['IMFFileData']));
+
                 // Cookie取得処理を呼び出す
                 const cookieList = getCookie();
                 // NEW付与対象のIDを格納する配列
@@ -305,10 +310,7 @@
                     }
                 }
             });
-            //console.log('IMFCaseResponseData_j :' + JSON.stringify( JSON.parse(window.sessionStorage.getItem(['IMFCaseResponseData']))));
-            console.log('IMFFileData_j :' + JSON.stringify( JSON.parse(window.sessionStorage.getItem(['IMFFileData']))));
-            //console.log('IMFCaseResponseData :' + window.sessionStorage.getItem(['IMFCaseResponseData']));
-            console.log('IMFFileData :' + window.sessionStorage.getItem(['IMFFileData']));
+
         }
 
 
