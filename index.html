@@ -296,23 +296,23 @@
                     document.getElementById('listQa').appendChild(clone);
                     
                     // ケースのNEWアイコン非表示用プロパティがfalseの場合、NEWアイコンを表示する
-                    //if(res.caseList[i].newIconDisp){
-                        // コンタクトボード明細の件数分
-                        for(let j = 0; j < res.cbdFileList.length; j++){
-                            // ケースのIdとcbdのケースのIdが一致かつNewがTrueの場合
-                            if(res.caseList[i].Id == res.cbdFileList[j].Case__c && res.cbdFileList[j].newIconDisp){
-                                // newIcon template要素を複製
-                                let newIconClone = newIconTemplate.content.cloneNode(true);
-                                // newIconを画面に出力
-                                document.getElementById(res.caseList[i].Id).appendChild(newIconClone);
-                                break;
-                            }
+                    // コンタクトボード明細の件数分
+                    for(let j = 0; j < res.cbdFileList.length; j++){
+                        // ケースのIdとcbdのケースのIdが一致かつNewがTrueの場合
+                        if(res.caseList[i].Id == res.cbdFileList[j].Case__c && res.cbdFileList[j].newIconDisp){
+                            // newIcon template要素を複製
+                            let newIconClone = newIconTemplate.content.cloneNode(true);
+                            // newIconを画面に出力
+                            document.getElementById(res.caseList[i].Id).appendChild(newIconClone);
+                            break;
                         }
-                    //}
+                    }
                 }
             });
         }
-        
+        console.log(JSON.parse(window.sessionStorage.getItem(['IMFCaseResponseData'])));
+        console.log(JSON.parse(window.sessionStorage.getItem(['IMFFileData'])));
+
 
         /***
          * コンテンツバージョン（ファイル）取得処理
@@ -322,37 +322,35 @@
 
         function getContentVersion(fileId){
             $.ajax({
-                    type: 'POST',
-                    crossOrigin: true,
-                    url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/oauth2/token',
-                    dataType: 'json',
-                    cache :false,
-                    data : {"grant_type":"refresh_token",
-                            "client_id":"3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ", 
-                            "refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"},
-                    success : function (connectData) {
-                        var accToken = 'Bearer ' + connectData.access_token;
-                        $.ajax({
-                            type: 'GET',
-                            crossOrigin: true,
-                            url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + fileId + '/VersionData',
-                            cache :false,
-                            headers: {"Authorization" : accToken},
-                            xhrFields : {responseType : 'blob'},
-                            success : function (fileContent) {
-                                console.log(JSON.stringify(fileContent))
-                                return fileContent;
-                            }
-                        })
-                    },
-                    error : function (data, errorThrown,status) {
-                        console.log(data);
-                        console.log(errorThrown);
-                        console.log(status);
-                    }
-                });
-            // ファイル取得
-            //let fileContent = 'https://www.google.com/';
+                type: 'POST',
+                crossOrigin: true,
+                url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/oauth2/token',
+                dataType: 'json',
+                cache :false,
+                data : {"grant_type":"refresh_token",
+                        "client_id":"3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ", 
+                        "refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"},
+                success : function (connectData) {
+                    var accToken = 'Bearer ' + connectData.access_token;
+                    $.ajax({
+                        type: 'GET',
+                        crossOrigin: true,
+                        url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + fileId + '/VersionData',
+                        cache :false,
+                        headers: {"Authorization" : accToken},
+                        xhrFields : {responseType : 'blob'},
+                        success : function (fileContent) {
+                            console.log(JSON.stringify(fileContent))
+                            return fileContent;
+                        }
+                    })
+                },
+                error : function (data, errorThrown,status) {
+                    console.log(data);
+                    console.log(errorThrown);
+                    console.log(status);
+                }
+            });
         }
 
         /***
