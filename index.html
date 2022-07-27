@@ -220,7 +220,7 @@
                             headers: {"Authorization" : accToken},
                             success : function (resp) {
                                 res = resp;
-                                console.log('res: ' + res);
+                                console.log('a_res: ' + JSON.stringify(res));
                             },
                             error : function (data, errorThrown,status) {
                                 
@@ -234,7 +234,7 @@
                         console.log(status);
                     }
                 });
-                console.log('res: ' + res)
+                console.log('res: ' + JSON.stringify(res))
                 // エラーが起きたとき
                 /*if(errorInfo.status == 'error'){
                     // ホーム画面（履歴あり）を非表示
