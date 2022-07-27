@@ -201,7 +201,7 @@
                 res = responceApexData();
                 console.log(res)
                 // エラーが起きたとき
-                if(errorInfo.status == 'error'){
+                /*if(errorInfo.status == 'error'){
                     // ホーム画面（履歴あり）を非表示
                     document.getElementById('contents').style.display = 'none';
                     // 共通エラー画面を表示
@@ -215,7 +215,7 @@
                     // ホーム画面（履歴なし）を表示
                     document.getElementById('noInq').style.display = 'block';
                     return;
-                }
+                }*/
                 // ケースのリストサイズが0でない
                 if(res.caseList.length != 0){
                     // 実行回数
