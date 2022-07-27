@@ -1,683 +1,545 @@
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
-		<meta charset="Shift_JIS">
-		<title>PayPay‹âs@ƒz[ƒ€‰æ–Ê</title>
-		<meta name="description" content="ŒÚ‹qƒRƒ“ƒ^ƒNƒgƒ{[ƒh">
-		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes">
+		<meta charset="shift_jis">
+		<title>PayPayéŠ€è¡Œã€€ãŠå•ã„åˆã‚ã›ä¸€è¦§ç”»é¢</title>
+		<meta name="description" content="é¡§å®¢ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <style>
-
-            /* 	reset.css
-            ====================================== */
-            body, div, dl, dt, dd, ul, ol, li,
-            h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td{ margin:0; padding:0;}
-            table{ border-collapse: collapse; border-spacing: 0;}
-            fieldset, img{ border: 0;}
-            address, caption, cite, code, dfn, em, strong, th, var{	font-style:normal; font-weight:normal;}
-            ol, ul{ list-style:none;}
-            caption, th{ text-align:left;}
-            h1, h2, h3, h4, h5, h6{ font-size:100%; font-weight:normal;}
-            q:before, q:after{ content:'';}
-            abbr, acronym{ border:0;}
-            hr{	display:none;}
-            
-            /*--component_smt.css--*/
-            /*#bodyWrapper*/
-            #bodyWrapper{margin:0;padding:0;}
-            /*contents*/
-            .contents{margin-bottom:16px; background-color:#fff;}
-            /*block*/
-            .blk{padding:0 16px;}
-            .blkTitle{padding:16px 0 0;position:relative;background:#fff;display:flex;justify-content: space-between;}
-            .blkTitleR{width:100%;margin:3px 0 -10px 0;text-align:right;font-size:1.4rem;white-space:nowrap;}
-            .blkTitleOc .ocDown::before,.blkTitleOc .ocUp::before{right:0.8em;top:0.7em;}
-            .blkTitleOc .ocDown::after,.blkTitleOc .ocUp::after{right:1.2em;}
-            .blkTitleOc .ocDown::after{top:1.3em;}
-            .blkTitleOc .ocUp::after{top:0.8em;}
-
-            .h201{font-size:1.6rem;font-weight:bold;white-space:nowrap;}
-            .h301{font-size:1.4rem;font-weight:bold;}
-
-            .blkCont{padding:16px 0;}
-            .blkCont+.blkCont{padding-top:0;}
-            .blkCont.layout-form{padding:16px 24px;}
-            .blkCont.layout-form.layout-form-login.layout-form-login-noborder{padding: 16px 0;}
-
-            /*--category/contact_smt.css--*/
-            /*body*/
-            body#contact{width:100%;}
-            /*contactboardContents*/
-            #contact .smtOnlyBr{display:block;}
-            #contact .note + .note{margin-top:16px;}
-            #contact .contbrd-title{margin:0 0 16px;border-radius:8px;padding:8px;background-color:#606060;color:#ffffff;text-align:center;}
-            #contact .blkCont.contbrd-btnArea-box{padding:36px 0;}
-            #contact .contbrd-btnArea-box{padding:24px 0;}
-            #contact .contbrd-formBtn{padding:8px 0 24px;text-align:right;}
-            #contact .contbrd-formTitle{font-size:1.6rem;font-weight:bold;text-align:center;color:#002970;}
-            /*contactboard*/
-            #contact .contbrd-head{position:relative;margin-bottom:16px;}
-            #contact .contbrd-head::before{content:"";display:inline-block;width:64px;height:64px;margin:0 16px 0 0;background-size:contain;}
-            #contact .contbrd-head.customer::before{background:transparent url(/commontpl/images/category/contact_ic001.svg) no-repeat center center;}
-            #contact .contbrd-head.answer::before{background:transparent url(/commontpl/images/category/contact_ic002.svg) no-repeat center center;}
-            #contact .contbrd-wrap .contbrd-cont{padding:24px 0;border-bottom:1px solid #bababa;}
-            #contact .contbrd-wrap .contbrd-cont:first-of-type{padding-top:0;}
-            #contact .contbrd-wrap .contbrd-cont:last-of-type{border-bottom:none;}
-            #contact .contbrd-wrap .contbrd-cont dl{position:absolute;display:inline-block;width:72%;top:8px;}
-            #contact .contbrd-wrap .contbrd-cont dl dt{color:#606060;display:flex;justify-content:space-between;}
-            #contact .contbrd-wrap .contbrd-cont dl dt .new-icon{width:46px;height:18px;margin-left:5px;border-radius:15px;background-color:#ffb900;color:#ffffff;text-align:center;font-size:1.2rem;}
-            #contact .contbrd-wrap .contbrd-cont dl dd{margin:6px 0;color:#606060;}
-            #contact .contbrd-wrap .contbrd-cont dl dd::before{content:"";display: inline-block;width:20px;height:20px;margin:0 11px 0 0;background:transparent url(/commontpl/images/category/contact_ic003.svg) no-repeat center center;background-size:contain;vertical-align:top;}
-            #contact .contbrd-body{position:relative;}
-            #contact .contbrd-body::after{content:"";width:8px;height:8px;border:0px;border-right:2px solid #bababa;border-top:2px solid #bababa;transform:rotate(135deg);position:absolute;top:5px;right:0.5em;}
-            #contact .contbrd-body.first::after{display:none;}
-            #contact .contbrd-body.first .contbrd-txt,#contact .contbrd-cont.open .contbrd-body.first .contbrd-txt{width:100%;}
-            #contact .contbrd-cont.open .contbrd-body::after{transform:rotate(-45deg);}
-            #contact .contbrd-txt p{display:none;}
-            #contact .contbrd-txt,#contact .contbrd-txt p:first-of-type{width:90%;-webkit-line-clamp:1;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;}
-            #contact .contbrd-body.first .contbrd-txt,#contact .contbrd-body.first .contbrd-txt p,#contact .contbrd-cont.open .contbrd-txt,#contact .contbrd-cont.open .contbrd-txt p:first-of-type,#contact .contbrd-cont.open .contbrd-txt p{-webkit-line-clamp:unset;display:block;}
-            #contact .contbrd-cont.open .contbrd-txt,#contact .contbrd-cont.open .contbrd-txt p:first-of-type,#contact .contbrd-cont.open .contbrd-txt p{width:95%;}
-            #contact .contbrd-txt + .h301{padding-top:16px; /*’Ç‰Ádisplay:none;/’Ç‰Á*/}
-            /*list-qa*/
-            #contact .list-qa dl{padding:24px 0 32px 0;border-bottom:1px solid #bababa;}
-            #contact .list-qa dl:last-of-type{border-bottom:none;}
-            #contact .list-qa dl a{color:#242323;text-decoration:none;}
-            #contact .list-qa dt{color:#002970;padding-bottom:12px;}
-            #contact .list-qa .list-qa-box{position:relative;display:flex;}
-            #contact .list-qa .list-qa-box .list-qa-cont{width:88%;font-weight:bold;}
-            #contact .list-qa .list-qa-box .list-qa-ic{width:46px;height:18px;margin-left:5px;border-radius:15px;background-color:#ffb900;color:#ffffff;text-align:center;font-size:1.2rem;}
-            #contact .list-qa .list-qa-time{margin:12px 0;color:#606060;}
-            #contact .list-qa .list-qa-time::before{content:"";display:inline-block;width:20px;height:20px;margin:0 11px 0 0;background:transparent url(/commontpl/images/category/contact_ic003.svg) no-repeat center center;background-size:contain;position:relative;top:1px;vertical-align:top;}
-            #contact .list-qa .list-qa-txt{color:#606060;}
-            #contact .list-qa .list-qa-txt span{padding-right:15px;font-weight:bold;}
-            #contact .list-qa .list-qa-txt .txt-fin{padding-right:0;font-weight:normal;color:#20bf7a;}
-            #contact .list-qa .list-qa-txt .txt-not-fin{padding-right:0;font-weight:normal;}
-
         </style>
 	</head>
-	<body id="contact">
-        <div class="bodyWrapper">
-            <main>
-
-                <!--template-->
-                <!--caseTemplate-->
-                <template id="contbrdTemplate">
-                    <dl>
-                        <a href="javascript:void(0);">
-                            <dt class="inq-title"></dt>
-                            <dd>
-                            <div id="cbdContent" class="list-qa-box">
-                                <p class="list-qa-cont cbd-content"></p>
-
-                            </div>
-                            <p class="list-qa-time inq-createdate"></p>
-                            <p class="list-qa-txt"><span>‚¨–â‚¢‡‚í‚¹í—Ş</span><span class="inq-type"></span></p>
-                            <p class="list-qa-txt"><span>ƒXƒe[ƒ^ƒX</span><span class="txt-fin inq-status"></span></p>
-                        </dd>
-                        </a>
-                    </dl>
-                </template>
-                <!--newIconTemplate-->
-                <template id="newIconTemplate">
-                    <p class="list-qa-ic">NEW</p>
-                </template>
-                <!--/template-->
-
-                
-            
-                <!--title-->
-                <div id="title">
-                <div class="titleL"><h1>‚¨–â‚¢‡‚í‚¹ƒtƒH[ƒ€</h1></div>
-                </div>
-                <!--/title-->
-                <!--incontainer-->
-                <div id="inContainer" class="inC1c">
-                
-                    <!--main-->
-                    <div id="mainArea">
-                    
-                        <!--contents-->
-                        <div class="contents">
-                        
-                            <div class="blk">
-                                <div class="blkCont bdrT0">
-                                
-                                <div class="note">
-                                <p>‚¨–â‚¢‡‚í‚¹‚Ì‰ñ“š–ÚˆÀ‚ÍŒ´‘¥A—‚‰c‹Æ“ú‚Å‚·B</p>
-                                </div>
-                                
-                                <p class="txtR mt-16"><a href="javascript:void(0);" class="btn btn02">V‹K‚¨–â‚¢‡‚í‚¹</a></p>
-                                
-                                <!--outputTemplate-->
-                                <div id="listQa" class="list-qa">
-                                </div>
-                                <!--/outputTemplate-->
-                                
-                                <p><a href="javascript:commonSubmit('ln0001')" title="Welcome Page‚É–ß‚é" class="btn btn02 btnL">Welcome Page</a></p>
-                                
-                                </div>
-                            </div>
-                        
-                        </div>
-                        <!--/contents-->
-                        
-                    </div>
-                    <!--/main-->
-                
-                </div>
-                <!--/incontainer-->
-            
-            </main>
-        </div><!--/bodyWrapper-->
-
-
-        <div >
-            <button type="button" onclick="location.href='./NewInquiry.html'">V‹K–â‚¢‡‚í‚¹</button>
-            <p style>‚Í‚¶‚ß‚Ä‚Ì•û‚Í‚±‚¿‚ç</p>
-            <button type="button" onclick="location.href='./InquiryList.html'">–â‚¢‡‚í‚¹ˆê——</button>
-            <p>–â‚¢‡‚í‚¹’†‚Ì•û‚Í‚±‚¿‚ç</p>
-            <a href="./HowToUse.html">ŒÚ‹qƒRƒ“ƒ^ƒNƒgƒ{[ƒh‚Ìg‚¢•û</a>
+	<body>
+        <div class="list-qa">
+            <!--outputTemplate(USE)-->
+            <dl id="listQa">
+            </dl>
+            <!--outputTemplate(USE)-->
         </div>
-        <script>
-
-	// ‰Šú•\¦ˆ—
-	window.onload = function(){
-		// ˆÃ†‰»•¶š—ñ
-		//let encText = '00001056';
-		// JSP˜AŒg•¶š—ñæ“¾
-		const linkedStr = '<%=request.getAttribute("SFConnectParam") %>';
-		// const linkedStr = document.getElementById('SFConnectParam').value; // —v‘f‚©‚çæ“¾‚·‚éê‡
-
-		// ’ÊMƒf[ƒ^¶¬
-		function responceApexData(){
-			// ƒAƒNƒZƒXƒg[ƒNƒ“æ“¾iƒŠƒtƒŒƒbƒVƒ…ƒg[ƒNƒ“ƒtƒ[j Ajax
-			$.ajax({
-				type: 'POST',
-				crossOrigin: true,
-				url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/oauth2/token',
-				dataType: 'json',
-				cache :false,
-				data : {"grant_type":"refresh_token",
-						"client_id":"3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ", 
-						"refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"},
-				success : function (connectData) {
-					var accToken = 'Bearer ' + connectData.access_token;
-					$.ajax({
-						type: 'GET',
-						crossOrigin: true,
-						url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/apexrest/IMF_Case',
-						dataType: 'json',
-						cache :false,
-						data: {inquiry : 'd5b8d90ceb5ff5f3505dd311e1e74f6e3f87d028ddac9c3c4c18ede46409e0ef'},
-						headers: {"Authorization" : accToken},
-						success : function (res) {
-							return res;
-							console.log(res);
-						},
-						error : function (data, errorThrown,status) {
-							
-						}
-					})
-					
-				},
-				error : function (data, errorThrown,status) {
-					console.log(data);
-					console.log(errorThrown);
-					console.log(status);
-				}
-			});
-			/*** ƒeƒXƒgƒf[ƒ^ ***/
-			/*let resData = {
-				accMail : 'k*****@u**************',
-				caseList : [{
-						Id: 'case_01',
-						CaseNumber: '00001234',
-						// cbd¨case‚É•ÏX
-						StatusClient__c: '‰ñ“šŠ®—¹',
-						// ‚¨–â‚¢‡‚í‚¹í—Ş
-						Subject: 'ƒg[ƒNƒ“EƒAƒvƒŠ',
-						// ‚¨–â‚¢‡‚í‚¹Ú×
-						Ankennaiyou__c: 'ƒXƒ}ƒz‚ğ‹@í•ÏX‚µ‚½‚Ì‚Å‚·‚ªAƒg[ƒNƒ“ƒAƒvƒŠ‚Ìˆø‚«Œp‚¬H‚ª‚æ‚­‚í‚©‚è‚Ü‚¹‚ñB‘O‚ÌƒXƒ}ƒz‚Í‚Á‚Ä‚¢‚Ü‚¹‚ñB',
-						CreatedDate: '2022-07-16T04:43:08.000+0000'
-					},{
-						Id: 'case_02',
-						CaseNumber: '00001235',
-						// cbd¨case‚É•ÏX
-						StatusClient__c: '‰ñ“šŠ®—¹',
-						// ‚¨–â‚¢‡‚í‚¹í—Ş
-						Subject: 'ƒLƒƒƒbƒVƒ…ƒJ[ƒh',
-						// ‚¨–â‚¢‡‚í‚¹Ú×
-						Ankennaiyou__c: 'ƒLƒƒƒbƒVƒ…ƒJ[ƒh‚ğ•´¸‚µ‚½‚Ì‚Å‚·‚ªA‚Ç‚¤‚·‚ê‚Î‚¢‚¢‚Ì‚©•ª‚©‚ç‚È‚¢‚Ì‚ÅA¿–â‚³‚¹‚Ä‚­‚¾‚³‚¢BƒXƒ}ƒz‚ğ‹@í•ÏX‚µ‚½‚Ì‚Å‚·‚ªAƒg[ƒNƒ“ƒAƒvƒŠ‚Ìˆø‚«Œp‚¬H‚ª‚æ‚­‚í‚©‚è‚Ü‚¹‚ñB‘O‚ÌƒXƒ}ƒz‚Í‚Á‚Ä‚¢‚Ü‚¹‚ñB',
-						CreatedDate: '2022-07-15T23:43:08.000+0000'
-					},{
-						Id: 'case_03',
-						CaseNumber: '00001235',
-						// cbd¨case‚É•ÏX
-						StatusClient__c: '‰ñ“šŠ®—¹',
-						// ‚¨–â‚¢‡‚í‚¹í—Ş
-						Subject: 'ƒLƒƒƒbƒVƒ…ƒJ[ƒh',
-						// ‚¨–â‚¢‡‚í‚¹Ú×
-						Ankennaiyou__c: 'ƒLƒƒƒbƒVƒ…ƒJ[ƒh‚ğ•´¸‚µ‚½‚Ì‚Å‚·‚ªA‚Ç‚¤‚·‚ê‚Î‚¢‚¢‚Ì‚©•ª‚©‚ç‚È‚¢‚Ì‚ÅA¿–â‚³‚¹‚Ä‚­‚¾‚³‚¢BƒXƒ}ƒz‚ğ‹@í•ÏX‚µ‚½‚Ì‚Å‚·‚ªAƒg[ƒNƒ“ƒAƒvƒŠ‚Ìˆø‚«Œp‚¬H‚ª‚æ‚­‚í‚©‚è‚Ü‚¹‚ñB‘O‚ÌƒXƒ}ƒz‚Í‚Á‚Ä‚¢‚Ü‚¹‚ñB',
-						CreatedDate: '2022-07-14T23:43:08.000+0000'
-					},{
-						Id: 'case_04',
-						CaseNumber: '00001235',
-						// cbd¨case‚É•ÏX
-						StatusClient__c: '‰ñ“šŠ®—¹',
-						// ‚¨–â‚¢‡‚í‚¹í—Ş
-						Subject: 'ƒLƒƒƒbƒVƒ…ƒJ[ƒh',
-						// ‚¨–â‚¢‡‚í‚¹Ú×
-						Ankennaiyou__c: 'ƒLƒƒƒbƒVƒ…ƒJ[ƒh‚ğ•´¸‚µ‚½‚Ì‚Å‚·‚ªA‚Ç‚¤‚·‚ê‚Î‚¢‚¢‚Ì‚©•ª‚©‚ç‚È‚¢‚Ì‚ÅA¿–â‚³‚¹‚Ä‚­‚¾‚³‚¢BƒXƒ}ƒz‚ğ‹@í•ÏX‚µ‚½‚Ì‚Å‚·‚ªAƒg[ƒNƒ“ƒAƒvƒŠ‚Ìˆø‚«Œp‚¬H‚ª‚æ‚­‚í‚©‚è‚Ü‚¹‚ñB‘O‚ÌƒXƒ}ƒz‚Í‚Á‚Ä‚¢‚Ü‚¹‚ñB',
-						CreatedDate: '2022-06-07T23:43:08.000+0000'
-					},{
-						Id: 'case_05',
-						CaseNumber: '00001235',
-						// cbd¨case‚É•ÏX
-						StatusClient__c: '‰ñ“šŠ®—¹',
-						// ‚¨–â‚¢‡‚í‚¹í—Ş
-						Subject: 'ƒLƒƒƒbƒVƒ…ƒJ[ƒh',
-						// ‚¨–â‚¢‡‚í‚¹Ú×
-						Ankennaiyou__c: 'ƒLƒƒƒbƒVƒ…ƒJ[ƒh‚ğ•´¸‚µ‚½‚Ì‚Å‚·‚ªA‚Ç‚¤‚·‚ê‚Î‚¢‚¢‚Ì‚©•ª‚©‚ç‚È‚¢‚Ì‚ÅA¿–â‚³‚¹‚Ä‚­‚¾‚³‚¢BƒXƒ}ƒz‚ğ‹@í•ÏX‚µ‚½‚Ì‚Å‚·‚ªAƒg[ƒNƒ“ƒAƒvƒŠ‚Ìˆø‚«Œp‚¬H‚ª‚æ‚­‚í‚©‚è‚Ü‚¹‚ñB‘O‚ÌƒXƒ}ƒz‚Í‚Á‚Ä‚¢‚Ü‚¹‚ñB',
-						CreatedDate: '2022-06-07T23:43:08.000+0000'
-					}
-				],
-				cbdFileList : [
-					{
-						Id: 'cbd_01',
-						Classification__c: '–â‚¢‡‚í‚¹',
-						Content__c: 'ƒXƒ}ƒz‚ğ‹@í•ÏX‚µ‚½‚Ì‚Å‚·‚ªAƒg[ƒNƒ“ƒAƒvƒŠ‚Ìˆø‚«Œp‚¬H‚ª‚æ‚­‚í‚©‚è‚Ü‚¹‚ñB‘O‚ÌƒXƒ}ƒz‚Í‚Á‚Ä‚¢‚Ü‚¹‚ñB',
-						Case__c: 'case_01',
-						// cbd¨case‚É•ÏXStatusClient__c
-						CreatedDate: '2022-07-16T04:43:08.000+0000',
-						// ƒtƒ@ƒCƒ‹
-						ContentVersionId: 'cv_01',
-						FileName: 'cvName01'
-					},{
-						Id: 'cbd_02',
-						Classification__c: '–â‚¢‡‚í‚¹',
-						Content__c: 'ƒXƒ}ƒz‚ğ‹@í•ÏX‚µ‚½‚Ì‚Å‚·‚ªAƒg[ƒNƒ“ƒAƒvƒŠ‚Ìˆø‚«Œp‚¬H‚ª‚æ‚­‚í‚©‚è‚Ü‚¹‚ñB‘O‚ÌƒXƒ}ƒz‚Í‚Á‚Ä‚¢‚Ü‚¹‚ñB',
-						Case__c: 'case_01',
-						// cbd¨case‚É•ÏXStatusClient__c
-						CreatedDate: '2022-07-16T04:43:08.000+0000',
-						// ƒtƒ@ƒCƒ‹
-						ContentVersionId: 'cv_01',
-						FileName: 'cvName01'
-					},{
-						Id: 'cbd_03',
-						Classification__c: '‰ñ“š',
-						Content__c: 'ƒJƒXƒ^ƒ}[ƒZƒ“ƒ^[‚Ì—é–Ø‚Å‚·B‚¨–â‚¢‡‚í‚¹‚ ‚è‚ª‚Æ‚¤‚²‚´‚¢‚Ü‚·BƒXƒ}[ƒgƒtƒHƒ“‚ğ‹@í•ÏX‚µ‚½ê‡Aƒg[ƒNƒ“ƒAƒvƒŠ‚Íˆø‚«Œp‚¬‚ª‚³‚ê‚Ü‚¹‚ñB‚¨è”‚ğ‚¨Š|‚¯’v‚µ‚Ü‚·‚ªA‰ü‚ß‚Äƒg[ƒNƒ“ƒAƒvƒŠ‚ğƒ_ƒEƒ“ƒ[ƒh‚¢‚½‚¾‚«AÄ“o˜^‚ğ‚¨Šè‚¢‚¢‚½‚µ‚Ü‚·B',
-						Case__c: 'case_02',
-						CreatedDate: '2022-07-16T04:43:08.000+0000',
-						// ƒtƒ@ƒCƒ‹
-						ContentVersionId: 'cv_02',
-						FileName: 'cvName02'
-					}
-				]
-			}
-			// nullƒ`ƒFƒbƒN—p
-			let nFlg = false;
-			if(nFlg){ resData = null; }
-			// ’ÊMƒGƒ‰[—p
-			let cFlg = false;
-			if(cFlg){ errorInfo = {
-				data: '', // ƒf[ƒ^
-				errorThrown: '', // —áŠOî•ñ
-				status: 'error' // ƒGƒ‰[î•ñ
-			}}
-			/*** /ƒeƒXƒgƒf[ƒ^ ***/
-			return resData;
-		}
-
-		// ’ÊMî•ñ—p
-		let res;
-		const promise = new Promise((resolve) => {
-			// ƒGƒ‰[Ši”[—p
-			let errorInfo = {
-				data: '', // ƒf[ƒ^
-				errorThrown: '', // —áŠOî•ñ
-				status: '' // ƒGƒ‰[î•ñ
-			};
-			// ‚¨–â‚¢‡‚í‚¹ˆê——æ“¾ˆ—Œ‹‰Êæ“¾
-			res = responceApexData();
-			console.log(res)
-			// ƒGƒ‰[‚ª‹N‚«‚½‚Æ‚«
-			if(errorInfo.status == 'error'){
-				// ƒz[ƒ€‰æ–Êi—š—ğ‚ ‚èj‚ğ”ñ•\¦
-				document.getElementById('contents').style.display = 'none';
-				// ‹¤’ÊƒGƒ‰[‰æ–Ê‚ğ•\¦
-				document.getElementById('commonError').style.display = 'block';
-				return;
-			}
-			//res = '';
-			if(!res){
-				// ƒz[ƒ€‰æ–Êi—š—ğ‚ ‚èj‚ğ”ñ•\¦
-				document.getElementById('contents').style.display = 'none';
-				// ƒz[ƒ€‰æ–Êi—š—ğ‚È‚µj‚ğ•\¦
-				document.getElementById('noInq').style.display = 'block';
-				return;
-			}
-			// ƒP[ƒX‚ÌƒŠƒXƒgƒTƒCƒY‚ª0‚Å‚È‚¢
-			if(res.caseList.length != 0){
-				// Às‰ñ”
-				let count = 0;
-				// ƒRƒ“ƒeƒ“ƒcƒo[ƒWƒ‡ƒ“IDƒŠƒXƒg‚ÌŒ”•ª
-				for(i=0; i < res.cbdFileList.length; i++){
-					// ƒtƒ@ƒCƒ‹“à—e‚ğ‘Ş”ğ‚·‚é”z—ñ
-					let tempFileList = [];
-					// ƒRƒ“ƒeƒ“ƒcƒo[ƒWƒ‡ƒ“ID‚ğˆø”‚Éæ“¾ˆ—‚ğŒÄ‚Ño‚µ
-					let resCvUrl = getContentVersion(res.cbdFileList[i].ContentVersionId);
-					// ƒtƒ@ƒCƒ‹“à—e‚ğ”z—ñ‚É‘Ş”ğ‚·‚é
-					let tempFile = {
-						cvId: res.cbdFileList[i].ContentVersionId,
-						fileName: res.cbdFileList[i].FileName,
-						versionData: resCvUrl
-					};
-					tempFileList.push(tempFile);
-					// Às‰ñ”‚ğƒCƒ“ƒNƒŠƒƒ“ƒg
-					count++;
-					// ƒtƒ@ƒCƒ‹‚ÌId‚ÌŒ”•ª“®‚¢‚½‚ç
-					if(count == res.cbdFileList.length){
-						// ƒZƒbƒVƒ‡ƒ“ƒXƒgƒŒ[ƒW‚Éæ“¾‚µ‚½’l‚ğ‘Ş”ğ
-						window.sessionStorage.setItem(['IMFFileData'],[JSON.stringify(tempFileList)]);
-						// Ÿ‚Ìˆ—‚Ö
-						resolve();
-					}
-				}
-			}
-	
-		// promiseˆ—‚ª‚·‚×‚ÄŠ®—¹‚µ‚Ä‚©‚çÀs
-		}).then(() => {
-			// ƒZƒbƒVƒ‡ƒ“ƒXƒgƒŒ[ƒW‚Éæ“¾‚µ‚½’l‚ğ‘Ş”ğ
-			window.sessionStorage.setItem(['IMFCaseResponseData'],[JSON.stringify(res)]);
-			// Cookieæ“¾ˆ—‚ğŒÄ‚Ño‚·
-			//const CookieList = '';
-			const cookieList = getCookie();
-			console.log('cookieList:' + cookieList)
-			// NEW•t—^‘ÎÛ‚ÌID‚ğŠi”[‚·‚é”z—ñ
-			let newTargetList = [];
-			for(i=0; i < res.cbdFileList.length; i++){
-				// NEW•\¦ƒtƒ‰ƒO‚ğtrue‚Å‰Šú‰»
-				let newDisplayFlag = true;
-				// 1ƒ–Œ‘O‚Ì“ú•t—p•Ï”‚ÉŒ»İ“ú‚ğæ“¾‚µ‚Ä-1ƒ–Œ‚·‚é
-				let nowDateTime = new Date();
-				const year = nowDateTime.getFullYear();
-				// Œ‚ğæ“¾‚µ‚ÄA1ƒ–Œ‘‚â‚µ‚Ä
-				const month = nowDateTime.getMonth() + 1;
-				// “ú‚ğæ“¾‚·‚é
-				const date = nowDateTime.getDate();
-				// æ“ª•¶š—ñ'0'‚ÉA1j‚©‚çŠÔ(h)‚ğæ“¾‚µ‚ÄŒ‹‡‚µ‚½’l‚ğÅŒã‚©‚ç2•¶š‚Ü‚Å‚ğ•Ï”‚ÉŠi”[
-				const hour = (`0` + (nowDateTime.getHours())).slice(-2);
-				// æ“ª•¶š—ñ'0'‚ÉA1j‚©‚ç•ª(m)‚ğæ“¾‚µ‚ÄŒ‹‡‚µ‚½’l‚ğÅŒã‚©‚ç2•¶š‚Ü‚Å‚ğ•Ï”‚ÉŠi”[
-				const minute = (`0` + (nowDateTime.getMinutes())).slice(-2);
-				nowDateTIme = new Date(`${year}/${month-1}/${date} ${hour}:${minute}`);
-				// ƒRƒ“ƒ^ƒNƒgƒ{[ƒh–¾×‚ÌŠÔ
-				let cbdDateTime = new Date(res.cbdFileList[i].CreatedDate);
-				// ƒRƒ“ƒ^ƒNƒgƒ{[ƒh–¾×‚ÌÅIXV“ú‚ªŒ»İ“ú-1ƒ–Œ‚æ‚èŒÃ‚¢i’l‚ğŠÜ‚Şjê‡
-				if(cbdDateTime >= nowDateTIme){
-					// Cookie‚ÌCbdId‚ÌŒ”•ª
-					for(j=0; j < cookieList.length; j++){
-						// ƒRƒ“ƒ^ƒNƒgƒ{[ƒh–¾×‚ÌID‚ÆCookie‚ÌID‚ªˆê’v‚µ‚Ä‚¢‚éê‡
-						if(res.cbdFileList[i].Id == cookieList[j] || res.cbdFileList[i].Classification__c == '–â‚¢‡‚í‚¹'){
-							// NEW•\¦ƒtƒ‰ƒO‚ğfalse‚Éİ’è
-							newDisplayFlag = false;
-						}
-					}
-				}else{
-					// NEW•\¦ƒtƒ‰ƒO‚ğfalse‚Éİ’è
-					newDisplayFlag = false;
-				}
-				// ƒRƒ“ƒ^ƒNƒgƒ{[ƒh–¾×‚ÌƒŒƒR\ƒh‚ÉNEWƒAƒCƒRƒ“§Œä—p‚ÌƒvƒƒpƒeƒB‚ª‚ ‚éê‡
-				if('newIconDisp' in res.cbdFileList[i]){
-					// NEWƒAƒCƒRƒ“§Œä—p‚ÌƒvƒƒpƒeƒB‚É’l‚ğ’Ç‰Á
-					res.cbdFileList[i].newIconDisp = newDisplayFlag;
-				// ƒvƒƒpƒeƒB‚ª‚È‚¢ê‡
-				}else{
-					// NEWƒAƒCƒRƒ“§Œä—p‚ÌƒvƒƒpƒeƒB‚ğ•t—^‚µA’l‚ğİ’è
-					res.cbdFileList[i]["newIconDisp"] = newDisplayFlag;
-				}
-			}
-			
-			// NEW•t—^‘ÎÛ‚ÌID”z—ñ‚ÌƒTƒCƒY‚ª0‚Å‚È‚¢ê‡
-			/*if(newTargetList.length != 0){
-				// ƒP[ƒXƒŒƒR[ƒhƒŠƒXƒg‚ÌŒ”•ª
-				for(i=0; i < res.caseList.length; i++){
-					// NEW•t—^‘ÎÛ‚ÌID”z—ñ‚ÌŒ”•ª
-					for(j=0; j < newTargetList.length; j++){
-						// ƒtƒ‰ƒO‚ğ”ñ•\¦‚Å‰Šú‰»
-						let newIconDispflg = false;
-						// ƒP[ƒX‚ÌID‚ÆNEW•t—^‘ÎÛID‚ªˆê’v
-						if(res.caseList[i].Id == newTargetList[j]){
-							// NEWƒAƒCƒRƒ“§Œä—p‚Ì’l‚ğtrue‚Éİ’è
-							newIconDispflg = true;
-						// ˆê’v‚µ‚È‚¢ê‡
-						}else{
-							// NEWƒAƒCƒRƒ“§Œä—p‚Ì’l‚ğfalse‚Åİ’è
-							newIconDispflg = false;
-						}
-						// ƒP[ƒX‚ÌƒŒƒR\ƒh‚ÉNEWƒAƒCƒRƒ“§Œä—p‚ÌƒvƒƒpƒeƒB‚ª‚ ‚éê‡
-						if('newIconDisp' in res.caseList[i]){
-							// NEWƒAƒCƒRƒ“§Œä—p‚ÌƒvƒƒpƒeƒB‚É’l‚ğ’Ç‰Á
-							res.caseList[i].newIconDisp = newIconDispflg;
-						// ƒvƒƒpƒeƒB‚ª‚È‚¢ê‡
-						}else{
-							// NEWƒAƒCƒRƒ“§Œä—p‚ÌƒvƒƒpƒeƒB‚ğ•t—^‚µA’l‚ğİ’è
-							res.caseList[i]["newIconDisp"] = newIconDispflg;
-						}
-					}
-				}
-			}*/
-			
-			/*** ƒ^ƒO‚ğ¶¬ ***/
-			// Case template—v‘f‚ğæ“¾
-			let caseTemplate = document.getElementById('caseTemplate');
-			// newIcon template—v‘f‚ğæ“¾
-			let iconTemplate = document.getElementById('newIconTemplate');
-			// ƒP[ƒX‚ÌƒŠƒXƒg‚ÌŒ”•ª
-			for(let i = 0; i < res.caseList.length; i++){
-				// case template—v‘f‚Ì“à—e‚ğ•¡»
-				let clone = caseTemplate.content.cloneNode(true);
-				// ‚¨–â‚¢‡‚í‚¹“à—e‚ğæ“¾
-				let content = res.caseList[i].Ankennaiyou__c;
-				// ‚¨–â‚¢‡‚í‚¹Ú×‚ªnull‚Å‚È‚¢
-				if(content != null){
-					// 12•¶š‚ğ’´‚¦‚éê‡
-					if(content.length > 30){
-						// È—ª‚·‚é
-						content = content.substring(0, 30) + "...";
-					}
-				}
-				// •¡»‚µ‚½template—v‘f‚Éƒf[ƒ^‚ğ‘}“ü
-				// ƒP[ƒX‚ÌId‚ğİ’è
-				clone.querySelector('.inq-id').dataset.cId = res.caseList[i].Id;
-				// ƒP[ƒX”Ô†‚ğİ’è‚·‚é
-				clone.querySelector('.inq-title').textContent = 'No.' + res.caseList[i].CaseNumber;
-				// ‚¨–â‚¢‡‚í‚¹“à—e‚ğİ’è‚·‚é
-				clone.querySelector('.cbd-content').textContent = content;
-				// ƒP[ƒX‚Ìì¬“ú‚ğJST“ú•t‚©‚ÂƒXƒ‰ƒbƒVƒ…‚É•ÏŠ·‚µ‚ÄAİ’è
-				clone.querySelector('.inq-createdate').textContent = changeSlashDate(res.caseList[i].CreatedDate);
-				// ‚¨–â‚¢‡‚í‚¹í—Ş‚ğİ’è‚·‚é
-				clone.querySelector('.inq-type').textContent = res.caseList[i].Subject;
-				// ƒP[ƒX‚ÌƒXƒe[ƒ^ƒX‚ğİ’è‚·‚é
-				clone.querySelector('.inq-status').textContent = res.caseList[i].StatusClient__c;
-				clone.querySelector('.inq-outputNew').id = res.caseList[i].Id;
-				// case‚ğ‰æ–Ê‚Éo—Í
-				document.getElementById('listQa').appendChild(clone);
-				
-				// ƒP[ƒX‚ÌNEWƒAƒCƒRƒ“”ñ•\¦—pƒvƒƒpƒeƒB‚ªfalse‚Ìê‡ANEWƒAƒCƒRƒ“‚ğ•\¦‚·‚é
-				//if(res.caseList[i].newIconDisp){
-					for(let j = 0; j < res.cbdFileList.length; j++){
-						if(res.caseList[i].Id == res.cbdFileList[j].Case__c && res.cbdFileList[j].newIconDisp){
-							// newIcon template—v‘f‚ğ•¡»
-							let newIconClone = newIconTemplate.content.cloneNode(true);
-							// newIcon‚ğ‰æ–Ê‚Éo—Í
-							document.getElementById(res.caseList[i].Id).appendChild(newIconClone);
-							break;
-						}
-					}
-				//}
-			}
-		});
-	}
-	
-
-	/***
-	 * ƒRƒ“ƒeƒ“ƒcƒo[ƒWƒ‡ƒ“iƒtƒ@ƒCƒ‹jæ“¾ˆ—
-	 * ˆø”@FƒRƒ“ƒeƒ“ƒcƒo[ƒWƒ‡ƒ“Id
-	 * •Ô‹p’lFƒtƒ@ƒCƒ‹‚Ì’†g
-	 ***/
-    
-	function getContentVersion(fileId){
-		$.ajax({
-			type: 'GET',
-			crossOrigin: true,
-			url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + vdList[i].contentVersionIdList + '/VersionData',
-			cache :false,
-			headers: {"Authorization" : accToken},
-			xhrFields : {responseType : 'blob'},
-			success : function (fileContent) {
-				return fileContent;
-			}
-		})
-		// ƒtƒ@ƒCƒ‹æ“¾
-		//let fileContent = 'https://www.google.com/';
-	}
-
-	/***
-	 * Cookieæ“¾ˆ—
-	 * ˆø”@F‚È‚µ
-	 * •Ô‹p’lFcbdIdƒŠƒXƒg
-	 ***/
-	function getCookie(){
-		// Cookie‚ğ•ªŠ„‚µ‚ÄŠi”[‚·‚é”z—ñ
-		let tempIdList = [];
-		// Cookie‚ğŠi”[‚·‚é”z—ñ
-		let cbdIdList = [];
-		// Œ‹‰Ê•Ô‹p—p”z—ñ
-		let resultCbdIdList = [];
-		// Cookie‚ğæ“¾
-		let nowCookie = document.cookie;
-		// Cookie‚ªnull‚à‚µ‚­‚Íundefined‚Å‚È‚¢ê‡
-		if(nowCookie){
-			// ’l‚ğ ';' ‚Å•ªŠ„‚µ‚Ä1j‚Ì”z—ñ‚ÉŠi”[
-			tempIdList = nowCookie.split(';');
-			// ’l‚ÌŒ”•ª
-			tempIdList.forEach(data => {
-				// ’l‚ğ '=' ‚Å•ªŠ„
-				data = data.split('=');
-				// ’l‚ğJSON•¶š—ñ‚©‚çJavascriptƒIƒuƒWƒFƒNƒg‚É•ÏŠ·A”z—ñ‚ÉŠi”[
-				cbdIdList[data[0]] = JSON.parse(data[1]);
-				// ”z—ñ‚Ì’l‚Ì—v‘f‚Ì”•ª
-				Object.keys(cbdIdList).forEach(key => {
-					// Key‚Ì’l‚ª‚¨–â‚¢‡‚í‚¹ƒtƒH[ƒ€—p‚ÌKey‚Ìê‡
-					if(key == 'IMFCookie'){
-						// Key‚Ì”z—ñ‚Ì’l‚ÌŒ”•ª
-						cbdIdList[key].forEach(elem => {
-							// Œ‹‰Ê•Ô‹p—p”z—ñ‚É’Ç‰Á
-							resultCbdIdList.push(elem);
-						})
-					}
-				})
-			})
-		}
-		// Œ‹‰Ê‚ğ•Ô‹p
-		return resultCbdIdList;
-	}
-
-	/*** 
-	 * “ú•t‚ğJST‚É•ÏŠ·‚·‚éˆ—
-	 * ˆø”@F2022-06-06T04:43:08.000+0000
-	 * •Ô‹p’lF2022”N06Œ06“ú 04:43
-	 ***/
-	function changeJstDate(dateTime){
-		// “ú•tƒIƒuƒWƒFƒNƒg‚Éˆø”‚Ì“ú•t‚ğİ’è‚µ‚Ä€”õ
-		const newDate = new Date(dateTime);
-		// ”N‚ğæ“¾
-		const year = newDate.getFullYear();
-		// Œ‚ğæ“¾‚µ1‚ğ‰ÁZ
-		const month = (`0` + (newDate.getMonth() + 1)).slice(-2);
-		// “ú‚ğæ“¾
-		const day = (`0` + (newDate.getDate())).slice(-2);
-		// æ“ª•¶š—ñ'0'‚ÉA1j‚©‚çŠÔ(h)‚ğæ“¾‚µ‚ÄŒ‹‡‚µ‚½’l‚ğÅŒã‚©‚ç2•¶š‚Ü‚Å‚ğ•Ï”‚ÉŠi”[
-		const hour = (`0` + (newDate.getHours())).slice(-2);
-		// æ“ª•¶š—ñ'0'‚ÉA1j‚©‚ç•ª(m)‚ğæ“¾‚µ‚ÄŒ‹‡‚µ‚½’l‚ğÅŒã‚©‚ç2•¶š‚Ü‚Å‚ğ•Ï”‚ÉŠi”[
-		const minute = (`0` + (newDate.getMinutes())).slice(-2);
-		// ’l‚ğ•Ô‹p
-		return `${year}”N${month}Œ${day}“ú ${hour}:${minute}`;
-	}
-	function changeSlashDate(dateTime){
-		// “ú•tƒIƒuƒWƒFƒNƒg‚Éˆø”‚Ì“ú•t‚ğİ’è‚µ‚Ä€”õ
-		const newDate = new Date(dateTime);
-		// ”N‚ğæ“¾
-		const year = newDate.getFullYear();
-		// Œ‚ğæ“¾‚µ1‚ğ‰ÁZ
-		const month = (`0` + (newDate.getMonth() + 1)).slice(-2);
-		// “ú‚ğæ“¾
-		const day = (`0` + (newDate.getDate())).slice(-2);
-		// æ“ª•¶š—ñ'0'‚ÉA1j‚©‚çŠÔ(h)‚ğæ“¾‚µ‚ÄŒ‹‡‚µ‚½’l‚ğÅŒã‚©‚ç2•¶š‚Ü‚Å‚ğ•Ï”‚ÉŠi”[
-		const hour = (`0` + (newDate.getHours())).slice(-2);
-		// æ“ª•¶š—ñ'0'‚ÉA1j‚©‚ç•ª(m)‚ğæ“¾‚µ‚ÄŒ‹‡‚µ‚½’l‚ğÅŒã‚©‚ç2•¶š‚Ü‚Å‚ğ•Ï”‚ÉŠi”[
-		const minute = (`0` + (newDate.getMinutes())).slice(-2);
-		// ’l‚ğ•Ô‹p
-		return `${year}/${month}/${day} ${hour}:${minute}`;
-	}
-	// pattern: 1/'”NŒ“ú', 2/'/'
-	// –¢g—p
-	function changePatternDate(dateTime, pattern){
-		// “ú•tƒIƒuƒWƒFƒNƒg‚Éˆø”‚Ì“ú•t‚ğİ’è‚µ‚Ä€”õ
-		const newDate = new Date(dateTime);
-		// ‹æØ‚è•¶š‚Ì”z—ñ
-		let delimiter = [];
-		// patteren‚É‚æ‚Á‚Ä‹æØ‚è•¶š‚ğ’Ç‰Á
-		switch(pattern){
-			case '1': delimiter.push(['”N','Œ','“ú']);
-			case '2': delimiter.push(['/','/','']);
-		}
-		// ”N‚ğæ“¾
-		const year = newDate.getFullYear();
-		// Œ‚ğæ“¾‚µ1‚ğ‰ÁZ
-		const month = newDate.getMonth() + 1;
-		// “ú‚ğæ“¾ˆÍ‚¤
-		const day = newDate.getDate();
-		// æ“ª•¶š—ñ'0'‚ÉA1j‚©‚çŠÔ(h)‚ğæ“¾‚µ‚ÄŒ‹‡‚µ‚½’l‚ğÅŒã‚©‚ç2•¶š‚Ü‚Å‚ğ•Ï”‚ÉŠi”[
-		const hour = (`0` + (newDate.getHours())).slice(-2)
-		// æ“ª•¶š—ñ'0'‚ÉA1j‚©‚ç•ª(m)‚ğæ“¾‚µ‚ÄŒ‹‡‚µ‚½’l‚ğÅŒã‚©‚ç2•¶š‚Ü‚Å‚ğ•Ï”‚ÉŠi”[
-		const minute = (`0` + (newDate.getMinutes())).slice(-2)
-		// ’l‚ğ•Ô‹p ‚±‚ê‚Å¶¬o—ˆ‚È‚¯‚ê‚Î•Ô‹p’l‚ğ()‚ÅˆÍ‚¤
-		return `${year}${delimiter[0]}${month}${delimiter[1]}${day}${delimiter[2]} ${hour}:${minute}`;
-	}
-
-	/***
-	 * V‹K–â‚¢‡‚í‚¹ƒ{ƒ^ƒ“‰Ÿ‰º‚Ì‘JˆÚˆ—(ƒ^ƒO‚É’¼Ú)
-	 * ˆø”@F‚È‚µ
-	 * •Ô‹p’lF‚È‚µ
-	 ***/
-	function newInquiryScreenTransition(){
-		location.href = '';
-	}
-
-	/***
-	 * ŒÂ•Ê–â‚¢‡‚í‚¹ Ú×‰æ–Ê‚Ì‘JˆÚˆ—
-	 * ˆø”@FƒP[ƒXId
-	 * •Ô‹p’lF‚È‚µ
-	 ***/
-	function inquiryDetailScreenTransition(caseId){
-		// ƒZƒbƒVƒ‡ƒ“ƒXƒgƒŒ[ƒW‚ÉƒP[ƒXID‚ğ‘Ş”ğ
-		window.sessionStorage.setItem(['IMFCaseId'],[JSON.stringify(caseId)]);
-		// ŒÂ•Ê–â‚¢‡‚í‚¹ Ú×‰æ–Ê‚Ö‘JˆÚ
-		location.href = './IMF_IndividualInquiry_DetailsScreen.html/?Id=' + caseId;
-	}
-
-	/***
-	 * Welcome Page‰æ–Ê‚Ì‘JˆÚˆ—i‰æ–Ê‚Ìƒ^ƒO‚Éƒxƒ^j
-	 * ˆø”@F‚È‚µ
-	 * •Ô‹p’lF‚È‚µ
-	 ***/
-	function welcomePageScreenTransition(){
-		commonSubmit('ln0002');
-	}
-
-
+        <!--template(USE)-->
+        <template id="caseTemplate">
+            <dl>
+                <a class="inq-id" href="javascript:void(0)" onclick="inquiryDetailScreenTransition(this.dataset.cId)" data-cId="">
+                    <dt class="inq-title"></dt>
+                    <dd>
+                    <div id="caseContent" class="inq-outputNew list-qa-box">
+                        <p class="list-qa-cont cbd-content"></p>
+                    </div>
+                    <p class="list-qa-time inq-createdate"></p>
+                    <p class="list-qa-txt"><span>ãŠå•ã„åˆã‚ã›ç¨®é¡</span><span class="inq-type"></span></p>
+                    <p class="list-qa-txt"><span>ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹</span><span class="txt-fin inq-status"></span></p>
+                </dd>
+                </a>
+            </dl>
+        </template>
+        <!--newIconTemplate-->
+        <template id="newIconTemplate">
+            <p class="list-qa-ic">NEW</p>
+        </template>
+        <!--/newIconTemplate-->
+        <!--/template(USE)-->
             
+        <script type="text/javascript">
+        // åˆæœŸè¡¨ç¤ºå‡¦ç†
+        window.onload = function(){
+            // æš—å·åŒ–æ–‡å­—åˆ—
+            //let encText = '00001056';
+            // JSPé€£æºæ–‡å­—åˆ—å–å¾—
+            const linkedStr = '<%=request.getAttribute("SFConnectParam") %>';
+            // const linkedStr = document.getElementById('SFConnectParam').value; // è¦ç´ ã‹ã‚‰å–å¾—ã™ã‚‹å ´åˆ
+
+            // é€šä¿¡ãƒ‡ãƒ¼ã‚¿ç”Ÿæˆ
+            function responceApexData(){
+                // ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³å–å¾—ï¼ˆãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ãƒˆãƒ¼ã‚¯ãƒ³ãƒ•ãƒ­ãƒ¼ï¼‰ Ajax
+                $.ajax({
+                    type: 'POST',
+                    crossOrigin: true,
+                    url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/oauth2/token',
+                    dataType: 'json',
+                    cache :false,
+                    data : {"grant_type":"refresh_token",
+                            "client_id":"3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ", 
+                            "refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"},
+                    success : function (connectData) {
+                        var accToken = 'Bearer ' + connectData.access_token;
+                        $.ajax({
+                            type: 'GET',
+                            crossOrigin: true,
+                            url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/apexrest/IMF_Case',
+                            dataType: 'json',
+                            cache :false,
+                            data: {inquiry : 'd5b8d90ceb5ff5f3505dd311e1e74f6e3f87d028ddac9c3c4c18ede46409e0ef'},
+                            headers: {"Authorization" : accToken},
+                            success : function (res) {
+                                return res;
+                                console.log(res);
+                            },
+                            error : function (data, errorThrown,status) {
+                                
+                            }
+                        })
+                        
+                    },
+                    error : function (data, errorThrown,status) {
+                        console.log(data);
+                        console.log(errorThrown);
+                        console.log(status);
+                    }
+                });
+                /*** ãƒ†ã‚¹ãƒˆãƒ‡ãƒ¼ã‚¿ ***/
+                /*let resData = {
+                    accMail : 'k*****@u**************',
+                    caseList : [{
+                            Id: 'case_01',
+                            CaseNumber: '00001234',
+                            // cbdâ†’caseã«å¤‰æ›´
+                            StatusClient__c: 'å›ç­”å®Œäº†',
+                            // ãŠå•ã„åˆã‚ã›ç¨®é¡
+                            Subject: 'ãƒˆãƒ¼ã‚¯ãƒ³ãƒ»ã‚¢ãƒ—ãƒª',
+                            // ãŠå•ã„åˆã‚ã›è©³ç´°
+                            Ankennaiyou__c: 'ã‚¹ãƒãƒ›ã‚’æ©Ÿç¨®å¤‰æ›´ã—ãŸã®ã§ã™ãŒã€ãƒˆãƒ¼ã‚¯ãƒ³ã‚¢ãƒ—ãƒªã®å¼•ãç¶™ãï¼ŸãŒã‚ˆãã‚ã‹ã‚Šã¾ã›ã‚“ã€‚å‰ã®ã‚¹ãƒãƒ›ã¯æŒã£ã¦ã„ã¾ã›ã‚“ã€‚',
+                            CreatedDate: '2022-07-16T04:43:08.000+0000'
+                        },{
+                            Id: 'case_02',
+                            CaseNumber: '00001235',
+                            // cbdâ†’caseã«å¤‰æ›´
+                            StatusClient__c: 'å›ç­”å®Œäº†',
+                            // ãŠå•ã„åˆã‚ã›ç¨®é¡
+                            Subject: 'ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚«ãƒ¼ãƒ‰',
+                            // ãŠå•ã„åˆã‚ã›è©³ç´°
+                            Ankennaiyou__c: 'ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚«ãƒ¼ãƒ‰ã‚’ç´›å¤±ã—ãŸã®ã§ã™ãŒã€ã©ã†ã™ã‚Œã°ã„ã„ã®ã‹åˆ†ã‹ã‚‰ãªã„ã®ã§ã€è³ªå•ã•ã›ã¦ãã ã•ã„ã€‚ã‚¹ãƒãƒ›ã‚’æ©Ÿç¨®å¤‰æ›´ã—ãŸã®ã§ã™ãŒã€ãƒˆãƒ¼ã‚¯ãƒ³ã‚¢ãƒ—ãƒªã®å¼•ãç¶™ãï¼ŸãŒã‚ˆãã‚ã‹ã‚Šã¾ã›ã‚“ã€‚å‰ã®ã‚¹ãƒãƒ›ã¯æŒã£ã¦ã„ã¾ã›ã‚“ã€‚',
+                            CreatedDate: '2022-07-15T23:43:08.000+0000'
+                        },{
+                            Id: 'case_03',
+                            CaseNumber: '00001235',
+                            // cbdâ†’caseã«å¤‰æ›´
+                            StatusClient__c: 'å›ç­”å®Œäº†',
+                            // ãŠå•ã„åˆã‚ã›ç¨®é¡
+                            Subject: 'ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚«ãƒ¼ãƒ‰',
+                            // ãŠå•ã„åˆã‚ã›è©³ç´°
+                            Ankennaiyou__c: 'ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚«ãƒ¼ãƒ‰ã‚’ç´›å¤±ã—ãŸã®ã§ã™ãŒã€ã©ã†ã™ã‚Œã°ã„ã„ã®ã‹åˆ†ã‹ã‚‰ãªã„ã®ã§ã€è³ªå•ã•ã›ã¦ãã ã•ã„ã€‚ã‚¹ãƒãƒ›ã‚’æ©Ÿç¨®å¤‰æ›´ã—ãŸã®ã§ã™ãŒã€ãƒˆãƒ¼ã‚¯ãƒ³ã‚¢ãƒ—ãƒªã®å¼•ãç¶™ãï¼ŸãŒã‚ˆãã‚ã‹ã‚Šã¾ã›ã‚“ã€‚å‰ã®ã‚¹ãƒãƒ›ã¯æŒã£ã¦ã„ã¾ã›ã‚“ã€‚',
+                            CreatedDate: '2022-07-14T23:43:08.000+0000'
+                        },{
+                            Id: 'case_04',
+                            CaseNumber: '00001235',
+                            // cbdâ†’caseã«å¤‰æ›´
+                            StatusClient__c: 'å›ç­”å®Œäº†',
+                            // ãŠå•ã„åˆã‚ã›ç¨®é¡
+                            Subject: 'ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚«ãƒ¼ãƒ‰',
+                            // ãŠå•ã„åˆã‚ã›è©³ç´°
+                            Ankennaiyou__c: 'ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚«ãƒ¼ãƒ‰ã‚’ç´›å¤±ã—ãŸã®ã§ã™ãŒã€ã©ã†ã™ã‚Œã°ã„ã„ã®ã‹åˆ†ã‹ã‚‰ãªã„ã®ã§ã€è³ªå•ã•ã›ã¦ãã ã•ã„ã€‚ã‚¹ãƒãƒ›ã‚’æ©Ÿç¨®å¤‰æ›´ã—ãŸã®ã§ã™ãŒã€ãƒˆãƒ¼ã‚¯ãƒ³ã‚¢ãƒ—ãƒªã®å¼•ãç¶™ãï¼ŸãŒã‚ˆãã‚ã‹ã‚Šã¾ã›ã‚“ã€‚å‰ã®ã‚¹ãƒãƒ›ã¯æŒã£ã¦ã„ã¾ã›ã‚“ã€‚',
+                            CreatedDate: '2022-06-07T23:43:08.000+0000'
+                        },{
+                            Id: 'case_05',
+                            CaseNumber: '00001235',
+                            // cbdâ†’caseã«å¤‰æ›´
+                            StatusClient__c: 'å›ç­”å®Œäº†',
+                            // ãŠå•ã„åˆã‚ã›ç¨®é¡
+                            Subject: 'ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚«ãƒ¼ãƒ‰',
+                            // ãŠå•ã„åˆã‚ã›è©³ç´°
+                            Ankennaiyou__c: 'ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚«ãƒ¼ãƒ‰ã‚’ç´›å¤±ã—ãŸã®ã§ã™ãŒã€ã©ã†ã™ã‚Œã°ã„ã„ã®ã‹åˆ†ã‹ã‚‰ãªã„ã®ã§ã€è³ªå•ã•ã›ã¦ãã ã•ã„ã€‚ã‚¹ãƒãƒ›ã‚’æ©Ÿç¨®å¤‰æ›´ã—ãŸã®ã§ã™ãŒã€ãƒˆãƒ¼ã‚¯ãƒ³ã‚¢ãƒ—ãƒªã®å¼•ãç¶™ãï¼ŸãŒã‚ˆãã‚ã‹ã‚Šã¾ã›ã‚“ã€‚å‰ã®ã‚¹ãƒãƒ›ã¯æŒã£ã¦ã„ã¾ã›ã‚“ã€‚',
+                            CreatedDate: '2022-06-07T23:43:08.000+0000'
+                        }
+                    ],
+                    cbdFileList : [
+                        {
+                            Id: 'cbd_01',
+                            Classification__c: 'å•ã„åˆã‚ã›',
+                            Content__c: 'ã‚¹ãƒãƒ›ã‚’æ©Ÿç¨®å¤‰æ›´ã—ãŸã®ã§ã™ãŒã€ãƒˆãƒ¼ã‚¯ãƒ³ã‚¢ãƒ—ãƒªã®å¼•ãç¶™ãï¼ŸãŒã‚ˆãã‚ã‹ã‚Šã¾ã›ã‚“ã€‚å‰ã®ã‚¹ãƒãƒ›ã¯æŒã£ã¦ã„ã¾ã›ã‚“ã€‚',
+                            Case__c: 'case_01',
+                            // cbdâ†’caseã«å¤‰æ›´StatusClient__c
+                            CreatedDate: '2022-07-16T04:43:08.000+0000',
+                            // ãƒ•ã‚¡ã‚¤ãƒ«
+                            ContentVersionId: 'cv_01',
+                            FileName: 'cvName01'
+                        },{
+                            Id: 'cbd_02',
+                            Classification__c: 'å•ã„åˆã‚ã›',
+                            Content__c: 'ã‚¹ãƒãƒ›ã‚’æ©Ÿç¨®å¤‰æ›´ã—ãŸã®ã§ã™ãŒã€ãƒˆãƒ¼ã‚¯ãƒ³ã‚¢ãƒ—ãƒªã®å¼•ãç¶™ãï¼ŸãŒã‚ˆãã‚ã‹ã‚Šã¾ã›ã‚“ã€‚å‰ã®ã‚¹ãƒãƒ›ã¯æŒã£ã¦ã„ã¾ã›ã‚“ã€‚',
+                            Case__c: 'case_01',
+                            // cbdâ†’caseã«å¤‰æ›´StatusClient__c
+                            CreatedDate: '2022-07-16T04:43:08.000+0000',
+                            // ãƒ•ã‚¡ã‚¤ãƒ«
+                            ContentVersionId: 'cv_01',
+                            FileName: 'cvName01'
+                        },{
+                            Id: 'cbd_03',
+                            Classification__c: 'å›ç­”',
+                            Content__c: 'ã‚«ã‚¹ã‚¿ãƒãƒ¼ã‚»ãƒ³ã‚¿ãƒ¼ã®éˆ´æœ¨ã§ã™ã€‚ãŠå•ã„åˆã‚ã›ã‚ã‚ŠãŒã¨ã†ã”ã–ã„ã¾ã™ã€‚ã‚¹ãƒãƒ¼ãƒˆãƒ•ã‚©ãƒ³ã‚’æ©Ÿç¨®å¤‰æ›´ã—ãŸå ´åˆã€ãƒˆãƒ¼ã‚¯ãƒ³ã‚¢ãƒ—ãƒªã¯å¼•ãç¶™ããŒã•ã‚Œã¾ã›ã‚“ã€‚ãŠæ‰‹æ•°ã‚’ãŠæ›ã‘è‡´ã—ã¾ã™ãŒã€æ”¹ã‚ã¦ãƒˆãƒ¼ã‚¯ãƒ³ã‚¢ãƒ—ãƒªã‚’ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã„ãŸã ãã€å†ç™»éŒ²ã‚’ãŠé¡˜ã„ã„ãŸã—ã¾ã™ã€‚',
+                            Case__c: 'case_02',
+                            CreatedDate: '2022-07-16T04:43:08.000+0000',
+                            // ãƒ•ã‚¡ã‚¤ãƒ«
+                            ContentVersionId: 'cv_02',
+                            FileName: 'cvName02'
+                        }
+                    ]
+                }
+                // nullãƒã‚§ãƒƒã‚¯ç”¨
+                let nFlg = false;
+                if(nFlg){ resData = null; }
+                // é€šä¿¡ã‚¨ãƒ©ãƒ¼ç”¨
+                let cFlg = false;
+                if(cFlg){ errorInfo = {
+                    data: '', // ãƒ‡ãƒ¼ã‚¿
+                    errorThrown: '', // ä¾‹å¤–æƒ…å ±
+                    status: 'error' // ã‚¨ãƒ©ãƒ¼æƒ…å ±
+                }}
+                /*** /ãƒ†ã‚¹ãƒˆãƒ‡ãƒ¼ã‚¿ ***/
+                return resData;
+            }
+
+            // é€šä¿¡æƒ…å ±ç”¨
+            let res;
+            const promise = new Promise((resolve) => {
+                // ã‚¨ãƒ©ãƒ¼æ ¼ç´ç”¨
+                let errorInfo = {
+                    data: '', // ãƒ‡ãƒ¼ã‚¿
+                    errorThrown: '', // ä¾‹å¤–æƒ…å ±
+                    status: '' // ã‚¨ãƒ©ãƒ¼æƒ…å ±
+                };
+                // ãŠå•ã„åˆã‚ã›ä¸€è¦§å–å¾—å‡¦ç†çµæœå–å¾—
+                res = responceApexData();
+                console.log(res)
+                // ã‚¨ãƒ©ãƒ¼ãŒèµ·ããŸã¨ã
+                if(errorInfo.status == 'error'){
+                    // ãƒ›ãƒ¼ãƒ ç”»é¢ï¼ˆå±¥æ­´ã‚ã‚Šï¼‰ã‚’éè¡¨ç¤º
+                    document.getElementById('contents').style.display = 'none';
+                    // å…±é€šã‚¨ãƒ©ãƒ¼ç”»é¢ã‚’è¡¨ç¤º
+                    document.getElementById('commonError').style.display = 'block';
+                    return;
+                }
+                //res = '';
+                if(!res){
+                    // ãƒ›ãƒ¼ãƒ ç”»é¢ï¼ˆå±¥æ­´ã‚ã‚Šï¼‰ã‚’éè¡¨ç¤º
+                    document.getElementById('contents').style.display = 'none';
+                    // ãƒ›ãƒ¼ãƒ ç”»é¢ï¼ˆå±¥æ­´ãªã—ï¼‰ã‚’è¡¨ç¤º
+                    document.getElementById('noInq').style.display = 'block';
+                    return;
+                }
+                // ã‚±ãƒ¼ã‚¹ã®ãƒªã‚¹ãƒˆã‚µã‚¤ã‚ºãŒ0ã§ãªã„
+                if(res.caseList.length != 0){
+                    // å®Ÿè¡Œå›æ•°
+                    let count = 0;
+                    // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ãƒãƒ¼ã‚¸ãƒ§ãƒ³IDãƒªã‚¹ãƒˆã®ä»¶æ•°åˆ†
+                    for(i=0; i < res.cbdFileList.length; i++){
+                        // ãƒ•ã‚¡ã‚¤ãƒ«å†…å®¹ã‚’é€€é¿ã™ã‚‹é…åˆ—
+                        let tempFileList = [];
+                        // ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ãƒãƒ¼ã‚¸ãƒ§ãƒ³IDã‚’å¼•æ•°ã«å–å¾—å‡¦ç†ã‚’å‘¼ã³å‡ºã—
+                        let resCvUrl = getContentVersion(res.cbdFileList[i].ContentVersionId);
+                        // ãƒ•ã‚¡ã‚¤ãƒ«å†…å®¹ã‚’é…åˆ—ã«é€€é¿ã™ã‚‹
+                        let tempFile = {
+                            cvId: res.cbdFileList[i].ContentVersionId,
+                            fileName: res.cbdFileList[i].FileName,
+                            versionData: resCvUrl
+                        };
+                        tempFileList.push(tempFile);
+                        // å®Ÿè¡Œå›æ•°ã‚’ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆ
+                        count++;
+                        // ãƒ•ã‚¡ã‚¤ãƒ«ã®Idã®ä»¶æ•°åˆ†å‹•ã„ãŸã‚‰
+                        if(count == res.cbdFileList.length){
+                            // ã‚»ãƒƒã‚·ãƒ§ãƒ³ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ã«å–å¾—ã—ãŸå€¤ã‚’é€€é¿
+                            window.sessionStorage.setItem(['IMFFileData'],[JSON.stringify(tempFileList)]);
+                            // æ¬¡ã®å‡¦ç†ã¸
+                            resolve();
+                        }
+                    }
+                }
+        
+            // promiseå‡¦ç†ãŒã™ã¹ã¦å®Œäº†ã—ã¦ã‹ã‚‰å®Ÿè¡Œ
+            }).then(() => {
+                // ã‚»ãƒƒã‚·ãƒ§ãƒ³ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ã«å–å¾—ã—ãŸå€¤ã‚’é€€é¿
+                window.sessionStorage.setItem(['IMFCaseResponseData'],[JSON.stringify(res)]);
+                // Cookieå–å¾—å‡¦ç†ã‚’å‘¼ã³å‡ºã™
+                //const CookieList = '';
+                const cookieList = getCookie();
+                console.log('cookieList:' + cookieList)
+                // NEWä»˜ä¸å¯¾è±¡ã®IDã‚’æ ¼ç´ã™ã‚‹é…åˆ—
+                let newTargetList = [];
+                for(i=0; i < res.cbdFileList.length; i++){
+                    // NEWè¡¨ç¤ºãƒ•ãƒ©ã‚°ã‚’trueã§åˆæœŸåŒ–
+                    let newDisplayFlag = true;
+                    // 1ãƒ¶æœˆå‰ã®æ—¥ä»˜ç”¨å¤‰æ•°ã«ç¾åœ¨æ—¥ã‚’å–å¾—ã—ã¦-1ãƒ¶æœˆã™ã‚‹
+                    let nowDateTime = new Date();
+                    const year = nowDateTime.getFullYear();
+                    // æœˆã‚’å–å¾—ã—ã¦ã€1ãƒ¶æœˆå¢—ã‚„ã—ã¦
+                    const month = nowDateTime.getMonth() + 1;
+                    // æ—¥ã‚’å–å¾—ã™ã‚‹
+                    const date = nowDateTime.getDate();
+                    // å…ˆé ­æ–‡å­—åˆ—'0'ã«ã€1ï¼‰ã‹ã‚‰æ™‚é–“(h)ã‚’å–å¾—ã—ã¦çµåˆã—ãŸå€¤ã‚’æœ€å¾Œã‹ã‚‰2æ–‡å­—ã¾ã§ã‚’å¤‰æ•°ã«æ ¼ç´
+                    const hour = (`0` + (nowDateTime.getHours())).slice(-2);
+                    // å…ˆé ­æ–‡å­—åˆ—'0'ã«ã€1ï¼‰ã‹ã‚‰åˆ†(m)ã‚’å–å¾—ã—ã¦çµåˆã—ãŸå€¤ã‚’æœ€å¾Œã‹ã‚‰2æ–‡å­—ã¾ã§ã‚’å¤‰æ•°ã«æ ¼ç´
+                    const minute = (`0` + (nowDateTime.getMinutes())).slice(-2);
+                    nowDateTIme = new Date(`${year}/${month-1}/${date} ${hour}:${minute}`);
+                    // ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰æ˜ç´°ã®æ™‚é–“
+                    let cbdDateTime = new Date(res.cbdFileList[i].CreatedDate);
+                    // ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰æ˜ç´°ã®æœ€çµ‚æ›´æ–°æ—¥ãŒç¾åœ¨æ—¥æ™‚-1ãƒ¶æœˆã‚ˆã‚Šå¤ã„ï¼ˆå€¤ã‚’å«ã‚€ï¼‰å ´åˆ
+                    if(cbdDateTime >= nowDateTIme){
+                        // Cookieã®CbdIdã®ä»¶æ•°åˆ†
+                        for(j=0; j < cookieList.length; j++){
+                            // ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰æ˜ç´°ã®IDã¨Cookieã®IDãŒä¸€è‡´ã—ã¦ã„ã‚‹å ´åˆ
+                            if(res.cbdFileList[i].Id == cookieList[j] || res.cbdFileList[i].Classification__c == 'å•ã„åˆã‚ã›'){
+                                // NEWè¡¨ç¤ºãƒ•ãƒ©ã‚°ã‚’falseã«è¨­å®š
+                                newDisplayFlag = false;
+                            }
+                        }
+                    }else{
+                        // NEWè¡¨ç¤ºãƒ•ãƒ©ã‚°ã‚’falseã«è¨­å®š
+                        newDisplayFlag = false;
+                    }
+                    // ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰æ˜ç´°ã®ãƒ¬ã‚³â€•ãƒ‰ã«NEWã‚¢ã‚¤ã‚³ãƒ³åˆ¶å¾¡ç”¨ã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ãŒã‚ã‚‹å ´åˆ
+                    if('newIconDisp' in res.cbdFileList[i]){
+                        // NEWã‚¢ã‚¤ã‚³ãƒ³åˆ¶å¾¡ç”¨ã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã«å€¤ã‚’è¿½åŠ 
+                        res.cbdFileList[i].newIconDisp = newDisplayFlag;
+                    // ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ãŒãªã„å ´åˆ
+                    }else{
+                        // NEWã‚¢ã‚¤ã‚³ãƒ³åˆ¶å¾¡ç”¨ã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’ä»˜ä¸ã—ã€å€¤ã‚’è¨­å®š
+                        res.cbdFileList[i]["newIconDisp"] = newDisplayFlag;
+                    }
+                }
+                
+                
+                // NEWä»˜ä¸å¯¾è±¡ã®IDé…åˆ—ã®ã‚µã‚¤ã‚ºãŒ0ã§ãªã„å ´åˆ
+                /*if(newTargetList.length != 0){
+                    // ã‚±ãƒ¼ã‚¹ãƒ¬ã‚³ãƒ¼ãƒ‰ãƒªã‚¹ãƒˆã®ä»¶æ•°åˆ†
+                    for(i=0; i < res.caseList.length; i++){
+                        // NEWä»˜ä¸å¯¾è±¡ã®IDé…åˆ—ã®ä»¶æ•°åˆ†
+                        for(j=0; j < newTargetList.length; j++){
+                            // ãƒ•ãƒ©ã‚°ã‚’éè¡¨ç¤ºã§åˆæœŸåŒ–
+                            let newIconDispflg = false;
+                            // ã‚±ãƒ¼ã‚¹ã®IDã¨NEWä»˜ä¸å¯¾è±¡IDãŒä¸€è‡´
+                            if(res.caseList[i].Id == newTargetList[j]){
+                                // NEWã‚¢ã‚¤ã‚³ãƒ³åˆ¶å¾¡ç”¨ã®å€¤ã‚’trueã«è¨­å®š
+                                newIconDispflg = true;
+                            // ä¸€è‡´ã—ãªã„å ´åˆ
+                            }else{
+                                // NEWã‚¢ã‚¤ã‚³ãƒ³åˆ¶å¾¡ç”¨ã®å€¤ã‚’falseã§è¨­å®š
+                                newIconDispflg = false;
+                            }
+                            // ã‚±ãƒ¼ã‚¹ã®ãƒ¬ã‚³â€•ãƒ‰ã«NEWã‚¢ã‚¤ã‚³ãƒ³åˆ¶å¾¡ç”¨ã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ãŒã‚ã‚‹å ´åˆ
+                            if('newIconDisp' in res.caseList[i]){
+                                // NEWã‚¢ã‚¤ã‚³ãƒ³åˆ¶å¾¡ç”¨ã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã«å€¤ã‚’è¿½åŠ 
+                                res.caseList[i].newIconDisp = newIconDispflg;
+                            // ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ãŒãªã„å ´åˆ
+                            }else{
+                                // NEWã‚¢ã‚¤ã‚³ãƒ³åˆ¶å¾¡ç”¨ã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’ä»˜ä¸ã—ã€å€¤ã‚’è¨­å®š
+                                res.caseList[i]["newIconDisp"] = newIconDispflg;
+                            }
+                        }
+                    }
+                }*/
+                
+                /*** ã‚¿ã‚°ã‚’ç”Ÿæˆ ***/
+                // Case templateè¦ç´ ã‚’å–å¾—
+                let caseTemplate = document.getElementById('caseTemplate');
+                // newIcon templateè¦ç´ ã‚’å–å¾—
+                let iconTemplate = document.getElementById('newIconTemplate');
+                // ã‚±ãƒ¼ã‚¹ã®ãƒªã‚¹ãƒˆã®ä»¶æ•°åˆ†
+                for(let i = 0; i < res.caseList.length; i++){
+                    // case templateè¦ç´ ã®å†…å®¹ã‚’è¤‡è£½
+                    let clone = caseTemplate.content.cloneNode(true);
+                    // ãŠå•ã„åˆã‚ã›å†…å®¹ã‚’å–å¾—
+                    let content = res.caseList[i].Ankennaiyou__c;
+                    // ãŠå•ã„åˆã‚ã›è©³ç´°ãŒnullã§ãªã„
+                    if(content != null){
+                        // 12æ–‡å­—ã‚’è¶…ãˆã‚‹å ´åˆ
+                        if(content.length > 30){
+                            // çœç•¥ã™ã‚‹
+                            content = content.substring(0, 30) + "...";
+                        }
+                    }
+                    // è¤‡è£½ã—ãŸtemplateè¦ç´ ã«ãƒ‡ãƒ¼ã‚¿ã‚’æŒ¿å…¥
+                    // ã‚±ãƒ¼ã‚¹ã®Idã‚’è¨­å®š
+                    clone.querySelector('.inq-id').dataset.cId = res.caseList[i].Id;
+                    // ã‚±ãƒ¼ã‚¹ç•ªå·ã‚’è¨­å®šã™ã‚‹
+                    clone.querySelector('.inq-title').textContent = 'No.' + res.caseList[i].CaseNumber;
+                    // ãŠå•ã„åˆã‚ã›å†…å®¹ã‚’è¨­å®šã™ã‚‹
+                    clone.querySelector('.cbd-content').textContent = content;
+                    // ã‚±ãƒ¼ã‚¹ã®ä½œæˆæ—¥ã‚’JSTæ—¥ä»˜ã‹ã¤ã‚¹ãƒ©ãƒƒã‚·ãƒ¥ã«å¤‰æ›ã—ã¦ã€è¨­å®š
+                    clone.querySelector('.inq-createdate').textContent = changeSlashDate(res.caseList[i].CreatedDate);
+                    // ãŠå•ã„åˆã‚ã›ç¨®é¡ã‚’è¨­å®šã™ã‚‹
+                    clone.querySelector('.inq-type').textContent = res.caseList[i].Subject;
+                    // ã‚±ãƒ¼ã‚¹ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’è¨­å®šã™ã‚‹
+                    clone.querySelector('.inq-status').textContent = res.caseList[i].StatusClient__c;
+                    clone.querySelector('.inq-outputNew').id = res.caseList[i].Id;
+                    // caseã‚’ç”»é¢ã«å‡ºåŠ›
+                    document.getElementById('listQa').appendChild(clone);
+                    
+                    // ã‚±ãƒ¼ã‚¹ã®NEWã‚¢ã‚¤ã‚³ãƒ³éè¡¨ç¤ºç”¨ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ãŒfalseã®å ´åˆã€NEWã‚¢ã‚¤ã‚³ãƒ³ã‚’è¡¨ç¤ºã™ã‚‹
+                    //if(res.caseList[i].newIconDisp){
+                        // ã‚³ãƒ³ã‚¿ã‚¯ãƒˆãƒœãƒ¼ãƒ‰æ˜ç´°ã®ä»¶æ•°åˆ†
+                        for(let j = 0; j < res.cbdFileList.length; j++){
+                            // ã‚±ãƒ¼ã‚¹ã®Idã¨cbdã®ã‚±ãƒ¼ã‚¹ã®IdãŒä¸€è‡´ã‹ã¤NewãŒTrueã®å ´åˆ
+                            if(res.caseList[i].Id == res.cbdFileList[j].Case__c && res.cbdFileList[j].newIconDisp){
+                                // newIcon templateè¦ç´ ã‚’è¤‡è£½
+                                let newIconClone = newIconTemplate.content.cloneNode(true);
+                                // newIconã‚’ç”»é¢ã«å‡ºåŠ›
+                                document.getElementById(res.caseList[i].Id).appendChild(newIconClone);
+                                break;
+                            }
+                        }
+                    //}
+                }
+            });
+        }
+        
+
+        /***
+         * ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ãƒãƒ¼ã‚¸ãƒ§ãƒ³ï¼ˆãƒ•ã‚¡ã‚¤ãƒ«ï¼‰å–å¾—å‡¦ç†
+         * å¼•æ•°ã€€ï¼šã‚³ãƒ³ãƒ†ãƒ³ãƒ„ãƒãƒ¼ã‚¸ãƒ§ãƒ³Id
+         * è¿”å´å€¤ï¼šãƒ•ã‚¡ã‚¤ãƒ«ã®ä¸­èº«
+         ***/
+
+        function getContentVersion(fileId){
+            $.ajax({
+                type: 'GET',
+                crossOrigin: true,
+                url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + vdList[i].contentVersionIdList + '/VersionData',
+                cache :false,
+                headers: {"Authorization" : accToken},
+                xhrFields : {responseType : 'blob'},
+                success : function (fileContent) {
+                    console.log(JSON.stringify(fileContent))
+                    return fileContent;
+                }
+            })
+            // ãƒ•ã‚¡ã‚¤ãƒ«å–å¾—
+            //let fileContent = 'https://www.google.com/';
+        }
+
+        /***
+         * Cookieå–å¾—å‡¦ç†
+         * å¼•æ•°ã€€ï¼šãªã—
+         * è¿”å´å€¤ï¼šcbdIdãƒªã‚¹ãƒˆ
+         ***/
+        function getCookie(){
+            // Cookieã‚’åˆ†å‰²ã—ã¦æ ¼ç´ã™ã‚‹é…åˆ—
+            let tempIdList = [];
+            // Cookieã‚’æ ¼ç´ã™ã‚‹é…åˆ—
+            let cbdIdList = [];
+            // çµæœè¿”å´ç”¨é…åˆ—
+            let resultCbdIdList = [];
+            // Cookieã‚’å–å¾—
+            let nowCookie = document.cookie;
+            // CookieãŒnullã‚‚ã—ãã¯undefinedã§ãªã„å ´åˆ
+            if(nowCookie){
+                // å€¤ã‚’ ';' ã§åˆ†å‰²ã—ã¦1ï¼‰ã®é…åˆ—ã«æ ¼ç´
+                tempIdList = nowCookie.split(';');
+                // å€¤ã®ä»¶æ•°åˆ†
+                tempIdList.forEach(data => {
+                    // å€¤ã‚’ '=' ã§åˆ†å‰²
+                    data = data.split('=');
+                    // å€¤ã‚’JSONæ–‡å­—åˆ—ã‹ã‚‰Javascriptã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å¤‰æ›ã€é…åˆ—ã«æ ¼ç´
+                    cbdIdList[data[0]] = JSON.parse(data[1]);
+                    // é…åˆ—ã®å€¤ã®è¦ç´ ã®æ•°åˆ†
+                    Object.keys(cbdIdList).forEach(key => {
+                        // Keyã®å€¤ãŒãŠå•ã„åˆã‚ã›ãƒ•ã‚©ãƒ¼ãƒ ç”¨ã®Keyã®å ´åˆ
+                        if(key == 'IMFCookie'){
+                            // Keyã®é…åˆ—ã®å€¤ã®ä»¶æ•°åˆ†
+                            cbdIdList[key].forEach(elem => {
+                                // çµæœè¿”å´ç”¨é…åˆ—ã«è¿½åŠ 
+                                resultCbdIdList.push(elem);
+                            })
+                        }
+                    })
+                })
+            }
+            // çµæœã‚’è¿”å´
+            return resultCbdIdList;
+        }
+
+        /*** 
+         * æ—¥ä»˜ã‚’JSTã«å¤‰æ›ã™ã‚‹å‡¦ç†
+         * å¼•æ•°ã€€ï¼š2022-06-06T04:43:08.000+0000
+         * è¿”å´å€¤ï¼š2022å¹´06æœˆ06æ—¥ 04:43
+         ***/
+        function changeJstDate(dateTime){
+            // æ—¥ä»˜ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å¼•æ•°ã®æ—¥ä»˜ã‚’è¨­å®šã—ã¦æº–å‚™
+            const newDate = new Date(dateTime);
+            // å¹´ã‚’å–å¾—
+            const year = newDate.getFullYear();
+            // æœˆã‚’å–å¾—ã—1ã‚’åŠ ç®—
+            const month = (`0` + (newDate.getMonth() + 1)).slice(-2);
+            // æ—¥ã‚’å–å¾—
+            const day = (`0` + (newDate.getDate())).slice(-2);
+            // å…ˆé ­æ–‡å­—åˆ—'0'ã«ã€1ï¼‰ã‹ã‚‰æ™‚é–“(h)ã‚’å–å¾—ã—ã¦çµåˆã—ãŸå€¤ã‚’æœ€å¾Œã‹ã‚‰2æ–‡å­—ã¾ã§ã‚’å¤‰æ•°ã«æ ¼ç´
+            const hour = (`0` + (newDate.getHours())).slice(-2);
+            // å…ˆé ­æ–‡å­—åˆ—'0'ã«ã€1ï¼‰ã‹ã‚‰åˆ†(m)ã‚’å–å¾—ã—ã¦çµåˆã—ãŸå€¤ã‚’æœ€å¾Œã‹ã‚‰2æ–‡å­—ã¾ã§ã‚’å¤‰æ•°ã«æ ¼ç´
+            const minute = (`0` + (newDate.getMinutes())).slice(-2);
+            // å€¤ã‚’è¿”å´
+            return `${year}å¹´${month}æœˆ${day}æ—¥ ${hour}:${minute}`;
+        }
+        function changeSlashDate(dateTime){
+            // æ—¥ä»˜ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å¼•æ•°ã®æ—¥ä»˜ã‚’è¨­å®šã—ã¦æº–å‚™
+            const newDate = new Date(dateTime);
+            // å¹´ã‚’å–å¾—
+            const year = newDate.getFullYear();
+            // æœˆã‚’å–å¾—ã—1ã‚’åŠ ç®—
+            const month = (`0` + (newDate.getMonth() + 1)).slice(-2);
+            // æ—¥ã‚’å–å¾—
+            const day = (`0` + (newDate.getDate())).slice(-2);
+            // å…ˆé ­æ–‡å­—åˆ—'0'ã«ã€1ï¼‰ã‹ã‚‰æ™‚é–“(h)ã‚’å–å¾—ã—ã¦çµåˆã—ãŸå€¤ã‚’æœ€å¾Œã‹ã‚‰2æ–‡å­—ã¾ã§ã‚’å¤‰æ•°ã«æ ¼ç´
+            const hour = (`0` + (newDate.getHours())).slice(-2);
+            // å…ˆé ­æ–‡å­—åˆ—'0'ã«ã€1ï¼‰ã‹ã‚‰åˆ†(m)ã‚’å–å¾—ã—ã¦çµåˆã—ãŸå€¤ã‚’æœ€å¾Œã‹ã‚‰2æ–‡å­—ã¾ã§ã‚’å¤‰æ•°ã«æ ¼ç´
+            const minute = (`0` + (newDate.getMinutes())).slice(-2);
+            // å€¤ã‚’è¿”å´
+            return `${year}/${month}/${day} ${hour}:${minute}`;
+        }
+        // pattern: 1/'å¹´æœˆæ—¥', 2/'/'
+        // æœªä½¿ç”¨
+        function changePatternDate(dateTime, pattern){
+            // æ—¥ä»˜ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å¼•æ•°ã®æ—¥ä»˜ã‚’è¨­å®šã—ã¦æº–å‚™
+            const newDate = new Date(dateTime);
+            // åŒºåˆ‡ã‚Šæ–‡å­—ã®é…åˆ—
+            let delimiter = [];
+            // patterenã«ã‚ˆã£ã¦åŒºåˆ‡ã‚Šæ–‡å­—ã‚’è¿½åŠ 
+            switch(pattern){
+                case '1': delimiter.push(['å¹´','æœˆ','æ—¥']);
+                case '2': delimiter.push(['/','/','']);
+            }
+            // å¹´ã‚’å–å¾—
+            const year = newDate.getFullYear();
+            // æœˆã‚’å–å¾—ã—1ã‚’åŠ ç®—
+            const month = newDate.getMonth() + 1;
+            // æ—¥ã‚’å–å¾—å›²ã†
+            const day = newDate.getDate();
+            // å…ˆé ­æ–‡å­—åˆ—'0'ã«ã€1ï¼‰ã‹ã‚‰æ™‚é–“(h)ã‚’å–å¾—ã—ã¦çµåˆã—ãŸå€¤ã‚’æœ€å¾Œã‹ã‚‰2æ–‡å­—ã¾ã§ã‚’å¤‰æ•°ã«æ ¼ç´
+            const hour = (`0` + (newDate.getHours())).slice(-2)
+            // å…ˆé ­æ–‡å­—åˆ—'0'ã«ã€1ï¼‰ã‹ã‚‰åˆ†(m)ã‚’å–å¾—ã—ã¦çµåˆã—ãŸå€¤ã‚’æœ€å¾Œã‹ã‚‰2æ–‡å­—ã¾ã§ã‚’å¤‰æ•°ã«æ ¼ç´
+            const minute = (`0` + (newDate.getMinutes())).slice(-2)
+            // å€¤ã‚’è¿”å´ ã“ã‚Œã§ç”Ÿæˆå‡ºæ¥ãªã‘ã‚Œã°è¿”å´å€¤ã‚’()ã§å›²ã†
+            return `${year}${delimiter[0]}${month}${delimiter[1]}${day}${delimiter[2]} ${hour}:${minute}`;
+        }
+
+        /***
+         * æ–°è¦å•ã„åˆã‚ã›ãƒœã‚¿ãƒ³æŠ¼ä¸‹æ™‚ã®é·ç§»å‡¦ç†(ã‚¿ã‚°ã«ç›´æ¥)
+         * å¼•æ•°ã€€ï¼šãªã—
+         * è¿”å´å€¤ï¼šãªã—
+         ***/
+        function newInquiryScreenTransition(){
+            location.href = '';
+        }
+
+        /***
+         * å€‹åˆ¥å•ã„åˆã‚ã› è©³ç´°ç”»é¢ã®é·ç§»å‡¦ç†
+         * å¼•æ•°ã€€ï¼šã‚±ãƒ¼ã‚¹Id
+         * è¿”å´å€¤ï¼šãªã—
+         ***/
+        function inquiryDetailScreenTransition(caseId){
+            // ã‚»ãƒƒã‚·ãƒ§ãƒ³ã‚¹ãƒˆãƒ¬ãƒ¼ã‚¸ã«ã‚±ãƒ¼ã‚¹IDã‚’é€€é¿
+            window.sessionStorage.setItem(['IMFCaseId'],[JSON.stringify(caseId)]);
+            // å€‹åˆ¥å•ã„åˆã‚ã› è©³ç´°ç”»é¢ã¸é·ç§»
+            location.href = './IMF_IndividualInquiry_DetailsScreen.html/?Id=' + caseId;
+        }
+
+        /***
+         * Welcome Pageç”»é¢ã®é·ç§»å‡¦ç†ï¼ˆç”»é¢ã®ã‚¿ã‚°ã«ãƒ™ã‚¿ï¼‰
+         * å¼•æ•°ã€€ï¼šãªã—
+         * è¿”å´å€¤ï¼šãªã—
+         ***/
+        function welcomePageScreenTransition(){
+            commonSubmit('ln0002');
+        }
+
         </script>
     </body>
 </html>
