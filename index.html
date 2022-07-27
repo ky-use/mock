@@ -198,8 +198,43 @@
                     status: '' // エラー情報
                 };
                 // お問い合わせ一覧取得処理結果取得
-                res = responceApexData();
-                console.log(res)
+                //res = responceApexData();
+                $.ajax({
+                    type: 'POST',
+                    crossOrigin: true,
+                    url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/oauth2/token',
+                    dataType: 'json',
+                    cache :false,
+                    data : {"grant_type":"refresh_token",
+                            "client_id":"3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ", 
+                            "refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"},
+                    success : function (connectData) {
+                        var accToken = 'Bearer ' + connectData.access_token;
+                        $.ajax({
+                            type: 'GET',
+                            crossOrigin: true,
+                            url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/apexrest/IMF_Case',
+                            dataType: 'json',
+                            cache :false,
+                            data: {inquiry : 'd5b8d90ceb5ff5f3505dd311e1e74f6e3f87d028ddac9c3c4c18ede46409e0ef'},
+                            headers: {"Authorization" : accToken},
+                            success : function (resp) {
+                                res = resp;
+                                console.log('res: ' + res);
+                            },
+                            error : function (data, errorThrown,status) {
+                                
+                            }
+                        })
+                        
+                    },
+                    error : function (data, errorThrown,status) {
+                        console.log(data);
+                        console.log(errorThrown);
+                        console.log(status);
+                    }
+                });
+                console.log('res: ' + res)
                 // エラーが起きたとき
                 /*if(errorInfo.status == 'error'){
                     // ホーム画面（履歴あり）を非表示
