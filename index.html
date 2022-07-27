@@ -431,7 +431,7 @@
             $.ajax({
                 type: 'GET',
                 crossOrigin: true,
-                url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + vdList[i].contentVersionIdList + '/VersionData',
+                url: 'https://protocomdev-dev-ed.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + fileId + '/VersionData',
                 cache :false,
                 headers: {"Authorization" : accToken},
                 xhrFields : {responseType : 'blob'},
