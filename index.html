@@ -266,7 +266,8 @@
                     // コンテンツバージョンIDリストの件数分
                     for(i=0; i < res.cbdFileList.length; i++){
                         if(res.cbdFileList[i].contentVersionId){
-                                console.log(i + ' ' + res.cbdFileList[i].contentVersionId)
+                            console.log(i + ' ' + res.cbdFileList[i].contentVersionId)
+                            let fileId = res.cbdFileList[i].contentVersionId;
                             // コンテンツバージョンIDを引数に取得処理を呼び出し
                             //let resCvUrl = getContentVersion(res.cbdFileList[i].ContentVersionId);
                             $.ajax({
@@ -283,7 +284,7 @@
                                     $.ajax({
                                         type: 'GET',
                                         crossOrigin: true,
-                                        url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + res.cbdFileList[i].contentVersionId + '/VersionData',
+                                        url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + fileId + '/VersionData',
                                         cache :false,
                                         headers: {"Authorization" : accToken},
                                         xhrFields : {responseType : 'blob'},
