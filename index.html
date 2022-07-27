@@ -221,6 +221,35 @@
                             success : function (resp) {
                                 res = resp;
                                 console.log('a_res: ' + JSON.stringify(res));
+
+                                // ケースのリストサイズが0でない
+                                if(res.caseList.length != 0){
+                                    // 実行回数
+                                    let count = 0;
+                                    // コンテンツバージョンIDリストの件数分
+                                    for(i=0; i < res.cbdFileList.length; i++){
+                                        // ファイル内容を退避する配列
+                                        let tempFileList = [];
+                                        // コンテンツバージョンIDを引数に取得処理を呼び出し
+                                        let resCvUrl = getContentVersion(res.cbdFileList[i].ContentVersionId);
+                                        // ファイル内容を配列に退避する
+                                        let tempFile = {
+                                            cvId: res.cbdFileList[i].ContentVersionId,
+                                            fileName: res.cbdFileList[i].FileName,
+                                            versionData: resCvUrl
+                                        };
+                                        tempFileList.push(tempFile);
+                                        // 実行回数をインクリメント
+                                        count++;
+                                        // ファイルのIdの件数分動いたら
+                                        if(count == res.cbdFileList.length){
+                                            // セッションストレージに取得した値を退避
+                                            window.sessionStorage.setItem(['IMFFileData'],[JSON.stringify(tempFileList)]);
+                                            // 次の処理へ
+                                            resolve();
+                                        }
+                                    }
+                                }
                             },
                             error : function (data, errorThrown,status) {
                                 
@@ -234,9 +263,7 @@
                         console.log(status);
                     }
                 });
-            // promise処理がすべて完了してから実行
-            }).then(() => {
-                console.log('res: ' + JSON.stringify(res))
+                
                 // エラーが起きたとき
                 /*if(errorInfo.status == 'error'){
                     // ホーム画面（履歴あり）を非表示
@@ -253,36 +280,11 @@
                     document.getElementById('noInq').style.display = 'block';
                     return;
                 }*/
-                // ケースのリストサイズが0でない
-                if(res.caseList.length != 0){
-                    // 実行回数
-                    let count = 0;
-                    // コンテンツバージョンIDリストの件数分
-                    for(i=0; i < res.cbdFileList.length; i++){
-                        // ファイル内容を退避する配列
-                        let tempFileList = [];
-                        // コンテンツバージョンIDを引数に取得処理を呼び出し
-                        let resCvUrl = getContentVersion(res.cbdFileList[i].ContentVersionId);
-                        // ファイル内容を配列に退避する
-                        let tempFile = {
-                            cvId: res.cbdFileList[i].ContentVersionId,
-                            fileName: res.cbdFileList[i].FileName,
-                            versionData: resCvUrl
-                        };
-                        tempFileList.push(tempFile);
-                        // 実行回数をインクリメント
-                        count++;
-                        // ファイルのIdの件数分動いたら
-                        if(count == res.cbdFileList.length){
-                            // セッションストレージに取得した値を退避
-                            window.sessionStorage.setItem(['IMFFileData'],[JSON.stringify(tempFileList)]);
-                            // 次の処理へ
-                            resolve();
-                        }
-                    }
-                }
+                
         
-
+            // promise処理がすべて完了してから実行
+            }).then(() => {
+                console.log('res: ' + JSON.stringify(res))
                 // セッションストレージに取得した値を退避
                 window.sessionStorage.setItem(['IMFCaseResponseData'],[JSON.stringify(res)]);
                 // Cookie取得処理を呼び出す
