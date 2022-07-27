@@ -89,6 +89,8 @@
 
             // 通信情報用
             let res;
+            // ファイル内容を退避する配列
+            let tempFileList = [];
             const promise = new Promise((resolve) => {
                 // エラー格納用
                 let errorInfo = {
@@ -138,8 +140,7 @@
                 if(res.caseList.length != 0){
                     // 実行回数
                     let count = 0;
-                    // ファイル内容を退避する配列
-                    let tempFileList = [];
+
                     // コンテンツバージョンIDリストの件数分
                     for(i=0; i < res.cbdFileList.length; i++){
                         if(res.cbdFileList[i].contentVersionId){
@@ -167,7 +168,7 @@
                                         headers: {"Authorization" : accToken},
                                         xhrFields : {responseType : 'blob'},
                                         success : function (fileContent) {
-                                            console.log(JSON.stringify(fileContent))
+                                            console.log(JSON.stringify('fileContent '+fileContent))
                                             let resCvUrl = fileContent;
                                             // ファイル内容を配列に退避する
                                             let tempFile = {
@@ -204,11 +205,11 @@
                 
             }).then(() => {
                 // セッションストレージに取得した値を退避
+                window.sessionStorage.setItem(['IMFFileData'],[JSON.stringify(tempFileList)]);
+                // セッションストレージに取得した値を退避
                 window.sessionStorage.setItem(['IMFCaseResponseData'],[JSON.stringify(res)]);
                 // Cookie取得処理を呼び出す
-                //const CookieList = '';
                 const cookieList = getCookie();
-                console.log('cookieList:' + cookieList)
                 // NEW付与対象のIDを格納する配列
                 let newTargetList = [];
                 for(i=0; i < res.cbdFileList.length; i++){
@@ -304,9 +305,9 @@
                     }
                 }
             });
-            console.log('IMFCaseResponseData_j :' + JSON.stringify( JSON.parse(window.sessionStorage.getItem(['IMFCaseResponseData']))));
+            //console.log('IMFCaseResponseData_j :' + JSON.stringify( JSON.parse(window.sessionStorage.getItem(['IMFCaseResponseData']))));
             console.log('IMFFileData_j :' + JSON.stringify( JSON.parse(window.sessionStorage.getItem(['IMFFileData']))));
-            console.log('IMFCaseResponseData :' + window.sessionStorage.getItem(['IMFCaseResponseData']));
+            //console.log('IMFCaseResponseData :' + window.sessionStorage.getItem(['IMFCaseResponseData']));
             console.log('IMFFileData :' + window.sessionStorage.getItem(['IMFFileData']));
         }
 
