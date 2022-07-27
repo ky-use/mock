@@ -265,6 +265,7 @@
                     let tempFileList = [];
                     // コンテンツバージョンIDリストの件数分
                     for(i=0; i < res.cbdFileList.length; i++){
+                        console.log(res.cbdFileList[i].contentVersionId)
                             if(res.cbdFileList[i].contentVersionId){
                             // コンテンツバージョンIDを引数に取得処理を呼び出し
                             //let resCvUrl = getContentVersion(res.cbdFileList[i].ContentVersionId);
