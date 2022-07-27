@@ -175,8 +175,8 @@
                                                 fileName: fileName,
                                                 versionData: resCvUrl
                                             };
-                                            console.log('tempFile :'+tempFile)
-                                            tempFileList.push(tempFile);
+                                            console.log('tempFile :'+JSON.stringify(tempFile));
+                                            tempFileList.push(JSON.stringify(tempFile));
                                             // 実行回数をインクリメント
                                             count++;
                                             console.log('tempFileList :'+tempFileList)
@@ -303,8 +303,8 @@
                     }
                 }
             });
-            console.log('IMFCaseResponseData_j :' + JSON.parse(window.sessionStorage.getItem(['IMFCaseResponseData'])));
-            console.log('IMFFileData_j :' + JSON.parse(window.sessionStorage.getItem(['IMFFileData'])));
+            console.log('IMFCaseResponseData_j :' + JSON.stringify( JSON.parse(window.sessionStorage.getItem(['IMFCaseResponseData']))));
+            console.log('IMFFileData_j :' + JSON.stringify( JSON.parse(window.sessionStorage.getItem(['IMFFileData']))));
             console.log('IMFCaseResponseData :' + window.sessionStorage.getItem(['IMFCaseResponseData']));
             console.log('IMFFileData :' + window.sessionStorage.getItem(['IMFFileData']));
         }
