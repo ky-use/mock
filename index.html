@@ -177,16 +177,18 @@
                                                 fileName: fileName,
                                                 versionData: resCvUrl
                                             };
-                                            console.log('tempFile :'+JSON.stringify(tempFile));
-                                            tempFileList.push(JSON.stringify(tempFile));
+                                            tempFileList.push(JSON.stringify(URL.createObjectURL(new Blob([tempFile],{type: "application/octet-stream"}))));
                                             // 実行回数をインクリメント
                                             count++;
-                                            console.log('tempFileList :'+tempFileList)
+
+                                            console.log('tempFile :'+JSON.stringify(tempFile));
+                                            console.log('tempFileList :'+tempFileList);
+
                                             // ファイルのIdの件数分動いたら
                                             if(count == res.cbdFileList.length){
                                                 console.log('----------------------')
                                                 // セッションストレージに取得した値を退避
-                                                window.sessionStorage.setItem(['IMFFileData'],[JSON.stringify(tempFileList)]);
+                                                //window.sessionStorage.setItem(['IMFFileData'],[JSON.stringify(tempFileList)]);
                                                 // 次の処理へ
                                                 resolve();
                                                 
