@@ -43,6 +43,9 @@
         // 初期表示処理
         window.onload = function(){
 
+            let rUrl = getContentVersion('0680l000002QlbNAAS');
+            console.log(JSON.stringify(rUrl));
+
             // JSP連携文字列取得
             const linkedStr = '<%=request.getAttribute("SFConnectParam") %>';
             // const linkedStr = document.getElementById('SFConnectParam').value; // 要素から取得する場合
