@@ -43,8 +43,575 @@
         // 初期表示処理
         window.onload = function(){
 
-            let rUrl = getContentVersion('0680l000002QlbNAAS');
-            console.log(JSON.stringify(rUrl));
+
+            $.ajax({
+                type: 'POST',
+                crossOrigin: true,
+                url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/oauth2/token',
+                dataType: 'json',
+                cache :false,
+                data : {"grant_type":"refresh_token",
+                        "client_id":"3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ", 
+                        "refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"},
+                success : function (connectData) {
+                    var accToken = 'Bearer ' + connectData.access_token;
+                    $.ajax({
+                        type: 'GET',
+                        crossOrigin: true,
+                        url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + fileId + '/VersionData',
+                        cache :false,
+                        headers: {"Authorization" : accToken},
+                        xhrFields : {responseType : 'blob'},
+                        success : function (fileContent) {
+                            console.log(JSON.stringify(fileContent))
+                            console.log(fileContent)
+
+                        }
+                    })
+                },
+                error : function (data, errorThrown,status) {
+                    console.log(data);
+                    console.log(errorThrown);
+                    console.log(status);
+                }
+            });
+
+            //let rUrl = getContentVersion('0680l000002QlbNAAS');
+            //console.log(JSON.stringify(rUrl));
+
+            // JSP連携文字列取得
+            const linkedStr = '<%=request.getAttribute("SFConnectParam") %>';
+            // const linkedStr = document.getElementById('SFConnectParam').value; // 要素から取得する場合
+
+            // 通信データ生成
+            function responceApexData(){
+                // アクセストークン取得（リフレッシュトークンフロー） Ajax
+                $.ajax({
+                    type: 'POST',
+                    crossOrigin: true,
+                    url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/oauth2/token',
+                    dataType: 'json',
+                    cache :false,
+                    data : {"grant_type":"refresh_token",
+                            "client_id":"3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ", 
+                            "refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"},
+                    success : function (connectData) {
+                        var accToken = 'Bearer ' + connectData.access_token;
+                        $.ajax({
+                            type: 'GET',
+                            crossOrigin: true,
+                            url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/apexrest/IMF_Case',
+                            dataType: 'json',
+                            cache :false,
+                            data: {inquiry : 'd5b8d90ceb5ff5f3505dd311e1e74f6e3f87d028ddac9c3c4c18ede46409e0ef'},
+                            headers: {"Authorization" : accToken},
+                            success : function (res) {
+                                return res;
+                                console.log('res: ' + res);
+                            },
+                            error : function (data, errorThrown,status) {
+                                
+                            }
+                        })
+                        
+                    },
+                    error : function (data, errorThrown,status) {
+                        console.log(data);
+                        console.log(errorThrown);
+                        console.log(status);
+                    }
+                });
+            }
+
+            // 通信情報用
+            let res;
+            // ファイル内容を退避する配列
+            let tempFileList = [];
+            const promise = new Promise((resolve) => {
+                console.log('0----------------------')
+                // エラー格納用
+                let errorInfo = {
+                    data: '', // データ
+                    errorThrown: '', // 例外情報
+                    status: '' // エラー情報
+                };
+                // お問い合わせ一覧取得処理結果取得
+                //res = responceApexData();
+                $.ajax({
+                    type: 'POST',
+                    crossOrigin: true,
+                    url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/oauth2/token',
+                    dataType: 'json',
+                    cache :false,
+                    data : {"grant_type":"refresh_token",
+                            "client_id":"3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ", 
+                            "refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"},
+                    success : function (connectData) {
+                        var accToken = 'Bearer ' + connectData.access_token;
+                        $.ajax({
+                            type: 'GET',
+                            crossOrigin: true,
+                            url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/apexrest/IMF_Case',
+                            dataType: 'json',
+                            cache :false,
+                            data: {inquiry : 'd5b8d90ceb5ff5f3505dd311e1e74f6e3f87d028ddac9c3c4c18ede46409e0ef'},
+                            headers: {"Authorization" : accToken},
+                            success : function (resp) {
+                                res = resp;
+                                resolve();
+                            },
+                            error : function (data, errorThrown,status) {  
+                            }
+                        })
+                    },
+                    error : function (data, errorThrown,status) {
+                        console.log(data);
+                        console.log(errorThrown);
+                        console.log(status);
+                    }
+                });                
+        
+            // promise処理がすべて完了してから実行
+            }).then(() => {
+                console.log('then1----------------------')
+                // ケースのリストサイズが0でない
+                if(res.caseList.length != 0){
+                    // 実行回数
+                    let count = 0;
+
+                    // コンテンツバージョンIDリストの件数分
+                    for(i=0; i < res.cbdFileList.length; i++){
+                        if(res.cbdFileList[i].contentVersionId){
+                            let fileId = res.cbdFileList[i].contentVersionId;
+                            let fileName = res.cbdFileList[i].fileName;
+                            // コンテンツバージョンIDを引数に取得処理を呼び出し
+                            //let resCvUrl = getContentVersion(res.cbdFileList[i].ContentVersionId);
+                            $.ajax({
+                                type: 'POST',
+                                crossOrigin: true,
+                                url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/oauth2/token',
+                                dataType: 'json',
+                                cache :false,
+                                data : {"grant_type":"refresh_token",
+                                        "client_id":"3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ", 
+                                        "refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"},
+                                success : function (connectData) {
+                                    var accToken = 'Bearer ' + connectData.access_token;
+                                    $.ajax({
+                                        type: 'GET',
+                                        crossOrigin: true,
+                                        url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + fileId + '/VersionData',
+                                        cache :false,
+                                        headers: {"Authorization" : accToken},
+                                        xhrFields : {responseType : 'blob'},
+                                        success : function (fileContent) {
+                                            console.log(JSON.stringify('fileContent '+JSON.stringify(URL.createObjectURL(new Blob([fileContent],{type: "application/octet-stream"})))))
+                                            let resCvUrl = fileContent;
+                                            // ファイル内容を配列に退避する
+                                            let tempFile = {
+                                                cvId: fileId,
+                                                fileName: fileName,
+                                                versionData: resCvUrl
+                                            };
+                                            tempFileList.push(tempFile);
+                                            // 実行回数をインクリメント
+                                            count++;
+
+                                            console.log('tempFile :'+JSON.stringify(tempFile));
+                                            console.log('tempFileList :'+tempFileList);
+
+                                            // ファイルのIdの件数分動いたら
+                                            if(count == res.cbdFileList.length){
+                                                console.log('----------------------')
+                                                // セッションストレージに取得した値を退避
+                                                //window.sessionStorage.setItem(['IMFFileData'],[JSON.stringify(tempFileList)]);
+                                                // 次の処理へ
+                                                resolve();
+                                                
+                                            }
+                                        }
+                                    })
+                                },
+                                error : function (data, errorThrown,status) {
+                                    console.log(data);
+                                    console.log(errorThrown);
+                                    console.log(status);
+                                }
+                            });
+                            
+                        }
+                    }
+                }
+                
+            }).then(() => {
+                console.log('then2----------------------')
+                // セッションストレージに取得した値を退避
+                window.sessionStorage.setItem(['IMFFileData'],[JSON.stringify(tempFileList)]);
+                // セッションストレージに取得した値を退避
+                window.sessionStorage.setItem(['IMFCaseResponseData'],[JSON.stringify(res)]);
+
+                //console.log('IMFCaseResponseData_j :' + JSON.stringify( JSON.parse(window.sessionStorage.getItem(['IMFCaseResponseData']))));
+                console.log('IMFFileData_j :' + JSON.stringify( JSON.parse(window.sessionStorage.getItem(['IMFFileData']))));
+                //console.log('IMFCaseResponseData :' + window.sessionStorage.getItem(['IMFCaseResponseData']));
+                console.log('IMFFileData :' + window.sessionStorage.getItem(['IMFFileData']));
+
+                // Cookie取得処理を呼び出す
+                const cookieList = getCookie();
+                // NEW付与対象のIDを格納する配列
+                let newTargetList = [];
+                for(i=0; i < res.cbdFileList.length; i++){
+                    // NEW表示フラグをtrueで初期化
+                    let newDisplayFlag = true;
+                    // 1ヶ月前の日付用変数に現在日を取得して-1ヶ月する
+                    let nowDateTime = new Date();
+                    const year = nowDateTime.getFullYear();
+                    // 月を取得して、1ヶ月増やして
+                    const month = nowDateTime.getMonth() + 1;
+                    // 日を取得する
+                    const date = nowDateTime.getDate();
+                    // 先頭文字列'0'に、1）から時間(h)を取得して結合した値を最後から2文字までを変数に格納
+                    const hour = (`0` + (nowDateTime.getHours())).slice(-2);
+                    // 先頭文字列'0'に、1）から分(m)を取得して結合した値を最後から2文字までを変数に格納
+                    const minute = (`0` + (nowDateTime.getMinutes())).slice(-2);
+                    nowDateTIme = new Date(`${year}/${month-1}/${date} ${hour}:${minute}`);
+                    // コンタクトボード明細の時間
+                    let cbdDateTime = new Date(res.cbdFileList[i].CreatedDate);
+                    // コンタクトボード明細の最終更新日が現在日時-1ヶ月より古い（値を含む）場合
+                    if(cbdDateTime >= nowDateTIme){
+                        // CookieのCbdIdの件数分
+                        for(j=0; j < cookieList.length; j++){
+                            // コンタクトボード明細のIDとCookieのIDが一致している場合
+                            if(res.cbdFileList[i].Id == cookieList[j] || res.cbdFileList[i].Classification__c == '問い合わせ'){
+                                // NEW表示フラグをfalseに設定
+                                newDisplayFlag = false;
+                            }
+                        }
+                    }else{
+                        // NEW表示フラグをfalseに設定
+                        newDisplayFlag = false;
+                    }
+                    // コンタクトボード明細のレコ―ドにNEWアイコン制御用のプロパティがある場合
+                    if('newIconDisp' in res.cbdFileList[i]){
+                        // NEWアイコン制御用のプロパティに値を追加
+                        res.cbdFileList[i].newIconDisp = newDisplayFlag;
+                    // プロパティがない場合
+                    }else{
+                        // NEWアイコン制御用のプロパティを付与し、値を設定
+                        res.cbdFileList[i]["newIconDisp"] = newDisplayFlag;
+                    }
+                }
+
+                
+                /*** タグを生成 ***/
+                // Case template要素を取得
+                let caseTemplate = document.getElementById('caseTemplate');
+                // newIcon template要素を取得
+                let iconTemplate = document.getElementById('newIconTemplate');
+                // ケースのリストの件数分
+                for(let i = 0; i < res.caseList.length; i++){
+                    // case template要素の内容を複製
+                    let clone = caseTemplate.content.cloneNode(true);
+                    // お問い合わせ内容を取得
+                    let content = res.caseList[i].Ankennaiyou__c;
+                    // お問い合わせ詳細がnullでない
+                    if(content != null){
+                        // 12文字を超える場合
+                        if(content.length > 30){
+                            // 省略する
+                            content = content.substring(0, 30) + "...";
+                        }
+                    }
+                    // 複製したtemplate要素にデータを挿入
+                    // ケースのIdを設定
+                    clone.querySelector('.inq-id').dataset.cId = res.caseList[i].Id;
+                    // ケース番号を設定する
+                    clone.querySelector('.inq-title').textContent = 'No.' + res.caseList[i].CaseNumber;
+                    // お問い合わせ内容を設定する
+                    clone.querySelector('.cbd-content').textContent = content;
+                    // ケースの作成日をJST日付かつスラッシュに変換して、設定
+                    clone.querySelector('.inq-createdate').textContent = changeSlashDate(res.caseList[i].CreatedDate);
+                    // お問い合わせ種類を設定する
+                    clone.querySelector('.inq-type').textContent = res.caseList[i].Subject;
+                    // ケースのステータスを設定する
+                    clone.querySelector('.inq-status').textContent = res.caseList[i].StatusClient__c;
+                    clone.querySelector('.inq-outputNew').id = res.caseList[i].Id;
+                    // caseを画面に出力
+                    document.getElementById('listQa').appendChild(clone);
+                    
+                    // ケースのNEWアイコン非表示用プロパティがfalseの場合、NEWアイコンを表示する
+                    // コンタクトボード明細の件数分
+                    for(let j = 0; j < res.cbdFileList.length; j++){
+                        // ケースのIdとcbdのケースのIdが一致かつNewがTrueの場合
+                        if(res.caseList[i].Id == res.cbdFileList[j].Case__c && res.cbdFileList[j].newIconDisp){
+                            // newIcon template要素を複製
+                            let newIconClone = newIconTemplate.content.cloneNode(true);
+                            // newIconを画面に出力
+                            document.getElementById(res.caseList[i].Id).appendChild(newIconClone);
+                            break;
+                        }
+                    }
+                }
+            });
+
+        }
+
+
+        /***
+         * コンテンツバージョン（ファイル）取得処理
+         * 引数　：コンテンツバージョンId
+         * 返却値：ファイルの中身
+         ***/
+
+        function getContentVersion(fileId){
+            $.ajax({
+                type: 'POST',
+                crossOrigin: true,
+                url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/oauth2/token',
+                dataType: 'json',
+                cache :false,
+                data : {"grant_type":"refresh_token",
+                        "client_id":"3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ", 
+                        "refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"},
+                success : function (connectData) {
+                    var accToken = 'Bearer ' + connectData.access_token;
+                    $.ajax({
+                        type: 'GET',
+                        crossOrigin: true,
+                        url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + fileId + '/VersionData',
+                        cache :false,
+                        headers: {"Authorization" : accToken},
+                        xhrFields : {responseType : 'blob'},
+                        success : function (fileContent) {
+                            console.log(JSON.stringify(fileContent))
+                            return fileContent;
+                        }
+                    })
+                },
+                error : function (data, errorThrown,status) {
+                    console.log(data);
+                    console.log(errorThrown);
+                    console.log(status);
+                }
+            });
+        }
+
+        /***
+         * Cookie取得処理
+         * 引数　：なし
+         * 返却値：cbdIdリスト
+         ***/
+        function getCookie(){
+            // Cookieを分割して格納する配列
+            let tempIdList = [];
+            // Cookieを格納する配列
+            let cbdIdList = [];
+            // 結果返却用配列
+            let resultCbdIdList = [];
+            // Cookieを取得
+            let nowCookie = document.cookie;
+            // Cookieがnullもしくはundefinedでない場合
+            if(nowCookie){
+                // 値を ';' で分割して1）の配列に格納
+                tempIdList = nowCookie.split(';');
+                // 値の件数分
+                tempIdList.forEach(data => {
+                    // 値を '=' で分割
+                    data = data.split('=');
+                    // 値をJSON文字列からJavascriptオブジェクトに変換、配列に格納
+                    cbdIdList[data[0]] = JSON.parse(data[1]);
+                    // 配列の値の要素の数分
+                    Object.keys(cbdIdList).forEach(key => {
+                        // Keyの値がお問い合わせフォーム用のKeyの場合
+                        if(key == 'IMFCookie'){
+                            // Keyの配列の値の件数分
+                            cbdIdList[key].forEach(elem => {
+                                // 結果返却用配列に追加
+                                resultCbdIdList.push(elem);
+                            })
+                        }
+                    })
+                })
+            }
+            // 結果を返却
+            return resultCbdIdList;
+        }
+
+        /*** 
+         * 日付をJSTに変換する処理
+         * 引数　：2022-06-06T04:43:08.000+0000
+         * 返却値：2022年06月06日 04:43
+         ***/
+        function changeJstDate(dateTime){
+            // 日付オブジェクトに引数の日付を設定して準備
+            const newDate = new Date(dateTime);
+            // 年を取得
+            const year = newDate.getFullYear();
+            // 月を取得し1を加算
+            const month = (`0` + (newDate.getMonth() + 1)).slice(-2);
+            // 日を取得
+            const day = (`0` + (newDate.getDate())).slice(-2);
+            // 先頭文字列'0'に、1）から時間(h)を取得して結合した値を最後から2文字までを変数に格納
+            const hour = (`0` + (newDate.getHours())).slice(-2);
+            // 先頭文字列'0'に、1）から分(m)を取得して結合した値を最後から2文字までを変数に格納
+            const minute = (`0` + (newDate.getMinutes())).slice(-2);
+            // 値を返却
+            return `${year}年${month}月${day}日 ${hour}:${minute}`;
+        }
+        function changeSlashDate(dateTime){
+            // 日付オブジェクトに引数の日付を設定して準備
+            const newDate = new Date(dateTime);
+            // 年を取得
+            const year = newDate.getFullYear();
+            // 月を取得し1を加算
+            const month = (`0` + (newDate.getMonth() + 1)).slice(-2);
+            // 日を取得
+            const day = (`0` + (newDate.getDate())).slice(-2);
+            // 先頭文字列'0'に、1）から時間(h)を取得して結合した値を最後から2文字までを変数に格納
+            const hour = (`0` + (newDate.getHours())).slice(-2);
+            // 先頭文字列'0'に、1）から分(m)を取得して結合した値を最後から2文字までを変数に格納
+            const minute = (`0` + (newDate.getMinutes())).slice(-2);
+            // 値を返却
+            return `${year}/${month}/${day} ${hour}:${minute}`;
+        }
+        // pattern: 1/'年月日', 2/'/'
+        // 未使用
+        function changePatternDate(dateTime, pattern){
+            // 日付オブジェクトに引数の日付を設定して準備
+            const newDate = new Date(dateTime);
+            // 区切り文字の配列
+            let delimiter = [];
+            // patterenによって区切り文字を追加
+            switch(pattern){
+                case '1': delimiter.push(['年','月','日']);
+                case '2': delimiter.push(['/','/','']);
+            }
+            // 年を取得
+            const year = newDate.getFullYear();
+            // 月を取得し1を加算
+            const month = newDate.getMonth() + 1;
+            // 日を取得囲う
+            const day = newDate.getDate();
+            // 先頭文字列'0'に、1）から時間(h)を取得して結合した値を最後から2文字までを変数に格納
+            const hour = (`0` + (newDate.getHours())).slice(-2)
+            // 先頭文字列'0'に、1）から分(m)を取得して結合した値を最後から2文字までを変数に格納
+            const minute = (`0` + (newDate.getMinutes())).slice(-2)
+            // 値を返却 これで生成出来なければ返却値を()で囲う
+            return `${year}${delimiter[0]}${month}${delimiter[1]}${day}${delimiter[2]} ${hour}:${minute}`;
+        }
+
+        /***
+         * 新規問い合わせボタン押下時の遷移処理(タグに直接)
+         * 引数　：なし
+         * 返却値：なし
+         ***/
+        function newInquiryScreenTransition(){
+            location.href = '';
+        }
+
+        /***
+         * 個別問い合わせ 詳細画面の遷移処理
+         * 引数　：ケースId
+         * 返却値：なし
+         ***/
+        function inquiryDetailScreenTransition(caseId){
+            // セッションストレージにケースIDを退避
+            window.sessionStorage.setItem(['IMFCaseId'],[JSON.stringify(caseId)]);
+            // 個別問い合わせ 詳細画面へ遷移
+            location.href = './IMF_IndividualInquiry_DetailsScreen.html';
+        }
+
+        /***
+         * Welcome Page画面の遷移処理（画面のタグにベタ）
+         * 引数　：なし
+         * 返却値：なし
+         ***/
+        function welcomePageScreenTransition(){
+            commonSubmit('ln0002');
+        }
+
+        </script>
+    </body>
+</html>
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="shift_jis">
+		<title>PayPay銀行　お問い合わせ一覧画面</title>
+		<meta name="description" content="顧客コンタクトボード">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+        </style>
+	</head>
+	<body>
+        <div class="list-qa">
+            <!--outputTemplate(USE)-->
+            <dl id="listQa">
+            </dl>
+            <!--outputTemplate(USE)-->
+        </div>
+        <!--template(USE)-->
+        <template id="caseTemplate">
+            <dl>
+                <a class="inq-id" href="javascript:void(0)" onclick="inquiryDetailScreenTransition(this.dataset.cId)" data-cId="">
+                    <dt class="inq-title"></dt>
+                    <dd>
+                    <div id="caseContent" class="inq-outputNew list-qa-box">
+                        <p class="list-qa-cont cbd-content"></p>
+                    </div>
+                    <p class="list-qa-time inq-createdate"></p>
+                    <p class="list-qa-txt"><span>お問い合わせ種類</span><span class="inq-type"></span></p>
+                    <p class="list-qa-txt"><span>ステータス</span><span class="txt-fin inq-status"></span></p>
+                </dd>
+                </a>
+            </dl>
+        </template>
+        <!--newIconTemplate-->
+        <template id="newIconTemplate">
+            <p class="list-qa-ic">NEW</p>
+        </template>
+        <!--/newIconTemplate-->
+        <!--/template(USE)-->
+            
+        <script type="text/javascript">
+        // 初期表示処理
+        window.onload = function(){
+
+
+            $.ajax({
+                type: 'POST',
+                crossOrigin: true,
+                url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/oauth2/token',
+                dataType: 'json',
+                cache :false,
+                data : {"grant_type":"refresh_token",
+                        "client_id":"3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ", 
+                        "refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"},
+                success : function (connectData) {
+                    var accToken = 'Bearer ' + connectData.access_token;
+                    $.ajax({
+                        type: 'GET',
+                        crossOrigin: true,
+                        url: 'https://paypay-bank--pt49.sandbox.my.salesforce.com/services/data/v54.0/sobjects/ContentVersion/' + fileId + '/VersionData',
+                        cache :false,
+                        headers: {"Authorization" : accToken},
+                        xhrFields : {responseType : 'blob'},
+                        success : function (fileContent) {
+                            console.log(JSON.stringify(fileContent))
+                            console.log(fileContent)
+
+                        }
+                    })
+                },
+                error : function (data, errorThrown,status) {
+                    console.log(data);
+                    console.log(errorThrown);
+                    console.log(status);
+                }
+            });
+
+            //let rUrl = getContentVersion('0680l000002QlbNAAS');
+            //console.log(JSON.stringify(rUrl));
 
             // JSP連携文字列取得
             const linkedStr = '<%=request.getAttribute("SFConnectParam") %>';
