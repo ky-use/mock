@@ -12,6 +12,9 @@
     </head>
 
 	<body id="contact">
+		<div>
+			<a id="link"></a>
+		</div>
 		<script type="text/javascript">
 
 /*** テスト用ダミーデータ ***/
@@ -106,53 +109,6 @@
 	// 通信先URL　※環境に併せて変更する必要あり！
 	const REQUEST_DOMAIN = 'https://paypay-bank--pt49.sandbox.my.salesforce.com';
 
-	/**
-	 * 初期表示時データ取得
-	 */
-	function responseApexData(){
-			console.log('--ajax--')
-		// アクセストークン取得（リフレッシュトークンフロー） Ajax
-		$.ajax({
-			type: 'POST',
-			crossOrigin: true,
-			url: REQUEST_DOMAIN + '/services/oauth2/token',
-			dataType: 'json',
-			cache :false,
-			data : {
-				"grant_type":"refresh_token",
-				"client_id":"3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ", 
-				"refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"
-			},
-			success : function (connectData) {
-				var accToken = 'Bearer ' + connectData.access_token;
-				$.ajax({
-					type: 'GET',
-					crossOrigin: true,
-					url: REQUEST_DOMAIN + '/services/apexrest/IMF_Case',
-					dataType: 'json',
-					cache :false,
-					data: {inquiry : 'bd1fcec2a09397bdac42bdba68beca74a28e90a646bffae6d0b2f3a376aa9993'},
-					headers: {"Authorization" : accToken},
-					success : function (res) {
-						console.log('res:'+ JSON.stringify(res));
-						//return res;
-					},
-					error : function (data, errorThrown,status) {
-						
-					}
-				})
-			},
-			error : function (data, errorThrown,status) {
-				console.log(data);
-				console.log(errorThrown);
-				console.log(status);
-			}
-		});
-
-
-	}
-    responseApexData();
-
     $(function(){
         		// アクセストークン取得（リフレッシュトークンフロー） Ajax
 		$.ajax({
@@ -184,6 +140,44 @@
 						}else{
 							console.log('else');
 						}
+						$.ajax({
+							type: 'POST',
+							crossOrigin: true,
+							url: REQUEST_DOMAIN + '/services/oauth2/token',
+							dataType: 'json',
+							cache :false,
+							data : {
+								"grant_type":"refresh_token",
+								"client_id":"3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ", 
+								"refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"
+							},
+							success : function (connectData) {
+								var accToken = 'Bearer ' + connectData.access_token;
+								$.ajax({
+									type: 'GET',
+									crossOrigin: true,
+									url: REQUEST_DOMAIN + '/services/data/v54.0/sobjects/ContentVersion/' + fileId + '/VersionData',
+									cache :false,
+									headers: {"Authorization" : accToken},
+									xhrFields : {responseType : 'blob'},
+									success : function (fileContent) {
+										console.log(JSON.stringify(fileContent))
+										let fileUrl = URL.createObjectURL(new Blob(
+											[fileContent],
+											{type: "application/octet-stream"}
+										));
+										document.getElementById('link').href = fileUrl;
+										document.getElementById('link').download = fileUrl;
+										document.getElementById('link').innerHTML = fileUrl;
+									}
+								})
+							},
+							error : function (data, errorThrown,status) {
+								console.log(data);
+								console.log(errorThrown);
+								console.log(status);
+							}
+						});
 					},
 					error : function (data, errorThrown,status) {
 						
@@ -198,7 +192,10 @@
 		});
     });
 
-
+	function getContentVersion(fileId){
+		
+		
+	}
 		</script>
 		<noscript>
 
