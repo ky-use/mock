@@ -555,109 +555,110 @@
                                 cbdFileList[j]["newIconDisp"] = newDisplayFlag;
                             }
                         }
+                         // コンタクトボード明細templateを取得
+                        let caseTemplate = document.getElementById('cbdTemplate');
+                        // newIcon template要素を取得
+                        let iconTemplate = document.getElementById('newIconTemplate');
+                        // コンタクトボード明細のリストの件数分
+                        for(let i = 0; i < cbdFileList.length; i++){
+                            // 要素を取得
+                            const cbd = cbdFileList[i].cbd;
+                            // 紐付く添付ファイルを取得
+                            const cvList = cbdFileList[i].contentVersions;
+                            // コンタクトボード明細templateの内容を複製
+                            let clone = cbdTemplate.content.cloneNode(true);
+                            // 複製したtemplate要素にデータを挿入	
+                            // レコード種別が、お客さまの場合
+                            if(cbd.Classification__c == '問い合わせ'){
+                                // お客さまクラスを付与
+                                clone.querySelector('.contbrd-head').classList.add('customer');
+                                // アクター名を「お客さま」に設定
+                                clone.querySelector('.actor-text').textContent = 'お客さま';
+                                // コンタクトボード明細の投稿内容をそのまま設定
+                                clone.querySelector('.contbrd-content').textContent = cbd.Content__c;
+                            // PayPay銀行の場合
+                            }else{
+                                // 回答クラスを付与
+                                clone.querySelector('.contbrd-head').classList.add('answer');
+                                // アクター名を「PayPay銀行」に設定
+                                clone.querySelector('.actor-text').textContent = 'PayPay銀行';
+                                // コンタクトボード明細の投稿内容を引数にURLリンク化処理を呼び出し
+                                let content = AutoLink(cbd.Content__c);
+                                // 値がNullではない場合
+                                if(content != null){
+                                    // リンク化した投稿内容を設定
+                                    // textContentに入れるとHTMLエンティティに変換されるため、innerHTMLに入れる
+                                    clone.querySelector('.contbrd-content').innerHTML = content;
+                                // 値がNullの場合
+                                }else{
+                                    // コンタクトボード明細の投稿内容をそのまま設定
+                                    clone.querySelector('.contbrd-content').innerHTML = cbd.Content__c;
+                                }
+                            }
+                            // コンタクトボード明細の作成日を日付をJSTに変換する処理を呼び出して、設定する
+                            clone.querySelector('.createddate').textContent = changeSlashDate(cbd.CreatedDate);
+                            clone.querySelector('.outputNew').id = 'new' + cbd.Id;
+                            clone.querySelector('.contbrd-txt').id = 'file' + cbd.Id;
+                            // 繰り返し初回の場合
+                            if(i == 0){
+                                // 初回の全表示用クラスを付与
+                                clone.querySelector('.contbrd-body').classList.add('first');
+                            }
+                            // コンタクトボード明細を画面に出力
+                            document.getElementById('outputCbdTemp').appendChild(clone);
+                            // コンタクトボード明細のNEWアイコン表示制御用プロパティがtrueの場合かつ PPBの回答の場合、NEWアイコンを表示する
+                            if(cbdFileList[i].newIconDisp && cbd.Classification__c == '回答'){
+                // TODO:動かないので一時コメントアウト
+                                // newIcon template要素を複製
+                                let newIconClone = newIconTemplate.content.cloneNode(true);
+                                
+                                // 個別詳細画面用のCSSクラスを追加
+                                newIconClone.querySelector('.list-qa-ic').classList.add('new-icon');
+                                // 元クラスを削除
+                                newIconClone.querySelector('.list-qa-ic').classList.remove('list-qa-ic');
+                                
+                                // newIconを画面に出力
+                                document.getElementById(res.caseList[i].Id).appendChild(newIconClone);
+                //
+                            }
+                            //ファイルがある場合
+                            if(cbdFileList[i].contentVersions.length > 0){
+                                // file template要素を取得
+                                let fileTemplate = document.getElementById('fileTemplate');
+                                // 「ファイル」固定文言タグを生成
+                                let fileFixedText = document.createElement('p');
+                                
+                                fileFixedText.innerHTML = 'ファイル';
+                                
+                                fileFixedText.style = 'font-weight: bold;margin-top: 10px'
+                                // 画面に追加
+                                document.getElementById('file' + cbd.Id).appendChild(fileFixedText);
+                                // 添付ファイルリストを取得
+                                const cvList = cbdFileList[i].contentVersions;
+                                // ファイルの件数分
+                                for(j = 0; j < cvList.length; j++){
+                                    // file template要素の内容を複製
+                                    let fileClone = fileTemplate.content.cloneNode(true);
+                                    // ファイルの中身からダウンロード用リンクを生成
+                                    let fileUrl = URL.createObjectURL(new Blob(
+                                        [cvList[j].versionData],
+                                        {type: "application/octet-stream"}
+                                    ));
+                                    // 画面出力するファイル名を設定する
+                                    fileClone.querySelector('.fileLink').textContent = cvList[j].Name;
+                                    // ダウンロードされる際のファイル名を設定する
+                                    fileClone.querySelector('.fileLink').download = cvList[j].Name;
+                                    // ダウンロード用リンクを設定する
+                                    fileClone.querySelector('.fileLink').href = fileUrl;
+                                    // ファイルを画面に出力
+                                    document.getElementById('file' + cbd.Id).appendChild(fileClone);
+                                }
+                            }
+                        }
                     }
                 }
 
-                // コンタクトボード明細templateを取得
-                let caseTemplate = document.getElementById('cbdTemplate');
-                // newIcon template要素を取得
-                let iconTemplate = document.getElementById('newIconTemplate');
-                // コンタクトボード明細のリストの件数分
-                for(let i = 0; i < cbdFileList.length; i++){
-                    // 要素を取得
-                    const cbd = cbdFileList[i].cbd;
-                    // 紐付く添付ファイルを取得
-                    const cvList = cbdFileList[i].contentVersions;
-                    // コンタクトボード明細templateの内容を複製
-                    let clone = cbdTemplate.content.cloneNode(true);
-                    // 複製したtemplate要素にデータを挿入	
-                    // レコード種別が、お客さまの場合
-                    if(cbd.Classification__c == '問い合わせ'){
-                        // お客さまクラスを付与
-                        clone.querySelector('.contbrd-head').classList.add('customer');
-                        // アクター名を「お客さま」に設定
-                        clone.querySelector('.actor-text').textContent = 'お客さま';
-                        // コンタクトボード明細の投稿内容をそのまま設定
-                        clone.querySelector('.contbrd-content').textContent = cbd.Content__c;
-                    // PayPay銀行の場合
-                    }else{
-                        // 回答クラスを付与
-                        clone.querySelector('.contbrd-head').classList.add('answer');
-                        // アクター名を「PayPay銀行」に設定
-                        clone.querySelector('.actor-text').textContent = 'PayPay銀行';
-                        // コンタクトボード明細の投稿内容を引数にURLリンク化処理を呼び出し
-                        let content = AutoLink(cbd.Content__c);
-                        // 値がNullではない場合
-                        if(content != null){
-                            // リンク化した投稿内容を設定
-                            // textContentに入れるとHTMLエンティティに変換されるため、innerHTMLに入れる
-                            clone.querySelector('.contbrd-content').innerHTML = content;
-                        // 値がNullの場合
-                        }else{
-                            // コンタクトボード明細の投稿内容をそのまま設定
-                            clone.querySelector('.contbrd-content').innerHTML = cbd.Content__c;
-                        }
-                    }
-                    // コンタクトボード明細の作成日を日付をJSTに変換する処理を呼び出して、設定する
-                    clone.querySelector('.createddate').textContent = changeSlashDate(cbd.CreatedDate);
-                    clone.querySelector('.outputNew').id = 'new' + cbd.Id;
-                    clone.querySelector('.contbrd-txt').id = 'file' + cbd.Id;
-                    // 繰り返し初回の場合
-                    if(i == 0){
-                        // 初回の全表示用クラスを付与
-                        clone.querySelector('.contbrd-body').classList.add('first');
-                    }
-                    // コンタクトボード明細を画面に出力
-                    document.getElementById('outputCbdTemp').appendChild(clone);
-                    // コンタクトボード明細のNEWアイコン表示制御用プロパティがtrueの場合かつ PPBの回答の場合、NEWアイコンを表示する
-                    if(cbdFileList[i].newIconDisp && cbd.Classification__c == '回答'){
-        // TODO:動かないので一時コメントアウト
-                        // newIcon template要素を複製
-                        let newIconClone = newIconTemplate.content.cloneNode(true);
-                        
-                        // 個別詳細画面用のCSSクラスを追加
-                        newIconClone.querySelector('.list-qa-ic').classList.add('new-icon');
-                        // 元クラスを削除
-                        newIconClone.querySelector('.list-qa-ic').classList.remove('list-qa-ic');
-                        
-                        // newIconを画面に出力
-                        document.getElementById(res.caseList[i].Id).appendChild(newIconClone);
-        //
-                    }
-                    //ファイルがある場合
-                    if(cbdFileList[i].contentVersions.length > 0){
-                        // file template要素を取得
-                        let fileTemplate = document.getElementById('fileTemplate');
-                        // 「ファイル」固定文言タグを生成
-                        let fileFixedText = document.createElement('p');
-                        
-                        fileFixedText.innerHTML = 'ファイル';
-                        
-                        fileFixedText.style = 'font-weight: bold;margin-top: 10px'
-                        // 画面に追加
-                        document.getElementById('file' + cbd.Id).appendChild(fileFixedText);
-                        // 添付ファイルリストを取得
-                        const cvList = cbdFileList[i].contentVersions;
-                        // ファイルの件数分
-                        for(j = 0; j < cvList.length; j++){
-                            // file template要素の内容を複製
-                            let fileClone = fileTemplate.content.cloneNode(true);
-                            // ファイルの中身からダウンロード用リンクを生成
-                            let fileUrl = URL.createObjectURL(new Blob(
-                                [cvList[j].versionData],
-                                {type: "application/octet-stream"}
-                            ));
-                            // 画面出力するファイル名を設定する
-                            fileClone.querySelector('.fileLink').textContent = cvList[j].Name;
-                            // ダウンロードされる際のファイル名を設定する
-                            fileClone.querySelector('.fileLink').download = cvList[j].Name;
-                            // ダウンロード用リンクを設定する
-                            fileClone.querySelector('.fileLink').href = fileUrl;
-                            // ファイルを画面に出力
-                            document.getElementById('file' + cbd.Id).appendChild(fileClone);
-                        }
-                    }
-                }
+               
             }
             
             /***
