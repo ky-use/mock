@@ -142,6 +142,68 @@
 		function sendDetailsScreen(selectedCaseId){
 			document.getElementById('outputCbdTemp').innerHTML = null;
 
+			// NEW付与対象のIDを格納する配列
+			let newTargetList = [];
+
+			let cbdFileList;
+			// ケースの件数分
+			for(i = 0; i < res.caseList.length; i++){
+
+				const rec = res.caseList[i];
+				// URLのケースIdとセッションストレージから取得したケースIdが一致する場合
+				if(selectedCaseId == rec.Id){
+
+					cbdFileList = res.caseList[i].cbdFileList;
+
+					// コンタクトボード明細レコードとファイルの組み合わせリストの件数分
+					for(j = 0; j < cbdFileList.length; j++){
+
+						let idFlg = {};
+						// NEW表示フラグをtrueで初期化
+						let newDisplayFlag = true;
+						// 1ヶ月前の日付用変数に現在日を取得して-1ヶ月する
+						let nowDateTime = new Date();
+						const year = nowDateTime.getFullYear();
+						// 月を取得して、1ヶ月増やして
+						const month = nowDateTime.getMonth() + 1;
+						// 日を取得する
+						const date = nowDateTime.getDate();
+						// 先頭文字列'0'に、1）から時間(h)を取得して結合した値を最後から2文字までを変数に格納
+						const hour = (`0` + (nowDateTime.getHours())).slice(-2);
+						// 先頭文字列'0'に、1）から分(m)を取得して結合した値を最後から2文字までを変数に格納
+						const minute = (`0` + (nowDateTime.getMinutes())).slice(-2);
+						nowDateTime = new Date(`${year}/${month-1}/${date} ${hour}:${minute}`);
+						// コンタクトボード明細の時間
+						let cbdDateTime = new Date(cbdFileList[j].CreatedDate);
+						// cbd日付が一カ月前より大きい
+						// コンタクトボード明細の最終更新日が現在日時-1ヶ月より新しい（値を含む）場合
+						if(cbdDateTime >= nowDateTime){
+							// CookieのCbdIdの件数分
+							for(k=0; k < CookieList.length; k++){
+								// コンタクトボード明細のIDとCookieのIDが一致している場合
+								if(cbdFileList[j].Id == CookieList[k]){
+									// NEW表示フラグをfalseに設定
+									newDisplayFlag = false;
+								}
+							}
+						// コンタクトボード明細の最終更新日が現在日時-1ヶ月より古い（値を含む）場合
+						}else{
+							// NEW表示フラグをfalseに設定
+							newDisplayFlag = false;
+						}
+						// コンタクトボード明細のレコ―ドにNEWアイコン制御用のプロパティがある場合
+						if('newIconDisp' in cbdFileList[j]){
+							// NEWアイコン制御用のプロパティに値を追加
+							cbdFileList[j].newIconDisp = newDisplayFlag;
+						// プロパティがない場合
+						}else{
+							// NEWアイコン制御用のプロパティを付与し、値を設定
+							cbdFileList[j]["newIconDisp"] = newDisplayFlag;
+						}
+					}
+				}
+			}
+
 			// コンタクトボード明細templateを取得
 			let caseTemplate = document.getElementById('cbdTemplate');
 			// newIcon template要素を取得
