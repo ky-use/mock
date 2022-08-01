@@ -41,7 +41,7 @@
 			<a id="link"></a>
 		</div>
 		
-		<div id="outputCbdTemp" class="contbrd-wrap">					
+		<div id="outputCbdTemp">					
 		</div>
 		
 		<script type="text/javascript">
@@ -83,6 +83,11 @@
 							
 							let fileId = '0680l000002QlbNAAS';
 							res = resp;
+                            console.log('res : ' + res)
+
+                            let selectedCaseId = '5000l000008VNgbAAG';
+                            sendDetailsScreen(selectedCaseId);
+
 							// ファイル取得
 							$.ajax({
 								type: 'POST',
@@ -137,9 +142,8 @@
 		});
 
 	/*** 個別問い合わせ ***/
-			console.log('res : ' + res)
-		let selectedCaseId = '5000l000008UmxJAAS';
-		sendDetailsScreen(selectedCaseId);
+        
+
 		function sendDetailsScreen(selectedCaseId){
 			document.getElementById('outputCbdTemp').innerHTML = null;
 
