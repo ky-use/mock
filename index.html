@@ -22,9 +22,12 @@
 		
 		<script type="text/javascript">
 
+        const REQUEST_DOMAIN = 'https://paypay-bank--pt49.sandbox.my.salesforce.com';
         const fileId = '0680l000002Qm23AAC';
         const fileName = '△△ご参考図.png';
-        function getContentVersion(fileId){
+
+        $(function(){
+        //function getContentVersion(fileId){
 		
             $.ajax({
                 type: 'POST',
