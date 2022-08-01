@@ -110,7 +110,7 @@
 	 * 初期表示時データ取得
 	 */
 	function responseApexData(){
-			
+			console.log('--ajax--')
 		// アクセストークン取得（リフレッシュトークンフロー） Ajax
 		$.ajax({
 			type: 'POST',
@@ -152,6 +152,47 @@
 
 	}
     responseApexData();
+
+    $(function(){
+        		// アクセストークン取得（リフレッシュトークンフロー） Ajax
+		$.ajax({
+			type: 'POST',
+			crossOrigin: true,
+			url: REQUEST_DOMAIN + '/services/oauth2/token',
+			dataType: 'json',
+			cache :false,
+			data : {
+				"grant_type":"refresh_token",
+				"client_id":"3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ", 
+				"refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"
+			},
+			success : function (connectData) {
+				var accToken = 'Bearer ' + connectData.access_token;
+				$.ajax({
+					type: 'GET',
+					crossOrigin: true,
+					url: REQUEST_DOMAIN + '/services/apexrest/IMF_Case',
+					dataType: 'json',
+					cache :false,
+					data: {inquiry : 'd5b8d90ceb5ff5f3505dd311e1e74f6e3f87d028ddac9c3c4c18ede46409e0ef'},
+					headers: {"Authorization" : accToken},
+					success : function (res) {
+						return res;
+						console.log('res:'+res);
+					},
+					error : function (data, errorThrown,status) {
+						
+					}
+				})
+			},
+			error : function (data, errorThrown,status) {
+				console.log(data);
+				console.log(errorThrown);
+				console.log(status);
+			}
+		});
+    });
+
 
 		</script>
 		<noscript>
