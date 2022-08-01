@@ -48,7 +48,7 @@
 
 		// 通信先URL　※環境に併せて変更する必要あり！
 		const REQUEST_DOMAIN = 'https://paypay-bank--pt49.sandbox.my.salesforce.com';
-
+		let res;
 		$(function(){
 				// アクセストークン取得（リフレッシュトークンフロー） Ajax
 			$.ajax({
@@ -72,17 +72,17 @@
 						cache :false,
 						data: {inquiry : 'd5b8d90ceb5ff5f3505dd311e1e74f6e3f87d028ddac9c3c4c18ede46409e0ef'},
 						headers: {"Authorization" : accToken},
-						success : function (res) {
-							console.log('res:'+ JSON.stringify(res));
-							//return res;
-							if(!res.caseList){
-								console.log('!res.caseList');
+						success : function (resp) {
+							console.log('res:'+ JSON.stringify(resp));
+							//return resp;
+							if(!resp.caseList){
+								console.log('!resp.caseList');
 							}else{
 								console.log('else');
 							}
 							
 							let fileId = '0680l000002QlbNAAS';
-
+							res = resp;
 							// ファイル取得
 							$.ajax({
 								type: 'POST',
