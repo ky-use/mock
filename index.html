@@ -179,10 +179,8 @@
 					success : function (res) {
 						console.log('res:'+ JSON.stringify(res));
 						//return res;
-						if(res.caseList.length == 0){ // お問い合わせ0件の場合
-							console.log('res.caseList.length == 0');
-						}else if(!res.caseList){
-							console.log('else if');
+						if(!res.caseList){
+							console.log('!res.caseList');
 						}else{
 							console.log('else');
 						}
