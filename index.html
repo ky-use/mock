@@ -1,1 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+		<meta http-equiv="Content-Script-Type" content="text/javascript">
+		<meta name="format-detection" content="telephone=no">
 
+		<title>お問い合わせフォーム</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+
+	<body id="contact">
+		<script type="text/javascript">
+
+/*** テスト用ダミーデータ ***/
+	const DummyResData = {
+		/*"caseList":[
+			
+			{
+				"record":{
+					"attributes":{
+						"type":"Case",
+						"url":"/services/data/v55.0/sobjects/Case/5000l000008VMRlAAO"
+					},
+					"Id":"5000l000008VMRlAAO",
+					"CaseNumber":"04544529",
+					"SubjectIMF__c":"キャッシュカード",
+					"StatusClient__c":"回答完了",
+					"CreatedDate":"2022-07-29T01:59:14.000+0000"
+				},
+				"content":"○○については△△でしょうか？",
+				"cbdFileList":[
+					{
+						"contentVersions":[],
+						"cbd":{
+							"attributes":{
+								"type":"IMF_ContactBoardDetail__c",
+								"url":"/services/data/v55.0/sobjects/IMF_ContactBoardDetail__c/a1B0l0000013OszEAE"
+							},
+							"Id":"a1B0l0000013OszEAE",
+							"Classification__c":"問い合わせ",
+							"Content__c":"○○については△△でしょうか？",
+							"Case__c":"5000l000008VMRlAAO",
+							"CreatedDate":"2022-07-29T01:59:15.000+0000"
+						}
+					}
+				]
+			},
+			{
+				"record":{
+					"attributes":{
+						"type":"Case",
+						"url":"/services/data/v55.0/sobjects/Case/5000l000008VGwcAAG"
+					},
+					"Id":"5000l000008VGwcAAG",
+					"CaseNumber":"04544518",
+					"SubjectIMF__c":"キャッシュカード",
+					"StatusClient__c":"回答準備中",
+					"CreatedDate":"2022-07-22T07:08:59.000+0000"
+				},
+				"content":"○○は△△でしょうか？",
+				"cbdFileList":[
+					{
+						"contentVersions":[
+							{"Name":"○○ご参考図.png","Id":"0680l000002Qlb3AAC"},
+							{"Name":"△△ご参考図.png","Id":"0680l000002QlbNAAS"}
+						],
+						"cbd":{
+							"attributes":{
+								"type":"IMF_ContactBoardDetail__c",
+								"url":"/services/data/v55.0/sobjects/IMF_ContactBoardDetail__c/a1B0l0000013OMBEA2"
+							},
+							"Id":"a1B0l0000013OMBEA2",
+							"Classification__c":"問い合わせ",
+							"Content__c":"○○は△△でしょうか？",
+							"Case__c":"5000l000008VGwcAAG",
+							"CreatedDate":"2022-07-22T09:05:04.000+0000"
+						}
+					},
+					{
+						"contentVersions":[],
+						"cbd":{
+							"attributes":{
+								"type":"IMF_ContactBoardDetail__c",
+								"url":"/services/data/v55.0/sobjects/IMF_ContactBoardDetail__c/a1B0l0000013OsuEAE"
+							},
+							"Id":"a1B0l0000013OsuEAE",
+							"Classification__c":"回答",
+							"Content__c":"お問い合わせありがとうございます。\r\n○○は△△でございます。",
+							"Case__c":"5000l000008VGwcAAG",
+							"CreatedDate":"2022-07-29T01:57:38.000+0000"
+						}
+					}
+				]
+			}
+		
+	],
+		"accMail":"k*****@u**************"
+		*/
+	};
+
+/*** テスト用ダミーデータ ***/
+
+	// 通信先URL　※環境に併せて変更する必要あり！
+	const REQUEST_DOMAIN = 'https://paypay-bank--pt49.sandbox.my.salesforce.com';
+
+	/**
+	 * 初期表示時データ取得
+	 */
+	function responseApexData(){
+			
+		// アクセストークン取得（リフレッシュトークンフロー） Ajax
+		$.ajax({
+			type: 'POST',
+			crossOrigin: true,
+			url: REQUEST_DOMAIN + '/services/oauth2/token',
+			dataType: 'json',
+			cache :false,
+			data : {
+				"grant_type":"refresh_token",
+				"client_id":"3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ", 
+				"refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"
+			},
+			success : function (connectData) {
+				var accToken = 'Bearer ' + connectData.access_token;
+				$.ajax({
+					type: 'GET',
+					crossOrigin: true,
+					url: REQUEST_DOMAIN + '/services/apexrest/IMF_Case',
+					dataType: 'json',
+					cache :false,
+					data: {inquiry : 'd5b8d90ceb5ff5f3505dd311e1e74f6e3f87d028ddac9c3c4c18ede46409e0ef'},
+					headers: {"Authorization" : accToken},
+					success : function (res) {
+						return res;
+						console.log(res);
+					},
+					error : function (data, errorThrown,status) {
+						
+					}
+				})
+			},
+			error : function (data, errorThrown,status) {
+				console.log(data);
+				console.log(errorThrown);
+				console.log(status);
+			}
+		});
+
+		return DummyResData;
+	}
+    console.log(DummyResData)
+
+		</script>
+		<noscript>
+
+		</noscript>
+	</body>
+</html>
