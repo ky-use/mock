@@ -10,7 +10,31 @@
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	</head>
+	
+	<!-- cbdTemplate -->
+	<template id="cbdTemplate">
+		<div class="contbrd-cont">
+			<div class="contbrd-head">
+				<dl>
+				<dt><span class="actor-text"></span><div class="outputNew list-qa-box"></div></dt>
+				<dd class="createddate"></dd>
+				</dl>
+			</div>
+			<div class="contbrd-body">
+				<div id="" name="cbdId" class="contbrd-txt">
+					<p class="contbrd-content"></p>
+				</div>
+			</div>
+		</div>
+	</template>
+	<!-- cbdTemplate -->
 
+	<!-- fileTemplate -->
+	<template id="fileTemplate">
+		<p><a class="fileLink"></a></p>
+	</template>
+	<!-- fileTemplate -->
+	
 	<body id="contact">
 		
 		<div>
@@ -53,7 +77,7 @@
 							}else{
 								console.log('else');
 							}
-
+							
 							let fileId = '0680l000002QlbNAAS';
 
 							// ファイル取得
@@ -109,9 +133,180 @@
 			});
 		});
 
-		function getContentVersion(fileId){
+	/*** 個別問い合わせ ***/
+		let selectedCaseId = '5000l000008UmxJAAS';
+		sendDetailsScreen(selectedCaseId);
+		function sendDetailsScreen(selectedCaseId){
+			document.getElementById('outputCbdTemp').innerHTML = null;
+			// 投稿するボタンにケースIdを設定
+			document.getElementById('replyButton').dataset.cId = selectedCaseId;
+			// Cookie取得処理を呼び出す
+			const CookieList = getCookie();
+			console.log('getCookie DetailsScreen :'+ CookieList)
+			// NEW付与対象のIDを格納する配列
+			let newTargetList = [];
 
+			let cbdFileList;
+			// ケースの件数分
+			for(i = 0; i < res.caseList.length; i++){
 
+				const rec = res.caseList[i].record;
+				// URLのケースIdとセッションストレージから取得したケースIdが一致する場合
+				if(selectedCaseId == rec.Id){
+					// ページタイトルを設定
+					document.getElementById('contbrdTitle').textContent = 'お問い合わせ番号：No.' + rec.CaseNumber;
+
+					cbdFileList = res.caseList[i].cbdFileList;
+
+					// コンタクトボード明細レコードとファイルの組み合わせリストの件数分
+					for(j = 0; j < cbdFileList.length; j++){
+
+						let idFlg = {};
+						// NEW表示フラグをtrueで初期化
+						let newDisplayFlag = true;
+						// 1ヶ月前の日付用変数に現在日を取得して-1ヶ月する
+						let nowDateTime = new Date();
+						const year = nowDateTime.getFullYear();
+						// 月を取得して、1ヶ月増やして
+						const month = nowDateTime.getMonth() + 1;
+						// 日を取得する
+						const date = nowDateTime.getDate();
+						// 先頭文字列'0'に、1）から時間(h)を取得して結合した値を最後から2文字までを変数に格納
+						const hour = (`0` + (nowDateTime.getHours())).slice(-2);
+						// 先頭文字列'0'に、1）から分(m)を取得して結合した値を最後から2文字までを変数に格納
+						const minute = (`0` + (nowDateTime.getMinutes())).slice(-2);
+						nowDateTime = new Date(`${year}/${month-1}/${date} ${hour}:${minute}`);
+						// コンタクトボード明細の時間
+						let cbdDateTime = new Date(cbdFileList[j].CreatedDate);
+						// cbd日付が一カ月前より大きい
+						// コンタクトボード明細の最終更新日が現在日時-1ヶ月より新しい（値を含む）場合
+						if(cbdDateTime >= nowDateTime){
+							// CookieのCbdIdの件数分
+							for(k=0; k < CookieList.length; k++){
+								// コンタクトボード明細のIDとCookieのIDが一致している場合
+								if(cbdFileList[j].Id == CookieList[k]){
+									// NEW表示フラグをfalseに設定
+									newDisplayFlag = false;
+								}
+							}
+						// コンタクトボード明細の最終更新日が現在日時-1ヶ月より古い（値を含む）場合
+						}else{
+							// NEW表示フラグをfalseに設定
+							newDisplayFlag = false;
+						}
+						// コンタクトボード明細のレコ―ドにNEWアイコン制御用のプロパティがある場合
+						if('newIconDisp' in cbdFileList[j]){
+							// NEWアイコン制御用のプロパティに値を追加
+							cbdFileList[j].newIconDisp = newDisplayFlag;
+						// プロパティがない場合
+						}else{
+							// NEWアイコン制御用のプロパティを付与し、値を設定
+							cbdFileList[j]["newIconDisp"] = newDisplayFlag;
+						}
+					}
+				}
+			}
+
+			// コンタクトボード明細templateを取得
+			let caseTemplate = document.getElementById('cbdTemplate');
+			// newIcon template要素を取得
+			let iconTemplate = document.getElementById('newIconTemplate');
+			// コンタクトボード明細のリストの件数分
+			for(let i = 0; i < cbdFileList.length; i++){
+				// 要素を取得
+				const cbd = cbdFileList[i].cbd;
+				// 紐付く添付ファイルを取得
+				const cvList = cbdFileList[i].contentVersions;
+				// コンタクトボード明細templateの内容を複製
+				let clone = cbdTemplate.content.cloneNode(true);
+				// 複製したtemplate要素にデータを挿入	
+				// レコード種別が、お客さまの場合
+				if(cbd.Classification__c == '問い合わせ'){
+					// お客さまクラスを付与
+					clone.querySelector('.contbrd-head').classList.add('customer');
+					// アクター名を「お客さま」に設定
+					clone.querySelector('.actor-text').textContent = 'お客さま';
+					// コンタクトボード明細の投稿内容をそのまま設定
+					clone.querySelector('.contbrd-content').textContent = cbd.Content__c;
+				// PayPay銀行の場合
+				}else{
+					// 回答クラスを付与
+					clone.querySelector('.contbrd-head').classList.add('answer');
+					// アクター名を「PayPay銀行」に設定
+					clone.querySelector('.actor-text').textContent = 'PayPay銀行';
+					// コンタクトボード明細の投稿内容を引数にURLリンク化処理を呼び出し
+					let content = AutoLink(cbd.Content__c);
+					// 値がNullではない場合
+					if(content != null){
+						// リンク化した投稿内容を設定
+						// textContentに入れるとHTMLエンティティに変換されるため、innerHTMLに入れる
+						clone.querySelector('.contbrd-content').innerHTML = content;
+					// 値がNullの場合
+					}else{
+						// コンタクトボード明細の投稿内容をそのまま設定
+						clone.querySelector('.contbrd-content').innerHTML = cbd.Content__c;
+					}
+				}
+				// コンタクトボード明細の作成日を日付をJSTに変換する処理を呼び出して、設定する
+				clone.querySelector('.createddate').textContent = changeSlashDate(cbd.CreatedDate);
+				clone.querySelector('.outputNew').id = 'new' + cbd.Id;
+				clone.querySelector('.contbrd-txt').id = 'file' + cbd.Id;
+				// 繰り返し初回の場合
+				if(i == 0){
+					// 初回の全表示用クラスを付与
+					clone.querySelector('.contbrd-body').classList.add('first');
+				}
+				// コンタクトボード明細を画面に出力
+				document.getElementById('outputCbdTemp').appendChild(clone);
+				// コンタクトボード明細のNEWアイコン表示制御用プロパティがtrueの場合かつ PPBの回答の場合、NEWアイコンを表示する
+				if(cbdFileList[i].newIconDisp && cbd.Classification__c == '回答'){
+	// TODO:動かないので一時コメントアウト
+					// newIcon template要素を複製
+					let newIconClone = newIconTemplate.content.cloneNode(true);
+
+					// 個別詳細画面用のCSSクラスを追加
+					newIconClone.querySelector('.list-qa-ic').classList.add('new-icon');
+					// 元クラスを削除
+					newIconClone.querySelector('.list-qa-ic').classList.remove('list-qa-ic');
+
+					// newIconを画面に出力
+					document.getElementById(res.caseList[i].Id).appendChild(newIconClone);
+	//
+				}
+				//ファイルがある場合
+				if(cbdFileList[i].contentVersions.length > 0){
+					// file template要素を取得
+					let fileTemplate = document.getElementById('fileTemplate');
+					// 「ファイル」固定文言タグを生成
+					let fileFixedText = document.createElement('p');
+
+					fileFixedText.innerHTML = 'ファイル';
+
+					fileFixedText.style = 'font-weight: bold;margin-top: 10px'
+					// 画面に追加
+					document.getElementById('file' + cbd.Id).appendChild(fileFixedText);
+					// 添付ファイルリストを取得
+					const cvList = cbdFileList[i].contentVersions;
+					// ファイルの件数分
+					for(j = 0; j < cvList.length; j++){
+						// file template要素の内容を複製
+						let fileClone = fileTemplate.content.cloneNode(true);
+						// ファイルの中身からダウンロード用リンクを生成
+						let fileUrl = URL.createObjectURL(new Blob(
+							[cvList[j].versionData],
+							{type: "application/octet-stream"}
+						));
+						// 画面出力するファイル名を設定する
+						fileClone.querySelector('.fileLink').textContent = cvList[j].Name;
+						// ダウンロードされる際のファイル名を設定する
+						fileClone.querySelector('.fileLink').download = cvList[j].Name;
+						// ダウンロード用リンクを設定する
+						fileClone.querySelector('.fileLink').href = fileUrl;
+						// ファイルを画面に出力
+						document.getElementById('file' + cbd.Id).appendChild(fileClone);
+					}
+				}
+			}
 		}
 		</script>
 	</body>
