@@ -43,7 +43,7 @@
 		
 		<div id="outputCbdTemp">					
 		</div>
-		<button onclick="responseApexData();"></button>
+		<button onclick="responseApexData();">登録</button>
 		
 		<script type="text/javascript">
 
@@ -86,7 +86,7 @@
 						url: REQUEST_DOMAIN + '/services/apexrest/IMF_Case',
 						dataType: 'json',
 						cache :false,
-						data: {"inquiry" : requestParam.eStr, "subject" : requestParam.subject, "content": requestParam.content, "linkedDial": requestParam.linkedDial},
+						data: {requestParam},
 						headers: {"Authorization" : accToken},
 						success : function (res) {
 							return res;
