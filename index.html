@@ -50,19 +50,12 @@
 		// 通信先URL　※環境に併せて変更する必要あり！
 		const REQUEST_DOMAIN = 'https://paypay-bank--pt49.sandbox.my.salesforce.com';
 		let res;
-		/*$(function(){
-			responseApexData();
-		});*/
+		$(function(){
+			//responseApexData();
 
-		// POSTデータ
-		let requestParam = //JSON.stringify(
-            {
-				'eStr': 'd5b8d90ceb5ff5f3505dd311e1e74f6e3f87d028ddac9c3c4c18ede46409e0ef', 
-				'subject': 'ajaxTest', 
-				'content': 'contentTest小山01', 
-				'linkedDial': 'キャッシュカード・トークン'
-			}
-		// 新規投稿用データハッシュ
+		});
+
+        // 新規投稿用データハッシュ
         const inqRegistData = {
             EncryptedData:'d5b8d90ceb5ff5f3505dd311e1e74f6e3f87d028ddac9c3c4c18ede46409e0ef',
             Subject:'ajaxTest',
@@ -70,25 +63,26 @@
             LinkedDial:''
         };
 
+        const jinkakuCode = '個人';
+        //const jinkakuCode = 'a';
+        // 各種手続きダイヤル設定対象
+        const procedureDialList = [
+            '登録情報の変更', 
+            'キャッシュカード・トークン', 
+            '振込', 
+            '口座自動振替', 
+            '各種証明書（取引明細・残高証明など）'
+        ];
+
+
         function himoduke(){
-            const jinkakuCode = '個人';
-            //const jinkakuCode = 'a';
-            // 各種手続きダイヤル設定対象
-            const procedureDialList = [
-                '登録情報の変更', 
-                'キャッシュカード・トークン', 
-                '振込', 
-                '口座自動振替', 
-                '各種証明書（取引明細・残高証明など）'
-            ];
-    
             // 画面入力されたお問い合わせ種類
             if(jinkakuCode == '個人' || jinkakuCode == '非居住者'){
                 // 選択値を取得
                 //let selectedItem = document.getElementById('Modal-aaa').innerHTML;
                 let selectedItem = 'キャッシュカード・トークン';
                 // 各種手続きダイヤル設定対象の場合
-                if(kojinItemList.includes(selectedItem)){
+                if(procedureDialList.includes(selectedItem)){
                     inqRegistData.LinkedDial = '各種手続きダイヤル';
                 }else{
                     inqRegistData.LinkedDial = 'その他ダイヤル';
