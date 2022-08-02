@@ -55,13 +55,14 @@
 		});
 
 		// POSTデータ
-		let requestParam = JSON.stringify({
+		let requestParam = //JSON.stringify(
+            {
 				'eStr': 'd5b8d90ceb5ff5f3505dd311e1e74f6e3f87d028ddac9c3c4c18ede46409e0ef', 
 				'subject': 'ajaxTest', 
 				'content': 'contentTest小山01', 
 				'linkedDial': 'キャッシュカード・トークン'
 			}
-		)
+		//)
 
 		function responseApexData(){
 			
@@ -85,7 +86,7 @@
 						url: REQUEST_DOMAIN + '/services/apexrest/IMF_Case',
 						dataType: 'json',
 						cache :false,
-						data: {inquiry : requestParam.eStr, sub : requestParam.subject, cont: requestParam.content, Dial: requestParam.linkedDial},
+						data: {"inquiry" : requestParam.eStr, "subject" : requestParam.subject, "content": requestParam.content, "linkedDial": requestParam.linkedDial},
 						headers: {"Authorization" : accToken},
 						success : function (res) {
 							return res;
