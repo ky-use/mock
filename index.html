@@ -86,7 +86,7 @@
 						url: REQUEST_DOMAIN + '/services/apexrest/IMF_Case',
 						dataType: 'json',
 						cache :false,
-						data: {requestParam},
+						data: requestParam,
 						headers: {"Authorization" : accToken},
 						success : function (res) {
 							return res;
