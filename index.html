@@ -64,7 +64,7 @@
         };
 
         const jinkakuCode = '個人';
-        //const jinkakuCode = 'a';
+        //const jinkakuCode = '法人';
         // 各種手続きダイヤル設定対象
         const procedureDialList = [
             '登録情報の変更', 
@@ -74,13 +74,13 @@
             '各種証明書（取引明細・残高証明など）'
         ];
 
-
+        let selectedItem = 'その他';
+        
         function himoduke(){
             // 画面入力されたお問い合わせ種類
             if(jinkakuCode == '個人' || jinkakuCode == '非居住者'){
                 // 選択値を取得
                 //let selectedItem = document.getElementById('Modal-aaa').innerHTML;
-                let selectedItem = 'キャッシュカード・トークン';
                 // 各種手続きダイヤル設定対象の場合
                 if(procedureDialList.includes(selectedItem)){
                     inqRegistData.LinkedDial = '各種手続きダイヤル';
