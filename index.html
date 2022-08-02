@@ -113,7 +113,6 @@
 					"refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"
 				},
 				success : function (connectData) {
-                    console.log(JSON.stringify(requestParam));
 					var accToken = 'Bearer ' + connectData.access_token;
                     $.ajax({
                         type:'POST',
