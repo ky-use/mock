@@ -62,7 +62,13 @@
 				'content': 'contentTest小山01', 
 				'linkedDial': 'キャッシュカード・トークン'
 			}
-		//)
+		// 新規投稿用データハッシュ
+        const inqRegistData = {
+            EncryptedData:'d5b8d90ceb5ff5f3505dd311e1e74f6e3f87d028ddac9c3c4c18ede46409e0ef',
+            Subject:'ajaxTest',
+            Content:'contentTest小山01',
+            LinkedDial:'キャッシュカード・トークン'
+        };
 
 		function responseApexData(){
 			
@@ -81,20 +87,15 @@
 				success : function (connectData) {
                     console.log(JSON.stringify(requestParam));
 					var accToken = 'Bearer ' + connectData.access_token;
-					$.ajax({
-						type: 'POST',
-						crossOrigin: true,
-						url: REQUEST_DOMAIN + '/services/apexrest/IMF_Case',
-						dataType: 'json',
-						cache :false,
-						data: {
-                            'eStr': 'd5b8d90ceb5ff5f3505dd311e1e74f6e3f87d028ddac9c3c4c18ede46409e0ef', 
-                            'subject': 'ajaxTest', 
-                            'content': 'contentTest小山01', 
-                            'linkedDial': 'キャッシュカード・トークン'
-                        },
-						headers: {"Authorization" : accToken},
-						success : function (res) {
+                    $.ajax({
+                        type:'POST',
+                        crossOrigin:true,
+                        url:REQUEST_DOMAIN + '/services/apexrest/IMF_Case',
+                        cache:false,
+                        headers: {"Authorization":accToken, "Content-Type":"application/json"},
+                        dataType:'json',
+                        data:JSON.stringify(inqRegistData),
+                        success:function(response){
 							console.log(res);
 							console.log('success');
 						},
