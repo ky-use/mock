@@ -85,7 +85,8 @@
             // 画面入力されたお問い合わせ種類
             if(jinkakuCode == '個人' || jinkakuCode == '非居住者'){
                 // 選択値を取得
-                let selectedItem = document.getElementById('Modal-aaa').innerHTML;
+                //let selectedItem = document.getElementById('Modal-aaa').innerHTML;
+                let selectedItem = 'キャッシュカード・トークン';
                 // 各種手続きダイヤル設定対象の場合
                 if(kojinItemList.includes(selectedItem)){
                     inqRegistData.LinkedDial = '各種手続きダイヤル';
