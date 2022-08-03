@@ -724,6 +724,18 @@
 
 			return;
 		}
+        // 子要素があればTRUE
+        const elemcheck = document.getElementById('listQa').hasChildNodes();
+        // 子要素があるかどうかチェック
+        if(elemcheck){
+            console.log(elemcheck)
+            let parent = document.getElementById('listQa');
+            console.log(parent)
+            // 子要素が無くなるまで削除
+            while(parent.firstChild){
+                parent.removeChild(parent.firstChild);
+            }
+        }
 		// 入力画面出力用
 		eMail = res.accMail;
 		// 新規入力画面に反映
@@ -859,19 +871,7 @@
 					clone.querySelector('.inq-status').classList.add('txt-fin');
 				} 
 				clone.querySelector('.inq-outputNew').id = c.record.Id;
-                // 子要素があればTRUE
-                const elemcheck = document.getElementById('listQa').hasChildNodes();
-                // 子要素があるかどうかチェック
-                if(elemcheck){
-                    console.log(elemcheck)
-                    let parent = document.getElementById('listQa');
-                    console.log(parent)
-                    // 子要素が無くなるまで削除
-                    while(parent.firstChild){
-                        console.log(parent.firstChild)
-                        parent.removeChild(parent.firstChild);
-                    }
-                }
+                
 				// caseを画面に出力
 				document.getElementById('listQa').appendChild(clone);
 				// コンタクトボード明細を取得
