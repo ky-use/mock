@@ -123,17 +123,23 @@
 
 		<script type="text/javascript">
 
-		// 通信先URL　※環境に併せて変更する必要あり！
-		const REQUEST_DOMAIN = 'https://paypay-bank--pt49.sandbox.my.salesforce.com';
-		let res;
+        const REQUEST_DOMAIN = 'https://paypay-bank--pt49.sandbox.my.salesforce.com';
+        const CLIENT_ID = '3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ';
+        const REFLESH_TOKEN = '5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu';
+		
+        let res;
+
+        // 新規投稿用データハッシュ
+        const inqRegistData = {
+            EncryptedData:'a31e76e1cb33faf4ae1380a8f732f95f9f9b83a095c3cbd607b9fc09399906f5',
+            Subject:'test_Koyama',
+            Content:'content01',
+            LinkedDial:'各種手続きダイヤル'
+        };
+
+
 		$(function(){
-			// 新規投稿用データハッシュ
-            const inqRegistData = {
-                EncryptedData:'a31e76e1cb33faf4ae1380a8f732f95f9f9b83a095c3cbd607b9fc09399906f5',
-                Subject:'test_Koyama',
-                Content:'content01',
-                LinkedDial:'各種手続きダイヤル'
-            };
+			
 		});
 
         // モーダル閉じるボタン(画面遷移なし)
