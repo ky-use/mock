@@ -315,7 +315,7 @@
     // 時限チェック 出力
     function dispTimeoutErrModal(){
         console.log('dispTimeoutErrModal');
-        const errorMessageText = res.errorMessage.replace(/\n/g, '<br>');
+        errorMessageText = res.errorMessage.replace(/\n/g, '<br>');
         $(".eMessage-error-timeoutError").html(errorMessageText);
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-timeoutError").fadeIn();
@@ -333,7 +333,7 @@
     // システムエラー 出力
     function dispAbnormalErrModal(){
         console.log('dispAbnormalErrModal');
-        const errorMessageText = res.errorMessage.replace(/\n/g, '<br>');
+        errorMessageText = res.errorMessage.replace(/\n/g, '<br>');
         $(".eMessage-error-abnormalError").html(errorMessageText);
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-abnormalError").fadeIn();
@@ -343,7 +343,7 @@
     // メールアドレス不正 出力
     function dispInvmailErrModal(){
         console.log('dispInvmailErrModal');
-        const errorMessageText = res.errorMessage.replace(/\n/g, '<br>');
+        errorMessageText = res.errorMessage.replace(/\n/g, '<br>');
         $(".eMessage-error-invmailError").html(errorMessageText);
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-invmailError").fadeIn();
@@ -354,7 +354,7 @@
     function dispNoaccErrModal(){
         if(res.result == 'NO_ACCOUNT'){
             console.log('dispNoaccErrModal');
-            const errorMessageText = res.errorMessage.replace(/\n/g, '<br>');
+            errorMessageText = res.errorMessage.replace(/\n/g, '<br>');
             $(".eMessage-error-noaccError").html(errorMessageText);
             let CurrentScrollY = $(window).scrollTop();
             $(".modalOverlay,.modalWrap_error.error-noaccError").fadeIn();
@@ -435,6 +435,9 @@
 	let selectFileIndex;
 	// アップロードファイル操作用：アップロードファイル数
 	let uploadedFileSize = 0;
+/*** ADD K.Y ***/
+	// エラーメッセージ（モーダル）
+	let errorMessageText;
 	
 	// エラー格納用
 	let errorInfo = {
@@ -1006,6 +1009,7 @@
 						const cbdId = response.cbdId;
 /*** ADD K.Y ***/
                         console.log(response)
+                        errorMessageText = response.errorMessage.replace(/\n/g, '<br>');
                         if(response.result == 'SUCCESS'){
                             if(cbdId){
                                 changeDisp('compScreen');
@@ -1013,7 +1017,7 @@
                             // メールアドレス不正
                         }else if(response.result == 'INVALID_EMAIL_ADDRESS'){
                             dispInvmailErrModal();
-                        // 時限チェック
+                            // 時限チェック
                         }else if(response.result == 'TIMED_CHECK'){
                             dispTimeoutErrModal();
                         // 異常終了
