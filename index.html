@@ -190,9 +190,7 @@
 
                             if(resp.result == 'SUCCESS'){
                                 if(resp.caseList){
-                                    if(resp.caseList.length == 0){
-                                        dispNocaseErrModal();
-                                    } 
+                                    dispNocaseErrModal();
                                 }
                             }else if(resp.result == 'TIMED_CHECK'){
                                 dispTimeoutErrModal();
