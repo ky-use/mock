@@ -189,7 +189,7 @@
                             console.log(resp);
 
                             if(resp.result == 'SUCCESS'){
-                                if(resp.caseList){
+                                if(!resp.caseList){
                                     dispNocaseErrModal();
                                 }
                             }else if(resp.result == 'TIMED_CHECK'){
