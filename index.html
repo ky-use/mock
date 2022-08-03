@@ -1000,7 +1000,7 @@
                         if(response.result == 'INVALID_EMAIL_ADDRESS'){
                             dispInvmailErrModal();
                         // 時限チェック
-                        }else if(resp.result == 'TIMED_CHECK'){
+                        }else if(response.result == 'TIMED_CHECK'){
                             dispRegisTimeoutErrModal();
                         // 異常終了
                         }else{
@@ -1127,8 +1127,13 @@
 						const cbdId = response.cbdId;
 						console.log(cbdId);
 /*** ADD K.Y ***/
+                        // メールアドレス不正
+                        if(response.result == 'INVALID_EMAIL_ADDRESS'){
+                            dispInvmailErrModal();
                         // 時限チェック
-                        if(resp.result == 'TIMED_CHECK'){
+                        }
+                        // 時限チェック
+                        if(response.result == 'TIMED_CHECK'){
                             dispRegisTimeoutErrModal();
                         // 異常終了
                         }else{
