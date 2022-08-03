@@ -361,11 +361,13 @@
     }
     // 取引先が存在しない(新規問い合わせ登録画面) 出力
     function dispNoaccErrModal(){
-        console.log('dispNoaccErrModal');
-        let CurrentScrollY = $(window).scrollTop();
-        $(".modalOverlay,.modalWrap_error.error-noaccError").fadeIn();
-        $(".error-noaccError").css("display", "block");
-        $("body").css({position:"fixed",top:-1 * CurrentScrollY});
+        if(!res.caseList){
+            console.log('dispNoaccErrModal');
+            let CurrentScrollY = $(window).scrollTop();
+            $(".modalOverlay,.modalWrap_error.error-noaccError").fadeIn();
+            $(".error-noaccError").css("display", "block");
+            $("body").css({position:"fixed",top:-1 * CurrentScrollY});
+        }
     }
 
 //-->
@@ -936,10 +938,7 @@
 /*** ADD K.Y ***/
                         // 成功
                         if(response.result == 'SUCCESS'){
-                            // お問い合わせ0件
-                            if(!response.caseList){
-                                dispNoaccErrModal();
-                            }
+                            
                         // 時限チェック
                         }else if(response.result == 'TIMED_CHECK'){
                             dispTimeoutErrModal();
@@ -1736,7 +1735,8 @@
 	<div class="blk">
 		<div class="blkCont bdrT0">
 			<p class="contbrd-formBtn">
-				<a href="javascript:void(0);" onclick="changeDisp('inqInputScreen')" class="btn btn02">新規お問い合わせ</a>
+<!-- ADD K.Y -->
+				<a href="javascript:void(0);" onclick="changeDisp('inqInputScreen'); dispNoaccErrModal();" class="btn btn02">新規お問い合わせ</a>
 			</p>
 			<p class="contbrd-formTitle">お問い合わせフォームの使い方</p>
 			<div class="stepCont">
