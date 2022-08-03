@@ -85,11 +85,15 @@
         $(".mClose").on("click", function(){
             var CurrentScrollY = $(window).scrollTop();
             $(".modalOverlay,.modalWrap_error").fadeOut();
+            $(".modalWrap_error").css("display", "none");
+            
             $("body").css({position:"",top:0 * CurrentScrollY});
         });
         function dispalyModal(){
             let CurrentScrollY = $(window).scrollTop();
             $(".modalOverlay,.modalWrap_error.error-type1").fadeIn();
+            $(".modalWrap_error").css("display", "block");
+
             $("body").css({position:"fixed",top:-1 * CurrentScrollY});
         }
 		function responseApexData(){
