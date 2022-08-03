@@ -57,7 +57,8 @@
         <div class="modalOverlay"></div>
 
 		<button onclick="responseApexData();">登録</button>
-		
+		<button onclick="newinq();">新規画面</button>
+	
         
         <div class="modalWrap_error error-comError">
             <div class="modalOuter_error">
@@ -95,6 +96,18 @@
                 </div><!--/modal_error_btnArea-->
             </div><!--/modalOuter_error-->
         </div><!--/modalWrap_error-->
+        
+        <div class="modalWrap_error error-nocaseError">
+            <div class="modalOuter_error">
+                <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
+                <div class="modal__bodyArea">
+                    <p class="fBold">ただいまお客さま情報を登録中です。<br>登録が完了しましたら<br>お問い合わせ可能となりますので、<br>時間をおいて再度お試しください。</p>
+                </div><!--/modal__bodyArea-->
+                <div class="modal_error_btnArea">
+                    <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
+                </div><!--/modal_error_btnArea-->
+            </div><!--/modalOuter_error-->
+        </div><!--/modalWrap_error-->
 
 		<script type="text/javascript">
 
@@ -103,40 +116,55 @@
 		let res;
 		$(function(){
 			//responseApexData();
-
 		});
 
+        let resp;
+        // モーダル閉じるボタン(画面遷移なし)
         $(".mClose").on("click", function(){
             var CurrentScrollY = $(window).scrollTop();
             $(".modalOverlay,.modalWrap_error").fadeOut();
             $(".modalWrap_error").css("display", "none");
             $("body").css({position:"",top:0 * CurrentScrollY});
         });
-
+        // 通信失敗
         function dispComErrModal(){
             let CurrentScrollY = $(window).scrollTop();
             $(".modalOverlay,.modalWrap_error.error-comError").fadeIn();
             $(".error-comError").css("display", "block");
             $("body").css({position:"fixed",top:-1 * CurrentScrollY});
         }
-
+        // 時限チェック
         function dispTimeoutErrModal(){
             let CurrentScrollY = $(window).scrollTop();
             $(".modalOverlay,.modalWrap_error.error-timeoutError").fadeIn();
             $(".error-timeoutError").css("display", "block");
             $("body").css({position:"fixed",top:-1 * CurrentScrollY});
         }
-
+        // システムエラー
         function dispAbnormalErrModal(){
             let CurrentScrollY = $(window).scrollTop();
             $(".modalOverlay,.modalWrap_error.error-abnormalError").fadeIn();
             $(".error-abnormalError").css("display", "block");
             $("body").css({position:"fixed",top:-1 * CurrentScrollY});
         }
+        // 取引先が存在しない場合(新規問い合わせ登録画面)
+        function dispNocaseErrModal(){
+            let CurrentScrollY = $(window).scrollTop();
+            $(".modalOverlay,.modalWrap_error.error-nocaseError").fadeIn();
+            $(".error-nocaseError").css("display", "block");
+            $("body").css({position:"fixed",top:-1 * CurrentScrollY});
+        }
 
+        function newinq(){
+            console.log(res.caseList)
+            if(res.caseList){
+                if(res.caseList.length == 0){
+                    dispNocaseErrModal();
+                } 
+            }
+        }
 
 		function responseApexData(){
-			
             $.ajax({
                 type: 'POST',
                 crossOrigin: true,
@@ -163,22 +191,18 @@
                         success : function (res) {
 			                console.log('success');
                             console.log(res);
-			                console.log(res.result);
+                            resp = res;
                             if(res.result == ''){
 
                             }else if(res.result == 'TIMED_CHECK'){
                                 dispTimeoutErrModal();
-			    	            console.log('reselse if');
                             }else{
                                 dispAbnormalErrModal();
-			    	            console.log('reselse');
                             }
                         },
                         error : function (data, errorThrown,status) {
                             console.log('error');
-
                             dispComErrModal();
-
                         }
                     })
                 },
