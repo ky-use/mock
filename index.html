@@ -72,6 +72,20 @@
         </div><!--/modalWrap_error-->
 
 
+        <div class="modalWrap_error error-timeoutError">
+            <div class="modalOuter_error">
+                <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
+                <div class="modal__bodyArea">
+                    <p class="fBold">ログイン後、一定の時間が経過しました。<br>再度ログインしてご利用ください。</p>
+                </div><!--/modal__bodyArea-->
+                <div class="modal_error_btnArea">
+                    <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
+                </div><!--/modal_error_btnArea-->
+            </div><!--/modalOuter_error-->
+        </div><!--/modalWrap_error-->
+        
+
+
 		<script type="text/javascript">
 
 		// 通信先URL　※環境に併せて変更する必要あり！
@@ -88,9 +102,16 @@
             $(".modalWrap_error").css("display", "none");
             $("body").css({position:"",top:0 * CurrentScrollY});
         });
-        function dispalyComErrorModal(){
+        function dispComErrModal(){
             let CurrentScrollY = $(window).scrollTop();
             $(".modalOverlay,.modalWrap_error.error-comError").fadeIn();
+            $(".modalWrap_error").css("display", "block");
+            $("body").css({position:"fixed",top:-1 * CurrentScrollY});
+        }
+
+        function dispTimeoutErrModal(){
+            let CurrentScrollY = $(window).scrollTop();
+            $(".modalOverlay,.modalWrap_error.error-timeoutError").fadeIn();
             $(".modalWrap_error").css("display", "block");
             $("body").css({position:"fixed",top:-1 * CurrentScrollY});
         }
@@ -105,8 +126,8 @@
                 data : {
                     "grant_type":"refresh_token",
                     "client_id":"3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ", 
-                    //"refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"
-                    "refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNm"
+                    "refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"
+                    //"refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNm" // アクセス失敗用
                 },
                 success : function (connectData) {
                     var accToken = 'Bearer ' + connectData.access_token;
@@ -116,16 +137,19 @@
                         url: REQUEST_DOMAIN + '/services/apexrest/IMF_Case',
                         dataType: 'json',
                         cache :false,
-                        data: {inquiry : 'd5b8d90ceb5ff5f3505dd311e1e74f6e3f87d028ddac9c3c4c18ede46409'},
+                        data: {inquiry : '789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab317b0a'},
                         headers: {"Authorization" : accToken},
                         success : function (res) {
+                            if(res.result == 'TIMED_CHECK'){
+                                dispTimeoutErrModal();
+                            }
                             console.log('success');
                             console.log(res)
                         },
                         error : function (data, errorThrown,status) {
                             console.log('error');
 
-                            dispalyComErrorModal();
+                            dispComErrModal();
 
 
                         }
@@ -133,7 +157,7 @@
                 },
                 error : function (data, errorThrown,status) {
                     console.log('a_error');
-                    dispalyComErrorModal();
+                    dispComErrModal();
                 }
             });
 		}
