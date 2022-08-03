@@ -524,7 +524,6 @@
 			cbdReqCheck();
 		});
 		
-		
 		const jinkakuCode = $('input[name="JinkakuCode"]').val();
 		if(jinkakuCode){
 			// 人格コードが個人または非居住者の場合
@@ -858,9 +857,18 @@
 					clone.querySelector('.inq-status').classList.remove('txt-not-fin');
 					// CSSクラスを追加（グリーン）
 					clone.querySelector('.inq-status').classList.add('txt-fin');
-				}
-				// 
+				} 
 				clone.querySelector('.inq-outputNew').id = c.record.Id;
+                // 子要素があればTRUE
+                const elemcheck = document.getElementById('listQa').hasChildNodes();
+                // 子要素があるかどうかチェック
+                if(elemcheck){
+                    const parent = document.getElementById('listQa');
+                    // 子要素が無くなるまで削除
+                    while(parent.firstChild){
+                        parent.removeChild(parent.firstChild);
+                    }
+                }
 				// caseを画面に出力
 				document.getElementById('listQa').appendChild(clone);
 				// コンタクトボード明細を取得
