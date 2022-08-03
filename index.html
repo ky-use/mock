@@ -864,10 +864,11 @@
                 // 子要素があるかどうかチェック
                 if(elemcheck){
                     console.log(elemcheck)
-                    console.log(parent)
                     let parent = document.getElementById('listQa');
+                    console.log(parent)
                     // 子要素が無くなるまで削除
                     while(parent.firstChild){
+                        console.log(parent.firstChild)
                         parent.removeChild(parent.firstChild);
                     }
                 }
