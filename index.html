@@ -87,6 +87,11 @@
             $(".modalOverlay,.modalWrap_error").fadeOut();
             $("body").css({position:"",top:0 * CurrentScrollY});
         });
+        function dispalyModal(){
+            let CurrentScrollY = $(window).scrollTop();
+            $(".modalOverlay,.modalWrap_error.error-type1").fadeIn();
+            $("body").css({position:"fixed",top:-1 * CurrentScrollY});
+        }
 		function responseApexData(){
 			
             $.ajax({
@@ -98,7 +103,8 @@
                 data : {
                     "grant_type":"refresh_token",
                     "client_id":"3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ", 
-                    "refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"
+                    //"refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu"
+                    "refresh_token":"5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNm"
                 },
                 success : function (connectData) {
                     var accToken = 'Bearer ' + connectData.access_token;
@@ -117,18 +123,15 @@
                         error : function (data, errorThrown,status) {
                             console.log('error');
 
-                            let CurrentScrollY = $(window).scrollTop();
-                            $(".modalOverlay,.modalWrap_error.error-type2").fadeIn();
-                            $("body").css({position:"fixed",top:-1 * CurrentScrollY});
+                            dispalyModal();
 
 
                         }
                     })
                 },
                 error : function (data, errorThrown,status) {
-                    console.log(data);
-                    console.log(errorThrown);
-                    console.log(status);
+                    console.log('a_error');
+                    dispalyModal();
                 }
             });
 		}
