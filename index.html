@@ -113,12 +113,11 @@
 
 		// 通信先URL　※環境に併せて変更する必要あり！
 		const REQUEST_DOMAIN = 'https://paypay-bank--pt49.sandbox.my.salesforce.com';
-		let resp;
+		let res;
 		$(function(){
 			//responseApexData();
 		});
 
-        let resp;
         // モーダル閉じるボタン(画面遷移なし)
         $(".mClose").on("click", function(){
             var CurrentScrollY = $(window).scrollTop();
@@ -156,9 +155,9 @@
         }
 
         function newinq(){
-            console.log(resp.caseList)
-            if(resp.caseList){
-                if(resp.caseList.length == 0){
+            console.log(res.caseList)
+            if(res.caseList){
+                if(res.caseList.length == 0){
                     dispNocaseErrModal();
                 } 
             }
@@ -189,10 +188,10 @@
                         //data: {inquiry : '789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab'}, // abnormal
                         data: {inquiry : '9cd4294277d8d2acc90e86920247ecc18f06d2309fa57662611b3be19c0733f6'}, // nocase
                         headers: {"Authorization" : accToken},
-                        success : function (res) {
+                        success : function (resp) {
 			                console.log('success');
                             console.log(res);
-                            resp = res;
+                            res = resp;
                             if(res.result == 'SUCCESS'){
 
                             }else if(res.result == 'TIMED_CHECK'){
