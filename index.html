@@ -315,7 +315,7 @@
     // 時限チェック 出力
     function dispTimeoutErrModal(){
         console.log('dispTimeoutErrModal');
-        const errorMessageText = res.errorMessage;
+        const errorMessageText = res.errorMessage.replace(/\n/, '<br>');
         $(".eMessage-error-timeoutError").html(errorMessageText);
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-timeoutError").fadeIn();
@@ -333,7 +333,7 @@
     // システムエラー 出力
     function dispAbnormalErrModal(){
         console.log('dispAbnormalErrModal');
-        const errorMessageText = res.errorMessage;
+        const errorMessageText = res.errorMessage.replace(/\n/, '<br>');
         $(".eMessage-error-abnormalError").html(errorMessageText);
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-abnormalError").fadeIn();
@@ -343,7 +343,7 @@
     // メールアドレス不正 出力
     function dispInvmailErrModal(){
         console.log('dispInvmailErrModal');
-        const errorMessageText = res.errorMessage;
+        const errorMessageText = res.errorMessage.replace(/\n/, '<br>');
         $(".eMessage-error-invmailError").html(errorMessageText);
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-invmailError").fadeIn();
@@ -354,7 +354,7 @@
     function dispNoaccErrModal(){
         if(res.result == 'NO_ACCOUNT'){
             console.log('dispNoaccErrModal');
-            const errorMessageText = res.errorMessage;
+            const errorMessageText = res.errorMessage.replace(/\n/, '<br>');
             $(".eMessage-error-noaccError").html(errorMessageText);
             let CurrentScrollY = $(window).scrollTop();
             $(".modalOverlay,.modalWrap_error.error-noaccError").fadeIn();
