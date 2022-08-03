@@ -311,9 +311,13 @@
     function dispComErrModal(){
         console.log('dispComErrModal');
         let CurrentScrollY = $(window).scrollTop();
+        console.log('dispComErrModal_2');
         $(".modalOverlay,.modalWrap_error.error-comError").fadeIn();
+        console.log('dispComErrModal_3');
         $(".error-comError").css("display", "block");
+        console.log('dispComErrModal_4');
         $("body").css({position:"fixed",top:-1 * CurrentScrollY});
+        console.log('dispComErrModal_5');
     }
     // 時限チェック 出力
     function dispTimeoutErrModal(){
