@@ -61,7 +61,7 @@
         
         <div class="modalWrap_error error-type2">
             <div class="modalOuter_error">
-                <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
+                <div class="modal__headArea"><img src="contact_error.png" alt="" width="128" height="64"></div>
                 <div class="modal__bodyArea">
                     <p class="fBold">通信エラーが発生しました。<br>時間をおいて、再度お試しください。</p>
                 </div><!--/modal__bodyArea-->
@@ -86,14 +86,12 @@
             var CurrentScrollY = $(window).scrollTop();
             $(".modalOverlay,.modalWrap_error").fadeOut();
             $(".modalWrap_error").css("display", "none");
-            
             $("body").css({position:"",top:0 * CurrentScrollY});
         });
-        function dispalyModal(){
+        function dispalyComErrorModal(){
             let CurrentScrollY = $(window).scrollTop();
             $(".modalOverlay,.modalWrap_error.error-type1").fadeIn();
             $(".modalWrap_error").css("display", "block");
-
             $("body").css({position:"fixed",top:-1 * CurrentScrollY});
         }
 		function responseApexData(){
@@ -127,7 +125,7 @@
                         error : function (data, errorThrown,status) {
                             console.log('error');
 
-                            dispalyModal();
+                            dispalyComErrorModal();
 
 
                         }
@@ -135,7 +133,7 @@
                 },
                 error : function (data, errorThrown,status) {
                     console.log('a_error');
-                    dispalyModal();
+                    dispalyComErrorModal();
                 }
             });
 		}
