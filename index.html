@@ -56,9 +56,9 @@
 		</div>
         <div class="modalOverlay"></div>
 
-		<button onclick="responseApexData();">登録</button>
-		<button onclick="newinq();">新規画面</button>
-	
+		<button onclick="responseApexData();">取得</button>
+		<button onclick="registInquery();">登録</button>
+
         
         <div class="modalWrap_error error-comError">
             <div class="modalOuter_error">
@@ -127,7 +127,13 @@
 		const REQUEST_DOMAIN = 'https://paypay-bank--pt49.sandbox.my.salesforce.com';
 		let res;
 		$(function(){
-			//responseApexData();
+			// 新規投稿用データハッシュ
+            const inqRegistData = {
+                EncryptedData:'a31e76e1cb33faf4ae1380a8f732f95f9f9b83a095c3cbd607b9fc09399906f5',
+                Subject:'test_Koyama',
+                Content:'content01',
+                LinkedDial:'各種手続きダイヤル'
+            };
 		});
 
         // モーダル閉じるボタン(画面遷移なし)
@@ -173,7 +179,7 @@
             $("body").css({position:"fixed",top:-1 * CurrentScrollY});
         }
 
-
+        // 取得
 		function responseApexData(){
             $.ajax({
                 type: 'POST',
@@ -235,6 +241,55 @@
                 }
             });
 		}
+
+        // 登録
+        function registInquery(){
+            // アクセストークン取得（リフレッシュトークンフロー） Ajax
+            $.ajax({
+                type: 'POST',
+                crossOrigin: true,
+                url: REQUEST_DOMAIN + '/services/oauth2/token',
+                dataType: 'json',
+                cache :false,
+                data : {
+                    "grant_type":"refresh_token",
+                    "client_id":CLIENT_ID, 
+                    "refresh_token":REFLESH_TOKEN
+                },
+                success : function (connectData) {
+                    var accToken = 'Bearer ' + connectData.access_token;
+                    $.ajax({
+                        type:'POST',
+                        crossOrigin:true,
+                        url:REQUEST_DOMAIN + '/services/apexrest/IMF_Case',
+                        cache:false,
+                        headers: {"Authorization":accToken, "Content-Type":"application/json"},
+                        dataType:'json',
+                        data:JSON.stringify(inqRegistData),
+                        success:function(response){
+                            const cbdId = response.cbdId;
+                            console.log('success');
+                            console.log(cbdId);
+                            console.log(response);
+                            
+                            if(response.result == 'INVALID_EMAIL_ADDRESS'){
+                                dispInvmailErrModal();
+                            }
+                        },
+                        error:function (data, errorThrown, status) {
+                            console.log(data);
+                            console.log(errorThrown);
+                            console.log(status);
+                        }
+                    })
+                },
+                error:function (data, errorThrown, status) {
+                    console.log(data);
+                    console.log(errorThrown);
+                    console.log(status);
+                }
+            });
+        }
 		</script>
 	</body>
 </html>
