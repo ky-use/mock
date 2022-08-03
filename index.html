@@ -295,11 +295,15 @@
     /*** 追加モーダル処理 ***/
     // モーダル閉じるボタン(画面遷移なし)
     $(".mClose").on("click", function(){
+        console.log('dispComErrModal');
         var CurrentScrollY = $(window).scrollTop();
+        console.log('dispComErrModal_2');
         $(".modalOverlay,.modalWrap_error").fadeOut();
+        console.log('dispComErrModal_3');
         $(".modalWrap_error").css("display", "none");
-        console.log($(".modalWrap_error"))
+        console.log('dispComErrModal_4');
         $("body").css({position:"",top:0 * CurrentScrollY});
+        console.log('dispComErrModal_5');
     });
     // 通信失敗 出力
     function dispComErrModal(){
