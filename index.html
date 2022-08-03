@@ -298,13 +298,9 @@
         $(".mClose").on("click", function(){
             console.log('dispComErrModal');
             var CurrentScrollY = $(window).scrollTop();
-            console.log('dispComErrModal_2');
             $(".modalOverlay,.modalWrap_error").fadeOut();
-            console.log('dispComErrModal_3');
             $(".modalWrap_error").css("display", "none");
-            console.log('dispComErrModal_4');
             $("body").css({position:"",top:0 * CurrentScrollY});
-            console.log('dispComErrModal_5');
         });
     });
     // 通信失敗 出力
@@ -312,7 +308,6 @@
         console.log('dispComErrModal');
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-comError").fadeIn();
-        console.log($(".error-comError"));
         $(".error-comError").css("display", "block");
         $("body").css({position:"fixed",top:-1 * CurrentScrollY});
 
@@ -321,6 +316,7 @@
     function dispTimeoutErrModal(){
         console.log('dispTimeoutErrModal');
         const errorMessageText = res.errorMessage;
+        $(".eMessage-error-timeoutError").html(errorMessageText);
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-timeoutError").fadeIn();
         $(".error-timeoutError").css("display", "block");
@@ -337,18 +333,18 @@
     // システムエラー 出力
     function dispAbnormalErrModal(){
         console.log('dispAbnormalErrModal');
+        const errorMessageText = res.errorMessage;
+        $(".eMessage-error-abnormalError").html(errorMessageText);
         let CurrentScrollY = $(window).scrollTop();
-        console.log('dispAbnormalErrModal_2');
         $(".modalOverlay,.modalWrap_error.error-abnormalError").fadeIn();
-        console.log('dispAbnormalErrModal_3');
         $(".error-abnormalError").css("display", "block");
-        console.log('dispAbnormalErrModal_4');
         $("body").css({position:"fixed",top:-1 * CurrentScrollY});
-        console.log('dispAbnormalErrModal_5');
     }
     // メールアドレス不正 出力
     function dispInvmailErrModal(){
         console.log('dispInvmailErrModal');
+        const errorMessageText = res.errorMessage;
+        $(".eMessage-error-invmailError").html(errorMessageText);
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-invmailError").fadeIn();
         $(".error-invmailError").css("display", "block");
@@ -358,6 +354,8 @@
     function dispNoaccErrModal(){
         if(res.result == 'NO_ACCOUNT'){
             console.log('dispNoaccErrModal');
+            const errorMessageText = res.errorMessage;
+            $(".eMessage-error-noaccError").html(errorMessageText);
             let CurrentScrollY = $(window).scrollTop();
             $(".modalOverlay,.modalWrap_error.error-noaccError").fadeIn();
             $(".error-noaccError").css("display", "block");
@@ -724,20 +722,19 @@
 
 			return;
 		}
+/*** ADD K.Y ***/
         // 子要素があればTRUE
         const elemcheck = document.getElementById('listQa').hasChildNodes();
         // 子要素があるかどうかチェック
         if(elemcheck){
-            console.log(elemcheck)
             let parent = document.getElementById('listQa');
-            
-            console.log($(".element").contents())
             // 子要素が無くなるまで削除
             while(parent.firstChild){
                 parent.removeChild(parent.firstChild);
             }
             console.log($(".element").contents())
         }
+
 		// 入力画面出力用
 		eMail = res.accMail;
 		// 新規入力画面に反映
@@ -2187,7 +2184,7 @@
     <div class="modalOuter_error">
         <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
         <div class="modal__bodyArea">
-            <p class="fBold ">通信エラーが発生しました。<br>入力内容が消えてしまうため、<br>入力内容をお控えいただき、<br>時間をおいて、再度お試しください。</p>
+            <p class="fBold eMessage-error-comErrorRegis">通信エラーが発生しました。<br>入力内容が消えてしまうため、<br>入力内容をお控えいただき、<br>時間をおいて、再度お試しください。</p>
         </div><!--/modal__bodyArea-->
         <div class="modal_error_btnArea">
             <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
@@ -2200,7 +2197,7 @@
     <div class="modalOuter_error">
         <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
         <div class="modal__bodyArea">
-            <p class="fBold">無効なメールアドレスが登録されています。<br>ご登録のメールアドレスを変更してから<br>お問い合わせください。</p>
+            <p class="fBold eMessage-error-invmailError">無効なメールアドレスが登録されています。<br>ご登録のメールアドレスを変更してから<br>お問い合わせください。</p>
         </div><!--/modal__bodyArea-->
         <div class="modal_error_btnArea">
             <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
@@ -2213,7 +2210,7 @@
     <div class="modalOuter_error">
         <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
         <div class="modal__bodyArea">
-            <p class="fBold">ただいまお客さま情報を登録中です。<br>登録が完了しましたら<br>お問い合わせ可能となりますので、<br>時間をおいて再度お試しください。</p>
+            <p class="fBold eMessage-error-noaccError">ただいまお客さま情報を登録中です。<br>登録が完了しましたら<br>お問い合わせ可能となりますので、<br>時間をおいて再度お試しください。</p>
         </div><!--/modal__bodyArea-->
         <div class="modal_error_btnArea">
             <p><a href="javascript:void(0);" class="btn btn03 btnL mClose" onclick="changeDisp('noInq')">閉じる</a></p>
