@@ -310,8 +310,6 @@
     // 通信失敗 出力
     function dispComErrModal(){
         console.log('dispComErrModal');
-        const errorMessageText = res.errorMessage;
-
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-comError").fadeIn();
         $(".error-comError").css("display", "block");
@@ -320,6 +318,7 @@
     // 時限チェック 出力
     function dispTimeoutErrModal(){
         console.log('dispTimeoutErrModal');
+        const errorMessageText = res.errorMessage;
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-timeoutError").fadeIn();
         $(".error-timeoutError").css("display", "block");
