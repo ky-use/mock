@@ -116,21 +116,21 @@
         function dispComErrModal(){
             let CurrentScrollY = $(window).scrollTop();
             $(".modalOverlay,.modalWrap_error.error-comError").fadeIn();
-            $(".modalWrap_error").css("display", "block");
+            $(".error-comError").css("display", "block");
             $("body").css({position:"fixed",top:-1 * CurrentScrollY});
         }
 
         function dispTimeoutErrModal(){
             let CurrentScrollY = $(window).scrollTop();
             $(".modalOverlay,.modalWrap_error.error-timeoutError").fadeIn();
-            $(".modalWrap_error").css("display", "block");
+            $(".error-timeoutError").css("display", "block");
             $("body").css({position:"fixed",top:-1 * CurrentScrollY});
         }
 
         function dispAbnormalErrModal(){
             let CurrentScrollY = $(window).scrollTop();
             $(".modalOverlay,.modalWrap_error.error-abnormalError").fadeIn();
-            $(".modalWrap_error").css("display", "block");
+            $(".error-abnormalError").css("display", "block");
             $("body").css({position:"fixed",top:-1 * CurrentScrollY});
         }
 
@@ -161,17 +161,17 @@
                         data: {inquiry : '789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab'}, // abnormal
                         headers: {"Authorization" : accToken},
                         success : function (res) {
-			    console.log('success');
+			                console.log('success');
                             console.log(res);
-			    console.log(res.result);
+			                console.log(res.result);
                             if(res.result == ''){
 
                             }else if(res.result == 'TIMED_CHECK'){
-                                // dispTimeoutErrModal();
-			    	console.log('reselse if');
+                                dispTimeoutErrModal();
+			    	            console.log('reselse if');
                             }else{
                                 dispAbnormalErrModal();
-			    	console.log('reselse');
+			    	            console.log('reselse');
                             }
                         },
                         error : function (data, errorThrown,status) {
