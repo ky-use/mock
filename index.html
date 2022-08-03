@@ -730,11 +730,13 @@
         if(elemcheck){
             console.log(elemcheck)
             let parent = document.getElementById('listQa');
-            console.log(parent)
+            
+            console.log($(".element").contents())
             // 子要素が無くなるまで削除
             while(parent.firstChild){
                 parent.removeChild(parent.firstChild);
             }
+            console.log($(".element").contents())
         }
 		// 入力画面出力用
 		eMail = res.accMail;
