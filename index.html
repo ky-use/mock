@@ -419,9 +419,9 @@
 	// 通信先URL　※環境に併せて変更する必要あり！
 	const REQUEST_DOMAIN = 'https://paypay-bank--pt49.sandbox.my.salesforce.com';
 	const CLIENT_ID = '3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ';
-	//const REFLESH_TOKEN = '5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu';
+	const REFLESH_TOKEN = '5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu';
 /*** ADD K.Y ***/
-	const REFLESH_TOKEN = '5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNm'; // accesserror
+	//const REFLESH_TOKEN = '5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNm'; // accesserror
 	
 	// 通信処理結果を退避するための変数
 	let res;
@@ -481,13 +481,13 @@
 	$(function(){
 		// 連携文字列取得
 		//linkedStr = $('input[name="SFConnectParam"]').val();
-		linkedStr = "bd1fcec2a09397bdac42bdba68beca74a28e90a646bffae6d0b2f3a376aa9993";
+		//linkedStr = "bd1fcec2a09397bdac42bdba68beca74a28e90a646bffae6d0b2f3a376aa9993";
 /*** ADD K.Y ***/
         /*
-        linkedStr = "789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab317b0a"; // timeout
         linkedStr = "789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab"; // abnormal
         linkedStr = "9cd4294277d8d2acc90e86920247ecc18f06d2309fa57662611b3be19c0733f6"; // noacc
         */
+        linkedStr = "789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab317b0a"; // timeout
 
 		// ホーム画面を表示
 		document.getElementById('inquiryForm').style.display = 'block';
