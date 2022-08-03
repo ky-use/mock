@@ -161,22 +161,23 @@
                         data: {inquiry : '789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab'}, // abnormal
                         headers: {"Authorization" : accToken},
                         success : function (res) {
+			    console.log('success');
+                            console.log(res);
+			    console.log(res.result);
                             if(res.result == ''){
 
                             }else if(res.result == 'TIMED_CHECK'){
                                 // dispTimeoutErrModal();
+			    	console.log('reselse if');
                             }else{
                                 dispAbnormalErrModal();
+			    	console.log('reselse');
                             }
-                            
-                            console.log('success');
-                            console.log(res)
                         },
                         error : function (data, errorThrown,status) {
                             console.log('error');
 
                             dispComErrModal();
-
 
                         }
                     })
