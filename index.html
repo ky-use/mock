@@ -298,6 +298,7 @@
         var CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error").fadeOut();
         $(".modalWrap_error").css("display", "none");
+        console.log($(".modalWrap_error"))
         $("body").css({position:"",top:0 * CurrentScrollY});
     });
     // 通信失敗 出力
@@ -336,9 +337,13 @@
     function dispAbnormalErrModal(){
         console.log('dispAbnormalErrModal');
         let CurrentScrollY = $(window).scrollTop();
+        console.log('dispAbnormalErrModal_2');
         $(".modalOverlay,.modalWrap_error.error-abnormalErrorRegis").fadeIn();
+        console.log('dispAbnormalErrModal_3');
         $(".error-abnormalErrorRegis").css("display", "block");
+        console.log('dispAbnormalErrModal_4');
         $("body").css({position:"fixed",top:-1 * CurrentScrollY});
+        console.log('dispAbnormalErrModal_5');
     }
     // メールアドレス不正 出力
     function dispInvmailErrModal(){
