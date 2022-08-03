@@ -968,9 +968,9 @@
 	function registInquery(){
         //const REFLESH_TOKEN = '5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8'; // accesserror
         
-        linkedStr = "789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab317b0a"; // timeout
-        //linkedStr = "a31e76e1cb33faf4ae1380a8f732f95f9f9b83a095c3cbd607b9fc09399906f5"; // invalidmail
-        //linkedStr = "789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab"; // abnormal
+        inqRegistData.linkedStr = "789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab317b0a"; // timeout
+        //inqRegistData.linkedStr = "a31e76e1cb33faf4ae1380a8f732f95f9f9b83a095c3cbd607b9fc09399906f5"; // invalidmail
+        //inqRegistData.linkedStr = "789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab"; // abnormal
 		// アクセストークン取得（リフレッシュトークンフロー） Ajax
 		$.ajax({
 			type: 'POST',
@@ -1127,11 +1127,6 @@
 						const cbdId = response.cbdId;
 						console.log(cbdId);
 /*** ADD K.Y ***/
-                        // メールアドレス不正
-                        if(response.result == 'INVALID_EMAIL_ADDRESS'){
-                            dispInvmailErrModal();
-                        // 時限チェック
-                        }
                         // 時限チェック
                         if(response.result == 'TIMED_CHECK'){
                             dispRegisTimeoutErrModal();
