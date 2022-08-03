@@ -1005,6 +1005,7 @@
 					success:function(response){
 						const cbdId = response.cbdId;
 /*** ADD K.Y ***/
+                        console.log(response)
                         if(response.result == 'SUCCESS'){
                             if(cbdId){
                                 changeDisp('compScreen');
@@ -1019,7 +1020,7 @@
                         }else{
                             dispAbnormalErrModal();
                         }
-
+                        console.log('----')
 						if(inputFiles.length > 0){
 							for(let i = 0; i < inputFiles.length; i++){
 								const cvJson = {
