@@ -190,11 +190,11 @@
                         headers: {"Authorization" : accToken},
                         success : function (resp) {
 			                console.log('success');
-                            console.log(res);
+                            console.log(resp);
                             res = resp;
-                            if(res.result == 'SUCCESS'){
+                            if(resp.result == 'SUCCESS'){
 
-                            }else if(res.result == 'TIMED_CHECK'){
+                            }else if(resp.result == 'TIMED_CHECK'){
                                 dispTimeoutErrModal();
                             }else{
                                 dispAbnormalErrModal();
