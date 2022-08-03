@@ -156,11 +156,7 @@
 
         function newinq(){
             console.log(res.caseList)
-            if(res.caseList){
-                if(res.caseList.length == 0){
-                    dispNocaseErrModal();
-                } 
-            }
+            
         }
 
 		function responseApexData(){
@@ -191,14 +187,20 @@
                         success : function (resp) {
 			                console.log('success');
                             console.log(resp);
-                            res = resp;
-                            if(resp.result == 'SUCCESS'){
 
+                            if(resp.result == 'SUCCESS'){
+                                if(resp.caseList){
+                                    if(resp.caseList.length == 0){
+                                        dispNocaseErrModal();
+                                    } 
+                                }
                             }else if(resp.result == 'TIMED_CHECK'){
                                 dispTimeoutErrModal();
                             }else{
                                 dispAbnormalErrModal();
                             }
+
+                            
                         },
                         error : function (data, errorThrown,status) {
                             console.log('error');
