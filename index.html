@@ -9,6 +9,17 @@
 		<title>お問い合わせフォーム</title>
 
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            #contact .modalOverlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:102;overflow:auto;background-color:rgba(0, 0, 0, 0.6);}
+            #contact .modalWrap,#contact .modalWrap_error{display:none;position:fixed;top:0;left:0;z-index:103;width:100%;height:100%;}
+            #contact .modalOuter,#contact .modalOuter_error{z-index:104;background-color:#fff;border-radius:8px;position:relative;margin:16px;padding-bottom:24px;}
+            #contact .modal__headArea{padding:16px 24px;font-size:14px;font-weight:bold;text-align:center;}
+            #contact .modal__bodyArea{margin-bottom:16px;padding:0 24px;overflow:auto;}
+            #contact .modalOuter_error{top:27%;margin-top:-8%;}
+            #contact .modalWrap_error .modal__bodyArea{font-size:1.6rem;text-align:center;}
+            #contact .modal_error_btnArea{padding:0 16px;}
+            #contact .modal_error_btnArea p:last-of-type{margin-top:16px;}
+        </style>
 	</head>
 	
 	<!-- cbdTemplate -->
@@ -45,7 +56,7 @@
 		</div>
         <div class="modalOverlay"></div>
 
-		<button onclick="himoduke();">登録</button>
+		<button onclick="responseApexData();">登録</button>
 		
         
         <div class="modalWrap_error error-type2">
@@ -55,7 +66,7 @@
                     <p class="fBold">通信エラーが発生しました。<br>時間をおいて、再度お試しください。</p>
                 </div><!--/modal__bodyArea-->
                 <div class="modal_error_btnArea">
-                    <p><a href="javascript:void(0);" class="btn btn03 btnL modal__close">閉じる</a></p>
+                    <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
                 </div><!--/modal_error_btnArea-->
             </div><!--/modalOuter_error-->
         </div><!--/modalWrap_error-->
@@ -71,7 +82,11 @@
 
 		});
 
-
+        $(".mClose").on("click", function(){
+            var CurrentScrollY = $(window).scrollTop();
+            $(".modalOverlay,.modalWrap_error").fadeOut();
+            $("body").css({position:"",top:0 * CurrentScrollY});
+        });
 		function responseApexData(){
 			
             $.ajax({
