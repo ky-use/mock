@@ -312,7 +312,7 @@
         console.log('dispComErrModal');
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-comError").fadeIn();
-        console.log('dispComErrModal :' + $(".error-comError"));
+        console.log($(".error-comError"));
         $(".error-comError").css("display", "block");
         $("body").css({position:"fixed",top:-1 * CurrentScrollY});
 
