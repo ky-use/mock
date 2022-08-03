@@ -863,6 +863,8 @@
                 const elemcheck = document.getElementById('listQa').hasChildNodes();
                 // 子要素があるかどうかチェック
                 if(elemcheck){
+                    console.log(elemcheck)
+                    console.log(parent)
                     const parent = document.getElementById('listQa');
                     // 子要素が無くなるまで削除
                     while(parent.firstChild){
