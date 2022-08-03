@@ -1135,7 +1135,7 @@
                         if(response.result == 'SUCCESS'){
                             return;
                             // 時限チェック
-                        }if(response.result == 'TIMED_CHECK'){
+                        }else if(response.result == 'TIMED_CHECK'){
                             dispTimeoutErrModal();
                         // 異常終了
                         }else{
