@@ -1002,7 +1002,10 @@
                         }else{
                             dispAbnormalErrModal();
                         }
-
+                        if(cbdId){
+                            changeDisp('compScreen');
+                        }
+                        
 						if(inputFiles.length > 0){
 							for(let i = 0; i < inputFiles.length; i++){
 								const cvJson = {
@@ -1972,7 +1975,7 @@
 			<p></p>
 			<p></p>
 			<div class="contbrd-btnArea-box">
-				<p><a href="javascript:void(0);" onclick="registInquery();changeDisp('compScreen')" class="btn btn01 btnL">投稿する</a></p>
+				<p><a href="javascript:void(0);" onclick="registInquery();" class="btn btn01 btnL">投稿する</a></p>
 				<p class="mt-16"><a href="javascript:void(0);" onclick="changeDisp('inqInputScreen')" class="btn btn03 btnL">戻る</a></p>
 			</div>
 		</div>
