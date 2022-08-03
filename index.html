@@ -361,7 +361,7 @@
     }
     // 取引先が存在しない(新規問い合わせ登録画面) 出力
     function dispNoaccErrModal(){
-        if(!res.caseList){
+        if(res.result == 'NO_ACCOUNT'){
             console.log('dispNoaccErrModal');
             let CurrentScrollY = $(window).scrollTop();
             $(".modalOverlay,.modalWrap_error.error-noaccError").fadeIn();
