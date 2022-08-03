@@ -996,7 +996,9 @@
 						const cbdId = response.cbdId;
 /*** ADD K.Y ***/
                         if(response.result == 'SUCCESS'){
-                            return;
+                            if(cbdId){
+                                changeDisp('compScreen');
+                            }
                             // メールアドレス不正
                         }else if(response.result == 'INVALID_EMAIL_ADDRESS'){
                             dispInvmailErrModal();
@@ -1006,9 +1008,6 @@
                         // 異常終了
                         }else{
                             dispAbnormalErrModal();
-                        }
-                        if(cbdId){
-                            changeDisp('compScreen');
                         }
 
 						if(inputFiles.length > 0){
@@ -1134,17 +1133,15 @@
 						console.log(cbdId);
 /*** ADD K.Y ***/
                         if(response.result == 'SUCCESS'){
-                            return;
+                            if(cbdId){
+                                changeDisp('compScreen');
+                            }
                             // 時限チェック
                         }else if(response.result == 'TIMED_CHECK'){
                             dispTimeoutErrModal();
                         // 異常終了
                         }else{
                             dispAbnormalErrModal();
-                        }
-
-                        if(cbdId){
-                            changeDisp('compScreen');
                         }
 
 						if(inputFiles.length > 0){
