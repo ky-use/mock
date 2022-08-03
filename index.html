@@ -428,9 +428,9 @@
 	// 通信先URL　※環境に併せて変更する必要あり！
 	const REQUEST_DOMAIN = 'https://paypay-bank--pt49.sandbox.my.salesforce.com';
 	const CLIENT_ID = '3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ';
-	const REFLESH_TOKEN = '5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu';
+	//const REFLESH_TOKEN = '5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNmlIiVu';
 /*** ADD K.Y ***/
-	//const REFLESH_TOKEN = '5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNm'; // accesserror
+	const REFLESH_TOKEN = '5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNm'; // accesserror
 	
 	// 通信処理結果を退避するための変数
 	let res;
@@ -496,8 +496,8 @@
         linkedStr = "789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab"; // abnormal
         linkedStr = "789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab317b0a"; // timeout
         linkedStr = "a31e76e1cb33faf4ae1380a8f732f95f9f9b83a095c3cbd607b9fc09399906f5"; // invalidmail
+        linkedStr = "9cd4294277d8d2acc90e86920247ecc18f06d2309fa57662611b3be19c0733f6"; // noacc
         */
-       linkedStr = "9cd4294277d8d2acc90e86920247ecc18f06d2309fa57662611b3be19c0733f6"; // noacc
 
 		// ホーム画面を表示
 		document.getElementById('inquiryForm').style.display = 'block';
@@ -973,6 +973,7 @@
 	 * 初期表示時データ取得
 	 */
 	function registInquery(){
+        const REFLESH_TOKEN = '5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNm'; // accesserror
 		// アクセストークン取得（リフレッシュトークンフロー） Ajax
 		$.ajax({
 			type: 'POST',
@@ -1099,6 +1100,7 @@
 	 * 初期表示時データ取得
 	 */
 	function registContactBoard(){
+        const REFLESH_TOKEN = '5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8hH5doNm'; // accesserror
 		// アクセストークン取得（リフレッシュトークンフロー） Ajax
 		$.ajax({
 			type: 'POST',
