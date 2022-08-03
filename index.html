@@ -321,8 +321,8 @@
     function dispRegisComErrModal(){
         console.log('dispRegisComErrModal');
         let CurrentScrollY = $(window).scrollTop();
-        $(".modalOverlay,.modalWrap_error.error-comError").fadeIn();
-        $(".error-comError").css("display", "block");
+        $(".modalOverlay,.modalWrap_error.error-comErrorRegis").fadeIn();
+        $(".error-comErrorRegis").css("display", "block");
         $("body").css({position:"fixed",top:-1 * CurrentScrollY});
     }
     // 時限チェック 出力(登録時)
@@ -338,9 +338,9 @@
         console.log('dispAbnormalErrModal');
         let CurrentScrollY = $(window).scrollTop();
         console.log('dispAbnormalErrModal_2');
-        $(".modalOverlay,.modalWrap_error.error-abnormalErrorRegis").fadeIn();
+        $(".modalOverlay,.modalWrap_error.error-abnormalError").fadeIn();
         console.log('dispAbnormalErrModal_3');
-        $(".error-abnormalErrorRegis").css("display", "block");
+        $(".error-abnormalError").css("display", "block");
         console.log('dispAbnormalErrModal_4');
         $("body").css({position:"fixed",top:-1 * CurrentScrollY});
         console.log('dispAbnormalErrModal_5');
