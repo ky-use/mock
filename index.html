@@ -966,7 +966,11 @@
 	 * 初期表示時データ取得
 	 */
 	function registInquery(){
-        const REFLESH_TOKEN = '5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8'; // accesserror
+        //const REFLESH_TOKEN = '5Aep861hjC52juQoBcsFRsbEALR2k2PEkuCJTzezJjsxYDFcfM3Xu_8fN.OBDlZ6BJFv9GwwXc8'; // accesserror
+        
+        linkedStr = "789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab317b0a"; // timeout
+        //linkedStr = "a31e76e1cb33faf4ae1380a8f732f95f9f9b83a095c3cbd607b9fc09399906f5"; // invalidmail
+        //linkedStr = "789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab"; // abnormal
 		// アクセストークン取得（リフレッシュトークンフロー） Ajax
 		$.ajax({
 			type: 'POST',
@@ -1005,7 +1009,7 @@
                         if(cbdId){
                             changeDisp('compScreen');
                         }
-                        
+
 						if(inputFiles.length > 0){
 							for(let i = 0; i < inputFiles.length; i++){
 								const cvJson = {
@@ -1129,6 +1133,10 @@
                         // 異常終了
                         }else{
                             dispAbnormalErrModal();
+                        }
+
+                        if(cbdId){
+                            changeDisp('compScreen');
                         }
 
 						if(inputFiles.length > 0){
@@ -2077,7 +2085,7 @@
 			-->
 			<div class="contbrd-btnArea-box">
 				<p>
-					<input type="submit" id="" onclick="registContactBoard();changeDisp('compScreen')" class="btn btn01 btnL" value="投稿する">
+					<input type="submit" id="" onclick="registContactBoard();" class="btn btn01 btnL" value="投稿する">
 				</p>
 				<p class="mt-16">
 					<a href="javascript:void(0);" onclick="changeDisp('replyInputScreen')" class="btn btn03 btnL">戻る</a>
