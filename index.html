@@ -310,6 +310,8 @@
     // 通信失敗 出力
     function dispComErrModal(){
         console.log('dispComErrModal');
+        const errorMessageText = res.errorMessage;
+
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-comError").fadeIn();
         $(".error-comError").css("display", "block");
@@ -938,10 +940,13 @@
 /*** ADD K.Y ***/
                         // 成功
                         if(response.result == 'SUCCESS'){
-                            
+                            return;
                         // 時限チェック
                         }else if(response.result == 'TIMED_CHECK'){
                             dispTimeoutErrModal();
+                        // 取引先0件
+                        }else if(response.result == 'NO_ACCOUNT'){
+                            return;
                         // 異常終了
                         }else{
                             dispAbnormalErrModal();
@@ -1797,7 +1802,7 @@
         <div class="modalOuter_error">
             <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
             <div class="modal__bodyArea">
-                <p class="fBold">通信エラーが発生しました。<br>時間をおいて、再度お試しください。</p>
+                <p class="fBold eMessage-comError">通信エラーが発生しました。<br>時間をおいて、再度お試しください。</p>
             </div><!--/modal__bodyArea-->
             <div class="modal_error_btnArea">
                 <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
@@ -1810,7 +1815,7 @@
         <div class="modalOuter_error">
             <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
             <div class="modal__bodyArea">
-                <p class="fBold">ログイン後、一定の時間が経過しました。<br>再度ログインしてご利用ください。</p>
+                <p class="fBold eMessage-error-timeoutError">ログイン後、一定の時間が経過しました。<br>再度ログインしてご利用ください。</p>
             </div><!--/modal__bodyArea-->
             <div class="modal_error_btnArea">
                 <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
@@ -1823,7 +1828,7 @@
         <div class="modalOuter_error">
             <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
             <div class="modal__bodyArea">
-                <p class="fBold">システムエラーが発生しました。<br>時間をおいて、再度ログインしてご利用ください。</p>
+                <p class="fBold eMessage-error-abnormalError">システムエラーが発生しました。<br>時間をおいて、再度ログインしてご利用ください。</p>
             </div><!--/modal__bodyArea-->
             <div class="modal_error_btnArea">
                 <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
