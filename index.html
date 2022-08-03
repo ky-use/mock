@@ -59,9 +59,9 @@
 		<button onclick="responseApexData();">登録</button>
 		
         
-        <div class="modalWrap_error error-type2">
+        <div class="modalWrap_error error-comError">
             <div class="modalOuter_error">
-                <div class="modal__headArea"><img src="contact_error.png" alt="" width="128" height="64"></div>
+                <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
                 <div class="modal__bodyArea">
                     <p class="fBold">通信エラーが発生しました。<br>時間をおいて、再度お試しください。</p>
                 </div><!--/modal__bodyArea-->
@@ -90,7 +90,7 @@
         });
         function dispalyComErrorModal(){
             let CurrentScrollY = $(window).scrollTop();
-            $(".modalOverlay,.modalWrap_error.error-type1").fadeIn();
+            $(".modalOverlay,.modalWrap_error.error-comError").fadeIn();
             $(".modalWrap_error").css("display", "block");
             $("body").css({position:"fixed",top:-1 * CurrentScrollY});
         }
