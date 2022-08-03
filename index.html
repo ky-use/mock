@@ -315,8 +315,11 @@
     // 時限チェック 出力
     function dispTimeoutErrModal(){
         console.log('dispTimeoutErrModal');
-        errorMessageText = res.errorMessage.replace(/\n/g, '<br>');
-        $(".eMessage-error-timeoutError").html(errorMessageText);
+        //errorMessageText = res.errorMessage.replace(/\n/g, '<br>');
+        console.log(errorMessageText)
+        if(errorMessageText){
+            $(".eMessage-error-timeoutError").html(errorMessageText);
+        }
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-timeoutError").fadeIn();
         $(".error-timeoutError").css("display", "block");
@@ -333,8 +336,11 @@
     // システムエラー 出力
     function dispAbnormalErrModal(){
         console.log('dispAbnormalErrModal');
-        errorMessageText = res.errorMessage.replace(/\n/g, '<br>');
-        $(".eMessage-error-abnormalError").html(errorMessageText);
+        //errorMessageText = res.errorMessage.replace(/\n/g, '<br>');
+        console.log(errorMessageText)
+        if(errorMessageText){
+            $(".eMessage-error-abnormalError").html(errorMessageText);
+        }
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-abnormalError").fadeIn();
         $(".error-abnormalError").css("display", "block");
@@ -343,8 +349,11 @@
     // メールアドレス不正 出力
     function dispInvmailErrModal(){
         console.log('dispInvmailErrModal');
-        errorMessageText = res.errorMessage.replace(/\n/g, '<br>');
-        $(".eMessage-error-invmailError").html(errorMessageText);
+        //errorMessageText = res.errorMessage.replace(/\n/g, '<br>');
+        console.log(errorMessageText)
+        if(errorMessageText){
+            $(".eMessage-error-invmailError").html(errorMessageText);
+        }
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-invmailError").fadeIn();
         $(".error-invmailError").css("display", "block");
@@ -354,8 +363,11 @@
     function dispNoaccErrModal(){
         if(res.result == 'NO_ACCOUNT'){
             console.log('dispNoaccErrModal');
-            errorMessageText = res.errorMessage.replace(/\n/g, '<br>');
-            $(".eMessage-error-noaccError").html(errorMessageText);
+            //errorMessageText = res.errorMessage.replace(/\n/g, '<br>');
+            console.log(errorMessageText)
+            if(errorMessageText){
+                $(".eMessage-error-noaccError").html(errorMessageText);
+            }
             let CurrentScrollY = $(window).scrollTop();
             $(".modalOverlay,.modalWrap_error.error-noaccError").fadeIn();
             $(".error-noaccError").css("display", "block");
@@ -943,15 +955,14 @@
 						res = response;
 						init();
 /*** ADD K.Y ***/
+                        errorMessageText = response.errorMessage.replace(/\n/g, '<br>');
                         // 成功
                         if(response.result == 'SUCCESS'){
-                            return;
                         // 時限チェック
                         }else if(response.result == 'TIMED_CHECK'){
                             dispTimeoutErrModal();
                         // 取引先0件
                         }else if(response.result == 'NO_ACCOUNT'){
-                            return;
                         // 異常終了
                         }else{
                             dispAbnormalErrModal();
@@ -1147,6 +1158,7 @@
                         console.log(response)
 						console.log(cbdId);
 /*** ADD K.Y ***/
+                        errorMessageText = response.errorMessage.replace(/\n/g, '<br>');
                         if(response.result == 'SUCCESS'){
                             if(cbdId){
                                 changeDisp('compScreen');
