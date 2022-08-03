@@ -334,14 +334,6 @@
         $(".error-comErrorRegis").css("display", "block");
         $("body").css({position:"fixed",top:-1 * CurrentScrollY});
     }
-    // 時限チェック 出力(登録時)
-    function dispRegisTimeoutErrModal(){
-        console.log('dispRegisTimeoutErrModal');
-        let CurrentScrollY = $(window).scrollTop();
-        $(".modalOverlay,.modalWrap_error.error-timeoutErrorRegis").fadeIn();
-        $(".error-timeoutErrorRegis").css("display", "block");
-        $("body").css({position:"fixed",top:-1 * CurrentScrollY});
-    }
     // システムエラー 出力
     function dispAbnormalErrModal(){
         console.log('dispAbnormalErrModal');
@@ -1736,22 +1728,7 @@
 			</p>
 		</div>
 	</div>
-
 </div>
-
-<!-- ADD K.Y -->
-    <!-- 通信失敗 -->
-    <div class="modalWrap_error error-comError">
-        <div class="modalOuter_error">
-            <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
-            <div class="modal__bodyArea">
-                <p class="fBold eMessage-comError">通信エラーが発生しました。<br>時間をおいて、再度お試しください。</p>
-            </div><!--/modal__bodyArea-->
-            <div class="modal_error_btnArea">
-                <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
-            </div><!--/modal_error_btnArea-->
-        </div><!--/modalOuter_error-->
-    </div><!--/modalWrap_error-->
 
 <!-- InquiryFormNoInq -->
 <div id="noInq" class="contents contbrd-pt-cont" style="display:none;">
@@ -1813,34 +1790,6 @@
 			</p>
 		</div>
 	</div>
-
-<!-- ADD K.Y -->
-    
-    <!-- 時限チェック -->
-    <div class="modalWrap_error error-timeoutError">
-        <div class="modalOuter_error">
-            <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
-            <div class="modal__bodyArea">
-                <p class="fBold eMessage-error-timeoutError">ログイン後、一定の時間が経過しました。<br>再度ログインしてご利用ください。</p>
-            </div><!--/modal__bodyArea-->
-            <div class="modal_error_btnArea">
-                <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
-            </div><!--/modal_error_btnArea-->
-        </div><!--/modalOuter_error-->
-    </div><!--/modalWrap_error-->
-    
-    <!-- 異常終了 -->
-    <div class="modalWrap_error error-abnormalError">
-        <div class="modalOuter_error">
-            <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
-            <div class="modal__bodyArea">
-                <p class="fBold eMessage-error-abnormalError">システムエラーが発生しました。<br>時間をおいて、再度ログインしてご利用ください。</p>
-            </div><!--/modal__bodyArea-->
-            <div class="modal_error_btnArea">
-                <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
-            </div><!--/modal_error_btnArea-->
-        </div><!--/modalOuter_error-->
-    </div><!--/modalWrap_error-->
 </div>
 
 <!-- DetailsScreen -->
@@ -1985,20 +1934,6 @@
 		</div><!--/modalOuter_error-->
 	</div><!--/modalWrap_error-->
 
-<!-- ADD K.Y -->
-    <!-- 取引先が存在しない -->
-    <div class="modalWrap_error error-noaccError">
-        <div class="modalOuter_error">
-            <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
-            <div class="modal__bodyArea">
-                <p class="fBold">ただいまお客さま情報を登録中です。<br>登録が完了しましたら<br>お問い合わせ可能となりますので、<br>時間をおいて再度お試しください。</p>
-            </div><!--/modal__bodyArea-->
-            <div class="modal_error_btnArea">
-                <p><a href="javascript:void(0);" class="btn btn03 btnL mClose" onclick="changeDisp('noInq')">閉じる</a></p>
-            </div><!--/modal_error_btnArea-->
-        </div><!--/modalOuter_error-->
-    </div><!--/modalWrap_error-->
-
 	<div class="blkCont contbrd-btnArea-box">
 		<p><input id="confButton" type="button" onclick="outputValueInqConf();changeDisp('inqConfirmScreen');" class="btn btn01 btnL" value="確認する"></p>
 		<p class="mt-16"><a href="javascript:void(0);" onclick="inqPrevAction();" class="btn btn03 btnL prevBtn">戻る</a></p>
@@ -2042,59 +1977,6 @@
 			</div>
 		</div>
 	</div>
-
-<!-- ADD K.Y -->
-    <!-- 通信失敗 -->
-    <div class="modalWrap_error error-comErrorRegis">
-        <div class="modalOuter_error">
-            <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
-            <div class="modal__bodyArea">
-                <p class="fBold">通信エラーが発生しました。<br>入力内容が消えてしまうため、<br>入力内容をお控えいただき、<br>時間をおいて、再度お試しください。</p>
-            </div><!--/modal__bodyArea-->
-            <div class="modal_error_btnArea">
-                <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
-            </div><!--/modal_error_btnArea-->
-        </div><!--/modalOuter_error-->
-    </div><!--/modalWrap_error-->
-
-    <!-- 時限チェック -->
-    <div class="modalWrap_error error-timeoutErrorRegis">
-        <div class="modalOuter_error">
-            <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
-            <div class="modal__bodyArea">
-                <p class="fBold">ログイン後、一定の時間が経過しました。<br>再度ログインしてお問い合わせください。</p>
-            </div><!--/modal__bodyArea-->
-            <div class="modal_error_btnArea">
-                <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
-            </div><!--/modal_error_btnArea-->
-        </div><!--/modalOuter_error-->
-    </div><!--/modalWrap_error-->
-    
-    <!-- 異常終了 -->
-    <div class="modalWrap_error error-abnormalError">
-        <div class="modalOuter_error">
-            <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
-            <div class="modal__bodyArea">
-                <p class="fBold">システムエラーが発生しました。<br>時間をおいて、再度ログインしてご利用ください。</p>
-            </div><!--/modal__bodyArea-->
-            <div class="modal_error_btnArea">
-                <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
-            </div><!--/modal_error_btnArea-->
-        </div><!--/modalOuter_error-->
-    </div><!--/modalWrap_error-->
-
-    <!-- メールアドレス不正 -->
-    <div class="modalWrap_error error-invmailError">
-        <div class="modalOuter_error">
-            <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
-            <div class="modal__bodyArea">
-                <p class="fBold">無効なメールアドレスが登録されています。<br>ご登録のメールアドレスを変更してから<br>お問い合わせください。</p>
-            </div><!--/modal__bodyArea-->
-            <div class="modal_error_btnArea">
-                <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
-            </div><!--/modal_error_btnArea-->
-        </div><!--/modalOuter_error-->
-    </div><!--/modalWrap_error-->
 </div>
 
 <!-- Reply_InputScreen -->
@@ -2200,59 +2082,6 @@
 			</div>
 		</div>
 	</div>
-
-<!-- ADD K.Y -->
-    <!-- 通信失敗 -->
-    <div class="modalWrap_error error-comErrorRegis">
-        <div class="modalOuter_error">
-            <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
-            <div class="modal__bodyArea">
-                <p class="fBold">通信エラーが発生しました。<br>入力内容が消えてしまうため、<br>入力内容をお控えいただき、<br>時間をおいて、再度お試しください。</p>
-            </div><!--/modal__bodyArea-->
-            <div class="modal_error_btnArea">
-                <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
-            </div><!--/modal_error_btnArea-->
-        </div><!--/modalOuter_error-->
-    </div><!--/modalWrap_error-->
-
-    <!-- 時限チェック -->
-    <div class="modalWrap_error error-timeoutErrorRegis">
-        <div class="modalOuter_error">
-            <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
-            <div class="modal__bodyArea">
-                <p class="fBold">ログイン後、一定の時間が経過しました。<br>再度ログインしてお問い合わせください。</p>
-            </div><!--/modal__bodyArea-->
-            <div class="modal_error_btnArea">
-                <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
-            </div><!--/modal_error_btnArea-->
-        </div><!--/modalOuter_error-->
-    </div><!--/modalWrap_error-->
-    
-    <!-- 異常終了 -->
-    <div class="modalWrap_error error-abnormalError">
-        <div class="modalOuter_error">
-            <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
-            <div class="modal__bodyArea">
-                <p class="fBold">システムエラーが発生しました。<br>時間をおいて、再度ログインしてご利用ください。</p>
-            </div><!--/modal__bodyArea-->
-            <div class="modal_error_btnArea">
-                <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
-            </div><!--/modal_error_btnArea-->
-        </div><!--/modalOuter_error-->
-    </div><!--/modalWrap_error-->
-
-    <!-- メールアドレス不正 -->
-    <div class="modalWrap_error error-invmailError">
-        <div class="modalOuter_error">
-            <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
-            <div class="modal__bodyArea">
-                <p class="fBold">無効なメールアドレスが登録されています。<br>ご登録のメールアドレスを変更してから<br>お問い合わせください。</p>
-            </div><!--/modal__bodyArea-->
-            <div class="modal_error_btnArea">
-                <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
-            </div><!--/modal_error_btnArea-->
-        </div><!--/modalOuter_error-->
-    </div><!--/modalWrap_error-->
 </div>
 
 <!-- CompletionScreen -->
@@ -2282,3 +2111,83 @@
 </div>
 
 <div class="modalOverlay"></div>
+
+<!-- ADD K.Y -->
+<!-- 通信失敗 -->
+<div class="modalWrap_error error-comError">
+    <div class="modalOuter_error">
+        <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
+        <div class="modal__bodyArea">
+            <p class="fBold eMessage-comError">通信エラーが発生しました。<br>時間をおいて、再度お試しください。</p>
+        </div><!--/modal__bodyArea-->
+        <div class="modal_error_btnArea">
+            <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
+        </div><!--/modal_error_btnArea-->
+    </div><!--/modalOuter_error-->
+</div><!--/modalWrap_error-->
+
+<!-- 時限チェック -->
+<div class="modalWrap_error error-timeoutError">
+    <div class="modalOuter_error">
+        <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
+        <div class="modal__bodyArea">
+            <p class="fBold eMessage-error-timeoutError">ログイン後、一定の時間が経過しました。<br>再度ログインしてご利用ください。</p>
+        </div><!--/modal__bodyArea-->
+        <div class="modal_error_btnArea">
+            <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
+        </div><!--/modal_error_btnArea-->
+    </div><!--/modalOuter_error-->
+</div><!--/modalWrap_error-->
+
+<!-- 異常終了 -->
+<div class="modalWrap_error error-abnormalError">
+    <div class="modalOuter_error">
+        <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
+        <div class="modal__bodyArea">
+            <p class="fBold eMessage-error-abnormalError">システムエラーが発生しました。<br>時間をおいて、再度ログインしてご利用ください。</p>
+        </div><!--/modal__bodyArea-->
+        <div class="modal_error_btnArea">
+            <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
+        </div><!--/modal_error_btnArea-->
+    </div><!--/modalOuter_error-->
+</div><!--/modalWrap_error-->
+
+
+<!-- 通信失敗(登録時) -->
+<div class="modalWrap_error error-comErrorRegis">
+    <div class="modalOuter_error">
+        <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
+        <div class="modal__bodyArea">
+            <p class="fBold ">通信エラーが発生しました。<br>入力内容が消えてしまうため、<br>入力内容をお控えいただき、<br>時間をおいて、再度お試しください。</p>
+        </div><!--/modal__bodyArea-->
+        <div class="modal_error_btnArea">
+            <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
+        </div><!--/modal_error_btnArea-->
+    </div><!--/modalOuter_error-->
+</div><!--/modalWrap_error-->
+
+<!-- メールアドレス不正 -->
+<div class="modalWrap_error error-invmailError">
+    <div class="modalOuter_error">
+        <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
+        <div class="modal__bodyArea">
+            <p class="fBold">無効なメールアドレスが登録されています。<br>ご登録のメールアドレスを変更してから<br>お問い合わせください。</p>
+        </div><!--/modal__bodyArea-->
+        <div class="modal_error_btnArea">
+            <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
+        </div><!--/modal_error_btnArea-->
+    </div><!--/modalOuter_error-->
+</div><!--/modalWrap_error-->
+
+<!-- 取引先が存在しない -->
+<div class="modalWrap_error error-noaccError">
+    <div class="modalOuter_error">
+        <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
+        <div class="modal__bodyArea">
+            <p class="fBold">ただいまお客さま情報を登録中です。<br>登録が完了しましたら<br>お問い合わせ可能となりますので、<br>時間をおいて再度お試しください。</p>
+        </div><!--/modal__bodyArea-->
+        <div class="modal_error_btnArea">
+            <p><a href="javascript:void(0);" class="btn btn03 btnL mClose" onclick="changeDisp('noInq')">閉じる</a></p>
+        </div><!--/modal_error_btnArea-->
+    </div><!--/modalOuter_error-->
+</div><!--/modalWrap_error-->
