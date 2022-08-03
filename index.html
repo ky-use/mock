@@ -302,6 +302,7 @@
     });
     // 通信失敗 出力
     function dispComErrModal(){
+        console.log('dispComErrModal');
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-comError").fadeIn();
         $(".error-comError").css("display", "block");
@@ -309,6 +310,7 @@
     }
     // 時限チェック 出力
     function dispTimeoutErrModal(){
+        console.log('dispTimeoutErrModal');
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-timeoutError").fadeIn();
         $(".error-timeoutError").css("display", "block");
@@ -316,6 +318,7 @@
     }
     // 通信失敗 出力(登録時)
     function dispRegisComErrModal(){
+        console.log('dispRegisComErrModal');
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-comError").fadeIn();
         $(".error-comError").css("display", "block");
@@ -323,6 +326,7 @@
     }
     // 時限チェック 出力(登録時)
     function dispRegisTimeoutErrModal(){
+        console.log('dispRegisTimeoutErrModal');
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-timeoutErrorRegis").fadeIn();
         $(".error-timeoutErrorRegis").css("display", "block");
@@ -330,6 +334,7 @@
     }
     // システムエラー 出力
     function dispAbnormalErrModal(){
+        console.log('dispAbnormalErrModal');
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-abnormalErrorRegis").fadeIn();
         $(".error-abnormalErrorRegis").css("display", "block");
@@ -337,6 +342,7 @@
     }
     // メールアドレス不正 出力
     function dispInvmailErrModal(){
+        console.log('dispInvmailErrModal');
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-invmailError").fadeIn();
         $(".error-invmailError").css("display", "block");
@@ -344,6 +350,7 @@
     }
     // 取引先が存在しない(新規問い合わせ登録画面) 出力
     function dispNoaccErrModal(){
+        console.log('dispNoaccErrModal');
         let CurrentScrollY = $(window).scrollTop();
         $(".modalOverlay,.modalWrap_error.error-noaccError").fadeIn();
         $(".error-noaccError").css("display", "block");
@@ -470,10 +477,9 @@
 		//linkedStr = $('input[name="SFConnectParam"]').val();
 		//linkedStr = "bd1fcec2a09397bdac42bdba68beca74a28e90a646bffae6d0b2f3a376aa9993";
 /*** ADD K.Y ***/
-		linkedStr = "789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab317b0a"; // timeout
-        	
+        linkedStr = "789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab"; // abnormal
         /*
-        	linkedStr = "789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab"; // abnormal
+        linkedStr = "789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab317b0a"; // timeout
 		linkedStr = "9cd4294277d8d2acc90e86920247ecc18f06d2309fa57662611b3be19c0733f6"; // nocase
 		linkedStr = "a31e76e1cb33faf4ae1380a8f732f95f9f9b83a095c3cbd607b9fc09399906f5"; // invalidmail
         */
