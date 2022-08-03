@@ -1001,7 +1001,7 @@
                             dispInvmailErrModal();
                         // 時限チェック
                         }else if(response.result == 'TIMED_CHECK'){
-                            dispRegisTimeoutErrModal();
+                            dispTimeoutErrModal();
                         // 異常終了
                         }else{
                             dispAbnormalErrModal();
@@ -1129,7 +1129,7 @@
 /*** ADD K.Y ***/
                         // 時限チェック
                         if(response.result == 'TIMED_CHECK'){
-                            dispRegisTimeoutErrModal();
+                            dispTimeoutErrModal();
                         // 異常終了
                         }else{
                             dispAbnormalErrModal();
