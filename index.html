@@ -84,7 +84,17 @@
             </div><!--/modalOuter_error-->
         </div><!--/modalWrap_error-->
         
-
+        <div class="modalWrap_error error-abnormalError">
+            <div class="modalOuter_error">
+                <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
+                <div class="modal__bodyArea">
+                    <p class="fBold">システムエラーが発生しました。<br>時間をおいて、再度ログインしてご利用ください。</p>
+                </div><!--/modal__bodyArea-->
+                <div class="modal_error_btnArea">
+                    <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
+                </div><!--/modal_error_btnArea-->
+            </div><!--/modalOuter_error-->
+        </div><!--/modalWrap_error-->
 
 		<script type="text/javascript">
 
@@ -102,6 +112,7 @@
             $(".modalWrap_error").css("display", "none");
             $("body").css({position:"",top:0 * CurrentScrollY});
         });
+
         function dispComErrModal(){
             let CurrentScrollY = $(window).scrollTop();
             $(".modalOverlay,.modalWrap_error.error-comError").fadeIn();
@@ -115,6 +126,15 @@
             $(".modalWrap_error").css("display", "block");
             $("body").css({position:"fixed",top:-1 * CurrentScrollY});
         }
+
+        function dispAbnormalErrModal(){
+            let CurrentScrollY = $(window).scrollTop();
+            $(".modalOverlay,.modalWrap_error.error-abnormalError").fadeIn();
+            $(".modalWrap_error").css("display", "block");
+            $("body").css({position:"fixed",top:-1 * CurrentScrollY});
+        }
+
+
 		function responseApexData(){
 			
             $.ajax({
@@ -137,12 +157,18 @@
                         url: REQUEST_DOMAIN + '/services/apexrest/IMF_Case',
                         dataType: 'json',
                         cache :false,
-                        data: {inquiry : '789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab317b0a'},
+                        //data: {inquiry : '789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab317b0a'}, // timeout
+                        data: {inquiry : '789d86fb97fa49352746c2d382ffdec636f460133f7b13b06dad531eab'}, // abnormal
                         headers: {"Authorization" : accToken},
                         success : function (res) {
-                            if(res.result == 'TIMED_CHECK'){
+                            if(res.result == ''){
+
+                            }else if(res.result == 'TIMED_CHECK'){
                                 dispTimeoutErrModal();
+                            }else{
+                                dispAbnormalErrModal();
                             }
+                            
                             console.log('success');
                             console.log(res)
                         },
