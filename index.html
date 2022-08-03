@@ -955,7 +955,9 @@
 						res = response;
 						init();
 /*** ADD K.Y ***/
-                        errorMessageText = response.errorMessage.replace(/\n/g, '<br>');
+                        if(response.errorMessage){
+                            errorMessageText = response.errorMessage.replace(/\n/g, '<br>');
+                        }
                         // 成功
                         if(response.result == 'SUCCESS'){
                         // 時限チェック
@@ -1018,9 +1020,11 @@
 					data:JSON.stringify(inqRegistData),
 					success:function(response){
 						const cbdId = response.cbdId;
-/*** ADD K.Y ***/
                         console.log(response)
-                        errorMessageText = response.errorMessage.replace(/\n/g, '<br>');
+/*** ADD K.Y ***/
+                        if(response.errorMessage){
+                            errorMessageText = response.errorMessage.replace(/\n/g, '<br>');
+                        }
                         if(response.result == 'SUCCESS'){
                             if(cbdId){
                                 changeDisp('compScreen');
@@ -1158,7 +1162,9 @@
                         console.log(response)
 						console.log(cbdId);
 /*** ADD K.Y ***/
-                        errorMessageText = response.errorMessage.replace(/\n/g, '<br>');
+                        if(response.errorMessage){
+                            errorMessageText = response.errorMessage.replace(/\n/g, '<br>');
+                        }
                         if(response.result == 'SUCCESS'){
                             if(cbdId){
                                 changeDisp('compScreen');
