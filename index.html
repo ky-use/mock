@@ -109,6 +109,18 @@
             </div><!--/modalOuter_error-->
         </div><!--/modalWrap_error-->
 
+        <div class="modalWrap_error error-invmailError">
+            <div class="modalOuter_error">
+                <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
+                <div class="modal__bodyArea">
+                    <p class="fBold">ただいまお客さま情報を登録中です。<br>登録が完了しましたら<br>お問い合わせ可能となりますので、<br>時間をおいて再度お試しください。</p>
+                </div><!--/modal__bodyArea-->
+                <div class="modal_error_btnArea">
+                    <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
+                </div><!--/modal_error_btnArea-->
+            </div><!--/modalOuter_error-->
+        </div><!--/modalWrap_error-->
+
 		<script type="text/javascript">
 
 		// 通信先URL　※環境に併せて変更する必要あり！
@@ -153,11 +165,14 @@
             $(".error-nocaseError").css("display", "block");
             $("body").css({position:"fixed",top:-1 * CurrentScrollY});
         }
-
-        function newinq(){
-            console.log(res.caseList)
-            
+        // メールアドレス不正
+        function dispInvmailErrModal(){
+            let CurrentScrollY = $(window).scrollTop();
+            $(".modalOverlay,.modalWrap_error.error-invmailError").fadeIn();
+            $(".error-invmailError").css("display", "block");
+            $("body").css({position:"fixed",top:-1 * CurrentScrollY});
         }
+
 
 		function responseApexData(){
             $.ajax({
@@ -187,17 +202,24 @@
                         success : function (resp) {
 			                console.log('success');
                             console.log(resp);
-
+                            
+                            // 成功
                             if(resp.result == 'SUCCESS'){
+                                // お問い合わせ0件
                                 if(!resp.caseList){
                                     dispNocaseErrModal();
                                 }
+                            // 時限チェック
                             }else if(resp.result == 'TIMED_CHECK'){
                                 dispTimeoutErrModal();
+                            
+                            }else if(resp.result == 'INVALID_EMAIL_ADDRESS'){
+                                dispInvmailErrModal();
+
+                            // 異常終了
                             }else{
                                 dispAbnormalErrModal();
                             }
-
                             
                         },
                         error : function (data, errorThrown,status) {
