@@ -748,6 +748,7 @@
 
 /*** K.Y ***/
 		// お問い合わせ詳細
+		console.log(document.getElementById('inqTextInput'))
 		document.getElementById('inqTextInput').innerHTML = '';
 		// お問い合わせ種類が入力されている
 		let inqTypeElem = document.getElementById('Modal-aaa');
@@ -779,7 +780,6 @@
                 cbdFileElem.removeChild(cbdFileElem.firstChild);
             }
         }
-
 		// 出力先要素に子要素があればTRUE
         const elemcheck = document.getElementById('listQa').hasChildNodes();
         // 子要素があるかどうかチェック
@@ -790,6 +790,8 @@
                 parent.removeChild(parent.firstChild);
             }
         }
+
+
 		// 入力画面出力用
 		eMail = res.accMail;
 		// 新規入力画面に反映
