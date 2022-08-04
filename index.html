@@ -779,9 +779,9 @@
         }
 		// 個別の投稿内容
 		document.getElementById('cbdTextInput').value = null;
-		if($("#inqTextInput").val() == ''){
+		if($("#cbdTextInput").val() == ''){
 			// 黄色
-			$("#inqTextInput").css('background', '#ffffcc');
+			$("#cbdTextInput").css('background', '#ffffcc');
 		}
 		// 個別のファイル出力先に子要素があればTRUE
         const cbdFileElemcheck = document.getElementById('cbdFileList').hasChildNodes();
