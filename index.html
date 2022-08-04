@@ -757,6 +757,11 @@
 			inqTypeElem.classList.remove('data-on');
 			inqTypeElem.classList.add('reqEntry');
 			inqTypeElem.innerHTML = '選択してください';
+			let choiceList = document.getElementsByName('aaa');
+			for(i = 0; i < choiceList.length; i++){
+				choiceList[i].checked="";
+			}
+
 		}
 		// 新規のファイル出力先に子要素があればTRUE
         const inqFileElemcheck = document.getElementById('inqFileList').hasChildNodes();
