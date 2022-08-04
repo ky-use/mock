@@ -750,6 +750,10 @@
 		// お問い合わせ詳細
 		console.log(document.getElementById('inqTextInput'))
 		document.getElementById('inqTextInput').value = null;
+		if($("#inqTextInput").val() == ''){
+			// 黄色
+			$("#inqTextInput").css('background', '#ffffcc');
+		}
 		// お問い合わせ種類が入力されている
 		let inqTypeElem = document.getElementById('Modal-aaa');
 		if(!inqTypeElem.classList.contains('reqEntry')){
@@ -775,6 +779,10 @@
         }
 		// 個別の投稿内容
 		document.getElementById('cbdTextInput').value = null;
+		if($("#inqTextInput").val() == ''){
+			// 黄色
+			$("#inqTextInput").css('background', '#ffffcc');
+		}
 		// 個別のファイル出力先に子要素があればTRUE
         const cbdFileElemcheck = document.getElementById('cbdFileList').hasChildNodes();
         // 子要素があるかどうかチェック
