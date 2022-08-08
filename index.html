@@ -1582,17 +1582,8 @@
 			$("body").css({position:"fixed",top:-1});
 		// いずれも未入力の場合
 		}else{
-			console.log(res.result);
-			if(res.result == 'SUCCESS'){
-				if(!res.caseList){ // お問い合わせ0件(null)の場合
-					// ホーム画面（履歴なし）を表示
-					changeDisp('noInq');
-					
-				}else{
-					// ホーム画面に遷移
-					changeDisp('inquiryForm');
-				}
-			}
+			// ホーム画面に遷移
+			changeDisp('inquiryForm');
 		}
 	}
 	/**
@@ -1614,8 +1605,19 @@
 		uploadedFileSize = 0;
 		// オーバレイをクリア（残すと前画面でオーバレイが残るため）
 		$('.modalOverlay,.error-type1').fadeOut();
-		// ホーム画面に遷移
-		changeDisp('inquiryForm');
+		
+		console.log(res.result);
+		if(res.result == 'SUCCESS'){
+			if(!res.caseList){ // お問い合わせ0件(null)の場合
+				// ホーム画面（履歴なし）を表示
+				changeDisp('noInq');
+				return;
+			}else{
+				// ホーム画面に遷移
+				changeDisp('inquiryForm');
+				return;
+			}
+		}
 	}
 	/**
 	 * 戻るボタン処理（追加投稿）
