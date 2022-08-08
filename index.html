@@ -1606,18 +1606,28 @@
 		// オーバレイをクリア（残すと前画面でオーバレイが残るため）
 		$('.modalOverlay,.error-type1').fadeOut();
 		
-		console.log(res.result);
+/*** ADD K.Y ***/
 		if(res.result == 'SUCCESS'){
 			if(!res.caseList){ // お問い合わせ0件(null)の場合
-				// ホーム画面（履歴なし）を表示
+				// ホーム画面（履歴なし）を遷移
 				changeDisp('noInq');
 				return;
-			}else{
-				// ホーム画面に遷移
+			}else{ // お問い合わせあり
+				// ホーム画面（履歴あり）に遷移
 				changeDisp('inquiryForm');
 				return;
 			}
 		}
+		// 新規のファイル出力先に子要素があればTRUE
+        const inqFileElemcheck = document.getElementById('inqFileList').hasChildNodes();
+        // 子要素があるかどうかチェック
+        if(inqFileElemcheck){
+			let inqFileElem = document.getElementById('inqFileList');
+            // 子要素が無くなるまで削除
+            while(inqFileElem.firstChild){
+				inqFileElem.removeChild(inqFileElem.firstChild);
+            }
+        }
 	}
 	/**
 	 * 戻るボタン処理（追加投稿）
