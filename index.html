@@ -1582,6 +1582,7 @@
 			$("body").css({position:"fixed",top:-1});
 		// いずれも未入力の場合
 		}else{
+			console.log(res.result);
 			if(res.result == 'SUCCESS'){
 				if(!res.caseList){ // お問い合わせ0件(null)の場合
 					// ホーム画面（履歴なし）を表示
