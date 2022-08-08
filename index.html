@@ -1,376 +1,4 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript">
-<!-- PPBより受領したスクリプトを反映
-	/*** NewInquiry_InputScreen ***/
-/*
-	$(function(){
-		var onResize;
-		$(window).on('load resize', function(){
-			clearTimeout(onResize);
-			onResize = setTimeout(function(){
-				inqtextinputAfter(document.getElementById("inqTextInput"));
-			},100);
-		});
-	});
-	//textarea自動高さ調整
-	function inqtextinputAfter(argObj){
-		argObj.style.height = "42px";
-		var wSclollHeight = parseInt(argObj.scrollHeight);
-		// 1行の長さを取得する
-		var wLineH = parseInt(argObj.style.lineHeight.replace(/px/, ''));
-		// 最低2行の表示エリアにする
-		if(wSclollHeight < (wLineH * 2)){wSclollHeight=(wLineH * 2);}
-		// テキストエリアの高さを設定する
-		argObj.style.height = wSclollHeight + "px";
-	}
-*/
-	$(function(){
-		//モーダル高さ調整
-		/*
-		$(window).on("load orientationchange resize", function() {
-			ModalWinLoad();
-		});
-		*/
-		
-		//モーダル開閉
-		$(".ModalBtn").on("click", function(){
-			$(".modalOverlay,.modalWrap").fadeIn();
-			$("body").css({position:"fixed",top:-1});
-			selectId = $(this).attr("id").slice(6);
-			//当該処理だけは呼び元の処理が特定できなかったため、コメントアウトしている
-			//ModalOpen(selectId);
-		});
-		
-		$(".modal__bottomArea").on("click", function(){
-			$(".modalOverlay,.modalWrap").fadeOut();
-			$("body").css({position:"",top:0});
-			SelectRadio(selectId);
-		});
-		$(".x-data-aaa").change(function(){
-			SelectRadio(selectId);
-		});
-		//モーダル開閉　戻る、ログアウト時
-		$(".prevBtn, .logout").on("click", function(){
-			if ($("body").find(".data-on").length) {
-				var CurrentScrollY = $(window).scrollTop();
-				$(".modalOverlay,.modalWrap_error.error-type1").fadeIn();
-				$("body").css({position:"fixed",top:-1 * CurrentScrollY});
-			}else{
-			}
-		});
-		$(".textinput-box .InputClear").on("click", function(){
-			if ($("body").find(".data-on").length) {
-				var CurrentScrollY = $(window).scrollTop();
-				$(".modalOverlay,.modalWrap_error.error-type2").fadeIn();
-				$("body").css({position:"fixed",top:-1 * CurrentScrollY});
-			}else{
-			}
-		});
-		$(".upfile-text .InputClear").on("click", function(){
-			var CurrentScrollY = $(window).scrollTop();
-			$(".modalOverlay,.modalWrap_error.error-type3").fadeIn();
-			$("body").css({position:"fixed",top:-1 * CurrentScrollY});
-		});
-		$(".modal__close").on("click", function(){
-			var CurrentScrollY = $(window).scrollTop();
-			$(".modalOverlay,.modalWrap_error").fadeOut();
-			$("body").css({position:"",top:0 * CurrentScrollY});
-		});
-		//入力値クリア
-		$(".InputClear").on("click", function(){
-			if ($("body").find(".data-on").length) {
-				var CurrentScrollY = $(window).scrollTop();
-				$(".modalOverlay,.modalWrap_error.error-type2").fadeIn();
-				$("body").css({position:"fixed",top:-1 * CurrentScrollY});
-				NextBtnActivity();
-			}else{
-			}
-		});
-		//input入力
-		$("#inqTextInput").on("keydown keyup keypress change blur", function() {
-			if ($(this).val().length) {
-				$('#inqContentDel').css("opacity", 1);
-				$("#inqTextInput").removeClass("reqEntry").addClass("data-on");
-			}else{
-				$('#inqContentDel').css("opacity", 0);
-				$("#inqTextInput").addClass("reqEntry").removeClass("data-on");
-			}
-			NextBtnActivity();
-		});
-		$("#inqDelBtn").on({
-			"click":function(){
-				$('#inqTextInput').val("");
-				reqCheck();
-				if($('#inqTextInput').val() == ''){
-					$('#inqTextInput').css('background', '#ffffcc');
-				}
-				$('#inqContentDel').css("opacity", 0);
-				$("#inqTextInput").addClass("reqEntry").removeClass("data-on");
-				//$("#inqtextInput").css({height:"42px"});
-				NextBtnActivity();
-			}
-		});
-		//入力時の下線制御
-//		setReqCls("#Modal-aaa, #inqTextInput");
-	});
-	function SelectRadio(id){
-		var childName = $("#"+id).children("li").attr("name");
-		var selectValue = $("input[name='"+childName+"']:checked").next().html();
-		$("#Modal-"+ id).html(selectValue);
-		var defValue = $("#Modal-"+ id).html();
-		var defValueMsg = "選択してください";
-		if(defValue == defValueMsg){
-			if(!$("#Modal-"+ id).hasClass("reqEntry")){$("#Modal-"+ id).addClass("reqEntry").removeClass("inputSelectItem-on data-on");}
-		}else if(defValue == ""){
-			$('#Modal-'+ id).add().html("選択してください");
-		}else{
-			$("#Modal-"+ id).removeClass("reqEntry").addClass("inputSelectItem-on data-on");
-		}
-		NextBtnActivity();
-	}
-	function NextBtnActivity(){
-		if (!($("body").find(".reqEntry").length)) {
-			$("p").find("#nextBtn").prop("disabled", false);
-		}else{
-			$("p").find("#nextBtn").prop("disabled", true);
-		}
-	}
-	/* ファイル操作処理はUSEで実装
-	$(function(){
-		$("#fileName").change(function(){
-			var file = document.getElementById("fileName").value;
-			document.getElementById("fileText").value = file;
-			$("#fileText").css({display:"block"});
-			$("#fileText").next(".inputClear").css("opacity", 1);
-		});
-	});
-	*/
-	/*** /NewInquiry_InputScreen ***/
-
-	/*** Reply_InputScreen ***/
-/*
-	$(function(){
-		var onResize;
-		$(window).on('load resize', function(){
-			clearTimeout(onResize);
-			onResize = setTimeout(function(){
-				textinputAfter(document.getElementById("cbdTextInput"));
-			},100);
-		});
-	});
-	//textarea自動高さ調整
-	function textinputAfter(argObj){
-		argObj.style.height = "42px";
-		var wSclollHeight = parseInt(argObj.scrollHeight);
-		// 1行の長さを取得する
-		var wLineH = parseInt(argObj.style.lineHeight.replace(/px/, ''));
-		// 最低2行の表示エリアにする
-		if(wSclollHeight < (wLineH * 2)){wSclollHeight=(wLineH * 2);}
-		// テキストエリアの高さを設定する
-		argObj.style.height = wSclollHeight + "px";
-	}
-*/
-	$(function(){
-		//モーダル高さ調整
-		/*
-		$(window).on("load orientationchange resize", function() {
-			ModalWinLoad();
-		});
-		*/
-		
-		//モーダル開閉
-		$(".ModalBtn").on("click", function(){
-			$(".modalOverlay,.modalWrap").fadeIn();
-			$("body").css({position:"fixed",top:-1});
-			selectId = $(this).attr("id").slice(6);
-			//ModalOpen(selectId);
-		});
-		
-		$(".modal__bottomArea").on("click", function(){
-			$(".modalOverlay,.modalWrap").fadeOut();
-			$("body").css({position:"",top:0});
-			SelectRadio(selectId);
-		});
-		$(".x-data-aaa").change(function(){
-			SelectRadio(selectId);
-		});
-		//モーダル開閉　戻る、ログアウト時
-		$(".prevBtn, .logout").on("click", function(){
-			if ($("body").find(".data-on").length) {
-				var CurrentScrollY = $(window).scrollTop();
-				$(".modalOverlay,.modalWrap_error.error-type1").fadeIn();
-				$("body").css({position:"fixed",top:-1 * CurrentScrollY});
-			}else{
-			}
-		});
-		$(".textinput-box .InputClear").on("click", function(){
-			if ($("body").find(".data-on").length) {
-				var CurrentScrollY = $(window).scrollTop();
-				$(".modalOverlay,.modalWrap_error.error-type2").fadeIn();
-				$("body").css({position:"fixed",top:-1 * CurrentScrollY});
-			}else{
-			}
-		});
-		$(".upfile-text .InputClear").on("click", function(){
-			var CurrentScrollY = $(window).scrollTop();
-			$(".modalOverlay,.modalWrap_error.error-type3").fadeIn();
-			$("body").css({position:"fixed",top:-1 * CurrentScrollY});
-		});
-		$(".modal__close").on("click", function(){
-			var CurrentScrollY = $(window).scrollTop();
-			$(".modalOverlay,.modalWrap_error").fadeOut();
-			$("body").css({position:"",top:0 * CurrentScrollY});
-		});
-		//入力値クリア
-		$(".InputClear").on("click", function(){
-			if ($("body").find(".data-on").length) {
-				var CurrentScrollY = $(window).scrollTop();
-				$(".modalOverlay,.modalWrap_error.error-type2").fadeIn();
-				$("body").css({position:"fixed",top:-1 * CurrentScrollY});
-				NextBtnActivity();
-			}else{
-			}
-		});
-		//input入力
-		$("#cbdTextInput").on("keydown keyup keypress change blur", function() {
-			if ($(this).val().length) {
-				$('#cbdContentDel').css("opacity", 1);
-				$("#cbdTextInput").removeClass("reqEntry").addClass("data-on");
-			}else{
-				$('#cbdContentDel').css("opacity", 0);
-				$("#cbdTextInput").addClass("reqEntry").removeClass("data-on");
-			}
-			NextBtnActivity();
-		});
-		$("#cbdDelBtn").on({
-			"click":function(){
-				$('#cbdTextInput').val("");
-				reqCheck();
-				if($('#cbdTextInput').val() == ''){
-					$('#cbdTextInput').css('background', '#ffffcc');
-				}
-				$('#cbdContentDel').css("opacity", 0);
-				$("#cbdTextInput").addClass("reqEntry").removeClass("data-on");
-				//$("#inqtextInput").css({height:"42px"});
-				NextBtnActivity();
-			}
-		});
-		//入力時の下線制御
-//		setReqCls("#Modal-aaa, #cbdTextInput");
-	});
-	function SelectRadio(id){
-		var childName = $("#"+id).children("li").attr("name");
-		var selectValue = $("input[name='"+childName+"']:checked").next().html();
-		$("#Modal-"+ id).html(selectValue);
-		var defValue = $("#Modal-"+ id).html();
-		var defValueMsg = "選択してください";
-		if(defValue == defValueMsg){
-			if(!$("#Modal-"+ id).hasClass("reqEntry")){
-				$("#Modal-"+ id).addClass("reqEntry").removeClass("inputSelectItem-on data-on");
-			}
-		}else if(defValue == ""){
-			$('#Modal-'+ id).add().html("選択してください");
-		}else{
-			$("#Modal-"+ id).removeClass("reqEntry").addClass("inputSelectItem-on data-on");
-		}
-		NextBtnActivity();
-	}
-	function NextBtnActivity(){
-		if (!($("body").find(".reqEntry").length)) {
-			$("p").find("#nextBtn").prop("disabled", false);
-		}else{
-			$("p").find("#nextBtn").prop("disabled", true);
-		}
-	}
-	/* ファイル操作処理はUSE側で実装
-	$(function(){
-		$("#fileName").change(function(){
-			var file = document.getElementById("fileName").value;
-			document.getElementById("fileText").value = file;
-			$("#fileText").css({display:"block"});
-			$("#fileText").next(".inputClear").css("opacity", 1);
-		});
-	});
-	*/
-	/*** /Reply_InputScreen ***/
-
-	/*** DetailsScreen ***/
-	$(function(){
-		$(".contbrd-cont").click(function(){
-			$(this).toggleClass("open");
-		});
-	});
-	/*** /DetailsScreen ***/
-
-	/*** 追加モーダル処理 ***/
-    // モーダル閉じるボタン(画面遷移なし)
-    $(function(){
-        $(".mClose").on("click", function(){
-            var CurrentScrollY = $(window).scrollTop();
-            $(".modalOverlay,.modalWrap_error").fadeOut();
-            $(".modalWrap_error").css("display", "none");
-            $("body").css({position:"",top:0 * CurrentScrollY});
-        });
-    });
-    // 通信失敗 出力
-    function dispComErrModal(){
-        let CurrentScrollY = $(window).scrollTop();
-        $(".modalOverlay,.modalWrap_error.error-comError").fadeIn();
-        $(".error-comError").css("display", "block");
-        $("body").css({position:"fixed",top:-1 * CurrentScrollY});
-
-    }
-    // 時限チェック 出力
-    function dispTimeoutErrModal(){
-        if(errorMessageText){
-            $(".eMessage-error-timeoutError").html(errorMessageText);
-        }
-        let CurrentScrollY = $(window).scrollTop();
-        $(".modalOverlay,.modalWrap_error.error-timeoutError").fadeIn();
-        $(".error-timeoutError").css("display", "block");
-        $("body").css({position:"fixed",top:-1 * CurrentScrollY});
-    }
-    // 通信失敗 出力(登録時)
-    function dispRegisComErrModal(){
-        let CurrentScrollY = $(window).scrollTop();
-        $(".modalOverlay,.modalWrap_error.error-comErrorRegis").fadeIn();
-        $(".error-comErrorRegis").css("display", "block");
-        $("body").css({position:"fixed",top:-1 * CurrentScrollY});
-    }
-    // システムエラー 出力
-    function dispAbnormalErrModal(){
-        if(errorMessageText){
-            $(".eMessage-error-abnormalError").html(errorMessageText);
-        }
-        let CurrentScrollY = $(window).scrollTop();
-        $(".modalOverlay,.modalWrap_error.error-abnormalError").fadeIn();
-        $(".error-abnormalError").css("display", "block");
-        $("body").css({position:"fixed",top:-1 * CurrentScrollY});
-    }
-    // メールアドレス不正 出力
-    function dispInvmailErrModal(){
-        if(errorMessageText){
-            $(".eMessage-error-invmailError").html(errorMessageText);
-        }
-        let CurrentScrollY = $(window).scrollTop();
-        $(".modalOverlay,.modalWrap_error.error-invmailError").fadeIn();
-        $(".error-invmailError").css("display", "block");
-        $("body").css({position:"fixed",top:-1 * CurrentScrollY});
-    }
-    // 取引先が存在しない(新規問い合わせ登録画面) 出力
-    function dispNoaccErrModal(){
-        if(res.result == 'NO_ACCOUNT'){
-            if(errorMessageText){
-                $(".eMessage-error-noaccError").html(errorMessageText);
-            }
-            let CurrentScrollY = $(window).scrollTop();
-            $(".modalOverlay,.modalWrap_error.error-noaccError").fadeIn();
-            $(".error-noaccError").css("display", "block");
-            $("body").css({position:"fixed",top:-1 * CurrentScrollY});
-        }
-    }
-//-->
-</script>
 <!--### template ###-->
 <!-- InquiryForm -->
 <template id="caseTemplate">
@@ -418,15 +46,16 @@
 
 <!-- fileTemplate -->
 <template id="fileTemplate">
-	<p><a class="fileLink"></a></p>
+	<p><a class="fileLink" target="_blank"></a></p>
 </template>
 
 <!-- uploadFileTemplate -->
 <template id="fileUpTemplate">
-	<p class="upfile-text"><a></a><span class="InputClear inputClear">×</span></p>
+	<p class="upfile-text"><a target="_blank"></a><span class="InputClear inputClear">×</span></p>
 </template>
 
 <script type="text/javascript">
+<!--
 	// 通信先URL　※環境に併せて変更する必要あり！
 	const REQUEST_DOMAIN = 'https://paypay-bank--pt49.sandbox.my.salesforce.com';
 	const CLIENT_ID = '3MVG99S6MzYiT5k.KkcZzmtcXubr_J8l8N8473VR.oFizQeVyWXFV5ARIiXmwhmXqjuNU.K6Pk9mc9M3btLBQ';
@@ -485,26 +114,184 @@
 		'各種証明書（取引明細・残高証明など）'
 	];
 	// 拡張子のリスト
-	const extensionList = ["heic", "xls", "xlsx", "doc", "docx", "png", "jpg", "jpeg", "pd"];
+	const extensionList = ["heic", "xls", "xlsx", "doc", "docx", "png", "jpg", "jpeg", "pdf"];
 	
-
 	/**
 	 * 初期表示処理
 	 */
 	$(function(){
 		// 連携文字列取得
 		//linkedStr = $('input[name="SFConnectParam"]').val();
-        linkedStr = 'bd1fcec2a09397bdac42bdba68beca74a28e90a646bffae6d0b2f3a376aa9993';
-/*** K.Y ***/
+		linkedStr = 'bd1fcec2a09397bdac42bdba68beca74a28e90a646bffae6d0b2f3a376aa9993'; //いっぱい
+		//linkedStr = 'b0d9fb640d1619065677920ae3734436346a058da071975e0df730ab6da7a43c' // ケース0件
 		// ホーム画面を表示
 		changeDisp('inquiryForm');
-
+		
+		//モーダル開閉
+		$(".ModalBtn").on("click", function(){
+			$(".modalOverlay,.modalWrap").fadeIn();
+			$("body").css({position:"fixed",top:-1});
+			selectId = $(this).attr("id").slice(6);
+		});
+		
+		$(".modal__bottomArea").on("click", function(){
+			$(".modalOverlay,.modalWrap").fadeOut();
+			$("body").css({position:"",top:0});
+			SelectRadio(selectId);
+		});
+		$(".x-data-inqType").change(function(){
+			SelectRadio(selectId);
+		});
+		//モーダル開閉　戻る、ログアウト時
+		$(".prevBtn, .logout").on("click", function(){
+			if ($("body").find(".data-on").length) {
+				var CurrentScrollY = $(window).scrollTop();
+				$(".modalOverlay,.modalWrap_error.error-type1").fadeIn();
+				$("body").css({position:"fixed",top:-1 * CurrentScrollY});
+			}else{
+			}
+		});
+		$(".textinput-box .InputClear").on("click", function(){
+			if ($("body").find(".data-on").length) {
+				var CurrentScrollY = $(window).scrollTop();
+				$(".modalOverlay,.modalWrap_error.error-type2").fadeIn();
+				$("body").css({position:"fixed",top:-1 * CurrentScrollY});
+			}else{
+			}
+		});
+		$(".upfile-text .InputClear").on("click", function(){
+			var CurrentScrollY = $(window).scrollTop();
+			$(".modalOverlay,.modalWrap_error.error-type3").fadeIn();
+			$("body").css({position:"fixed",top:-1 * CurrentScrollY});
+		});
+		$(".modal__close").on("click", function(){
+			var CurrentScrollY = $(window).scrollTop();
+			$(".modalOverlay,.modalWrap_error").fadeOut();
+			$("body").css({position:"",top:0 * CurrentScrollY});
+		});
+		//入力値クリア
+		$(".InputClear").on("click", function(){
+			if ($("body").find(".data-on").length) {
+				var CurrentScrollY = $(window).scrollTop();
+				$(".modalOverlay,.modalWrap_error.error-type2").fadeIn();
+				$("body").css({position:"fixed",top:-1 * CurrentScrollY});
+				NextBtnActivity();
+			}else{
+			}
+		});
+		//input入力
+		$("#inqTextInput").on("keydown keyup keypress change blur", function() {
+			if ($(this).val().length) {
+				$('#inqContentDel').css("opacity", 1);
+				$("#inqTextInput").removeClass("reqEntry").addClass("data-on");
+			}else{
+				$('#inqContentDel').css("opacity", 0);
+				$("#inqTextInput").addClass("reqEntry").removeClass("data-on");
+			}
+			NextBtnActivity();
+		});
+		$("#inqDelBtn").on({
+			"click":function(){
+				$('#inqTextInput').val("");
+				inqReqCheck();
+				if($('#inqTextInput').val() == ''){
+					$('#inqTextInput').css('background', '#ffffcc');
+				}
+				$('#inqContentDel').css("opacity", 0);
+				$("#inqTextInput").addClass("reqEntry").removeClass("data-on");
+				//$("#inqtextInput").css({height:"42px"});
+				NextBtnActivity();
+			}
+		});
+		//入力時の下線制御
+		//setReqCls("#Modal-inqType, #inqTextInput");
+		
+		//モーダル開閉
+		$(".ModalBtn").on("click", function(){
+			$(".modalOverlay,.modalWrap").fadeIn();
+			$("body").css({position:"fixed",top:-1});
+			selectId = $(this).attr("id").slice(6);
+			//ModalOpen(selectId);
+		});
+		
+		$(".modal__bottomArea").on("click", function(){
+			$(".modalOverlay,.modalWrap").fadeOut();
+			$("body").css({position:"",top:0});
+			SelectRadio(selectId);
+		});
+		$(".x-data-inqType").change(function(){
+			SelectRadio(selectId);
+		});
+		//モーダル開閉　戻る、ログアウト時
+		$(".prevBtn, .logout").on("click", function(){
+			if ($("body").find(".data-on").length) {
+				var CurrentScrollY = $(window).scrollTop();
+				$(".modalOverlay,.modalWrap_error.error-type1").fadeIn();
+				$("body").css({position:"fixed",top:-1 * CurrentScrollY});
+			}else{
+			}
+		});
+		$(".textinput-box .InputClear").on("click", function(){
+			if ($("body").find(".data-on").length) {
+				var CurrentScrollY = $(window).scrollTop();
+				$(".modalOverlay,.modalWrap_error.error-type2").fadeIn();
+				$("body").css({position:"fixed",top:-1 * CurrentScrollY});
+			}else{
+			}
+		});
+		$(".upfile-text .InputClear").on("click", function(){
+			var CurrentScrollY = $(window).scrollTop();
+			$(".modalOverlay,.modalWrap_error.error-type3").fadeIn();
+			$("body").css({position:"fixed",top:-1 * CurrentScrollY});
+		});
+		$(".modal__close").on("click", function(){
+			var CurrentScrollY = $(window).scrollTop();
+			$(".modalOverlay,.modalWrap_error").fadeOut();
+			$("body").css({position:"",top:0 * CurrentScrollY});
+		});
+		//入力値クリア
+		$(".InputClear").on("click", function(){
+			if ($("body").find(".data-on").length) {
+				var CurrentScrollY = $(window).scrollTop();
+				$(".modalOverlay,.modalWrap_error.error-type2").fadeIn();
+				$("body").css({position:"fixed",top:-1 * CurrentScrollY});
+				NextBtnActivity();
+			}else{
+			}
+		});
+		//input入力
+		$("#cbdTextInput").on("keydown keyup keypress change blur", function() {
+			if ($(this).val().length) {
+				$('#cbdContentDel').css("opacity", 1);
+				$("#cbdTextInput").removeClass("reqEntry").addClass("data-on");
+			}else{
+				$('#cbdContentDel').css("opacity", 0);
+				$("#cbdTextInput").addClass("reqEntry").removeClass("data-on");
+			}
+			NextBtnActivity();
+		});
+		$("#cbdDelBtn").on({
+			"click":function(){
+				$('#cbdTextInput').val("");
+				cbdReqCheck();
+				if($('#cbdTextInput').val() == ''){
+					$('#cbdTextInput').css('background', '#ffffcc');
+				}
+				$('#cbdContentDel').css("opacity", 0);
+				$("#cbdTextInput").addClass("reqEntry").removeClass("data-on");
+				//$("#inqtextInput").css({height:"42px"});
+				NextBtnActivity();
+			}
+		});
+		//入力時の下線制御
+		//setReqCls("#Modal-inqType, #cbdTextInput");
+		
 		$("#outputCbdTemp").on("click", ".contbrd-cont", function(){
 			$(this).toggleClass("open");
 		});
 		
 		/*** 確認するボタン活性処理 ***/
-		//必須項目に何か変更が加えられたら（＝入力されたら）、check関数が作動する
+		// 必須項目に何か変更が加えられたら（＝入力されたら）、check関数が作動する
 		$('#confButton').prop("disabled", true);
 		
 		$('#modalText').change( function(){
@@ -521,11 +308,82 @@
 			cbdReqCheck();
 		});
 		
+		/*** 新規問い合わせ画面 入力欄の背景色を黄色にする ***/
+		if($("#inqTextInput").val() == ''){
+			// 黄色
+			$("#inqTextInput").css('background', '#ffffcc');
+		}
+		$("#inqTextInput").on('keydown keyup keypress change focus blur', function() {
+			// 値が空の時
+			if($(this).val() == ''){
+				// 黄色
+				$(this).css('background', '#ffffcc');
+			// 値が入っている時に白色
+			}else{
+				// 白色
+				$(this).css('background', '');
+			}
+		});
+		
+		/*** 個別問い合わせ画面 入力欄の背景色を黄色にする ***/
+		if($("#cbdTextInput").val() == ''){
+			// 黄色
+			$("#cbdTextInput").css('background', '#ffffcc');
+		}
+		
+		$("#cbdTextInput").on('keydown keyup keypress change focus blur', function() {
+			// 値が空の時
+			if($(this).val() == ''){
+				// 黄色
+				$(this).css('background', '#ffffcc');
+			// 値が入っている時に白色
+			}else{
+				// 白色
+				$(this).css('background', '');				
+			}
+		});
+		
+		$(".contbrd-cont").click(function(){
+			$(this).toggleClass("open");
+		});
 
-
-
+		/*** 追加モーダル処理 ***/
+    	// モーダル閉じるボタン(画面遷移なし)
+        $(".mClose").on("click", function(){
+            var CurrentScrollY = $(window).scrollTop();
+            $(".modalOverlay,.modalWrap_error").fadeOut();
+            $(".modalWrap_error").css("display", "none");
+            $("body").css({position:"",top:0 * CurrentScrollY});
+        });
+    
+		// 削除ボタン押下時入力欄
+		$('#inqDelbtn').click(function(){
+			// 値が空の時
+			if($("#inqTextInput").val() == ''){
+				// 黄色
+				$("#inqTextInput").css('background', '#ffffcc');
+			// 値が入っている時に白色
+			}else{
+				// 白色
+				$("#inqTextInput").css('background', '');
+			}
+		});
+		
+		// 削除ボタン押下時入力欄
+		$('#cbdDelBtn').click(function(){
+			// 値が空の時
+			if($("#cbdTextInput").val() == ''){
+				// 黄色
+				$("#cbdTextInput").css('background', '#ffffcc');
+			// 値が入っている時に白色
+			}else{
+				// 白色
+				$("#cbdTextInput").css('background', '');
+			}
+		});
+		
 		//const jinkakuCode = $('input[name="JinkakuCode"]').val();
-        const jinkakuCode = '個人';
+		const jinkakuCode = '個人';
 		
 		if(jinkakuCode){
 			// 人格コードが個人または非居住者の場合
@@ -746,26 +604,23 @@
 			return;
 		}
 
-/*** K.Y ***/
 		// お問い合わせ詳細
-		console.log(document.getElementById('inqTextInput'))
 		document.getElementById('inqTextInput').value = null;
 		if($("#inqTextInput").val() == ''){
 			// 黄色
 			$("#inqTextInput").css('background', '#ffffcc');
 		}
 		// お問い合わせ種類が入力されている
-		let inqTypeElem = document.getElementById('Modal-aaa');
+		let inqTypeElem = document.getElementById('Modal-inqType');
 		if(!inqTypeElem.classList.contains('reqEntry')){
 			inqTypeElem.classList.remove('inputSelectItem-on');
 			inqTypeElem.classList.remove('data-on');
 			inqTypeElem.classList.add('reqEntry');
 			inqTypeElem.innerHTML = '選択してください';
-			let choiceList = document.getElementsByName('aaa');
+			let choiceList = document.getElementsByName('inqType');
 			for(i = 0; i < choiceList.length; i++){
 				choiceList[i].checked="";
 			}
-
 		}
 		// 新規のファイル出力先に子要素があればTRUE
         const inqFileElemcheck = document.getElementById('inqFileList').hasChildNodes();
@@ -803,8 +658,6 @@
                 parent.removeChild(parent.firstChild);
             }
         }
-
-
 		// 入力画面出力用
 		eMail = res.accMail;
 		// 新規入力画面に反映
@@ -965,52 +818,49 @@
 	 */
 	function getAllCase(){
 		$.ajax({
-			type: 'POST',
-			crossOrigin: true,
+			type:'POST',
+			crossOrigin:true,
 			url: REQUEST_DOMAIN + '/services/oauth2/token',
-			dataType: 'json',
-			cache :false,
-			data : {
+			dataType:'json',
+			cache:false,
+			data:{
 				"grant_type":"refresh_token",
 				"client_id":CLIENT_ID, 
 				"refresh_token":REFLESH_TOKEN
-			},
-			success : function (connectData) {
-				var accToken = 'Bearer ' + connectData.access_token;
-				$.ajax({
-					type:'GET',
-					crossOrigin:true,
-					url:REQUEST_DOMAIN + '/services/apexrest/IMF_Case',
-					dataType:'json',
-					cache:false,
-					data:{inquiry:linkedStr},
-					headers: {"Authorization":accToken},
-					success:function(response){
-						res = response;
-						init();
-						if(response.errorMessage){
-                            errorMessageText = response.errorMessage.replace(/\n/g, '<br>');
-                        }
-                        // 成功
-                        if(response.result == 'SUCCESS'){
-                        // 時限チェック
-                        }else if(response.result == 'TIMED_CHECK'){
-                            dispTimeoutErrModal();
-                        // 取引先0件
-                        }else if(response.result == 'NO_ACCOUNT'){
-                        // 異常終了
-                        }else{
-                            dispAbnormalErrModal();
-                        }
-					},
-					error:function (data, errorThrown, status) {
-						dispComErrModal();
-					}
-				})
-			},
-			error:function (data, errorThrown, status) {
-				dispComErrModal();
 			}
+		}).done(function(connectData){
+			var accToken = 'Bearer ' + connectData.access_token;
+			$.ajax({
+				type:'GET',
+				crossOrigin:true,
+				url:REQUEST_DOMAIN + '/services/apexrest/IMF_Case',
+				dataType:'json',
+				cache:false,
+				data:{inquiry:linkedStr},
+				headers: {"Authorization":accToken}
+			}).done(function(response){
+				if(response.errorMessage){
+					errorMessageText = response.errorMessage.replace(/\n/g, '<br>');
+				}
+				
+				// 成功
+				if(response.result == 'SUCCESS'){
+					res = response;
+					init();
+					// 時限チェック
+				}else if(response.result == 'TIMED_CHECK'){
+					dispTimeoutErrModal();
+				// 取引先0件
+				}else if(response.result == 'NO_ACCOUNT'){
+				// 異常終了
+				}else{
+					dispAbnormalErrModal();
+				}
+			}).fail(function (data, errorThrown, status){
+				dispComErrModal();
+			});
+		}).fail(function (data, errorThrown, status) {
+			dispComErrModal();
 		});
 	}
 	
@@ -1029,104 +879,93 @@
 				"grant_type":"refresh_token",
 				"client_id":CLIENT_ID, 
 				"refresh_token":REFLESH_TOKEN
-			},
-			success : function (connectData) {
-				var accToken = 'Bearer ' + connectData.access_token;
-				$.ajax({
-					type:'POST',
-					crossOrigin:true,
-					url:REQUEST_DOMAIN + '/services/apexrest/IMF_Case',
-					cache:false,
-					headers: {"Authorization":accToken, "Content-Type":"application/json"},
-					dataType:'json',
-					data:JSON.stringify(inqRegistData),
-					success:function(response){
-						const cbdId = response.cbdId;
-						if(response.errorMessage){
-                            errorMessageText = response.errorMessage.replace(/\n/g, '<br>');
-                        }
-                        if(response.result == 'SUCCESS'){
-                            if(cbdId){
-                                changeDisp('compScreen');
-                            }
-						// メールアドレス不正
-                        }else if(response.result == 'INVALID_EMAIL_ADDRESS'){
-                            dispInvmailErrModal();
-						// 時限チェック
-                        }else if(response.result == 'TIMED_CHECK'){
-                            dispTimeoutErrModal();
-                        // 異常終了
-                        }else{
-                            dispAbnormalErrModal();
-                        }
-						if(inputFiles.length > 0){
-							for(let i = 0; i < inputFiles.length; i++){
-								const cvJson = {
-									Title:inputFiles[i].name,
-									PathOnClient:inputFiles[i].name,
-									VersionData:inputFiles[i].versionData
-								}
+			}
+		}).done(function (connectData) {
+			var accToken = 'Bearer ' + connectData.access_token;
+			$.ajax({
+				type:'POST',
+				crossOrigin:true,
+				url:REQUEST_DOMAIN + '/services/apexrest/IMF_Case',
+				cache:false,
+				headers:{"Authorization":accToken, "Content-Type":"application/json"},
+				dataType:'json',
+				data:JSON.stringify(inqRegistData)
+			}).done(function(response){
+				const cbdId = response.cbdId;
+				if(response.errorMessage){
+					errorMessageText = response.errorMessage.replace(/\n/g, '<br>');
+				}
+				if(response.result == 'SUCCESS'){
+					if(cbdId){
+						changeDisp('compScreen');
+					}
+				// メールアドレス不正
+				}else if(response.result == 'INVALID_EMAIL_ADDRESS'){
+					dispInvmailErrModal();
+				// 時限チェック
+				}else if(response.result == 'TIMED_CHECK'){
+					dispTimeoutErrModal();
+				// 異常終了
+				}else{
+					dispAbnormalErrModal();
+				}
+				if(inputFiles.length > 0){
+					for(let i = 0; i < inputFiles.length; i++){
+						const cvJson = {
+							Title:inputFiles[i].name,
+							PathOnClient:inputFiles[i].name,
+							VersionData:inputFiles[i].versionData
+						}
+						$.ajax({
+							type:"POST",
+							url:REQUEST_DOMAIN + "/services/data/v54.0/sobjects/ContentVersion",
+							cache:false,
+							headers:{"Authorization":accToken, "Content-Type":"application/json"},
+							dataType:"json",
+							data:JSON.stringify(cvJson)
+						}).done(function(cv){
+							const cvId = cv.id;
+							const query = "SELECT+ContentDocumentId+FROM+ContentVersion+WHERE+Id+=+'" + cvId + "'";
+							$.ajax({
+								type:"GET",
+								crossOrigin:true,
+								url:REQUEST_DOMAIN + "/services/data/v54.0/query/?q=" + query,
+								cache:false,
+								headers: {"Authorization":accToken}
+							}).done(function(res){
+								const records = res.records;
+								const cdId = records[0].ContentDocumentId;
+								const linkJson = {
+									ContentDocumentId:cdId,
+									LinkedEntityId:cbdId,
+									Visibility:"AllUsers"
+								};
 								$.ajax({
 									type:"POST",
-									url:REQUEST_DOMAIN + "/services/data/v54.0/sobjects/ContentVersion",
+									crossOrigin:true,
+									url:REQUEST_DOMAIN + "/services/data/v54.0/sobjects/ContentDocumentLink",
 									cache:false,
 									headers:{"Authorization":accToken, "Content-Type":"application/json"},
 									dataType:"json",
-									data:JSON.stringify(cvJson),
-									success:function(cv){
-										const cvId = cv.id;
-										const query = "SELECT+ContentDocumentId+FROM+ContentVersion+WHERE+Id+=+'" + cvId + "'";
-										$.ajax({
-											type:"GET",
-											crossOrigin:true,
-											url:REQUEST_DOMAIN + "/services/data/v54.0/query/?q=" + query,
-											cache:false,
-											headers: {"Authorization":accToken},
-											success : function(res){
-												const records = res.records;
-												const cdId = records[0].ContentDocumentId;
-												const linkJson = {
-													ContentDocumentId:cdId,
-													LinkedEntityId:cbdId,
-													Visibility:"AllUsers"
-												};
-												$.ajax({
-													type:"POST",
-													crossOrigin:true,
-													url:REQUEST_DOMAIN + "/services/data/v54.0/sobjects/ContentDocumentLink",
-													cache:false,
-													headers:{"Authorization":accToken, "Content-Type":"application/json"},
-													dataType:"json",
-													data:JSON.stringify(linkJson),
-													success:function(res){
+									data:JSON.stringify(linkJson)
+								}).done(function(res){
 
-													},
-													error:function(data, errorThrown,status) {
-														dispRegisComErrModal();
-													}
-												});
-											
-											},
-											error:function(data, errorThrown, status) {
-												dispRegisComErrModal();
-											}
-										});
-									},
-									error:function(data, errorThrown, status) {
-										dispRegisComErrModal();
-									}
+								}).fail(function(data, errorThrown, status) {
+									dispRegisComErrModal();
 								});
-							}
-						}
-					},
-					error:function (data, errorThrown, status) {
-						dispRegisComErrModal();
+							}).fail(function(data, errorThrown, status) {
+								dispRegisComErrModal();
+							});
+						}).fail(function(data, errorThrown, status) {
+							dispRegisComErrModal();
+						});
 					}
-				})
-			},
-			error:function (data, errorThrown, status) {
+				}
+			}).fail(function (data, errorThrown, status) {
 				dispRegisComErrModal();
-			}
+			});
+		}).fail(function (data, errorThrown, status) {
+			dispRegisComErrModal();
 		});
 	}
 	
@@ -1145,101 +984,89 @@
 				"grant_type":"refresh_token",
 				"client_id":CLIENT_ID, 
 				"refresh_token":REFLESH_TOKEN
-			},
-			success : function (connectData) {
-				var accToken = 'Bearer ' + connectData.access_token;
-				$.ajax({
-					type:'POST',
-					crossOrigin:true,
-					url:REQUEST_DOMAIN + '/services/apexrest/IMF_ContactBoardDetail',
-					cache:false,
-					headers: {"Authorization":accToken, "Content-Type":"application/json"},
-					dataType:'json',
-					data:JSON.stringify(cbdRegistData),
-					success:function(response){
-						const cbdId = response.cbdId;
-						if(response.errorMessage){
-                            errorMessageText = response.errorMessage.replace(/\n/g, '<br>');
-                        }
-                        if(response.result == 'SUCCESS'){
-                            if(cbdId){
-                                changeDisp('compScreen');
-                            }
-                            // 時限チェック
-                        }else if(response.result == 'TIMED_CHECK'){
-                            dispTimeoutErrModal();
-                        // 異常終了
-                        }else{
-                            dispAbnormalErrModal();
-                        }
-						if(inputFiles.length){
-							for(let i = 0; i < inputFiles.length; i++){
-								const cvJson = {
-									Title:inputFiles[i].name,
-									PathOnClient:inputFiles[i].name,
-									VersionData:inputFiles[i].versionData
-								}
+			}
+		}).done(function (connectData) {
+			var accToken = 'Bearer ' + connectData.access_token;
+			$.ajax({
+				type:'POST',
+				crossOrigin:true,
+				url:REQUEST_DOMAIN + '/services/apexrest/IMF_ContactBoardDetail',
+				cache:false,
+				headers: {"Authorization":accToken, "Content-Type":"application/json"},
+				dataType:'json',
+				data:JSON.stringify(cbdRegistData)
+			}).done(function(response){
+				const cbdId = response.cbdId;
+				if(response.errorMessage){
+					errorMessageText = response.errorMessage.replace(/\n/g, '<br>');
+				}
+				if(response.result == 'SUCCESS'){
+					if(cbdId){
+						changeDisp('compScreen');
+					}
+				// 時限チェック
+				}else if(response.result == 'TIMED_CHECK'){
+					dispTimeoutErrModal();
+				// 異常終了
+				}else{
+					dispAbnormalErrModal();
+				}
+				if(inputFiles.length){
+					for(let i = 0; i < inputFiles.length; i++){
+						const cvJson = {
+							Title:inputFiles[i].name,
+							PathOnClient:inputFiles[i].name,
+							VersionData:inputFiles[i].versionData
+						}
+						$.ajax({
+							type:"POST",
+							url:REQUEST_DOMAIN + "/services/data/v54.0/sobjects/ContentVersion",
+							cache:false,
+							headers:{"Authorization":accToken, "Content-Type":"application/json"},
+							dataType:"json",
+							data:JSON.stringify(cvJson)
+						}).done(function(cv){
+							const cvId = cv.id;
+							const query = "SELECT+ContentDocumentId+FROM+ContentVersion+WHERE+Id+=+'" + cvId + "'";
+							$.ajax({
+								type:"GET",
+								crossOrigin:true,
+								url:REQUEST_DOMAIN + "/services/data/v54.0/query/?q=" + query,
+								cache:false,
+								headers: {"Authorization":accToken}
+							}).done(function(res){
+								const records = res.records;
+								const cdId = records[0].ContentDocumentId;
+								const linkJson = {
+									ContentDocumentId:cdId,
+									LinkedEntityId:cbdId,
+									Visibility:"AllUsers"
+								};
 								$.ajax({
 									type:"POST",
-									url:REQUEST_DOMAIN + "/services/data/v54.0/sobjects/ContentVersion",
+									crossOrigin:true,
+									url:REQUEST_DOMAIN + "/services/data/v54.0/sobjects/ContentDocumentLink",
 									cache:false,
 									headers:{"Authorization":accToken, "Content-Type":"application/json"},
 									dataType:"json",
-									data:JSON.stringify(cvJson),
-									success:function(cv){
-										const cvId = cv.id;
-										const query = "SELECT+ContentDocumentId+FROM+ContentVersion+WHERE+Id+=+'" + cvId + "'";
-										$.ajax({
-											type:"GET",
-											crossOrigin:true,
-											url:REQUEST_DOMAIN + "/services/data/v54.0/query/?q=" + query,
-											cache:false,
-											headers: {"Authorization":accToken},
-											success : function(res){
-												const records = res.records;
-												const cdId = records[0].ContentDocumentId;
-												const linkJson = {
-													ContentDocumentId:cdId,
-													LinkedEntityId:cbdId,
-													Visibility:"AllUsers"
-												};
-												$.ajax({
-													type:"POST",
-													crossOrigin:true,
-													url:REQUEST_DOMAIN + "/services/data/v54.0/sobjects/ContentDocumentLink",
-													cache:false,
-													headers:{"Authorization":accToken, "Content-Type":"application/json"},
-													dataType:"json",
-													data:JSON.stringify(linkJson),
-													success:function(res){
-
-													},
-													error:function(data, errorThrown,status) {
-														dispRegisComErrModal();
-													}
-												});
-											
-											},
-											error:function(data, errorThrown, status) {
-												dispRegisComErrModal();
-											}
-										});
-									},
-									error:function(data, errorThrown, status) {
-										dispRegisComErrModal();
-									}
+									data:JSON.stringify(linkJson)
+								}).done(function(res){
+								}).fail(function(data, errorThrown,status) {
+									dispRegisComErrModal();
 								});
-							}
-						}
-					},
-					error:function (data, errorThrown, status) {
-						dispRegisComErrModal();
+							}).fail(function(data, errorThrown, status) {
+								dispRegisComErrModal();
+							});
+						}).fail(function(data, errorThrown, status) {
+							dispRegisComErrModal();
+						});
 					}
-				})
-			},
-			error:function (data, errorThrown, status) {
+				}
+			}).fail(function (data, errorThrown, status) {
 				dispRegisComErrModal();
-			}
+			});
+		}).fail(function (data, errorThrown, status) {
+			dispRegisComErrModal();
 		});
 	}
 	
@@ -1262,74 +1089,68 @@
 				"grant_type":"refresh_token",
 				"client_id":CLIENT_ID, 
 				"refresh_token":REFLESH_TOKEN
-			},
-			success : function (connectData) {
-				var accToken = 'Bearer ' + connectData.access_token;
-				$.ajax({
-					type:'GET',
-					crossOrigin:true,
-					url:REQUEST_DOMAIN + '/services/data/v54.0/sobjects/ContentVersion/' + fileId + '/VersionData',
-					cache:false,
-					headers:{"Authorization":accToken},
-					xhrFields:{responseType:'blob'},
-					success:function(fileContent){
-						// ケースのリストサイズが0でない
-						if(res.caseList.length != 0){
-							// ファイルの紐付け有無
-							let fileAttached = false;
-							// ケースをループ
-							for(let i = 0; i < res.caseList.length; i++){
-								// コンタクトボード明細を取得
-								const cbdFileList = res.caseList[i].cbdFileList;
-								// コンタクトボード明細をループ
-								for(let j = 0; j < cbdFileList.length; j++){
-									// 添付ファイルをループ
-									for(let k = 0; k < cbdFileList[j].contentVersions.length; k++){
-										// 要素をインスタンス化
-										const cv = cbdFileList[j].contentVersions[k];
-										
-										if(cv.Id == fileId){
-											// IDを条件に添付ファイルのBlobデータを取得
-											res.caseList[i].cbdFileList[j].contentVersions[k]["versionData"] = fileContent;
-											// 紐付け済にする
-											fileAttached = true;
-											// 以後処理不要
-											break;
-										}
-									}
-									// 紐付け済の場合
-									if(fileAttached){
-										// 以後処理不要
-										break;
-									}
-								}
-								// 紐付け済の場合
-								if(fileAttached){
+			}
+		}).done(function (connectData) {
+			var accToken = 'Bearer ' + connectData.access_token;
+			$.ajax({
+				type:'GET',
+				crossOrigin:true,
+				url:REQUEST_DOMAIN + '/services/data/v54.0/sobjects/ContentVersion/' + fileId + '/VersionData',
+				cache:false,
+				headers:{"Authorization":accToken},
+				xhrFields:{responseType:'blob'}
+			}).done(function(fileContent){
+				// ケースのリストサイズが0でない
+				if(res.caseList.length != 0){
+					// ファイルの紐付け有無
+					let fileAttached = false;
+					// ケースをループ
+					for(let i = 0; i < res.caseList.length; i++){
+						// コンタクトボード明細を取得
+						const cbdFileList = res.caseList[i].cbdFileList;
+						// コンタクトボード明細をループ
+						for(let j = 0; j < cbdFileList.length; j++){
+							// 添付ファイルをループ
+							for(let k = 0; k < cbdFileList[j].contentVersions.length; k++){
+								// 要素をインスタンス化
+								const cv = cbdFileList[j].contentVersions[k];
+								
+								if(cv.Id == fileId){
+									// IDを条件に添付ファイルのBlobデータを取得
+									res.caseList[i].cbdFileList[j].contentVersions[k]["versionData"] = fileContent;
+									// 紐付け済にする
+									fileAttached = true;
 									// 以後処理不要
 									break;
 								}
 							}
+							// 紐付け済の場合
+							if(fileAttached){
+								// 以後処理不要
+								break;
+							}
 						}
-						// 全て紐付け終わったら
-						if(fileIdList.length - 1 == index){
-							// 次の処理を呼ぶ
-							resolve();
-						// まだ終わってない場合
-						}else{
-							// 再帰実行する
-							getContentVersion(fileIdList, resolve, index + 1);
+						// 紐付け済の場合
+						if(fileAttached){
+							// 以後処理不要
+							break;
 						}
-					},
-					error:function (data, errorThrown, status) {
-/*** K.Y ***/
-						dispRegisComErrModal();
 					}
-				});
-			},
-			error:function (data, errorThrown, status) {
-/*** K.Y ***/
+				}
+				// 全て紐付け終わったら
+				if(fileIdList.length - 1 == index){
+					// 次の処理を呼ぶ
+					resolve();
+				// まだ終わってない場合
+				}else{
+					// 再帰実行する
+					getContentVersion(fileIdList, resolve, index + 1);
+				}
+			}).fail(function (data, errorThrown, status) {
 				dispRegisComErrModal();
-			}
+			});
+		}).fail(function (data, errorThrown, status) {
+			dispRegisComErrModal();
 		});
 	}
 	
@@ -1605,7 +1426,7 @@
 	 */
 	function outputValueInqConf(){
 		inqRegistData.EncryptedData = linkedStr;
-		inqRegistData.Subject = document.getElementById('Modal-aaa').innerHTML;
+		inqRegistData.Subject = document.getElementById('Modal-inqType').innerHTML;
 		inqRegistData.Content = document.getElementById('inqTextInput').value;
 		
         // 2000文字以下チェック
@@ -1630,13 +1451,12 @@
                 }
             }
         }
-//		inqRegistData.LinkedDial:null
 		document.getElementById('inqConfMailText').innerHTML = eMail;
 		document.getElementById('inqConfTypeText').innerHTML = inqRegistData.Subject;
 		document.getElementById('inqConfDtailsText').innerHTML = inqRegistData.Content;
 		// 選択値を取得
 		const jinkakuCode = $('input[name="JinkakuCode"]').val();
-		let selectedItem = document.getElementById('Modal-aaa').innerHTML;
+		let selectedItem = document.getElementById('Modal-inqType').innerHTML;
 		// 画面入力されたお問い合わせ種類
 		if(jinkakuCode == '個人' || jinkakuCode == '非居住者'){
 			// 各種手続きダイヤル設定対象の場合
@@ -1649,6 +1469,15 @@
 		}else{
 			inqRegistData.LinkedDial = '法人ダイヤル';
 		}
+		
+		document.getElementById("inqUploadFiles").innerHTML = null;
+		
+		for(let i = 0; i < inputFiles.length; i++){
+			const p = document.createElement("p");
+			p.innerText = inputFiles[i].name;
+			document.getElementById("inqUploadFiles").appendChild(p);
+		}
+		
 		// 確認画面へ遷移する
         changeDisp('inqConfirmScreen');
 	}
@@ -1683,70 +1512,18 @@
                 }
             }
         }
+        
+        document.getElementById("cbdUploadFiles").innerHTML = null;
+		
+		for(let i = 0; i < inputFiles.length; i++){
+			const p = document.createElement("p");
+			p.innerText = inputFiles[i].name;
+			document.getElementById("cbdUploadFiles").appendChild(p);
+		}
+        
         changeDisp('replyConfirmScreen');
 	}
 	
-	/*** 新規問い合わせ画面 入力欄の背景色を黄色にする ***/
-	$(function(){
-		if($("#inqTextInput").val() == ''){
-			// 黄色
-			$("#inqTextInput").css('background', '#ffffcc');
-		}
-		$("#inqTextInput").on('keydown keyup keypress change focus blur', function() {
-			// 値が空の時
-			if($(this).val() == ''){
-				// 黄色
-				$(this).css('background', '#ffffcc');
-			// 値が入っている時に白色
-			}else{
-				// 白色
-				$(this).css('background', '');
-			}
-		});
-	});
-	/*** 個別問い合わせ画面 入力欄の背景色を黄色にする ***/
-	$(function(){
-		if($("#cbdTextInput").val() == ''){
-			// 黄色
-			$("#cbdTextInput").css('background', '#ffffcc');
-		}
-		$("#cbdTextInput").on('keydown keyup keypress change focus blur', function() {
-			// 値が空の時
-			if($(this).val() == ''){
-				// 黄色
-				$(this).css('background', '#ffffcc');
-			// 値が入っている時に白色
-			}else{
-				// 白色
-				$(this).css('background', '');				
-			}
-		});
-	});
-
-	// 削除ボタン押下時入力欄
-	$('#inqDelbtn').click( function(){
-		// 値が空の時
-		if($("#inqTextInput").val() == ''){
-			// 黄色
-			$("#inqTextInput").css('background', '#ffffcc');
-		// 値が入っている時に白色
-		}else{
-			// 白色
-			$("#inqTextInput").css('background', '');
-		}
-	})
-	// 削除ボタン押下時入力欄
-	$('#cbdDelBtn').click( function(){
-		// 値が空の時
-		if($("#cbdTextInput").val() == ''){
-			// 黄色
-			$("#cbdTextInput").css('background', '#ffffcc');
-		// 値が入っている時に白色
-		}else{
-			// 白色
-			$("#cbdTextInput").css('background', '');
-		}
-	})
 	// 2000文字チェック
 	function checkVal(content){
         // 値がない場合、エラー
@@ -1759,7 +1536,7 @@
 	 */
 	function inqReqCheck(){
 		
-		const itype_flg = ( $('#Modal-aaa').html() == "選択してください" ) ? false : true;
+		const itype_flg = ( $('#Modal-inqType').html() == "選択してください" ) ? false : true;
 		const idtail_flg = ($('#inqTextInput').val() === "") ? false : true;
 		
 		let isBtnActive;
@@ -1795,7 +1572,7 @@
 	 */
 	function inqPrevAction(){
 		// 問い合わせ種類選択の値設定状況確認
-		itype_flg = (typeof $('input[name="aaa"]:checked').val() === "undefined") ? false : true;
+		itype_flg = (typeof $('input[name="inqType"]:checked').val() === "undefined") ? false : true;
 		// 問い合わせ内容の入力状況確認
 		idtail_flg  = ($('#inqTextInput').val() === "" ) ? false : true;
 		// いずれか入力されている場合
@@ -1805,6 +1582,7 @@
 			$("body").css({position:"fixed",top:-1});
 		// いずれも未入力の場合
 		}else{
+			
 			// ホーム画面に遷移
 			changeDisp('inquiryForm');
 		}
@@ -1814,11 +1592,11 @@
 	 */
 	function inqClearInput(){
 		// 問い合わせ種類選択をクリア
-		$('input[name="aaa"]:checked').prop("checked", false);
-		$("#Modal-aaa").html("選択してください");
+		$('input[name="inqType"]:checked').prop("checked", false);
+		$("#Modal-inqType").html("選択してください");
 		// 表示色の調整
-		if(!$("#Modal-aaa").hasClass("reqEntry")){
-			$("#Modal-aaa").addClass("reqEntry").removeClass("inputSelectItem-on data-on");
+		if(!$("#Modal-inqType").hasClass("reqEntry")){
+			$("#Modal-inqType").addClass("reqEntry").removeClass("inputSelectItem-on data-on");
 		}
 		// 問い合わせ内容をクリア
 		$('#inqTextInput').val(null);
@@ -1909,6 +1687,90 @@
 		// ファイル読込の開始
 		reader.readAsDataURL(files[index]);
 	}
+	
+	function SelectRadio(id){
+		var childName = $("#"+id).children("li").attr("name");
+		var selectValue = $("input[name='"+childName+"']:checked").next().html();
+		$("#Modal-"+ id).html(selectValue);
+		var defValue = $("#Modal-"+ id).html();
+		var defValueMsg = "選択してください";
+		if(defValue == defValueMsg){
+			if(!$("#Modal-"+ id).hasClass("reqEntry")){
+				$("#Modal-"+ id).addClass("reqEntry").removeClass("inputSelectItem-on data-on");
+			}
+		}else if(defValue == ""){
+			$('#Modal-'+ id).add().html("選択してください");
+		}else{
+			$("#Modal-"+ id).removeClass("reqEntry").addClass("inputSelectItem-on data-on");
+		}
+		NextBtnActivity();
+	}
+	
+	function NextBtnActivity(){
+		if (!($("body").find(".reqEntry").length)) {
+			$("p").find("#nextBtn").prop("disabled", false);
+		}else{
+			$("p").find("#nextBtn").prop("disabled", true);
+		}
+	}
+
+    // 通信失敗 出力
+    function dispComErrModal(){
+        let CurrentScrollY = $(window).scrollTop();
+        $(".modalOverlay,.modalWrap_error.error-comError").fadeIn();
+        $(".error-comError").css("display", "block");
+        $("body").css({position:"fixed",top:-1 * CurrentScrollY});
+    }
+    // 時限チェック 出力
+    function dispTimeoutErrModal(){
+        if(errorMessageText){
+            $(".eMessage-error-timeoutError").html(errorMessageText);
+        }
+        let CurrentScrollY = $(window).scrollTop();
+        $(".modalOverlay,.modalWrap_error.error-timeoutError").fadeIn();
+        $(".error-timeoutError").css("display", "block");
+        $("body").css({position:"fixed",top:-1 * CurrentScrollY});
+    }
+    // 通信失敗 出力(登録時)
+    function dispRegisComErrModal(){
+        let CurrentScrollY = $(window).scrollTop();
+        $(".modalOverlay,.modalWrap_error.error-comErrorRegis").fadeIn();
+        $(".error-comErrorRegis").css("display", "block");
+        $("body").css({position:"fixed",top:-1 * CurrentScrollY});
+    }
+    // システムエラー 出力
+    function dispAbnormalErrModal(){
+        if(errorMessageText){
+            $(".eMessage-error-abnormalError").html(errorMessageText);
+        }
+        let CurrentScrollY = $(window).scrollTop();
+        $(".modalOverlay,.modalWrap_error.error-abnormalError").fadeIn();
+        $(".error-abnormalError").css("display", "block");
+        $("body").css({position:"fixed",top:-1 * CurrentScrollY});
+    }
+    // メールアドレス不正 出力
+    function dispInvmailErrModal(){
+        if(errorMessageText){
+            $(".eMessage-error-invmailError").html(errorMessageText);
+        }
+        let CurrentScrollY = $(window).scrollTop();
+        $(".modalOverlay,.modalWrap_error.error-invmailError").fadeIn();
+        $(".error-invmailError").css("display", "block");
+        $("body").css({position:"fixed",top:-1 * CurrentScrollY});
+    }
+    // 取引先が存在しない(新規問い合わせ登録画面) 出力
+    function dispNoaccErrModal(){
+        if(res.result == 'NO_ACCOUNT'){
+            if(errorMessageText){
+                $(".eMessage-error-noaccError").html(errorMessageText);
+            }
+            let CurrentScrollY = $(window).scrollTop();
+            $(".modalOverlay,.modalWrap_error.error-noaccError").fadeIn();
+            $(".error-noaccError").css("display", "block");
+            $("body").css({position:"fixed",top:-1 * CurrentScrollY});
+        }
+    }
+//-->
 </script>
 
 <!-- InquiryForm -->
@@ -1945,7 +1807,7 @@
 						<dt>STEP1</dt>
 						<dd>
 							<div class="img">
-								<img src="./commontpl/images/category/contact_img001.png" alt="" width="180" height="192">
+								<img src="/commontpl/images/category/contact_img001.png" alt="" width="180" height="192">
 							</div>
 							<p class="stepTxt">
 								［新規お問い合わせ］<br class="smtOnlyBr">より投稿
@@ -1959,7 +1821,7 @@
 						<dt>STEP2</dt>
 						<dd>
 							<div class="img">
-								<img src="./commontpl/images/category/contact_img002.png" alt="" width="180" height="192">
+								<img src="/commontpl/images/category/contact_img002.png" alt="" width="180" height="192">
 							</div>
 							<p class="stepTxt">
 								回答が投稿されたら<br>メールでお知らせ
@@ -1973,7 +1835,7 @@
 						<dt>STEP3</dt>
 						<dd>
 							<div class="img">
-								<img src="./commontpl/images/category/contact_img003.png" alt="" width="180" height="192">
+								<img src="/commontpl/images/category/contact_img003.png" alt="" width="180" height="192">
 							</div>
 							<p class="stepTxt">
 								ログインして回答を確認
@@ -2023,34 +1885,34 @@
 			<div id="modalText">
 				<p class="input-title">お問い合わせ種類</p>
 				<p class="inputSelectWrap pulldown">
-					<a href="javascript:void(0);" id="Modal-aaa" class="ModalBtn reqEntry">選択してください</a>
+					<a href="javascript:void(0);" id="Modal-inqType" class="ModalBtn reqEntry">選択してください</a>
 				</p>
-				<div class="modalWrap pulldown modalWrap-aaa">
+				<div class="modalWrap pulldown modalWrap-inqType">
 					<div class="modalOuter">
 						<div class="modal__headArea">お問い合わせ種類</div>
 						<div class="modal__bodyArea">
-							<ul id="aaa" class="wrap-label-list">
-								<li id="dial01" name="aaa"><label class="label-radio" for="aaa01"><input type="radio" name="aaa" value="1" id="aaa01" class="x-data-aaa"><span>登録情報の変更</span></label></li>
-								<li id="dial02" name="aaa"><label class="label-radio" for="aaa02"><input type="radio" name="aaa" value="2" id="aaa02" class="x-data-aaa"><span>キャッシュカード・トークン</span></label></li>
-								<li id="dial03" name="aaa"><label class="label-radio" for="aaa03"><input type="radio" name="aaa" value="3" id="aaa03" class="x-data-aaa"><span>振込</span></label></li>
-								<li id="dial04" name="aaa"><label class="label-radio" for="aaa04"><input type="radio" name="aaa" value="4" id="aaa04" class="x-data-aaa"><span>口座自動振替</span></label></li>
-								<li id="dial05" name="aaa"><label class="label-radio" for="aaa05"><input type="radio" name="aaa" value="5" id="aaa05" class="x-data-aaa"><span>各種証明書（取引明細・残高証明など）</span></label></li>
-								<li id="dial06" name="aaa"><label class="label-radio" for="aaa06"><input type="radio" name="aaa" value="6" id="aaa06" class="x-data-aaa"><span>その他</span></label></li>
-								<li id="dial07" name="aaa"><label class="label-radio" for="aaa07"><input type="radio" name="aaa" value="7" id="aaa07" class="x-data-aaa"><span>登録情報の変更</span></label></li>
-								<li id="dial08" name="aaa"><label class="label-radio" for="aaa08"><input type="radio" name="aaa" value="8" id="aaa08" class="x-data-aaa"><span>キャッシュカード・トークン</span></label></li>
-								<li id="dial09" name="aaa"><label class="label-radio" for="aaa09"><input type="radio" name="aaa" value="9" id="aaa09" class="x-data-aaa"><span>振込</span></label></li>
-								<li id="dial10" name="aaa"><label class="label-radio" for="aaa10"><input type="radio" name="aaa" value="10" id="aaa10" class="x-data-aaa"><span>口座自動振替</span></label></li>
-								<li id="dial11" name="aaa"><label class="label-radio" for="aaa11"><input type="radio" name="aaa" value="11" id="aaa11" class="x-data-aaa"><span>各種証明書（取引明細・残高証明など）</span></label></li>
-								<li id="dial12" name="aaa"><label class="label-radio" for="aaa12"><input type="radio" name="aaa" value="12" id="aaa12" class="x-data-aaa"><span>BA-PLUS</span></label></li>
-								<li id="dial13" name="aaa"><label class="label-radio" for="aaa13"><input type="radio" name="aaa" value="13" id="aaa13" class="x-data-aaa"><span>その他</span></label></li>
+							<ul id="inqType" class="wrap-label-list">
+								<li id="dial01" name="inqType"><label class="label-radio" for="inqType01"><input type="radio" name="inqType" value="1" id="inqType01" class="x-data-inqType"><span>登録情報の変更</span></label></li>
+								<li id="dial02" name="inqType"><label class="label-radio" for="inqType02"><input type="radio" name="inqType" value="2" id="inqType02" class="x-data-inqType"><span>キャッシュカード・トークン</span></label></li>
+								<li id="dial03" name="inqType"><label class="label-radio" for="inqType03"><input type="radio" name="inqType" value="3" id="inqType03" class="x-data-inqType"><span>振込</span></label></li>
+								<li id="dial04" name="inqType"><label class="label-radio" for="inqType04"><input type="radio" name="inqType" value="4" id="inqType04" class="x-data-inqType"><span>口座自動振替</span></label></li>
+								<li id="dial05" name="inqType"><label class="label-radio" for="inqType05"><input type="radio" name="inqType" value="5" id="inqType05" class="x-data-inqType"><span>各種証明書（取引明細・残高証明など）</span></label></li>
+								<li id="dial06" name="inqType"><label class="label-radio" for="inqType06"><input type="radio" name="inqType" value="6" id="inqType06" class="x-data-inqType"><span>その他</span></label></li>
+								<li id="dial07" name="inqType"><label class="label-radio" for="inqType07"><input type="radio" name="inqType" value="7" id="inqType07" class="x-data-inqType"><span>登録情報の変更</span></label></li>
+								<li id="dial08" name="inqType"><label class="label-radio" for="inqType08"><input type="radio" name="inqType" value="8" id="inqType08" class="x-data-inqType"><span>キャッシュカード・トークン</span></label></li>
+								<li id="dial09" name="inqType"><label class="label-radio" for="inqType09"><input type="radio" name="inqType" value="9" id="inqType09" class="x-data-inqType"><span>振込</span></label></li>
+								<li id="dial10" name="inqType"><label class="label-radio" for="inqType10"><input type="radio" name="inqType" value="10" id="inqType10" class="x-data-inqType"><span>口座自動振替</span></label></li>
+								<li id="dial11" name="inqType"><label class="label-radio" for="inqType11"><input type="radio" name="inqType" value="11" id="inqType11" class="x-data-inqType"><span>各種証明書（取引明細・残高証明など）</span></label></li>
+								<li id="dial12" name="inqType"><label class="label-radio" for="inqType12"><input type="radio" name="inqType" value="12" id="inqType12" class="x-data-inqType"><span>BA-PLUS</span></label></li>
+								<li id="dial13" name="inqType"><label class="label-radio" for="inqType13"><input type="radio" name="inqType" value="13" id="inqType13" class="x-data-inqType"><span>その他</span></label></li>
 							</ul>
-						</div><!--/modal__bodyArea-->
+						</div>
 						<p>
 							<a href="javascript:void(0);" class="modal__bottomArea btn btn03 btnL">閉じる</a>
 						</p>
-					</div><!--/modalOuter-->
+					</div>
 				</div>
-			</div><!--/modalWrap-->
+			</div>
 		</div>
 	</div>
 	
@@ -2058,7 +1920,6 @@
 		<div class="input-textarea">
 			<label for="textInput" class="input-title">お問い合わせ詳細</label>
 			<div class="textinput-box">
-				<!--<textarea type="text" id="inqTextInput" oninput="inqtextinputAfter(this)" name="textInput" maxlength="" rows="" wrap="soft" class="reqEntry" placeholder="ご記入ください"></textarea>-->
 				<textarea type="text" id="inqTextInput" name="textInput" maxlength="" rows="10" wrap="soft" class="reqEntry" placeholder="ご記入ください" style="overflow: auto;"></textarea>
 				<span id="inqContentDel" class="InputClear inputClear" style="margin-right: 16px;">×</span>
 			</div>
@@ -2094,46 +1955,46 @@
 	
 	<div class="modalWrap_error error-type1">
 		<div class="modalOuter_error">
-			<div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
+			<div class="modal__headArea"><img src="/commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
 			<div class="modal__bodyArea">
-				<p class="fBold">入力した内容は失われます。<br>よろしいですか？</p>
-			</div><!--/modal__bodyArea-->
+				<p class="fBold">入力された内容が失われます。<br>それでも問題ない場合は戻るを選択して下さい。</p>
+			</div>
 			<div class="modal_error_btnArea">
-				<p><a href="javascript:void(0);" class="btn btn01 btnL modal__close">戻る</a></p>
-				<p><a href="javascript:void(0);" class="btn btn03 btnL modal__close" onclick="inqClearInput();">OK</a></p>
-			</div><!--/modal_error_btnArea-->
-		</div><!--/modalOuter_error-->
-	</div><!--/modalWrap_error-->
+				<p><a href="javascript:void(0);" class="btn btn01 btnL modal__close" onclick="inqClearInput();">戻る</a></p>
+				<p><a href="javascript:void(0);" class="btn btn03 btnL modal__close">閉じる</a></p>
+			</div>
+		</div>
+	</div>
 	
 	<div class="modalWrap_error error-type2">
 		<div class="modalOuter_error">
 			<div class="modal__headArea">
-				<img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64">
+				<img src="/commontpl/images/category/contact_error.png" alt="" width="128" height="64">
 			</div>
 			<div class="modal__bodyArea">
 				<p class="fBold">入力された内容が失われます。<br>それでも問題ない場合は「削除する」を選択してください。</p>
-			</div><!--/modal__bodyArea-->
+			</div>
 			<div class="modal_error_btnArea">
 				<p><a id="inqDelBtn" href="javascript:void(0);" class="btn btn01 btnL modal__close">削除する</a></p>
 				<p><a href="javascript:void(0);" class="btn btn03 btnL modal__close">閉じる</a></p>
-			</div><!--/modal_error_btnArea-->
-		</div><!--/modalOuter_error-->
-	</div><!--/modalWrap_error-->
+			</div>
+		</div>
+	</div>
 	
 	<div class="modalWrap_error error-type3">
 		<div class="modalOuter_error">
 			<div class="modal__headArea">
-				<img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64">
+				<img src="/commontpl/images/category/contact_error.png" alt="" width="128" height="64">
 			</div>
 			<div class="modal__bodyArea">
 				<p class="fBold">アップロードしたファイルが削除されます。<br>それでも問題ない場合は「削除する」を選択してください。</p>
-			</div><!--/modal__bodyArea-->
+			</div>
 			<div class="modal_error_btnArea">
 				<p><a href="javascript:void(0);" class="btn btn01 btnL modal__close" onclick="inqDeleteFile();">削除する</a></p>
 				<p><a href="javascript:void(0);" class="btn btn03 btnL modal__close">閉じる</a></p>
-			</div><!--/modal_error_btnArea-->
-		</div><!--/modalOuter_error-->
-	</div><!--/modalWrap_error-->
+			</div>
+		</div>
+	</div>
 	
 	<div class="blkCont contbrd-btnArea-box">
 		<p><input id="confButton" type="submit" onclick="outputValueInqConf();" class="btn btn01 btnL" value="確認する"></p>
@@ -2165,13 +2026,9 @@
 		</div>
 		<div class="blkTitle">
 			<h2 class="h201">ファイルアップロード</h2>
+			<p id="inqUploadFiles"></p>
 		</div>
 		<div class="blkCont bdrT0">
-			<p>なし</p>
-			<p></p>
-			<p></p>
-			<p></p>
-			<p></p>
 			<div class="contbrd-btnArea-box">
 				<p><a href="javascript:void(0);" onclick="registInquery();" class="btn btn01 btnL">投稿する</a></p>
 				<p class="mt-16"><a href="javascript:void(0);" onclick="changeDisp('inqInputScreen')" class="btn btn03 btnL">戻る</a></p>
@@ -2187,7 +2044,6 @@
 			<p class="contbrd-title">投稿内容</p>
 			<div class="input-textarea">
 				<div class="textinput-box">
-					<!--<textarea type="text" id="cbdTextInput" oninput="textinputAfter(this)" name="textInput" maxlength="" rows="" wrap="soft" class="reqEntry inputTextItem" placeholder="ご記入ください"></textarea>-->
 					<textarea type="text" id="cbdTextInput" name="textInput" maxlength="" rows="10" wrap="soft" class="reqEntry inputTextItem" placeholder="ご記入ください" style="overflow: auto;"></textarea>
 					<span id="cbdContentDel" class="InputClear inputClear" style="margin-right: 16px;">×</span>
 				</div>
@@ -2209,47 +2065,47 @@
 				<div class="modalWrap_error error-type1">
 					<div class="modalOuter_error">
 						<div class="modal__headArea">
-							<img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64">
+							<img src="/commontpl/images/category/contact_error.png" alt="" width="128" height="64">
 						</div>
 						<div class="modal__bodyArea">
-							<p class="fBold">入力した内容は失われます。<br>よろしいですか？</p>
-						</div><!--/modal__bodyArea-->
+							<p class="fBold">入力された内容が失われます。<br>それでも問題ない場合は戻るを選択してください。</p>
+						</div>
 						<div class="modal_error_btnArea">
-							<p><a href="javascript:void(0);" class="btn btn01 btnL modal__close">戻る</a></p>
-							<p><a href="javascript:void(0);" class="btn btn03 btnL modal__close" onclick="cbdClearInput();">OK</a></p>
-						</div><!--/modal_error_btnArea-->
-					</div><!--/modalOuter_error-->
-				</div><!--/modalWrap_error-->
+							<p><a href="javascript:void(0);" class="btn btn01 btnL modal__close" onclick="cbdClearInput();">戻る</a></p>
+							<p><a href="javascript:void(0);" class="btn btn03 btnL modal__close">閉じる</a></p>
+						</div>
+					</div>
+				</div>
 				
 				<div class="modalWrap_error error-type2">
 					<div class="modalOuter_error">
 						<div class="modal__headArea">
-							<img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64">
+							<img src="/commontpl/images/category/contact_error.png" alt="" width="128" height="64">
 						</div>
 						<div class="modal__bodyArea">
 							<p class="fBold">入力された内容が失われます。<br>それでも問題ない場合は「削除する」を選択してください。</p>
-						</div><!--/modal__bodyArea-->
+						</div>
 						<div class="modal_error_btnArea">
 							<p><a id="cbdDelBtn" href="javascript:void(0);" class="btn btn01 btnL modal__close">削除する</a></p>
 							<p><a href="javascript:void(0);" class="btn btn03 btnL modal__close">閉じる</a></p>
-						</div><!--/modal_error_btnArea-->
-					</div><!--/modalOuter_error-->
-				</div><!--/modalWrap_error-->
+						</div>
+					</div>
+				</div>
 				
 				<div class="modalWrap_error error-type3">
 					<div class="modalOuter_error">
 						<div class="modal__headArea">
-							<img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64">
+							<img src="/commontpl/images/category/contact_error.png" alt="" width="128" height="64">
 						</div>
 						<div class="modal__bodyArea">
 							<p class="fBold">アップロードしたファイルが削除されます。<br>それでも問題ない場合は「削除する」を選択してください。</p>
-						</div><!--/modal__bodyArea-->
+						</div>
 						<div class="modal_error_btnArea">
 							<p><a href="javascript:void(0);" class="btn btn01 btnL modal__close" onclick="cbdDeleteFile();">削除する</a></p>
 							<p><a href="javascript:void(0);" class="btn btn03 btnL modal__close">閉じる</a></p>
-						</div><!--/modal_error_btnArea-->
-					</div><!--/modalOuter_error-->
-				</div><!--/modalWrap_error-->
+						</div>
+					</div>
+				</div>
 				
 				<div class="contbrd-btnArea-box">
 					<p class="mt-24">
@@ -2271,10 +2127,7 @@
 			<p class="contbrd-title">投稿内容</p>
 			<p id="cbdConfDtailsText"></p>
 			<h3 class="h301 mt-24">ファイルアップロード</h3>
-			<!--
-			<p>aaaaaaaaaaaa.pdf</p>
-			<p>bbbb.jpg</p>
-			-->
+			<p id="cbdUploadFiles"></p>
 			<div class="contbrd-btnArea-box">
 				<p>
 					<input type="submit" id="" onclick="registContactBoard();" class="btn btn01 btnL" value="投稿する">
@@ -2318,78 +2171,78 @@
 <!-- 通信失敗 -->
 <div class="modalWrap_error error-comError">
     <div class="modalOuter_error">
-        <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
+        <div class="modal__headArea"><img src="/commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
         <div class="modal__bodyArea">
             <p class="fBold eMessage-comError"></p>
-        </div><!--/modal__bodyArea-->
+        </div>
         <div class="modal_error_btnArea">
             <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
-        </div><!--/modal_error_btnArea-->
-    </div><!--/modalOuter_error-->
-</div><!--/modalWrap_error-->
+        </div>
+    </div>
+</div>
 
 <!-- 時限チェック -->
 <div class="modalWrap_error error-timeoutError">
     <div class="modalOuter_error">
-        <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
+        <div class="modal__headArea"><img src="/commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
         <div class="modal__bodyArea">
             <p class="fBold eMessage-error-timeoutError"></p>
-        </div><!--/modal__bodyArea-->
+        </div>
         <div class="modal_error_btnArea">
             <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
-        </div><!--/modal_error_btnArea-->
-    </div><!--/modalOuter_error-->
-</div><!--/modalWrap_error-->
+        </div>
+    </div>
+</div>
 
 <!-- 異常終了 -->
 <div class="modalWrap_error error-abnormalError">
     <div class="modalOuter_error">
-        <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
+        <div class="modal__headArea"><img src="/commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
         <div class="modal__bodyArea">
             <p class="fBold eMessage-error-abnormalError"></p>
-        </div><!--/modal__bodyArea-->
+        </div>
         <div class="modal_error_btnArea">
             <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
-        </div><!--/modal_error_btnArea-->
-    </div><!--/modalOuter_error-->
-</div><!--/modalWrap_error-->
+        </div>
+    </div>
+</div>
 
 
 <!-- 通信失敗(登録時) -->
 <div class="modalWrap_error error-comErrorRegis">
     <div class="modalOuter_error">
-        <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
+        <div class="modal__headArea"><img src="/commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
         <div class="modal__bodyArea">
             <p class="fBold eMessage-error-comErrorRegis"></p>
-        </div><!--/modal__bodyArea-->
+        </div>
         <div class="modal_error_btnArea">
             <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
-        </div><!--/modal_error_btnArea-->
-    </div><!--/modalOuter_error-->
-</div><!--/modalWrap_error-->
+        </div>
+    </div>
+</div>
 
 <!-- メールアドレス不正 -->
 <div class="modalWrap_error error-invmailError">
     <div class="modalOuter_error">
-        <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
+        <div class="modal__headArea"><img src="/commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
         <div class="modal__bodyArea">
             <p class="fBold eMessage-error-invmailError"></p>
-        </div><!--/modal__bodyArea-->
+        </div>
         <div class="modal_error_btnArea">
             <p><a href="javascript:void(0);" class="btn btn03 btnL mClose">閉じる</a></p>
-        </div><!--/modal_error_btnArea-->
-    </div><!--/modalOuter_error-->
-</div><!--/modalWrap_error-->
+        </div>
+    </div>
+</div>
 
 <!-- 取引先が存在しない -->
 <div class="modalWrap_error error-noaccError">
     <div class="modalOuter_error">
-        <div class="modal__headArea"><img src="commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
+        <div class="modal__headArea"><img src="/commontpl/images/category/contact_error.png" alt="" width="128" height="64"></div>
         <div class="modal__bodyArea">
             <p class="fBold eMessage-error-noaccError"></p>
-        </div><!--/modal__bodyArea-->
+        </div>
         <div class="modal_error_btnArea">
             <p><a href="javascript:void(0);" class="btn btn03 btnL mClose" onclick="changeDisp('noInq')">閉じる</a></p>
-        </div><!--/modal_error_btnArea-->
-    </div><!--/modalOuter_error-->
-</div><!--/modalWrap_error-->
+        </div>
+    </div>
+</div>
